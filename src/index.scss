@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 code {
@@ -16,4 +18,19 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.button {
+  background-color: transparent;
+
+  border-radius: 20px;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@font-face {
+  font-family: myfont;
+  src: url(./font/BalonkuRegular-la1w.otf);
 }
