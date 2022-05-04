@@ -1,19 +1,8 @@
-.startpage {
-    display: flex;
-    position: relative;
+.startPage {
     flex-direction: column;
 
-    width: 100%;
-    min-height: 100vh;
-
-    background-color: coral;
-
-    color: rgb(247, 233, 228);
-    font-size: 30px;
-    text-align: center;
-
     h1 {
-        max-width: 400px;
+        max-width: 700px;
         margin: 20px 0px;
 
         font-family: myfont;
@@ -43,15 +32,4 @@
             font-size: 15px;
         }
     }
-
-    .version-text {
-        position: absolute;
-        right: 20px;
-        bottom: 20px;
-
-        color: rgb(244, 242, 242);
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 13px;
-        font-weight: 800;
-    }
-}
+} 

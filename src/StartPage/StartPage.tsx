@@ -1,14 +1,18 @@
 import React, {useState} from 'react'
 import { motion } from 'framer-motion'
 import { letter, sentence, button } from '../Animations/variants'
+import { useNavigate, useParams } from "react-router-dom";
 import './StartPage.scss'
 
 export const StartPage = () => {
 
   const headerText = "Your work schedule can be here...";
   const [showCreate, setShowCreate] = useState(false);
+  const navigate = useNavigate(); 
+
   return (
-    <motion.div className='startpage flex'
+    <motion.div
+      className='startPage flex'
       initial={{opacity:0}}
       animate={{opacity:1}}
     >
@@ -30,15 +34,14 @@ export const StartPage = () => {
           animate="goodPosition"
           whileHover="hover"
           whileTap="tap"
-          onClick={()=>setShowCreate(!showCreate)}
+          onClick={()=> navigate("/Create")}
         >
           {!showCreate?<text>Create</text>:
           <div className='create-schedule'>działa</div>}
         </motion.div>
 
-        <p>if you belong to an existing work schedule, you can <text>log in</text></p>
+        <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1.5, delay:2}}>if you belong to an existing work schedule, you can <text>log in</text></motion.p>
 
-        <text className='version-text'>Work schedule v0.2</text>
     </motion.div>
   )
 }

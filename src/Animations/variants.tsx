@@ -28,7 +28,7 @@ export const button = {
       }
     },
     hover:{
-      scale:1.2,
+      scale:1.12,
       border: "3px solid #FF00FF",
       color: "#FF00FF",
       transition: {
@@ -36,3 +36,14 @@ export const button = {
       }
     },
   }
+
+export const position = {
+  outside: {opacity: 0, x: 200},
+  goodPosition: {
+    opacity: 1,
+    x:0,
+    transition: {
+      duration: 1.5,
+    }
+  },
+}
