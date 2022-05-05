@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { position } from '../../Animations/variants'
 
 import './CreateSheudle.scss'
+import { Admin } from './Persons/Admin'
+import { Worker } from './Persons/Worker';
 
 export const CreateSheudle = () => {
   return (
@@ -11,11 +13,11 @@ export const CreateSheudle = () => {
         animate="goodPosition"
         className='CreateSheudle flex'
     >
-     Create your Sheudle
+     <h3>Create <br />your Sheudle</h3>
+     <input type="text" className='name_sheudle-input' placeholder="Name group"/>
      <div className='Persons flex'>
-       <div className='Person flex'>
-
-        </div>
+       <Admin/>
+       <Worker/>
      </div>
     </motion.div>
   )

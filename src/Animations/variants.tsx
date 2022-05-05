@@ -35,10 +35,17 @@ export const button = {
         duration: .3,
       }
     },
+    hoverWorker:{
+      scale:1.1,
+      cursor:"pointer",
+      transition: {
+        duration: .3,
+      }
+    }
   }
 
 export const position = {
-  outside: {opacity: 0, x: 200},
+  outside: {opacity: 0, x: -200},
   goodPosition: {
     opacity: 1,
     x:0,

@@ -22,4 +22,15 @@
         font-size: 13px;
         font-weight: 800;
     }
+
+    input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid white;
+        outline: none;
+
+        padding: .3rem 0rem;
+
+        color: white;
+    }
 }

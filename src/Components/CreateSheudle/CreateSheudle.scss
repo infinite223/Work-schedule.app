@@ -4,17 +4,38 @@
 
     flex-direction: column;
 
+    h3 {
+        max-width: 400px;
+
+        letter-spacing: 4px;
+    }
+
+    .name_sheudle-input {
+        width: 200px;
+
+        font-size: 27px;
+        text-align: center; 
+    }
+
     .Persons {
         width: 80%;
 
         margin: 40px 0px;
-        
-        .Person {
-            width: 170px;
-            height: 200px;
-    
-            border-radius: 10px;
-            border: 2px solid white;
-        }
     }
 }
+
+
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(240, 230, 230);
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(240, 230, 230);
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(240, 230, 230);
+  }
