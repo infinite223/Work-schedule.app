@@ -1,19 +1,36 @@
 export const sentence = {
-    hidden: {opacity: 1},
+    hidden: {opacity: 0},
     visible: {
       opacity: 1,
       transition: {
         delay: 0.3,
-        staggerChildren: 0.08,
+        staggerChildren: 0.07,
       }
     }
   }
+  
+export const show = {
+    hidden: {opacity: 0},
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: .3,
+        duration:2.5,
+      }
+    },
+    hoverAdmin:{
+      background: "radial-gradient(circle, rgba(250,121,73,1) 50%, rgba(254, 4, 254,.08) 100%)",
+    }
+  }  
 
 export const letter = {
     hidden: {opacity: 0, y: 50},
     visible: {
       opacity: 1,
       y:0,
+      transition:{
+        duration:.7,
+      },
     },
   }
 
@@ -35,22 +52,25 @@ export const button = {
         duration: .3,
       }
     },
-    hoverWorker:{
-      scale:1.1,
-      cursor:"pointer",
-      transition: {
-        duration: .3,
-      }
-    }
   }
 
 export const position = {
-  outside: {opacity: 0, x: -200},
+  outsideRight: {opacity: 0, x: 200},
+  outsideTop: {opacity: 0, y: -200},
   goodPosition: {
     opacity: 1,
+    y:0,
     x:0,
     transition: {
       duration: 1.5,
     }
   },
+  hoverWorker:{
+    scale:1.1,
+    background: "radial-gradient(circle, rgba(250,121,73,1) 50%, rgba(254, 4, 254,.08) 100%)",
+    cursor:"pointer",
+    transition: {
+      duration: .3,
+    }
+  }
 }

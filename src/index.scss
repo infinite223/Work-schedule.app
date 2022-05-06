@@ -7,6 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+  background-color: coral;
 }
 
 code {
@@ -33,4 +35,13 @@ code {
 @font-face {
   font-family: myfont;
   src: url(./font/BalonkuRegular-la1w.otf);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
 }

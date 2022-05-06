@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { motion } from 'framer-motion'
 import { letter, sentence, button } from '../Animations/variants'
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './StartPage.scss'
 
 export const StartPage = () => {

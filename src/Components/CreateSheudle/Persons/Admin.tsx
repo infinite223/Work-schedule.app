@@ -1,9 +1,11 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+import { show } from '../../../Animations/variants'
 import './Person.scss'
 
 export const Admin = () => {
   return (
-    <div className='Person flex'>
+    <motion.div className='Person flex' variants={show} initial="hidden" animate="visible" whileHover="hoverAdmin">
         <div className='flex person_content'>
             <h4>You</h4>
             <form>
@@ -14,6 +16,6 @@ export const Admin = () => {
                 </label>
             </form>
         </div>
-    </div>
+    </motion.div>
   )
 }

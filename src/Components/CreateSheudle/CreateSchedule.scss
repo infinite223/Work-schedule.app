@@ -1,26 +1,44 @@
-.CreateSheudle {
-    width: 100%;
-    height: 100vh;
-
+.CreateSchedule {
     flex-direction: column;
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    .icon-exit {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+
+      cursor: pointer;
+
+      &:hover {
+        color: magenta;
+      }
+    }
 
     h3 {
+        margin-top: 100px;
         max-width: 400px;
 
         letter-spacing: 4px;
     }
 
-    .name_sheudle-input {
+    .name_Schedule-input {
         width: 200px;
 
         font-size: 27px;
-        text-align: center; 
+        text-align: center;
+        letter-spacing: 2px; 
+
+        margin-top:20px;
+        margin-bottom: 60px;
     }
 
     .Persons {
         width: 80%;
-
-        margin: 40px 0px;
+        flex-wrap: wrap;
+       
     }
 }
 
@@ -39,3 +57,4 @@
   ::-ms-input-placeholder { /* Microsoft Edge */
     color: rgb(240, 230, 230);
   }
+  
