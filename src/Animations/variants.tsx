@@ -10,16 +10,19 @@ export const sentence = {
   }
   
 export const show = {
-    hidden: {opacity: 0},
+    hidden: {opacity: 0, background: "linear-gradient(120deg, rgb(248, 94, 38) 50%, rgba(254, 4, 254,.1) 100%)"},
     visible: {
       opacity: 1,
       transition: {
-        delay: .3,
-        duration:2.5,
+        delay: .1,
+        duration:1.5,
       }
     },
     hoverAdmin:{
-      background: "radial-gradient(circle, rgba(250,121,73,1) 50%, rgba(254, 4, 254,.08) 100%)",
+      background: "linear-gradient(320deg, rgb(248, 94, 38) 15%, rgba(254, 4, 254,.1) 100%)",
+      transition: {
+        duration: .7,
+      }
     }
   }  
 
@@ -55,7 +58,11 @@ export const button = {
   }
 
 export const position = {
-  outsideRight: {opacity: 0, x: 200},
+  outsideRight: {
+    opacity: 0,
+     x: 200,
+     background: "linear-gradient(120deg, rgb(248, 94, 38) 50%, rgba(254, 4, 254,.1) 100%)",
+    },
   outsideTop: {opacity: 0, y: -200},
   goodPosition: {
     opacity: 1,
@@ -67,10 +74,10 @@ export const position = {
   },
   hoverWorker:{
     scale:1.1,
-    background: "radial-gradient(circle, rgba(250,121,73,1) 50%, rgba(254, 4, 254,.08) 100%)",
+    background: "linear-gradient(320deg, rgb(248, 94, 38) 15%, rgba(254, 4, 254,.1) 100%)",
     cursor:"pointer",
     transition: {
-      duration: .3,
+      duration: .7,
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { letter, sentence, button } from '../Animations/variants'
 import { useNavigate } from "react-router-dom";

@@ -11,12 +11,18 @@ import { Worker } from './Persons/Worker';
 export const CreateSchedule = () => {
   const navigate = useNavigate(); 
 
-  const [workers, setWorkers] = useState([{login:"", nickname:""}])
+  const [workers, setWorkers] = useState([{id:0,login:"", nickname:""}])
   console.log(workers)
 
   const newWorker= (login:string, nickname:string ) => {
-    setWorkers([...workers, {login:login, nickname:nickname}])
+    setWorkers([...workers, {id:workers.length, login:login, nickname:nickname}])
   }
+
+  const setWorker= (id:number, login:string, nickname:string ) => {
+    console.log(id, login, nickname)
+    setWorkers([...workers, {id:id, login:login, nickname:nickname}])
+  }
+  console.log(workers)
 
   return (
     <motion.div className='CreateSchedule flex'>
@@ -34,8 +40,8 @@ export const CreateSchedule = () => {
      
      <div className='Persons flex'>
        <Admin/>
-       {workers.map(()=> {
-         return <Worker newWorker={newWorker}/>
+       {workers.map((worker)=> {
+         return <Worker key={worker.id} setWorker={setWorker} newWorker={newWorker} id={worker.id}/>
        })}
      </div>
     </motion.div>

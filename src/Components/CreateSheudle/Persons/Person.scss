@@ -7,22 +7,28 @@
     margin: 20px;
 
     border-radius: 10px;
-    box-shadow: 0 0 .1em .05em magenta;     
+    box-shadow: 0 0 .5em .02em rgb(40, 35, 35);
+         
     //background-color: rgb(250, 121, 73); 
-    background: rgb(250,121,73);
-    background: linear-gradient(120deg, rgba(250,121,73,1) 50%, rgba(254, 4, 254,.15) 100%);
-
+   // background: rgb(250,121,73);
+  //  background: linear-gradient(120deg, rgb(248, 94, 38) 20%, rgba(254, 4, 254,.1) 100%);
     letter-spacing: 4px;
 
     .person_content {
         height: 100%;
         flex-direction: column;
+        
 
         h4 {
             min-height: 50px;
 
             max-width: 150px;
             font-size: 22px;
+
+            p {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
         }
 
         h5 {
