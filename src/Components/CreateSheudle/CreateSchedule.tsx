@@ -19,8 +19,9 @@ export const CreateSchedule = () => {
   }
 
   const setWorker= (id:number, login:string, nickname:string ) => {
-    console.log(id, login, nickname)
-    setWorkers([...workers, {id:id, login:login, nickname:nickname}])
+    let newWorker = [...workers]; 
+    newWorker[id] ={id:id, login:login, nickname:nickname}; 
+    setWorkers(newWorker);
   }
   console.log(workers)
 
