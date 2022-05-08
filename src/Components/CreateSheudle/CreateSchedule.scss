@@ -6,7 +6,7 @@
     min-height: 100vh;
 
     .icon-exit {
-      position: absolute;
+      position: fixed;
       left: 20px;
       top: 20px;
 
@@ -18,11 +18,12 @@
     }
 
     h3 {
-        margin-top: 100px;
-        max-width: 400px;
+        margin-top: 50px;
+        max-width: 500px;
 
         letter-spacing: 4px;
-       
+        font-family: myFont;
+        font-size: 50px;
     }
 
     .name_Schedule-input {

@@ -74,7 +74,7 @@ export const position = {
   },
   hoverWorker:{
     scale:1.1,
-    background: "linear-gradient(320deg, rgb(248, 94, 38) 15%, rgba(254, 4, 254,.1) 100%)",
+    background: "linear-gradient(120deg, rgb(248, 94, 38) 10%, rgba(254, 4, 254,.14) 80%)",
     cursor:"pointer",
     transition: {
       duration: .7,

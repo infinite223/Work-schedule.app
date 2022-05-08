@@ -12,7 +12,6 @@ export const CreateSchedule = () => {
   const navigate = useNavigate(); 
 
   const [workers, setWorkers] = useState([{id:0,login:"", nickname:""}])
-  console.log(workers)
 
   const newWorker= (login:string, nickname:string ) => {
     setWorkers([...workers, {id:workers.length, login:login, nickname:nickname}])
@@ -23,7 +22,7 @@ export const CreateSchedule = () => {
     newWorker[id] ={id:id, login:login, nickname:nickname}; 
     setWorkers(newWorker);
   }
-  console.log(workers)
+  
 
   return (
     <motion.div className='CreateSchedule flex'>

@@ -10,8 +10,16 @@
     font-size: 30px;
     text-align: center;
 
+    .calendar-icon {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+
+        opacity: .7;
+    }
+
     .version-text {
-        position: absolute;
+        position: fixed;
         right: 20px;
         bottom: 20px;
 
