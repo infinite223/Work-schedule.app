@@ -25,25 +25,26 @@ export const CreateSchedule = () => {
   
 
   return (
-    <motion.div className='CreateSchedule flex'>
+    <motion.div className='CreateSchedule '>
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
+      <div className='Content flex'>
+        <motion.div
+        variants={position}
+        initial="outsideTop"
+        animate="goodPosition"
+        > 
+          <h3>Create <br />Your Schedule</h3>
+          <input type="text" className='name_Schedule-input' placeholder="Name group"/>
+        </motion.div>
 
-      <motion.div
-       variants={position}
-       initial="outsideTop"
-       animate="goodPosition"
-      > 
-        <h3>Create <br />Your Schedule</h3>
-        <input type="text" className='name_Schedule-input' placeholder="Name group"/>
-      </motion.div>
-
-     
-     <div className='Persons flex'>
-       <Admin/>
-       {workers.map((worker)=> {
-         return <Worker key={worker.id} setWorker={setWorker} newWorker={newWorker} id={worker.id}/>
-       })}
-     </div>
+      
+        <div className='Persons flex'>
+          <Admin/>
+          {workers.map((worker)=> {
+            return <Worker key={worker.id} setWorker={setWorker} newWorker={newWorker} id={worker.id}/>
+          })}
+        </div>
+      </div>
     </motion.div>
   )
 }

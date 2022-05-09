@@ -12,7 +12,8 @@
 
     @for $i from 0 through 1 {
         .square-#{$i} {
-            position: fixed;
+            position:fixed;
+           
             width: 140%;
             height: 400px;
 

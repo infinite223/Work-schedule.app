@@ -3,7 +3,8 @@
     position: relative;
 
     width: 100%;
-    min-height: 100vh;
+
+    max-height: 100vh;
 
     .icon-exit {
       position: fixed;
@@ -17,7 +18,17 @@
       }
     }
 
-    h3 {
+    .Content {
+      flex-direction: column;
+
+      overflow-x:auto;
+      overflow-y:auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      
+      h3 {
         margin-top: 50px;
         max-width: 500px;
 
@@ -38,12 +49,12 @@
 
     .Persons {
         max-width: 80%;
-        height: 350px;
+        
         flex-wrap: wrap;
         position: relative;
 
-        margin-bottom: 20px;
-        padding: 40px;
+        margin-bottom: 100px;
+    }
     }
 }
 
