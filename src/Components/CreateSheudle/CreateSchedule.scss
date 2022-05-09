@@ -33,30 +33,33 @@
         text-align: center;
         letter-spacing: 2px; 
 
-        margin-top:20px;
-        margin-bottom: 60px;
+        margin-bottom: 10px;
     }
 
     .Persons {
-        width: 80%;
+        max-width: 80%;
+        height: 350px;
         flex-wrap: wrap;
-       
+        position: relative;
+
+        margin-bottom: 20px;
+        padding: 40px;
     }
 }
 
 
 
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder { 
     color: rgb(240, 230, 230);
     opacity: 1; /* Firefox */
   }
   
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  :-ms-input-placeholder { 
     color: rgb(240, 230, 230);
   }
   
-  ::-ms-input-placeholder { /* Microsoft Edge */
+  ::-ms-input-placeholder { 
     color: rgb(240, 230, 230);
   }
   

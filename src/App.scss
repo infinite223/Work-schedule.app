@@ -10,6 +10,22 @@
     font-size: 30px;
     text-align: center;
 
+    @for $i from 0 through 1 {
+        .square-#{$i} {
+            position: fixed;
+            width: 140%;
+            height: 400px;
+
+            overflow: hidden;
+    
+            background-color: rgba(54, 53, 48, 0.06);
+    
+            transform: rotate(25deg+($i*130deg));
+    
+            z-index: -1;
+        }
+    }
+
     .calendar-icon {
         position: fixed;
         top: 20px;

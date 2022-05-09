@@ -18,8 +18,8 @@ export const show = {
         duration:1.5,
       }
     },
-    hoverAdmin:{
-      background: "linear-gradient(320deg, rgb(248, 94, 38) 15%, rgba(254, 4, 254,.1) 100%)",
+    hover:{
+      background: "linear-gradient(120deg, rgb(248, 94, 38) 10%, rgba(254, 4, 254,.14) 80%)",
       transition: {
         duration: .7,
       }
@@ -77,7 +77,7 @@ export const position = {
     background: "linear-gradient(120deg, rgb(248, 94, 38) 10%, rgba(254, 4, 254,.14) 80%)",
     cursor:"pointer",
     transition: {
-      duration: .7,
+      duration: .4,
     }
   }
 }

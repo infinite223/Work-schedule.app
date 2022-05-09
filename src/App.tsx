@@ -7,6 +7,8 @@ import './App.scss'
 function App() {
   return (
     <div className='App flex'>
+      <div className='square-0'/>
+      <div className='square-1'/>
       <Router>  
         <Routes>      
           <Route path="/" element={<StartPage/>} />   

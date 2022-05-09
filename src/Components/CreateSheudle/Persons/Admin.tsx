@@ -6,7 +6,7 @@ import './Person.scss'
 export const Admin = () => {
   const [nickname, setNickname] = useState<string>();
   return (
-    <motion.div className='Person flex' variants={show} initial="hidden" animate="visible" whileHover="hoverAdmin">
+    <motion.div className='Person flex' variants={show} initial="hidden" animate="visible" whileHover="hover">
         <div className='flex person_content'>
             <h4>You <p>{nickname&&<text>{nickname}<br /></text>}(Admin)</p></h4>
             
