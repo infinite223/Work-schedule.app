@@ -6,6 +6,8 @@
 
     max-height: 100vh;
 
+    color: rgb(170, 164, 164);
+
     .icon-exit {
       position: fixed;
       left: 20px;
@@ -49,11 +51,11 @@
 
         background-color: rgba(218, 87, 192, 0.1);
         border-radius: 10px;
-        box-shadow: 0 0 .2em .01em rgb(184, 180, 177);
+        box-shadow: 0 0 .5em .02em rgb(40, 35, 35);
         border: none;
 
         &:hover {
-          box-shadow: 0 0 .2em .05em rgba(244, 239, 243, 0.8);
+          box-shadow: 0 0 .9em .05em rgb(31, 31, 31);
           transition: all .4s ease-in-out;
         }
     }

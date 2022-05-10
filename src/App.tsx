@@ -8,10 +8,13 @@ import './App.scss'
 function App() {
   return (
     <div className='App flex'>
-      <div className='square-0 flex'><text>1</text></div>
-      <div className='square-1 flex'><text>2</text></div>
-      <div className='square-2 flex'><text>3</text></div>
-      <div className='square-3 flex'><text>4</text></div>
+      <div className='square-conteiner'>
+        <div className='square-1 flex'><text>1<span>May</span></text></div>
+        <div className='square-2 flex'><text>2<span>May</span></text></div>
+        <div className='square-3 flex'><text>3<span>May</span></text></div>
+        <div className='square-4 flex'><text>4<span>May</span></text></div>
+      </div>
+      
       <Router>  
         <Routes>      
           <Route path="/" element={<StartPage/>} />   
