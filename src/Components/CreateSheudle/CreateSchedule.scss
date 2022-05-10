@@ -47,13 +47,13 @@
         margin-bottom: 20px;
         padding: .7rem 1rem;
 
-        background-color: rgba(243, 92, 38, .1);
+        background-color: rgba(218, 87, 192, 0.1);
         border-radius: 10px;
-        box-shadow: 0 0 .2em .01em rgb(253, 250, 248);
+        box-shadow: 0 0 .2em .01em rgb(184, 180, 177);
         border: none;
 
         &:hover {
-          box-shadow: 0 0 .2em .01em rgb(60, 56, 60);
+          box-shadow: 0 0 .2em .05em rgba(244, 239, 243, 0.8);
           transition: all .4s ease-in-out;
         }
     }
