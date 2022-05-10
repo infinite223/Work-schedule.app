@@ -34,7 +34,7 @@ export const CreateSchedule = () => {
         animate="goodPosition"
         > 
           <h3>Create <br />Your Schedule</h3>
-          <input type="text" className='name_Schedule-input' placeholder="Name group"/>
+          <input type="text" className='name_Schedule-input' placeholder="Name group"/>             
         </motion.div>
 
       

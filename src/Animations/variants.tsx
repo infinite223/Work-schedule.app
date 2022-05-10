@@ -61,7 +61,7 @@ export const position = {
   outsideRight: {
     opacity: 0,
      x: 200,
-     background: "linear-gradient(120deg, rgb(248, 94, 38) 50%, rgba(254, 4, 254,.1) 100%)",
+     background: "linear-gradient(120deg, rgb(248, 94, 38) 50%, rgba(254, 4, 254,.2) 100%)",
     },
   outsideTop: {opacity: 0, y: -200},
   goodPosition: {
@@ -74,7 +74,7 @@ export const position = {
   },
   hoverWorker:{
     scale:1.1,
-    background: "linear-gradient(120deg, rgb(248, 94, 38) 10%, rgba(254, 4, 254,.14) 80%)",
+    background: "linear-gradient(120deg, rgb(248, 94, 38) 10%, rgba(254, 4, 254,.54) 80%)",
     cursor:"pointer",
     transition: {
       duration: .4,

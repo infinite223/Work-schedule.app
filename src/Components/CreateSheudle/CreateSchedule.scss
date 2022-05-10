@@ -18,7 +18,7 @@
       }
     }
 
-    .Content {
+    .Content {      
       flex-direction: column;
 
       overflow-x:auto;
@@ -32,19 +32,30 @@
         margin-top: 50px;
         max-width: 500px;
 
-        letter-spacing: 4px;
+        letter-spacing: 7px;
         font-family: myFont;
         font-size: 50px;
     }
 
     .name_Schedule-input {
-        width: 200px;
+        max-width: 250px;
 
-        font-size: 27px;
+        font-size: 30px;
         text-align: center;
         letter-spacing: 2px; 
 
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        padding: .7rem 1rem;
+
+        background-color: rgba(243, 92, 38, .1);
+        border-radius: 10px;
+        box-shadow: 0 0 .2em .01em rgb(253, 250, 248);
+        border: none;
+
+        &:hover {
+          box-shadow: 0 0 .2em .01em rgb(60, 56, 60);
+          transition: all .4s ease-in-out;
+        }
     }
 
     .Persons {
@@ -62,7 +73,7 @@
 
 
 ::placeholder { 
-    color: rgb(240, 230, 230);
+    color: rgba(240, 230, 230,.7);
     opacity: 1; /* Firefox */
   }
   
