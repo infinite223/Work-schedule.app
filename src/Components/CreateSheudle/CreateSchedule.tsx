@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { position } from '../../Animations/variants'
+import { position, show } from '../../Animations/variants'
 import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react'
@@ -29,14 +29,13 @@ export const CreateSchedule = () => {
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
       <div className='Content flex'>
         <motion.div
-        variants={position}
-        initial="outsideTop"
-        animate="goodPosition"
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:2.5}}
         > 
           <h3>Create <br />Your Schedule</h3>
-          <input type="text" className='name_Schedule-input' placeholder="Name group"/>             
-        </motion.div>
-
+          <input type="text" className='name_Schedule-input' placeholder="Name group"/>                  
+        </motion.div>   
       
         <div className='Persons flex'>
           <Admin/>

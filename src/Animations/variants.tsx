@@ -10,16 +10,16 @@ export const sentence = {
   }
   
 export const show = {
-    hidden: {opacity: 0, background: "linear-gradient(120deg, rgba(218, 87, 192, 0.1) 50%, rgba(254, 4, 254,.1) 100%)"},
+    hidden: {opacity: 0, background: "linear-gradient(120deg, rgba(118, 17, 192, 0.3) 50%, rgba(254, 4, 254,.1) 100%)"},
     visible: {
       opacity: 1,
       transition: {
         delay: .1,
-        duration:1.5,
+        duration:2,
       }
     },
     hover:{
-      background: "linear-gradient(120deg, rgba(218, 87, 192, 0.1) 10%, rgba(254, 4, 254,.14) 80%)",
+      background:"linear-gradient(120deg, rgba(118, 17, 192, 0.3) 50%, rgba(224, 4, 254,.4) 100%)",
       transition: {
         duration: .7,
       }
@@ -61,9 +61,9 @@ export const position = {
   outsideRight: {
     opacity: 0,
      x: 200,
-     background: "linear-gradient(120deg, rgba(218, 87, 192, 0.1) 50%, rgba(254, 4, 254,.2) 100%)",
+     background: "linear-gradient(120deg, rgba(118, 17, 192, 0.3) 50%, rgba(254, 4, 254,.1) 100%)",
     },
-  outsideTop: {opacity: 0, y: -200},
+  outsideTop: {opacity: 0, x: 200},
   goodPosition: {
     opacity: 1,
     y:0,
@@ -74,7 +74,7 @@ export const position = {
   },
   hoverWorker:{
     scale:1.1,
-    background: "linear-gradient(120deg, rgba(218, 87, 192, 0.1) 10%, rgba(254, 4, 254,.54) 80%)",
+    background: "linear-gradient(120deg, rgba(218, 17, 192, 0.1) 10%, rgba(254, 4, 254,.54) 80%)",
     cursor:"pointer",
     transition: {
       duration: .4,
