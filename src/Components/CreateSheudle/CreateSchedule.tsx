@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { position, show } from '../../Animations/variants'
 import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react'
@@ -34,15 +33,21 @@ export const CreateSchedule = () => {
         transition={{duration:2.5}}
         > 
           <h3>Create <br />Your Schedule</h3>
-          <input type="text" className='name_Schedule-input' placeholder="Name group"/>                  
+          <div className='inputs'>
+            <input type="text" className='name_Schedule-input button' placeholder="Name group"/>   
+            <div className='Create_Schedule-button button'>Create</div>   
+          </div>  
+          <hr style={{width:"100%",height:"1px",color:"rgba(57, 58, 59,.9)",border:"0px",backgroundColor:"rgba(57, 58, 59,.9)"}}/>                  
         </motion.div>   
       
         <div className='Persons flex'>
+          <hr style={{position:"absolute",top:"-12px",width:"100%",height:"1px",color:"rgba(57, 58, 59,.9)",border:"0px",backgroundColor:"rgba(57, 58, 59,.9)"}}/>                  
           <Admin/>
           {workers.map((worker)=> {
             return <Worker key={worker.id} setWorker={setWorker} newWorker={newWorker} id={worker.id}/>
           })}
-        </div>
+           <hr style={{position:"absolute",bottom:"-12px",width:"100%",height:"1px",color:"rgba(57, 58, 59,.9)",border:"0px",backgroundColor:"rgba(57, 58, 59,.9)"}}/>
+        </div>  
       </div>
     </motion.div>
   )

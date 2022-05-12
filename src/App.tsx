@@ -2,17 +2,22 @@ import { StartPage } from './StartPage/StartPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CreateSchedule } from './Components/CreateSheudle/CreateSchedule';
 import { RiCalendarTodoLine } from 'react-icons/ri'
-import { motion } from 'framer-motion'
+import { DayOnBackground } from './Components/DayOnBackground';
 import './App.scss'
 
 function App() {
+  const days = [1,2,3,4]; 
   return (
     <div className='App flex'>
       <div className='square-conteiner'>
-        <div className='square-1 flex'><text>1<span>May</span></text></div>
-        <div className='square-2 flex'><text>2<span>May</span></text></div>
-        <div className='square-3 flex'><text>3<span>May</span></text></div>
-        <div className='square-4 flex'><text>4<span>May</span></text></div>
+        {days.map((day)=>{
+          return (
+            <>
+              <DayOnBackground day={day} className={"flex square-"+day}/>
+            </>
+          )
+        }
+        )}     
       </div>
       
       <Router>  

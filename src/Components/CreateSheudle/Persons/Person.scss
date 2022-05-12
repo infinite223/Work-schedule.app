@@ -7,12 +7,13 @@
     margin: 20px;
 
     border-radius: 10px;
-    box-shadow: 0 0 .5em .02em rgb(40, 35, 35);
-         
-    //background-color: rgb(250, 121, 73); 
-   // background: rgb(250,121,73);
-  //  background: linear-gradient(120deg, rgb(248, 94, 38) 20%, rgba(254, 4, 254,.1) 100%);
+    box-shadow: 0 0 .15em .015em #FF00FF;
+    border: 1px solid rgb(139, 136, 139);
+
+    background-color: rgbA(27, 27, 27,.3);
+            
     letter-spacing: 4px;
+    color: rgb(180, 176, 176);
 
     .person_content {
         height: 100%;

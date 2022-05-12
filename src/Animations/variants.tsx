@@ -10,7 +10,7 @@ export const sentence = {
   }
   
 export const show = {
-    hidden: {opacity: 0, background: "linear-gradient(120deg, rgba(118, 17, 192, 0.3) 50%, rgba(254, 4, 254,.1) 100%)"},
+    hidden: {opacity: 0},
     visible: {
       opacity: 1,
       transition: {
@@ -19,7 +19,7 @@ export const show = {
       }
     },
     hover:{
-      background:"linear-gradient(120deg, rgba(118, 17, 192, 0.3) 50%, rgba(224, 4, 254,.4) 100%)",
+      background: "linear-gradient(120deg, rgba(8, 0, 2, 0.3) 10%, rgba(254, 4, 254,.02) 100%)",
       transition: {
         duration: .7,
       }
@@ -61,7 +61,6 @@ export const position = {
   outsideRight: {
     opacity: 0,
      x: 200,
-     background: "linear-gradient(120deg, rgba(118, 17, 192, 0.3) 50%, rgba(254, 4, 254,.1) 100%)",
     },
   outsideTop: {opacity: 0, x: 200},
   goodPosition: {
@@ -74,7 +73,7 @@ export const position = {
   },
   hoverWorker:{
     scale:1.1,
-    background: "linear-gradient(120deg, rgba(218, 17, 192, 0.1) 10%, rgba(254, 4, 254,.54) 80%)",
+    background: "linear-gradient(120deg, rgba(8, 0, 2, 0.3) 10%, rgba(254, 4, 254,.02) 100%)",
     cursor:"pointer",
     transition: {
       duration: .4,
