@@ -58,7 +58,32 @@
         }
     }
 
-    
+    .login-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+
+        font-size: 25px;
+
+        &:hover {
+            cursor: pointer;
+            transition: all .5s ease-in-out;
+            color: #FF00FF;
+            transform: scale(.95);
+        }
+    }
+
+    .icon-exit {
+        position: fixed;
+        left: 20px;
+        top: 20px;
+  
+        cursor: pointer;
+  
+        &:hover {
+          color: magenta;
+        }
+      }
 
     .calendar-icon {
         position: fixed;

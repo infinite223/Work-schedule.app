@@ -8,18 +8,6 @@
 
     color: rgb(226, 217, 217);
 
-    .icon-exit {
-      position: fixed;
-      left: 20px;
-      top: 20px;
-
-      cursor: pointer;
-
-      &:hover {
-        color: magenta;
-      }
-    }
-
     .Content {      
       flex-direction: column;
 

@@ -27,7 +27,7 @@ export const StartPage = () => {
             )
           })}
         </motion.h1>
-
+        <div className='login-button' onClick={()=> navigate("/Login")}><text style={{color: "#FF00FF"}}>Log</text> In</div>
         <motion.div className='button create-button'
           variants={button}
           initial="hidden"
