@@ -9,6 +9,14 @@
 
         font-family: Courier  ;
     }
+
+    .login-text {
+        color: #FF00FF;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
     
     .create-button {
         padding: .7rem 3rem;

@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useNavigate } from './../imports'
 import { letter, sentence, button } from '../Animations/variants'
-import { useNavigate } from "react-router-dom";
+
 import './StartPage.scss'
 
 export const StartPage = () => {
 
-  const headerText = "Your work schedule can be here...";
-  const [showCreate, setShowCreate] = useState(false);
+  const headerText = "Your work schedule can be here";
   const navigate = useNavigate(); 
 
   return (
@@ -27,7 +25,7 @@ export const StartPage = () => {
             )
           })}
         </motion.h1>
-        <div className='login-button' onClick={()=> navigate("/Login")}><text style={{color: "#FF00FF"}}>Log</text> In</div>
+        <div className='login-button' onClick={()=> navigate("/Login")}><text className='login-text'>Log</text> In</div>
         <motion.div className='button create-button'
           variants={button}
           initial="hidden"
@@ -36,11 +34,12 @@ export const StartPage = () => {
           whileTap="tap"
           onClick={()=> navigate("/Create")}
         >
-          {!showCreate?<text>Create</text>:
-          <div className='create-schedule'>działa</div>}
+          <text>Create</text>      
         </motion.div>
 
-        <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1.5, delay:2}}>if you belong to an existing work schedule, you can <text>log in</text></motion.p>
+        <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1.5, delay:2}}>if you belong to an existing work schedule, you can 
+         <text onClick={()=> navigate("/Login")}><text className='login-text'> log In</text></text>
+        </motion.p>
 
     </motion.div>
   )

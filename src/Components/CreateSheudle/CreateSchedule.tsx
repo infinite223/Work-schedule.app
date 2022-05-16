@@ -1,24 +1,20 @@
-import { motion } from 'framer-motion'
-import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
-import { useNavigate } from "react-router-dom";
+import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker } from './../../imports'
 import { useState } from 'react'
 
 import './CreateSchedule.scss'
-import { Admin } from './Persons/Admin'
-import { Worker } from './Persons/Worker';
 
 export const CreateSchedule = () => {
   const navigate = useNavigate(); 
 
-  const [workers, setWorkers] = useState([{id:0,login:"", nickname:""}])
+  const [workers, setWorkers] = useState([{id:0,email:"", nickname:""}])
 
-  const newWorker= (login:string, nickname:string ) => {
-    setWorkers([...workers, {id:workers.length, login:login, nickname:nickname}])
+  const newWorker= (email:string, nickname:string ) => {
+    setWorkers([...workers, {id:workers.length, email:email, nickname:nickname}])
   }
 
-  const setWorker= (id:number, login:string, nickname:string ) => {
+  const setWorker= (id:number, email:string, nickname:string ) => {
     let newWorker = [...workers]; 
-    newWorker[id] ={id:id, login:login, nickname:nickname}; 
+    newWorker[id] ={id:id, email:email, nickname:nickname}; 
     setWorkers(newWorker);
   }
   

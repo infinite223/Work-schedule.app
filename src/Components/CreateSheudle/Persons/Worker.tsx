@@ -1,18 +1,19 @@
 import React, { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
-import './Person.scss'
+import { motion } from './../../../imports'
 import { position, show } from './../../../Animations/variants';
 
+import './Person.scss'
+
 interface props {
-  newWorker: (login:string, nickname:string) => void,
-  setWorker: (id:number, login:string, nickname:string) => void,
+  newWorker: (email:string, nickname:string) => void,
+  setWorker: (id:number, email:string, nickname:string) => void,
   id:number
 }
 
 export const Worker: React.FC<props>= ({ newWorker, setWorker, id }) => {
   const [showForm, setShowForm] = useState<boolean>(false); 
   
-  const [login, setLogin] = useState("")
+  const [email, setEmail] = useState("")
   const [nickname, setNickname] = useState<string>("")
 
   return (
@@ -30,8 +31,8 @@ export const Worker: React.FC<props>= ({ newWorker, setWorker, id }) => {
             {nickname?<h4>{nickname.length>7?nickname.substring(0, 6)+"...":nickname}</h4>:<h4>New worker</h4>}
             <form className='flex ' >
                 <label>
-                  <input type="text" placeholder='login' onChange={(x)=>(setLogin(x.target.value),setWorker(id,login, nickname))}/>
-                  <input type="text" placeholder='nickname' onChange={(x)=>(setNickname(x.target.value),setWorker(id,login, nickname))}/>
+                  <input type="text" placeholder='email' onChange={(x)=>(setEmail(x.target.value),setWorker(id, email, nickname))}/>
+                  <input type="text" placeholder='nickname' onChange={(x)=>(setNickname(x.target.value),setWorker(id, email, nickname))}/>
                 </label>
             </form>
            </motion.div>

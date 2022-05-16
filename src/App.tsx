@@ -1,16 +1,9 @@
-import { StartPage } from './StartPage/StartPage';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { CreateSchedule } from './Components/CreateSheudle/CreateSchedule';
-import { RiCalendarTodoLine } from 'react-icons/ri'
-import { DayOnBackground } from './Components/DayOnBackground';
-import { LoginPage } from './LoginPage/LoginPage';
+import { StartPage, Router, Routes, Route, CreateSchedule, RiCalendarTodoLine, DayOnBackground, LoginPage, days } from './imports';
+
 import './App.scss'
 
 function App() {
-  let days:number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
-    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
-    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
-    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; 
+
   return (
     <div className='App flex'>
       <div className='square-conteiner'>
