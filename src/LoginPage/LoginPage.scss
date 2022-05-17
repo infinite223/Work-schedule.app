@@ -1,0 +1,36 @@
+.LoginPage {
+    flex-direction: column;
+    position: relative;
+
+    width: 400px;
+    height: 500px;
+
+    background-color: rgba(28, 27, 27, 1);
+    border-radius: 20px;
+
+    font-size: 23px;
+    h1::first-letter {
+        color: #FF00FF;
+    }
+    
+
+    button {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+
+        padding: .4rem 1.2rem;
+
+        color: white;
+        font-size: 20px;
+
+        border: 1px solid white;
+        border-radius: 15px;
+
+        &:hover {
+            transition: all .5s ease-in-out;
+            color: #FF00FF;
+            border: 1px solid #FF00FF;;
+        }
+    }
+}
