@@ -2,24 +2,46 @@
     flex-direction: column;
     position: relative;
 
-    width: 400px;
+    width: 380px;
     height: 500px;
 
-    background-color: rgba(28, 27, 27, 1);
+    background-color: rgba(28, 27, 27, .9);
     border-radius: 20px;
 
-    font-size: 23px;
+    font-size: 20px;
     h1::first-letter {
         color: #FF00FF;
     }
+
     
+    .Login__content {
+        flex-direction: column;
+
+        width: 80%;
+        margin-bottom: 50px;
+
+        p {
+            margin: 30px 0;
+            max-width: 80%;
+
+            font-size: 13px;
+            color: rgba(172, 165, 165, .7);
+        }
+
+        input {
+            width: 100%;
+
+            font-size: large;
+            margin: .7rem 0;
+        }
+    }
 
     button {
         position: absolute;
-        right: 20px;
-        bottom: 20px;
+        right: 35px;
+        bottom: 35px;
 
-        padding: .4rem 1.2rem;
+        padding: .4rem 1.4rem;
 
         color: white;
         font-size: 20px;
@@ -32,5 +54,8 @@
             color: #FF00FF;
             border: 1px solid #FF00FF;;
         }
+    }
+    @media only screen and (max-width: 600px) {
+        transform: scale(.8);        
     }
 }

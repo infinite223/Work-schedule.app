@@ -3,19 +3,16 @@ import { StartPage, Router, Routes, Route, CreateSchedule, RiCalendarTodoLine, D
 import './App.scss'
 
 function App() {
-
   return (
     <div className='App flex'>
       <div className='square-conteiner'>
         {days.map((day)=>{
-          return (
-            <>
-              <DayOnBackground day={day} className={"flex square-1"}/>
-            </>
-          )
-        }
+          return (       
+              <DayOnBackground day={day} className={"flex square-1"}/>       
+          )}       
         )}     
       </div>
+
       <Router>  
         <Routes>      
           <Route path="/" element={<StartPage/>} />   
@@ -23,8 +20,9 @@ function App() {
           <Route path='/Login' element={<LoginPage/>}/>           
         </Routes>     
       </Router>
+      
       <RiCalendarTodoLine className='calendar-icon' size={35}/>
-      <text className='version-text'>Work schedule v0.2</text>
+      <text className='version-text'>Work schedule v0.3</text>
     </div>
   );
 }

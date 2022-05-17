@@ -8,6 +8,12 @@
         margin: 20px 0px;
 
         font-family: Courier  ;
+
+        @media only screen and (max-width: 600px) {
+           width: 350px;
+
+           font-size: 40px;
+        }
     }
 
     .login-text {
@@ -30,6 +36,11 @@
         font-family:Verdana, Geneva, Tahoma, sans-serif;
         
         letter-spacing: 3px;
+
+        @media only screen and (max-width: 600px) {
+           font-size: 17px;
+           padding: .5rem 2rem;
+        }
     }
 
     p {
@@ -41,5 +52,9 @@
             font-weight: 800;
             font-size: 15px;
         }
+
+        @media only screen and (max-width: 600px) {
+           transform: scale(.7);
+         }
     }
 } 
