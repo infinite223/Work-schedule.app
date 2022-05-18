@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react'
 import { motion } from './../../../imports'
 import { position, show } from './../../../Animations/variants';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './Person.scss'
+import { bindActionCreators } from 'redux';
+import { actionCreators, State } from '../../../state';
 
 interface props {
   newWorker: (email:string, nickname:string) => void,
@@ -11,6 +14,10 @@ interface props {
 }
 
 export const Worker: React.FC<props>= ({ newWorker, setWorker, id }) => {
+ // const dispatch = useDispatch();
+ // const { incrementCount, decrementCount } = bindActionCreators(actionCreators, dispatch)
+//  const count = useSelector((state: State)=> state.count)
+
   const [showForm, setShowForm] = useState<boolean>(false); 
   
   const [email, setEmail] = useState("")
