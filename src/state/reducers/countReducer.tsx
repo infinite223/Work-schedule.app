@@ -1,16 +1,17 @@
 const initialState = 0;
 
+
 type Action = {
     type: string,
-    payload?: number
+    payload: object
 } 
 
 export const countReducer = (state: number = initialState, action: Action) =>{
     switch (action.type){
-        case "Increment":
-            return state+1;
-        case "Decrementt":
-            return state-1;
+        case "AddPerson":
+            return action;
+        case "DeletePerson":
+            return state;
         default:
             return state;
     }

@@ -1,19 +1,19 @@
 import { Dispatch } from "redux"
 
-export const incrementCount = (count:number) => {
+export const addPerson = (person:object) => {
     return (dispatch: Dispatch) => {
         dispatch({
-            type: "Increment",
-            payload:count
+            type: "AddPerson",
+            payload:person
         })
     }
 }
 
-export const decrementCount = (count:number) => {
+export const deletePerson = (person:object) => {
     return (dispatch: Dispatch) => {
         dispatch({
-            type: "Decrement",
-            payload:count
+            type: "DeletePerson",
+            payload:person
         })
     }
 } 

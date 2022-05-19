@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { motion } from './../../../imports'
 import { position, show } from './../../../Animations/variants';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, State } from '../../../state';
 import './Person.scss'
 
 interface props {
@@ -15,6 +17,11 @@ export const Worker: React.FC<props>= ({ newWorker, setWorker, id }) => {
   
   const [email, setEmail] = useState("")
   const [nickname, setNickname] = useState<string>("")
+
+  const person = useSelector((state: State)=> state.count)
+  const dispatch = useDispatch();
+  
+  const { addPerson, deletePerson } = bindActionCreators(actionCreators, dispatch)
 
   return (
     <motion.div className='Person flex' 
@@ -32,7 +39,7 @@ export const Worker: React.FC<props>= ({ newWorker, setWorker, id }) => {
             <form className='flex ' >
                 <label>
                   <input type="text" placeholder='e-mail' onChange={(x)=>(setEmail(x.target.value),setWorker(id, email, nickname))}/>
-                  <input type="text" placeholder='nickname' onChange={(x)=>(setNickname(x.target.value),setWorker(id, email, nickname))}/>
+                  <input type="text" placeholder='nickname' onChange={(x)=>(addPerson({email: email,nickname: nickname}),setNickname(x.target.value),setWorker(id, email, nickname))}/>
                 </label>
             </form>
            </motion.div>
