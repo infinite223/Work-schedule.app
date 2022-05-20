@@ -1,15 +1,34 @@
-const initialState = 0;
-
+import { PayloadAction } from "@reduxjs/toolkit"
 
 type Action = {
     type: string,
-    payload: object
+    payload: { 
+        id:number,
+        email:string,
+        nickname:string
+    }
 } 
+interface Person {
+    person: [{
+        id:number,
+        email:string,
+        nickname:string
+    }]
+}
+const initialUserState: Person = {
+    person : [{ 
+        id:1,    
+        email:"",
+        nickname:""
+    }]
+}
 
-export const countReducer = (state: number = initialState, action: Action) =>{
+export const countReducer = (state = initialUserState, action: Action) =>{
     switch (action.type){
         case "AddPerson":
-            return action;
+            return {...state, person: [...state.person, action.payload]}
+        case "SetPerson":
+            return console.log(state.person.find((x)=>x.id===action.payload.id))
         case "DeletePerson":
             return state;
         default:

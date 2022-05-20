@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react'
 import { motion } from './../../../imports'
 import { position, show } from './../../../Animations/variants';
-import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../../state';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 import './Person.scss'
 
 interface props {
@@ -29,7 +31,7 @@ export const Worker: React.FC<props>= ({ newWorker, setWorker, id }) => {
         initial="outsideRight"
         animate="goodPosition"
         whileHover={!showForm?"hoverWorker":"noHoverWorker"}>
-         {!showForm?<motion.div className='flex person_content' onClick={()=> (setShowForm(true), newWorker("",""))}>
+         {!showForm?<motion.div className='flex person_content' onClick={()=> (addPerson({id: id+1,email:"", nickname:""}),setShowForm(true))}>
             <h5>Click to add new person</h5>
             <div className='button new_person-button flex'>+</div>
          </motion.div>:
@@ -39,7 +41,7 @@ export const Worker: React.FC<props>= ({ newWorker, setWorker, id }) => {
             <form className='flex ' >
                 <label>
                   <input type="text" placeholder='e-mail' onChange={(x)=>(setEmail(x.target.value),setWorker(id, email, nickname))}/>
-                  <input type="text" placeholder='nickname' onChange={(x)=>(addPerson({email: email,nickname: nickname}),setNickname(x.target.value),setWorker(id, email, nickname))}/>
+                  <input type="text" placeholder='nickname' onChange={(x)=>(setNickname(x.target.value),setWorker(id, email, nickname))}/>
                 </label>
             </form>
            </motion.div>

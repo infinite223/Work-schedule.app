@@ -9,6 +9,15 @@ export const addPerson = (person:object) => {
     }
 }
 
+export const setPerson = (person:object) => {
+    return (dispatch: Dispatch) => {
+        dispatch({
+            type: "SetPerson",
+            payload:person
+        })
+    }
+}
+
 export const deletePerson = (person:object) => {
     return (dispatch: Dispatch) => {
         dispatch({
