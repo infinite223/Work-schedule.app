@@ -24,12 +24,18 @@ const initialUserState: Person = {
 }
 
 export const countReducer = (state = initialUserState, action: Action) =>{
+    
     switch (action.type){
         case "AddPerson":
             return {...state, person: [...state.person, action.payload]}
         case "SetPerson":
-            return console.log(state.person.find((x)=>x.id===action.payload.id))
-        case "DeletePerson":
+            const personIndex = state.person.findIndex((person)=>person.id===action.payload.id)
+            state.person[personIndex].email = action.payload.email;
+            state.person[personIndex].nickname = action.payload.nickname;
+
+            return state;
+            
+        case "DeletePerson": 
             return state;
         default:
             return state;
