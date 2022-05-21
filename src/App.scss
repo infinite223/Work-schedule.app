@@ -91,6 +91,10 @@
         right: 20px;
 
         opacity: .7;
+
+        @media only screen and (max-width: 600px) {           
+           position: absolute;   
+        }
     }
 
     .version-text {
@@ -103,8 +107,9 @@
         font-size: 13px;
         font-weight: 800;
 
-        @media only screen and (max-width: 600px) {
-            transform: scale(.8);        
+        @media only screen and (max-width: 600px) {           
+            transform: scale(.8);  
+            display: none;     
         }
     }
 

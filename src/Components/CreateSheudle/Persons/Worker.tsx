@@ -9,12 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Person.scss'
 
 interface props {
+  personsCount:number,
   id:number
 }
 
-export const Worker: React.FC<props>= ({ id }) => {
-  const [showForm, setShowForm] = useState<boolean>(false); 
-  
+export const Worker: React.FC<props>= ({ personsCount, id }) => { 
   const [email, setEmail] = useState("")
   const [nickname, setNickname] = useState<string>("")
 
@@ -28,8 +27,8 @@ export const Worker: React.FC<props>= ({ id }) => {
         variants={position}
         initial="outsideRight"
         animate="goodPosition"
-        whileHover={!showForm?"hoverWorker":"noHoverWorker"}>
-         {!showForm?<motion.div className='flex person_content' onClick={()=> (addPerson({id: id+1,email:"", nickname:""}),setShowForm(true))}>
+        whileHover={id==personsCount?"hoverWorker":"noHoverWorker"}>
+         {id==personsCount?<motion.div className='flex person_content' onClick={()=> (addPerson({id: id+1,email:"", nickname:""}))}>
             <h5>Click to add new person</h5>
             <div className='button new_person-button flex'>+</div>
          </motion.div>:

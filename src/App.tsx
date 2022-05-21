@@ -5,26 +5,28 @@ import './App.scss'
 function App() {
 
   return (
-    <div className='App flex'>
-      <div className='square-conteiner'>
-        {days.map((day)=>{
-          return (       
-              <DayOnBackground day={day} className={"flex square-1"}/>       
-          )}       
-        )}     
-      </div>
+    <>
+      <div className='App flex'>
+        <div className='square-conteiner'>
+          {days.map((day)=>{
+            return (       
+                <DayOnBackground day={day} className={"flex square-1"}/>       
+            )}       
+          )}     
+        </div>
 
-      <Router>  
-        <Routes>      
-          <Route path="/" element={<StartPage/>} />   
-          <Route path="/Create" element={<CreateSchedule/>} />
-          <Route path='/Login' element={<LoginPage/>}/>           
-        </Routes>     
-      </Router>
-      
-      <RiCalendarTodoLine className='calendar-icon' size={35}/>
-      <text className='version-text'>Work schedule v0.3</text>
-    </div>
+        <Router>  
+          <Routes>      
+            <Route path="/" element={<StartPage/>} />   
+            <Route path="/Create" element={<CreateSchedule/>} />
+            <Route path='/Login' element={<LoginPage/>}/>           
+          </Routes>     
+        </Router>
+        
+        <RiCalendarTodoLine className='calendar-icon' size={35}/>
+        <text className='version-text'>Work schedule v0.3</text>
+      </div>
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ export const CreateSchedule = () => {
   const persons = useSelector((state: State)=> state.count)
   const dispatch = useDispatch();
   const { person }:any = persons;
-  console.log(person)
+
   const { addPerson } = bindActionCreators(actionCreators, dispatch)
 
 
@@ -37,7 +37,7 @@ export const CreateSchedule = () => {
           <hr style={{position:"absolute",top:"-12px",width:"100%",height:"1px",color:"rgba(57, 58, 59,.9)",border:"0px",backgroundColor:"rgba(57, 58, 59,.9)"}}/>                  
           <Admin/>
           {person.map((worker:any)=> {
-            return <Worker key={worker.id} id={worker.id}/>
+            return <Worker personsCount={person.length} key={worker.id} id={worker.id}/>
           })}
            <hr style={{position:"absolute",bottom:"-12px",width:"100%",height:"1px",color:"rgba(57, 58, 59,.9)",border:"0px",backgroundColor:"rgba(57, 58, 59,.9)"}}/>
         </div>  
