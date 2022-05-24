@@ -7,7 +7,7 @@
     margin: 20px;
 
     border-radius: 10px;
-    box-shadow: 0 0 .15em .015em #FF00FF;
+    box-shadow: 0 0 .15em .015em rgb(170, 164, 164);  
     border: 1px solid rgb(139, 136, 139);
 
     background-color: rgbA(27, 27, 27,.3);
@@ -26,6 +26,9 @@
 
             max-width: 150px;
             font-size: 22px;
+            &::first-letter {
+                color:#FF00FF;
+            }
 
             p {
                 font-size: 12px;
@@ -41,6 +44,7 @@
         
         .new_person-button {
             font-size: 55px;
+            color: #FF00FF;
         }
     
         form {

@@ -1,6 +1,11 @@
 import { Dispatch } from "redux"
+interface IUser {
+    id:number,
+    email:string,
+    nickname:string
+}
 
-export const addPerson = (person:object) => {
+export const addPerson = (person:IUser) => {
     return (dispatch: Dispatch) => {
         dispatch({
             type: "AddPerson",
@@ -9,7 +14,7 @@ export const addPerson = (person:object) => {
     }
 }
 
-export const setPerson = (person:object) => {
+export const setPerson = (person:IUser) => {
     return (dispatch: Dispatch) => {
         dispatch({
             type: "SetPerson",
@@ -18,7 +23,7 @@ export const setPerson = (person:object) => {
     }
 }
 
-export const deletePerson = (person:object) => {
+export const deletePerson = (person:IUser) => {
     return (dispatch: Dispatch) => {
         dispatch({
             type: "DeletePerson",
@@ -26,3 +31,12 @@ export const deletePerson = (person:object) => {
         })
     }
 } 
+
+export const setEmail = (person:IUser) => {
+    return (dispatch: Dispatch) => {
+        dispatch({
+            type: "SetEmail",
+            payload:person
+        })
+    }
+}

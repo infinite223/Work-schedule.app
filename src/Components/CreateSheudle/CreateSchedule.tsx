@@ -9,12 +9,13 @@ import './CreateSchedule.scss'
 export const CreateSchedule = () => {
   const navigate = useNavigate(); 
   
-  const persons = useSelector((state: State)=> state.count)
+  const persons = useSelector((state: State)=> state.person)
   const dispatch = useDispatch();
-  const { person }:any = persons;
+  const  person :any = persons;
 
   const { addPerson } = bindActionCreators(actionCreators, dispatch)
 
+  console.log(person)
 
   return (
     <motion.div className='CreateSchedule '>
