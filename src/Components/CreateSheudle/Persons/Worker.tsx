@@ -36,8 +36,8 @@ export const Worker: React.FC<props>= ({ personsCount, id }) => {
             {nickname?<h4>{nickname.length>7?nickname.substring(0, 6)+"...":nickname}</h4>:<h4>New worker</h4>}
             <form className='flex ' >
                 <label>
-                  <input type="text" placeholder='e-mail' onChange={(x) => (setEmaill(x.target.value), setEmail({id:id,email:x.target.value,nickname:""}))}/>
-                  <input type="text" placeholder='nickname' onChange={(x)=>(setNickname(x.target.value),setPerson({id:id, email:email, nickname:nickname}))}/>
+                  <input type="text" placeholder='e-mail' onChange={(x) => (setEmaill(x.target.value), setEmail({id:id,email:x.target.value,nickname:nickname}))}/>
+                  <input type="text" placeholder='nickname' onChange={(x)=>(setNickname(x.target.value),setEmail({id:id, email:email, nickname:nickname}))}/>
                 </label>
             </form>
            </motion.div>
