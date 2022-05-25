@@ -13,13 +13,13 @@ interface IUser {
 }
 
 const initalState: IUser[] = [
-    { id: 1, email: "", nickname: "" },
+    { id: 0, email: "", nickname: "" },
   ];
 
 export const countReducer = (state = initalState, action: Action) =>{
     const { type } = action;
-    
-    switch (type){
+   
+    switch (type){    
         case "AddPerson":
             return  [...state, action.payload]
 
@@ -35,19 +35,26 @@ export const countReducer = (state = initalState, action: Action) =>{
               ];
         case "SetEmail":   
         
-        let id:number = action.payload.id;
+   
        //  var newState = Object.assign({}, state, {
         //    [id]: Object.assign({}, state[id], 
         //        action.payload
         //       )
        //  })
         // return  newState;
+        let id:number = action.payload.id
          return (Object.assign([], state, {
             [id]: Object.assign({}, state[id], 
                action.payload
             )
         }))  
-                          
+        case "SetNickname":  
+        let id1:number = action.payload.id     
+        return (Object.assign([], state, {
+            [id1]: Object.assign({}, state[id1], 
+               action.payload
+            )
+        }))                   
         case "DeletePerson": 
             return state;
         default:

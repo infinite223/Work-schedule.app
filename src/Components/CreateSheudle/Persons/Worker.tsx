@@ -27,7 +27,7 @@ export const Worker: React.FC<props>= ({ personsCount, id }) => {
         initial="outsideRight"
         animate="goodPosition"
         whileHover={id==personsCount?"hoverWorker":"noHoverWorker"}>
-         {id==personsCount?<motion.div className='flex person_content' onClick={()=> (addPerson({id: id+1,email:"", nickname:""}))}>
+         {id==personsCount-1?<motion.div className='flex person_content' onClick={()=> (addPerson({id: id+1,email:"", nickname:""}))}>
             <h5>Click to add new person</h5>
             <div className='button new_person-button flex'>+</div>
          </motion.div>:
