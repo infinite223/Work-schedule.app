@@ -31,12 +31,3 @@ export const deletePerson = (person:IUser) => {
         })
     }
 } 
-
-export const setEmail = (person:IUser) => {
-    return (dispatch: Dispatch) => {
-        dispatch({
-            type: "SetEmail",
-            payload:person
-        })
-    }
-}

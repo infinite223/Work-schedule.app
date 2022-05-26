@@ -1,4 +1,4 @@
-import { StartPage, Router, Routes, Route, CreateSchedule, RiCalendarTodoLine, DayOnBackground, LoginPage, days } from './imports';
+import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, RiCalendarTodoLine, DayOnBackground, LoginPage, days } from './imports';
 
 import './App.scss'
 
@@ -19,7 +19,8 @@ function App() {
           <Routes>      
             <Route path="/" element={<StartPage/>} />   
             <Route path="/Create" element={<CreateSchedule/>} />
-            <Route path='/Login' element={<LoginPage/>}/>           
+            <Route path='/Login' element={<LoginPage/>}/> 
+            <Route path='/Schedule' element={<SchedulePage/>}/>              
           </Routes>     
         </Router>
         

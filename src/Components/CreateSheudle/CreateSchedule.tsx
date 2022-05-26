@@ -15,8 +15,6 @@ export const CreateSchedule = () => {
 
   const { addPerson } = bindActionCreators(actionCreators, dispatch)
 
-  console.log(person)
-
   return (
     <motion.div className='CreateSchedule '>
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>

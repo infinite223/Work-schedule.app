@@ -18,7 +18,7 @@ export const LoginPage = () => {
              <input type="password" placeholder='Password'/>
            </div>
 
-           <button className='login button'>Log In</button>
+           <button className='login button' onClick={()=>navigate("/Schedule")}>Log In</button>
          </motion.div>
     </div>
   )

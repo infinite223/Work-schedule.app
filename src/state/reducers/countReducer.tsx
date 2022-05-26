@@ -22,39 +22,13 @@ export const countReducer = (state = initalState, action: Action) =>{
     switch (type){    
         case "AddPerson":
             return  [...state, action.payload]
-
         case "SetPerson":
-            //const personIndex = state.person.findIndex((person)=>person.id===action.payload.id)
-            //state.person[personIndex].email = action.payload.email;
-           // state.person[personIndex].nickname = action.payload.nickname;
-
-            return [
-                ...state.slice(0, action.payload.id),
-                action.payload.email,
-                ...state.slice(action.payload.id)
-              ];
-        case "SetEmail":   
-        
-   
-       //  var newState = Object.assign({}, state, {
-        //    [id]: Object.assign({}, state[id], 
-        //        action.payload
-        //       )
-       //  })
-        // return  newState;
-        let id:number = action.payload.id
-         return (Object.assign([], state, {
-            [id]: Object.assign({}, state[id], 
-               action.payload
-            )
-        }))  
-        case "SetNickname":  
-        let id1:number = action.payload.id     
-        return (Object.assign([], state, {
-            [id1]: Object.assign({}, state[id1], 
-               action.payload
-            )
-        }))                   
+            let id:number = action.payload.id
+            return (Object.assign([], state, {
+               [id]: Object.assign({}, state[id], 
+                  action.payload
+               )
+           }))                 
         case "DeletePerson": 
             return state;
         default:
