@@ -13,7 +13,7 @@ interface props {
 export const Worker: React.FC<props>= ({ personsCount, id }) => { 
   const person = useSelector((state: State)=> state.person)
   const dispatch = useDispatch();
-  console.log(person[id])
+  console.log(person)
   
   const { addPerson, setPerson } = bindActionCreators(actionCreators, dispatch)
 
