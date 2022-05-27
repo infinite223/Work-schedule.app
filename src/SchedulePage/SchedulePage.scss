@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     
-
     width: 90vw;
     height: 85vh;
 
@@ -11,24 +10,62 @@
 
     color: antiquewhite;    
 
-    .date {    
-        margin: 20px;
-
-        font-size: 20px;
-
-        div {
-        margin: 5px;
+    .SchedulePage__navbar {
+        flex-direction: column;
+        height: 100%;
         
-            &::first-letter {
-                color: #FF00FF;
-            }
-        }
+        .date {    
+            margin: 10px;
+            padding: 10px;
 
-        .year {
-            font-size: 50px;
-            letter-spacing: 5px;
+            max-width: 250px;
+    
+            font-size: 27px;
+    
+            div {
+                margin: 10px;
+            
+                &::first-letter {
+                    color: #FF00FF;
+                }            
+            }
+    
+            .year {
+                font-size: 60px;
+            }
+    
         }
     }
+
+    .SchedulePage__data {
+        flex-direction: column;
+        
+        height: 100%;
+        width: 90%;
+
+        font-size: 18px;
+        color: rgb(160, 156, 156);
+
+        .group-name {
+            width: 90%;
+            
+            border: 2px solid rgb(34, 33, 33);
+
+            padding: .4rem;
+        }
+
+        .worker-list {
+            height: 100%;
+            width: 90%;
+
+            border: 2px solid rgb(34, 33, 33);
+
+            margin: 10px;
+            margin-bottom: 20px;
+            padding: .4rem;
+        }
+    }   
+   
 
     .SchedulePage__content {
         flex-wrap: wrap;

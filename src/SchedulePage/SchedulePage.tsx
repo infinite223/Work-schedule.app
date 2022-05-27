@@ -19,13 +19,27 @@ export const SchedulePage = () => {
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
         <div className='SchedulePage'>
-            <div className='date'>
-                <div className='flex'>
-                    <div>{days[today.getDay()-1]}</div>
-                    <div>{month[today.getMonth()]}</div>
+            <div className='SchedulePage__navbar flex'>
+                <div className='date'>
+                    <div className='year'>{today.getFullYear()}</div>
+                    <div className='flex'>
+                        <div>{days[today.getDay()-1]}</div>
+                        <div>{month[today.getMonth()]}</div>
+                    </div>
+               
                 </div>
-              
-                <div className='year'>{today.getFullYear()}</div>
+                <div className='SchedulePage__data flex'>
+                    <div className='group-name'>Prato Verde</div>
+                    <div className='worker-list'>
+                        <p>
+                            Workers 
+                        </p>
+                        Dawid<br />
+                        Nikola<br />
+                        Norbi<br />
+                        xD<br />
+                    </div>
+                </div>
             </div>
 
             <div className='SchedulePage__content flex'>
