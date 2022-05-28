@@ -1,6 +1,3 @@
-import { PayloadAction } from "@reduxjs/toolkit"
-import update from 'immutability-helper';
-
 interface Action  {
     type: string,
     payload: IUser;

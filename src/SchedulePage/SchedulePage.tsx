@@ -1,6 +1,10 @@
 import { useNavigate, HiOutlineChevronDoubleLeft, motion } from './../imports';
 import { daysInMonth, generateSheduleData } from './functions/functions'
 
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, State } from '../state';
+
 import './SchedulePage.scss'
 
 export const SchedulePage = () => {
@@ -13,7 +17,13 @@ export const SchedulePage = () => {
     const today = new Date();
 
     const daysInMonthToday = daysInMonth(today.getMonth()+1,2022)
-    const schedule = generateSheduleData(daysInMonthToday)
+   // const schedule = generateSheduleData(daysInMonthToday)
+
+    const schedule = useSelector((state: State)=> state.schedule)
+    const dispatch = useDispatch();
+    console.log(schedule)
+  
+    //const { addPerson } = bindActionCreators(actionCreators, dispatch)
  
   return (
     <>
@@ -30,14 +40,22 @@ export const SchedulePage = () => {
                 </div>
                 <div className='SchedulePage__data flex'>
                     <div className='group-name'>Prato Verde</div>
-                    <div className='worker-list'>
+                    <div className='worker-list flex'>
                         <p>
-                            Workers 
+                            Workers in group
                         </p>
-                        Dawid<br />
-                        Nikola<br />
-                        Norbi<br />
-                        xD<br />
+                        <div className='worker flex'>
+                            <text className='worker-name'>Dawid</text>
+                            <text className='worker-hours'>45h</text>
+                        </div>
+                        <div className='worker flex'>
+                            <text className='worker-name'>Nikola</text>
+                            <text className='worker-hours'>40h</text>
+                        </div>
+                        <div className='worker flex'>
+                            <text className='worker-name'>Natalia</text>
+                            <text className='worker-hours'>50h</text>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,7 +65,7 @@ export const SchedulePage = () => {
                    return (
                     <div className='SchedulePage__content__day'>
                         <span>{day.id}</span>
-                       
+                        <text>{day.date.getDay()}</text>
                     </div>
                    )
                })}

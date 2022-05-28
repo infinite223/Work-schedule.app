@@ -55,6 +55,8 @@
         }
 
         .worker-list {
+            flex-direction: column;
+
             height: 100%;
             width: 90%;
 
@@ -63,6 +65,27 @@
             margin: 10px;
             margin-bottom: 20px;
             padding: .4rem;
+
+            .worker {
+                width: 90%;
+
+                background-color: rgba(31, 30, 30,.5);
+                padding: 5px;
+                margin: 5px 0px;
+
+                text {
+                    width: 50%;
+                    margin: 0px 10px;
+                }
+
+                .worker-name {       
+                    text-align: left;
+                }
+
+                .worker-hours {
+                    text-align: right;
+                }
+            }
         }
     }   
    
@@ -88,6 +111,8 @@
             margin:.6%;
 
             background-color: rgb(34, 32, 32);
+            border-radius: 5px;
+
             font-size: 18px;
 
             span {
