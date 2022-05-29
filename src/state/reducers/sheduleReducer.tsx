@@ -14,7 +14,7 @@ function generateSheduleData(){
     let initalState = []
 
     for (let i = 1; i <= 31; i++) {
-        initalState.push({id:i, date: new Date(`2022-05-${i}`), persons:[]})
+        initalState.push({id:i, date: new Date(`2022-05-${i}`), persons:["Dawid", "Nikola"]})
     }
 
     return initalState;

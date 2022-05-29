@@ -6,22 +6,18 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../state';
 
 import './SchedulePage.scss'
+import { Day } from './SchedulePageComponents/Day/Day';
+import { days, month, today } from './constants';
 
 export const SchedulePage = () => {
+
     const navigate = useNavigate(); 
-
-    const days = ["Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday ", "Sunday"]
-
-    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-    const today = new Date();
-
     const daysInMonthToday = daysInMonth(today.getMonth()+1,2022)
    // const schedule = generateSheduleData(daysInMonthToday)
 
     const schedule = useSelector((state: State)=> state.schedule)
     const dispatch = useDispatch();
-    console.log(schedule)
+
   
     //const { addPerson } = bindActionCreators(actionCreators, dispatch)
  
@@ -33,7 +29,7 @@ export const SchedulePage = () => {
                 <div className='date'>
                     <div className='year'>{today.getFullYear()}</div>
                     <div className='flex'>
-                        <div>{days[today.getDay()-1]}</div>
+                        <div>{days[today.getDay()]}</div>
                         <div>{month[today.getMonth()]}</div>
                     </div>
                
@@ -63,10 +59,7 @@ export const SchedulePage = () => {
             <div className='SchedulePage__content flex'>
                {schedule.map((day)=>{
                    return (
-                    <div className='SchedulePage__content__day'>
-                        <span>{day.id}</span>
-                        <text>{day.date.getDay()}</text>
-                    </div>
+                    <Day id={day.id} date={day.date} persons={day.persons}/>
                    )
                })}
             </div>
