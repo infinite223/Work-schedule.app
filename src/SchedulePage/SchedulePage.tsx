@@ -3,7 +3,7 @@ import { daysInMonth, generateSheduleData } from './functions/functions'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators, State } from '../state';
+import { State } from '../state';
 
 import './SchedulePage.scss'
 import { Day } from './SchedulePageComponents/Day/Day';
@@ -13,14 +13,11 @@ export const SchedulePage = () => {
 
     const navigate = useNavigate(); 
     const daysInMonthToday = daysInMonth(today.getMonth()+1,2022)
-   // const schedule = generateSheduleData(daysInMonthToday)
 
     const schedule = useSelector((state: State)=> state.schedule)
     const dispatch = useDispatch();
 
-  
-    //const { addPerson } = bindActionCreators(actionCreators, dispatch)
- 
+    console.log(schedule) 
   return (
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>

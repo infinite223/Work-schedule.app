@@ -5,6 +5,11 @@ interface IUser {
     nickname:string
 }
 
+interface IShedule {
+    id:number,
+    persons: Array<string>
+}
+
 export const addPerson = (person:IUser) => {
     return (dispatch: Dispatch) => {
         dispatch({
@@ -31,3 +36,13 @@ export const deletePerson = (person:IUser) => {
         })
     }
 } 
+
+
+export const setPersonInDay = (shedule:IShedule) => {
+    return (dispatch: Dispatch) => {
+        dispatch({
+            type: "SetPersonInDay",
+            payload:shedule
+        })
+    }
+}

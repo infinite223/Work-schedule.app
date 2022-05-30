@@ -20,18 +20,15 @@ function generateSheduleData(){
     return initalState;
 }
 
-//const initalState: IShedule[] = [
-  //  { id: 0, date: new Date("2021-04-08"), persons: [] },
- // ];
 
 export const ScheduleReducer = (state = generateSheduleData(), action: Action) =>{
     const { type } = action;
    
     switch (type){    
-        case "SetDay":
-            let id:number = action.payload.id
+        case "SetPersonInDay":
+            let id: number = action.payload.id
             return (Object.assign([], state, {
-               [id]: Object.assign({}, state[id], 
+               [id-1]: Object.assign({}, state[id-1], 
                   action.payload
                )
            }))                 
