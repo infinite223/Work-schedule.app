@@ -1,8 +1,5 @@
-import { useNavigate, HiOutlineChevronDoubleLeft, motion } from './../imports';
-import { daysInMonth, generateSheduleData } from './functions/functions'
-
-import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useNavigate, HiOutlineChevronDoubleLeft } from './../imports';
+import { useSelector } from 'react-redux';
 import { State } from '../state';
 
 import './SchedulePage.scss'
@@ -12,11 +9,10 @@ import { days, month, today } from './constants';
 export const SchedulePage = () => {
 
     const navigate = useNavigate(); 
-    const daysInMonthToday = daysInMonth(today.getMonth()+1,2022)
 
     const schedule = useSelector((state: State)=> state.schedule)
-    const dispatch = useDispatch();
 
+    const date = new Date();
     console.log(schedule) 
   return (
     <>
@@ -56,7 +52,7 @@ export const SchedulePage = () => {
             <div className='SchedulePage__content flex'>
                {schedule.map((day)=>{
                    return (
-                    <Day id={day.id} date={day.date} persons={day.persons}/>
+                    <Day key={day.id} id={day.id} date={date} persons={day.persons}/>
                    )
                })}
             </div>
