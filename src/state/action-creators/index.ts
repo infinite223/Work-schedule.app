@@ -5,9 +5,15 @@ interface IUser {
     nickname:string
 }
 
+interface IPerson {
+    name: string;
+    startWork: string;
+    endWork: string;
+}
+
 interface IShedule {
     id:number,
-    persons: Array<string>
+    persons: Array<IPerson>
 }
 
 export const addPerson = (person:IUser) => {

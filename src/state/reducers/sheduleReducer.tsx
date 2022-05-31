@@ -5,8 +5,11 @@ interface Action  {
 
 interface IShedule {
     id:number,
-    //date:Date,
-    persons:[]
+    persons: [{
+        name:string,
+        startWork:string,
+        endWork:string
+    }]
 }
 //, date: new Date(`2022-05-${i}`)
 function generateSheduleData(){
@@ -14,7 +17,7 @@ function generateSheduleData(){
     let initalState = []
 
     for (let i = 1; i <= 31; i++) {
-        initalState.push({id:i, persons:["Dawid", "Nikola"]})
+        initalState.push({id:i, persons:[{name:"Dawid", startWork:"17:00", endWork:"22:00"}]})
     }
 
     return initalState;
