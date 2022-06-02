@@ -1,4 +1,5 @@
-import { useNavigate, HiOutlineChevronDoubleLeft } from './../imports';
+import { useNavigate, HiOutlineChevronDoubleLeft, motion } from './../imports';
+import { show } from '../Animations/variants';
 import { useSelector } from 'react-redux';
 import { State } from '../state';
 
@@ -17,7 +18,7 @@ export const SchedulePage = () => {
   return (
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-        <div className='SchedulePage'>
+        <motion.div className='SchedulePage' variants={show} initial="hidden" animate="visible">
             <div className='SchedulePage__navbar flex'>
                 <div className='date'>
                     <div className='year'>{today.getFullYear()}</div>
@@ -57,7 +58,7 @@ export const SchedulePage = () => {
                })}
             </div>
             
-        </div>
+        </motion.div>
     </>                                                                                          
   )
 }

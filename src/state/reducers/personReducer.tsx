@@ -13,7 +13,7 @@ const initalState: IUser[] = [
     { id: 0, email: "", nickname: "" },
   ];
 
-export const countReducer = (state = initalState, action: Action) =>{
+export const personReducer = (state = initalState, action: Action) =>{
     const { type } = action;
    
     switch (type){    

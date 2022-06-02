@@ -1,13 +1,12 @@
 import { combineReducers } from "redux";
-import { countReducer } from './countReducer'
+import { personReducer } from './personReducer'
 import { ScheduleReducer } from "./sheduleReducer";
 import { loginReducer } from "./loginReducer";
 
 export const reducers = combineReducers({
-    person: countReducer,
+    person: personReducer,
     schedule: ScheduleReducer,
     login:loginReducer
-    
 });
 
 export type State = ReturnType<typeof reducers>

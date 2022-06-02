@@ -17,7 +17,7 @@ function generateSheduleData(){
     let initalState = []
 
     for (let i = 1; i <= 31; i++) {
-        initalState.push({id:i, persons:[{name:"Dawid", startWork:"17:00", endWork:"22:00"}]})
+        initalState.push({id:i, persons: [{name:"Dawid", startWork:"17:00", endWork:"22:00"}]})
     }
 
     return initalState;

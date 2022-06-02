@@ -101,6 +101,11 @@
         margin-left: 0px;
 
         border: 2px solid rgb(34, 33, 33);
-  
+        
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }

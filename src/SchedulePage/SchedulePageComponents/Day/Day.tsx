@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { motion } from 'framer-motion';
 import { days } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,44 +15,62 @@ interface IPerson {
 
 export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }> = ({ id, date, persons }) => {
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
+  const [startWork, setStartWork] = useState("00:00");
+  const [endWork, setEndWork] = useState("00:00");
 
   const loginPerson = useSelector((state: State)=> state.login)
 
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
 
-  const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
+  const [ selectColor, setSelectColor ] = useState<boolean>();
 
-  const setPersons = () : void => {
-    //persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]}
-    if(foundPerson){
-       setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
+
+  const setPersons = (operation:boolean) : void => {
+    if(!operation){
+      setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
     }
     else {
-       setPersonInDay({id:id, persons:[...persons, {name:loginPerson[0].nickname, startWork:"12:00", endWork:"22:00"}]})
+      setPersonInDay({id:id, persons:[...persons, {name:loginPerson[0].nickname, startWork:startWork, endWork:endWork}]})
     }
+    //if(foundPerson){
+    //   setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
+   // }
+   // else {
+    //   setPersonInDay({id:id, persons:[...persons, {name:loginPerson[0].nickname, startWork:"12:00", endWork:"22:00"}]})
+   // }
   }
-
+  useEffect(()=>{
+    const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
+    setSelectColor(foundPerson?true:false)
+    console.log(id, persons)
+  },[ setPersonInDay ])
 
   return (
     <>
-        {chooseHours&&<div className='day__chooseHours'>
+        {chooseHours&&<motion.div className='day__chooseHours' drag>
               <nav>
                 <text>{loginPerson[0].nickname}</text>
-                <CgCloseR className='exit-icon' size={32} onClick={()=> setChooseHours(false)}/>
+                <CgCloseR className='exit-icon' size={25} onClick={()=> setChooseHours(false)}/>
               </nav>
-              <div className='day__chooseHours-choose'>
-
+              <div className='day__chooseHours-choose flex'>
+                <div className={`chooseHours flex ${selectColor?"select":"no-select"}`}>
+                  <input className='hours' type="time" onChange={(x)=>(setPersons(true),setStartWork(x.target.value))}/>
+                    To  
+                  <input className='hours' onChange={(x)=>setEndWork(x.target.value)} type="time"/>
+                </div>
+                
+                <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
               </div>  
-        </div>}
+        </motion.div>}
 
-      <div className='day' onClick={()=>(setPersons(), setChooseHours(true))}>
+      <div className='day' onClick={()=> setChooseHours(true)}>
           <nav >
             <span>{id}</span>
             <text>{days[date.getDay()]}</text>      
           </nav>
-          <div className='day__workerlist flex'>  
-            {persons?persons.map(({name, startWork, endWork})=>{
+          <div className='day__workerlist'>  
+            {persons?persons.map(({ name, startWork, endWork })=>{
               return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
             }):<>xd</>}
           </div>
