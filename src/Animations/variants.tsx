@@ -15,7 +15,7 @@ export const show = {
       opacity: 1,
       transition: {
         delay: .1,
-        duration:2,
+        duration:1,
       }
     },
     hover:{

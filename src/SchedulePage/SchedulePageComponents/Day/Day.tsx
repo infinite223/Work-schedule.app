@@ -14,11 +14,11 @@ interface IPerson {
 }
 
 export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }> = ({ id, date, persons }) => {
-  const [ chooseHours, setChooseHours ] = useState<boolean>(false)
-  const [startWork, setStartWork] = useState("00:00");
-  const [endWork, setEndWork] = useState("00:00");
-
   const loginPerson = useSelector((state: State)=> state.login)
+  const [ chooseHours, setChooseHours ] = useState<boolean>(false)
+  const [ startWork, setStartWork ] = useState(persons[0]?.startWork? persons[0].startWork : "00:00");
+  const [ endWork, setEndWork ] = useState("00:00");
+
 
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
@@ -31,34 +31,31 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
       setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
     }
     else {
-      setPersonInDay({id:id, persons:[...persons, {name:loginPerson[0].nickname, startWork:startWork, endWork:endWork}]})
+     
+      setPersonInDay({id:id, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
+         {name:loginPerson[0].nickname, startWork:startWork, endWork:endWork}]})
     }
-    //if(foundPerson){
-    //   setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
-   // }
-   // else {
-    //   setPersonInDay({id:id, persons:[...persons, {name:loginPerson[0].nickname, startWork:"12:00", endWork:"22:00"}]})
-   // }
   }
+
   useEffect(()=>{
     const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
     setSelectColor(foundPerson?true:false)
-    console.log(id, persons)
   },[ setPersonInDay ])
 
   return (
     <>
         {chooseHours&&<motion.div className='day__chooseHours' drag>
               <nav>
-                <text>{loginPerson[0].nickname}</text>
+                <span>{id}</span>
+                <text>{days[date.getDay()]}</text>     
                 <CgCloseR className='exit-icon' size={25} onClick={()=> setChooseHours(false)}/>
               </nav>
               <div className='day__chooseHours-choose flex'>
-                <div className={`chooseHours flex ${selectColor?"select":"no-select"}`}>
-                  <input className='hours' type="time" onChange={(x)=>(setPersons(true),setStartWork(x.target.value))}/>
+                <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
+                  <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
                     To  
-                  <input className='hours' onChange={(x)=>setEndWork(x.target.value)} type="time"/>
-                </div>
+                  <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
+                </div>  
                 
                 <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
               </div>  
