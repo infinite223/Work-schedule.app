@@ -1,8 +1,7 @@
 import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker } from './../../imports'
 import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators, State } from '../../state';
-import { useEffect, useState } from 'react'
+import {  State } from '../../state';
+
 
 import './CreateSchedule.scss'
 
@@ -12,8 +11,6 @@ export const CreateSchedule = () => {
   const persons = useSelector((state: State)=> state.person)
   const dispatch = useDispatch();
   const  person :any = persons;
-
-  const { addPerson } = bindActionCreators(actionCreators, dispatch)
 
   return (
     <motion.div className='CreateSchedule '>

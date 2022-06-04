@@ -13,6 +13,7 @@ export { Worker } from './Components/CreateSheudle/Persons/Worker';
 
 export { RiCalendarTodoLine } from 'react-icons/ri'
 export { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
+export { CgCloseR } from 'react-icons/cg'
 
 export { bindActionCreators } from 'redux';
 export { useDispatch, useSelector } from 'react-redux';

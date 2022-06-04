@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { State } from '../state';
 
 import './SchedulePage.scss'
-import { Day } from './SchedulePageComponents/Day/Day';
-import { days, month, today } from './constants';
+import { Day } from '../Components/Day/Day';
+import { days, month, today } from '../Helpers/constants';
 
 export const SchedulePage = () => {
 
@@ -34,8 +34,6 @@ export const SchedulePage = () => {
         })
         return (hours + minutes/60).toFixed(2)
     }
-
-    const date = new Date();
 
   return (
     <>

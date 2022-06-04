@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion';
-import { days } from '../../constants'
+import { CgCloseR, motion} from '../../imports'
+import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators, State } from '../../../state';
-import { CgCloseR } from 'react-icons/cg'
+import { actionCreators, State } from '../../state';
 
 import './Day.scss'
+import { AnimatePresence } from 'framer-motion';
 interface IPerson {
       name: string;
       startWork: string;
@@ -38,13 +38,20 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
   }
 
   useEffect(()=>{
-    const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
-    setSelectColor(foundPerson?true:false)
+    if(persons && loginPerson){
+      const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
+      setSelectColor(foundPerson?true:false)
+    }
   },[ setPersonInDay ])
 
   return (
-    <>
-        {chooseHours&&<motion.div className='day__chooseHours' drag>
+    <AnimatePresence>
+        {chooseHours&&<motion.div className='day__chooseHours' drag 
+          key="box"
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          exit={{opacity:0}}
+        >
               <nav>
                 <span>{id}</span>
                 <text>{days[date.getDay()]}</text>     
@@ -72,6 +79,6 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
             }):<>xd</>}
           </div>
       </div>
-    </>
+    </AnimatePresence>
   )
 }
