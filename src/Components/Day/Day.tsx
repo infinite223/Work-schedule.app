@@ -48,9 +48,9 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
     <AnimatePresence>
         {chooseHours&&<motion.div className='day__chooseHours' drag 
           key="box"
-          initial={{opacity:0}}
-          animate={{opacity:1}}
-          exit={{opacity:0}}
+          initial={{opacity:0, top:"10px"}}
+          animate={{opacity:1, top:"50%", scaleX:"1"}}
+          exit={{opacity:0, bottom:"10px", scale:[".9", ".8", ".4", ".1"]}}
         >
               <nav>
                 <span>{id}</span>
