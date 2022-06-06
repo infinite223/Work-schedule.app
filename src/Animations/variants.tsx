@@ -26,6 +26,15 @@ export const show = {
     }
   }  
 
+  export const showDay = {
+    hidden: {opacity:0, top:"10px"},
+    visible:{opacity:1, top:"50%", scaleX:"1"},
+    exit:{opacity:0, bottom:"10px", scale:[".9", ".8", ".4", ".1"]}
+  }
+
+
+    
+
 export const letter = {
     hidden: {opacity: 0, y: 50},
     visible: {
@@ -72,7 +81,7 @@ export const position = {
     }
   },
   hoverWorker:{
-    scale:1.1,
+    scale:.9,
     background: "linear-gradient(120deg, rgba(8, 0, 2, 0.3) 10%, rgba(254, 4, 254,.02) 100%)",
     cursor:"pointer",
     transition: {

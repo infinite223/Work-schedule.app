@@ -1,14 +1,14 @@
 .Person {
     flex-direction: column;
 
-    width: 230px;
-    height: 300px;
+    width: 200px;
+    height: 250px;
 
     margin: 20px;
 
     border-radius: 10px;
-    box-shadow: 0 0 .15em .015em rgb(170, 164, 164);  
-    border: 1px solid rgb(139, 136, 139);
+    box-shadow: 0 0 .15em .015em rgb(90, 89, 89);  
+    border: 1px solid rgb(102, 100, 102);
 
     background-color: rgbA(27, 27, 27,.3);
             
@@ -22,16 +22,16 @@
         border-radius: 10px;
 
         h4 {
-            min-height: 50px;
+            min-height: 40px;
 
             max-width: 150px;
-            font-size: 22px;
+            font-size: 17px;
             &::first-letter {
                 color:#FF00FF;
             }
 
             p {
-                font-size: 12px;
+                font-size: 10px;
                 letter-spacing: 1px;
             }
         }
@@ -43,7 +43,7 @@
         }
         
         .new_person-button {
-            font-size: 55px;
+            font-size: 50px;
             color: #FF00FF;
         }
     
@@ -51,9 +51,10 @@
             height: 50%;
             
             input {
-                max-width: 80%;               
-    
-                font-size: 18px;
+                max-width: 80%;  
+              
+                font-size: 14px;
+                border-color: gray;
             }
         }
     }

@@ -4,6 +4,7 @@ import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
+import { showDay } from '../../Animations/variants';
 
 import './Day.scss'
 import { AnimatePresence } from 'framer-motion';
@@ -48,9 +49,10 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
     <AnimatePresence>
         {chooseHours&&<motion.div className='day__chooseHours' drag 
           key="box"
-          initial={{opacity:0, top:"10px"}}
-          animate={{opacity:1, top:"50%", scaleX:"1"}}
-          exit={{opacity:0, bottom:"10px", scale:[".9", ".8", ".4", ".1"]}}
+          variants={showDay}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
               <nav>
                 <span>{id}</span>
