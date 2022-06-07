@@ -1,30 +1,26 @@
 .Person {
     flex-direction: column;
 
-    width: 200px;
-    height: 250px;
+    width: 100;
+    height: 50px;
 
-    margin: 20px;
+    margin: 10px;
 
-    border-radius: 10px;
-    box-shadow: 0 0 .15em .015em rgb(90, 89, 89);  
-    border: 1px solid rgb(102, 100, 102);
+  //  box-shadow: 0 0 .15em .015em rgb(90, 89, 89);  
+ //   border: 1px solid rgb(102, 100, 102);
 
-    background-color: rgbA(27, 27, 27,.3);
+    background-color: rgb(37, 36, 37);
             
     letter-spacing: 4px;
-    color: rgb(180, 176, 176);
+    color: rgb(46, 45, 45);
 
     .person_content {
         height: 100%;
-        flex-direction: column; 
+        //flex-direction: column; 
 
         border-radius: 10px;
 
         h4 {
-            min-height: 40px;
-
-            max-width: 150px;
             font-size: 17px;
             &::first-letter {
                 color:#FF00FF;
@@ -38,8 +34,6 @@
 
         h5 {
             font-size: 17px;
-
-            max-width: 150px;
         }
         
         .new_person-button {

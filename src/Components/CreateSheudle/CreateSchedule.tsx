@@ -1,5 +1,6 @@
 import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker } from './../../imports'
 import { useDispatch, useSelector } from 'react-redux';
+import { BsPersonBoundingBox } from 'react-icons/bs'
 import {  State } from '../../state';
 
 
@@ -21,13 +22,14 @@ export const CreateSchedule = () => {
           animate={{opacity:1}}
           transition={{duration:2.5}}
           > 
-            <h3>Create <br />Your Schedule</h3>
-            <div className='inputs'>
+            <h3>Create Your Schedule</h3>
+           
+           
+          </motion.div>   
+          <div className='inputs'>
               <input type="text" className='name_Schedule-input button' placeholder="Name group"/>   
               <div className='Create_Schedule-button button'>Create</div>   
             </div>  
-           
-          </motion.div>   
       </nav>
       <div className='Content flex'>
         <div className='Persons'>               
@@ -35,7 +37,10 @@ export const CreateSchedule = () => {
           {person.map((worker:any)=> {
             return <Worker personsCount={person.length} key={worker.id} id={worker.id}/>
           })}
-        </div>  
+        </div> 
+        <div className='Person__data flex'>
+            <BsPersonBoundingBox size={100} color="grey"/>
+        </div> 
       </div>
     </motion.div>
   )

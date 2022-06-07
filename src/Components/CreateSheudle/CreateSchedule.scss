@@ -1,11 +1,10 @@
 .CreateSchedule {
-  display: flex;
+    display: flex;
     position: relative;
-  
+    flex-direction: column;
+
     width: 90vw;
     height: 80vh;
-
-    padding: 20px 0;
 
     background-color: rgba(28, 27, 27, .9);
     border-radius: 10px;
@@ -13,14 +12,19 @@
     color: antiquewhite;    
 
     nav {
-      width: 20%;
-      height: 100%;
+      display: flex;
+      align-items: center;
+      width: auto;
+      height: 50px;
 
-      padding: 20px;
+      margin: 20px;
+      padding: 10px 25px;
+
+      border: 1px solid rgb(49, 48, 48);
+
 
       h3 {
-        max-width: 500px;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         font-family: Courier  ;
         font-size: 30px;
 
@@ -31,23 +35,22 @@
     }
 
     .inputs {
-      display: flex;  
-      justify-content: center;
-
+      display: flex;
+      margin-left: auto;
       .name_Schedule-input {
-        max-width: 160px;
+        max-width: 200px;
 
         font-size: 15px;
         text-align: center;
         letter-spacing: 2px; 
         
-        padding: .7rem .1rem;
+        padding: .7rem 1rem;
 
-        border-radius: 25px 0px 0px 25px;
-        border: 3px solid rgb(170, 164, 164);  
+        border-radius: 10px 0px 0px 10px;
+        border: 2px solid rgb(114, 113, 113);
 
         &:hover { 
-          border: 3px solid rgb(208, 204, 204);;
+          border: 3px solid rgb(114, 113, 113);
           transition: all .4s ease-in-out;
           cursor:text;
         }
@@ -57,18 +60,19 @@
       }
 
       .Create_Schedule-button {    
-        width: 200px;
+        width: 150px;
 
         font-size: 15px;
+        font-weight: 900;
         text-align: center;
         letter-spacing: 2px; 
         color: black;
 
         padding: .7rem .2rem;
 
-        border-radius: 0px 25px 25px 0px;
-        background-color: rgb(170, 164, 164);
-        border: 3px solid rgb(170, 164, 164);
+        border-radius: 0px 10px 10px 0px;
+        background-color: rgb(114, 113, 113);
+        border: 2px solid rgb(114, 113, 113);
         border-left: none;
 
         &:hover {    
@@ -84,25 +88,31 @@
     }
     }
 
-    .Content {    
-      overflow-x:auto;
-      overflow-y:auto;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      
-    .Persons {
-      display: flex;
-      align-content: flex-start;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-
-      width: 100%;
+    .Content {  
       height: 100%;
 
-      margin: 20px;
-    }
+      margin: 0 20px 20px 20px;
+      
+      .Persons {
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        //flex-wrap: wrap;
+        justify-content: flex-start;
+
+        width: 70%;
+        height: 100%;
+
+        margin-right: 20px;
+        border: 1px solid rgb(49, 48, 48);
+      }
+
+      .Person__data {
+        width: 30%;
+        height: 100%;
+
+        border: 1px solid rgb(49, 48, 48);
+      }
     }
 }
 

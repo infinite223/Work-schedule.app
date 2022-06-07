@@ -10,7 +10,7 @@ export const Admin = () => {
   return (
     <motion.div className='Person flex' variants={show} initial="hidden" animate="visible" whileHover="hover">
         <div className='flex person_content'>
-            <h4>You <p>{nickname&&<text>{nickname}<br /></text>}(Admin)</p></h4>          
+            <h4>You {nickname&&<text>{nickname}</text>}(Admin)</h4>          
             <form>
                 <label>
                   <input type="text" placeholder='e-mail'/>
