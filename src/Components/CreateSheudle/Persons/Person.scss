@@ -6,19 +6,37 @@
 
     margin: 10px;
 
-  //  box-shadow: 0 0 .15em .015em rgb(90, 89, 89);  
- //   border: 1px solid rgb(102, 100, 102);
-
-    background-color: rgb(37, 36, 37);
+    background-color: rgb(30, 29, 29);
             
     letter-spacing: 4px;
-    color: rgb(46, 45, 45);
+    color: rgb(131, 129, 129);
 
     .person_content {
-        height: 100%;
-        //flex-direction: column; 
+        display: flex;
+        align-items: center;
+        height: 50px;
+        width: 100%;
 
         border-radius: 10px;
+        text-align: left;
+
+        text {
+            font-size: 17px;
+            margin: 0 10px;
+
+            letter-spacing: 1px;
+        }
+
+        .text__value {
+            display: flex;
+            align-items: center;
+            
+            width: 300px;
+            height: 80%;
+            
+            border: 1px solid rgba(64, 63, 63,.6);
+            padding: 0 20px;
+        }
 
         h4 {
             font-size: 17px;
@@ -34,11 +52,9 @@
 
         h5 {
             font-size: 17px;
-        }
-        
-        .new_person-button {
-            font-size: 50px;
-            color: #FF00FF;
+            letter-spacing: normal;
+
+            margin-right: 10px;
         }
     
         form {
@@ -51,5 +67,9 @@
                 border-color: gray;
             }
         }
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 }

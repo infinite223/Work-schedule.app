@@ -35,7 +35,7 @@ export const CreateSchedule = () => {
         <div className='Persons'>               
           <Admin/>
           {person.map((worker:any)=> {
-            return <Worker personsCount={person.length} key={worker.id} id={worker.id}/>
+            return <Worker lastPersonId={person.at(-1).id} key={worker.id} id={worker.id}/>
           })}
         </div> 
         <div className='Person__data flex'>

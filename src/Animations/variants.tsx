@@ -19,7 +19,6 @@ export const show = {
       }
     },
     hover:{
-      background: "linear-gradient(120deg, rgba(8, 0, 2, 0.3) 10%, rgba(254, 4, 254,.02) 100%)",
       transition: {
         duration: .7,
       }
@@ -29,7 +28,7 @@ export const show = {
   export const showDay = {
     hidden: {opacity:0, top:"10px"},
     visible:{opacity:1, top:"50%", scaleX:"1"},
-    exit:{opacity:0, bottom:"10px", scale:[".9", ".8", ".4", ".1"]}
+    exit:{opacity:0, scale:[".9", ".8", ".4", ".1"]}
   }
 
 
@@ -82,7 +81,7 @@ export const position = {
   },
   hoverWorker:{
     scale:.9,
-    background: "linear-gradient(120deg, rgba(8, 0, 2, 0.3) 10%, rgba(254, 4, 254,.02) 100%)",
+    backgroundColor: "rgb(25, 24, 24)",
     cursor:"pointer",
     transition: {
       duration: .4,

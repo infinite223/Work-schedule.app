@@ -52,13 +52,15 @@
             color: #f9f8f9;
         }
     }
+}
 
+.enable-day {
+    
     &:hover {
         cursor: pointer;
         border: 1px solid  #6d5a6d;
     }
 }
-
 
 
 .day__chooseHours {

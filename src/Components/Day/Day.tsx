@@ -19,11 +19,10 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
   const [ startWork, setStartWork ] = useState(persons[0]?.startWork? persons[0].startWork : "00:00");
   const [ endWork, setEndWork ] = useState("00:00");
-
+  const todayDate = new Date();
 
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
-
   const [ selectColor, setSelectColor ] = useState<boolean>();
 
 
@@ -70,7 +69,7 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
               </div>  
         </motion.div>}
 
-      <div className='day' onClick={()=> setChooseHours(true)}>
+      <div className={todayDate.getDate()-1<id?`enable-day day`:'day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
           <nav >
             <span>{id}</span>
             <text>{days[date.getDay()]}</text>      
