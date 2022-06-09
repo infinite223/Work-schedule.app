@@ -19,6 +19,9 @@ export const Admin = () => {
                   <input type="password" placeholder='password' />
                 </label>
             </form> */}
+            <text className='text__value'><text>email:</text> <input type="text" placeholder='...'/></text>
+            <text className='text__value'><text>nickname:</text> <input type="text" placeholder='...'/> </text>
+            <text className='text__value'><text>password:</text> <input type="password" placeholder='...'/> </text>
         </div>
     </motion.div>
   )

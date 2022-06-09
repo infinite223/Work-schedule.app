@@ -1,6 +1,7 @@
 import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker } from './../../imports'
 import { useDispatch, useSelector } from 'react-redux';
 import { BsPersonBoundingBox } from 'react-icons/bs'
+import { IoCreateOutline } from 'react-icons/io5'
 import {  State } from '../../state';
 
 
@@ -23,12 +24,16 @@ export const CreateSchedule = () => {
           transition={{duration:2.5}}
           > 
             <h3>Create Your Schedule</h3>
-           
-           
+
           </motion.div>   
-          <div className='inputs'>
-              <input type="text" className='name_Schedule-input button' placeholder="Name group"/>   
-              <div className='Create_Schedule-button button'>Create</div>   
+          <div className='create__group'>
+              {/* <input type="text" className='name_Schedule-input button' placeholder="Name group"/>   
+              <div className='Create_Schedule-button button'>Create
+              </div>   */}
+              <text className='text__value'><text>name group:</text>
+                <input type="text" placeholder='...'/> 
+                <IoCreateOutline size={25} className="create__group-button"/>
+              </text> 
             </div>  
       </nav>
       <div className='Content flex'>

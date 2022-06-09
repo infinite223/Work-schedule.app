@@ -23,7 +23,7 @@
         text-align: left;
 
         text {
-            font-size: 17px;
+            font-size: 13px;
             margin: 0 10px;
 
             letter-spacing: 1px;
@@ -49,6 +49,11 @@
                 background-color: rgb(33, 32, 32);
                 border:none;
             }
+
+            &:hover {
+                border:1px solid rgba(79, 77, 77, 0.9);
+                transition: all .6s ease-in-out;
+              }
         }
 
         .delete-person {
