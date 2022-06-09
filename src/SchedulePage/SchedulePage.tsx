@@ -50,10 +50,8 @@ export const SchedulePage = () => {
                 </div>
                 <div className='SchedulePage__data flex'>
                     <div className='group-name'>Prato Verde</div>
-                    <div className='worker-list flex'>
-                        <p>
-                            Workers in group
-                        </p>
+                    <div className='worker-list'>
+                      
                         <div className='worker flex'>
                             <text className='worker-name'>Dawid</text>
                             <text className='worker-hours'>{countHours("Dawid")}h</text>

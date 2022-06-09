@@ -12,15 +12,17 @@ export const sentence = {
 export const show = {
     hidden: {opacity: 0},
     visible: {
+      backgroundColor:"rgb(30, 29, 29)",
       opacity: 1,
       transition: {
-        delay: .1,
-        duration:1,
+        delay:.2,
+        duration:.5,
       }
     },
     hover:{
+      backgroundColor: "rgb(35, 34, 34)",
       transition: {
-        duration: .7,
+        duration: .2,
       }
     }
   }  

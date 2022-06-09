@@ -71,7 +71,7 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
 
       <div className={todayDate.getDate()-1<id?`enable-day day`:'day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
           <nav >
-            <span>{id}</span>
+            <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
             <text>{days[date.getDay()]}</text>      
           </nav>
           <div className='day__workerlist'>  
