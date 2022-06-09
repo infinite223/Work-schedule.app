@@ -12,7 +12,7 @@ export const sentence = {
 export const show = {
     hidden: {opacity: 0},
     visible: {
-      backgroundColor:"rgb(30, 29, 29)",
+      border: "1px solid rgba(64, 63, 63,.6)",
       opacity: 1,
       transition: {
         delay:.2,
@@ -20,7 +20,7 @@ export const show = {
       }
     },
     hover:{
-      backgroundColor: "rgb(35, 34, 34)",
+      border: "1px solid rgba(108, 103, 103, .6)",
       transition: {
         duration: .2,
       }
@@ -72,13 +72,14 @@ export const position = {
     opacity: 0,
      x: 200,
     },
-  outsideTop: {opacity: 0, x: 200},
+  outsideTop: {opacity: 0, y: 100},
   goodPosition: {
+   
     opacity: 1,
     y:0,
     x:0,
     transition: {
-      duration: 1.5,
+      duration: 1,
     }
   },
   hoverWorker:{
