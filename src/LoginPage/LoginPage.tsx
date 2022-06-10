@@ -1,5 +1,5 @@
 import { useNavigate, HiOutlineChevronDoubleLeft, motion } from './../imports';
-import { show } from './../Animations/variants';
+import { showPage } from './../Animations/variants';
 
 import './LoginPage.scss'
 
@@ -8,7 +8,7 @@ export const LoginPage = () => {
   return (
     <div>
          <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-         <motion.div variants={show} initial="hidden" animate="visible" className='LoginPage flex'>       
+         <motion.div variants={showPage} initial="hidden" animate="visible" className='LoginPage flex'>       
            <div className='Login__content flex'>
             <h1>Log In</h1>
             <p>

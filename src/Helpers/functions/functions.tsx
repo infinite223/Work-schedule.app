@@ -1,7 +1,12 @@
 import { useSelector } from 'react-redux';
 import { State } from './../../state';
 
-const schedule = useSelector((state: State)=> state.schedule)
+function timeStringToFloat(time:string) {
+    var hoursMinutes = time.split(/[.:]/);
+    var hours = parseInt(hoursMinutes[0], 10);
+    var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+    return  {hours, minutes} ;
+}
 
 export function generateSheduleData(days:number){
 
@@ -18,14 +23,9 @@ export function daysInMonth (month:number, year:number) {
     return new Date(year, month, 0).getDate();
 }
 
-function timeStringToFloat(time:string) {
-    var hoursMinutes = time.split(/[.:]/);
-    var hours = parseInt(hoursMinutes[0], 10);
-    var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-    return  {hours, minutes} ;
-}
+export const CountHours = (person:string) => {
+    const schedule = useSelector((state: State)=> state.schedule)
 
-export const countHours = (person:string) => {
     let hours = 0;
     let minutes = 0 ;
     schedule.forEach((day)=>{

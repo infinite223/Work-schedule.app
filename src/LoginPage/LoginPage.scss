@@ -2,11 +2,15 @@
     flex-direction: column;
     position: relative;
 
-    width: 380px;
-    height: 500px;
+    width: 300px;
+    height: 480px;
 
     background-color: rgba(28, 27, 27, .9);
     border-radius: 10px;
+
+    -webkit-box-shadow: 0px 0px 20px 5px rgb(54, 54, 55);
+    -moz-box-shadow: 0px 0px 20px 5px rgb(54, 54, 55);
+    box-shadow: 0px 0px 25px 5px rgb(56, 56, 56);
 
     font-size: 20px;
     h1::first-letter {
@@ -44,7 +48,7 @@
         padding: .4rem 1.4rem;
 
         color: white;
-        font-size: 20px;
+        font-size: 14px;
 
         border: 1px solid white;
         border-radius: 15px;

@@ -27,6 +27,17 @@ export const show = {
     }
   }  
 
+  export const showPage = {
+    hidden: {opacity: 0, scale:0},
+    visible: {
+      opacity: 1, scale:1,
+      transition: {
+        delay:.2,
+        duration:.5,
+      }
+    }
+  }
+
   export const showDay = {
     hidden: {opacity:0, top:"10px"},
     visible:{opacity:1, top:"50%", scaleX:"1"},

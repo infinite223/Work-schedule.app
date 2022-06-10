@@ -12,20 +12,22 @@
     nav {
       display: flex;
       align-items: center;
+
       width: auto;
       height: 10%;
 
       margin: 20px;
-      padding: 10px 25px;
-
-      border: 1px solid rgb(49, 48, 48);
-
 
       h3 {
         letter-spacing: 1px;
         font-family: Courier  ;
         font-size: 26px;
         color: rgb(240, 240, 240);
+
+        &::first-letter {
+          color: #FF00FF;
+          font-size: 40px;
+        }
 
         @media only screen and (max-width: 600px) {
           max-width: 350px;
@@ -35,8 +37,10 @@
 
     .create__group {
       display: flex;
+
       height: 90%;
       width: 400px;
+
       margin-left: auto;
      
       text {
@@ -55,6 +59,7 @@
         height: 80%;
         
         border: 1px solid rgba(64, 63, 63,.6);
+
         padding: 0 10px;
 
         input {
@@ -63,6 +68,7 @@
                          
             font-size: 14px;
             text-align: center;
+
             background-color: rgb(33, 32, 32);
             border:none;
         }
@@ -110,6 +116,10 @@
 
         &::-webkit-scrollbar {
            display: none;
+        }
+
+        .Persons__add-button {
+
         }
       }
 
