@@ -33,7 +33,7 @@ export const CreateSchedule = () => {
           </motion.div>   
           <div className='create__group'>
               <text className='text__value'><text>Name group:</text>
-                <input type="text" placeholder='...'/> 
+                <input type="text"/> 
                 <IoCreateOutline size={25} className="create__group-button"/>
               </text> 
             </div>  
@@ -44,7 +44,7 @@ export const CreateSchedule = () => {
           {person.map((worker:any)=> {
             return <Worker lastPersonId={person.at(-1).id} key={worker.id} id={worker.id}/>
           })}
-          <div className='Persons__add-button'>
+         
             <motion.div className='Person flex' 
               variants={position}
               initial="outsideTop"
@@ -55,7 +55,7 @@ export const CreateSchedule = () => {
                 <MdOutlinePersonAdd size={25} color='white'/>
               </motion.div>
             </motion.div>
-          </div>
+     
         </div> 
         <div className='Person__data flex'>
             <BsPersonBoundingBox size={100} color="grey"/>
