@@ -24,8 +24,8 @@ function App() {
           </Routes>     
         </Router>
         
-        <RiCalendarTodoLine className='calendar-icon' size={35}/>
-        <text className='version-text'>Work schedule v0.3</text>
+        {/* <RiCalendarTodoLine className='calendar-icon' size={35}/> */}
+        <text className='version-text'>Work schedule v0.5</text>
       </div>
     </>
   );
