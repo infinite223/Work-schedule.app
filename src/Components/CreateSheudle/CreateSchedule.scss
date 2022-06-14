@@ -7,7 +7,7 @@
     height: 80vh;
 
     @media only screen and (max-width: 800px) {
-      margin-top: 20%;
+      margin-top: 5%;
       min-height: 100vh;
       width: 90vw;
       height: auto;
@@ -27,6 +27,7 @@
       @media only screen and (max-width: 600px) {
        height: auto;
        flex-direction: column;
+       margin: 10px;
       }
 
       margin: 20px;
@@ -45,7 +46,8 @@
         @media only screen and (max-width: 600px) {
           max-width: 350px;
           font-size: 20px;
-          margin: 30px 0;
+          margin-bottom: 20px;
+          margin-top: 10px;
        }
     }
 
@@ -81,6 +83,10 @@
         border: 1px solid rgba(64, 63, 63,.6);
 
         padding: 0 10px;
+      
+        @media only screen and (max-width: 600px) {
+          padding: 5px;
+        }
 
         input {
             width: 180px;  
@@ -91,6 +97,10 @@
 
             background-color: rgb(33, 32, 32);
             border:none;
+         
+          @media only screen and (max-width: 600px) {
+            width: 140px;
+          }
         }
 
         .create__group-button {
@@ -145,6 +155,11 @@
           margin-right: auto;
           width: 100%;
           height: 400px;
+        }
+
+        .Person__add-button {
+          background-color:rgb(25, 24, 24);
+          width:100%;
         }
       }
 

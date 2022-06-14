@@ -23,19 +23,20 @@ export const Worker: React.FC<props>= ({ lastPersonId, id }) => {
 
   return (
     <div className='Person'>
-        <motion.div className='person_content'>
           <motion.div className='person_content'  variants={show} initial="hidden" animate="visible"  whileHover="hover">
-            <text style={{color:"white", width:"40px", textAlign:"center"}}>{id+1}</text>
-              <text className='text__value'><text>email:</text>
-              <input type="text" autoComplete='off' placeholder='' value={email} onChange={(x) => (setEmaill(x.target.value), setPerson({id:id,email:email,nickname:nickname}))}/>
-            </text>
-              <text className='text__value'><text>nickname:</text>
-              <input type="text" placeholder='' value={nickname} onChange={(x)=>(setNickname(x.target.value),setPerson({id:id, email:email, nickname:nickname}))}/>
-            </text>
+              <text style={{color:"white", width:"20px", margin:"0 20px"}}>{id+1}</text>
               
-            <MdOutlinePersonRemove className='delete-person' size={25} onClick={()=>deletePerson({id:id,email:"",nickname:""})}/>
+              <div className='person__data'>
+                <text className='text__value'><text>email:</text>
+                  <input type="text" autoComplete='off' placeholder='' value={email} onChange={(x) => (setEmaill(x.target.value), setPerson({id:id,email:email,nickname:nickname}))}/>
+                </text>
+                <text className='text__value'><text>nickname:</text>
+                  <input type="text" placeholder='' value={nickname} onChange={(x)=>(setNickname(x.target.value),setPerson({id:id, email:email, nickname:nickname}))}/>
+                </text>    
+              </div>            
+              <MdOutlinePersonRemove className='delete-person' size={25} onClick={()=>deletePerson({id:id,email:"",nickname:""})}/>
           </motion.div>
-        </motion.div>
+    
     </div>
 
   )

@@ -4,11 +4,10 @@ import { BsPersonBoundingBox } from 'react-icons/bs'
 import { IoCreateOutline } from 'react-icons/io5'
 import { actionCreators,  State } from '../../state';
 
-import { position, show } from './../../Animations/variants';
+import { position, showPage } from './../../Animations/variants';
 import { MdOutlinePersonAdd } from 'react-icons/md'
 
 import './CreateSchedule.scss'
-import { showPage } from './../../Animations/variants';
 
 export const CreateSchedule = () => {
   const navigate = useNavigate(); 
@@ -45,14 +44,14 @@ export const CreateSchedule = () => {
             return <Worker lastPersonId={person.at(-1).id} key={worker.id} id={worker.id}/>
           })}
          
-            <motion.div className='Person flex' 
+            <motion.div className='Person' 
               variants={position}
               initial="outsideTop"
               animate="goodPosition"
               whileHover="hoverWorker">
-              <motion.div style={{backgroundColor:"rgb(25, 24, 24)"}} className='flex person_content' onClick={()=> (addPerson({id: persons.length,email:"", nickname:""}))}>
+              <motion.div className="Person__add-button flex" onClick={()=> (addPerson({id: persons.length,email:"", nickname:""}))}>
                 <h5>Click to add new person </h5> 
-                <MdOutlinePersonAdd size={25} color='white'/>
+                <MdOutlinePersonAdd size={25} color='white' style={{margin:"0 20px"}}/>
               </motion.div>
             </motion.div>
      

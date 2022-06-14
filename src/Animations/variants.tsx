@@ -85,7 +85,6 @@ export const position = {
     },
   outsideTop: {opacity: 0, y: 100},
   goodPosition: {
-   
     opacity: 1,
     y:0,
     x:0,
