@@ -27,19 +27,18 @@ export const CreateSchedule = () => {
           animate={{opacity:1}}
           transition={{duration:2.5}}
           > 
-            <h3>Create Your work schedule</h3>
+            <h3>Persons in schedule <text style={{color:"#FF00FF"}}>{person.length}</text></h3>
 
           </motion.div>   
           <div className='create__group'>
               <text className='text__value'><text>Name group:</text>
                 <input type="text"/> 
-                <IoCreateOutline size={25} className="create__group-button"/>
+                {/* <IoCreateOutline size={25} className="create__group-button"/> */}
               </text> 
             </div>  
       </nav>
       <div className='Content flex'>
         <div className='Persons'>               
-          {/* <Admin/> */}
           {person.map((worker:any)=> {
             return <Worker lastPersonId={person.at(-1).id} key={worker.id} id={worker.id}/>
           })}
@@ -50,14 +49,20 @@ export const CreateSchedule = () => {
               animate="goodPosition"
               whileHover="hoverWorker">
               <motion.div className="Person__add-button flex" onClick={()=> (addPerson({id: persons.length,email:"", nickname:""}))}>
-                <h5>Click to add new person </h5> 
+                <h5 style={{marginLeft:"20px"}}>Click to add new person </h5> 
                 <MdOutlinePersonAdd size={25} color='white' style={{margin:"0 20px"}}/>
               </motion.div>
             </motion.div>
      
         </div> 
         <div className='Person__data flex'>
-            <BsPersonBoundingBox size={100} color="grey"/>
+            <div className='Person__data-admin'>
+              <text>Admin<div style={{color:"#FF00FF", fontSize:"13px"}}>(YOU)</div></text>
+
+               {/* <Admin/> */}
+            </div>
+              
+            <BsPersonBoundingBox size={100} className='Person__data-icon'/>
         </div> 
       </div>
     </motion.div>
