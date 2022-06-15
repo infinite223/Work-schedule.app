@@ -31,8 +31,9 @@ export const CreateSchedule = () => {
 
           </motion.div>   
           <div className='create__group'>
-              <text className='text__value'><text>Name group:</text>
-                <input type="text"/> 
+              <text className='text__value'>
+                  {/* <text>Name group:</text> */}
+                <input type="text" placeholder='Name group'/> 
                 {/* <IoCreateOutline size={25} className="create__group-button"/> */}
               </text> 
             </div>  
