@@ -5,13 +5,13 @@
     height: 50px;
 
     @media only screen and (max-width: 600px) {
-       height: 120px;
+       height: auto;
     }
 
     margin: 10px 0;
             
     letter-spacing: 4px;
-    color: rgb(182, 175, 175);
+    color: rgb(207, 205, 205);
     font-size: 17px;
 
     .person_content {
