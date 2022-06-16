@@ -7,13 +7,11 @@ import { MdOutlinePersonRemove } from 'react-icons/md'
 import './Person.scss'
 
 interface props {
-  lastPersonId:number,
   id:number
 }
 
-export const Worker: React.FC<props>= ({ lastPersonId, id }) => { 
+export const Worker: React.FC<props>= ({id}) => { 
   const person = useSelector((state: State)=> state.person)
-  console.log(person)
   const dispatch = useDispatch();
   
   const { setPerson, deletePerson } = bindActionCreators(actionCreators, dispatch)
@@ -24,7 +22,7 @@ export const Worker: React.FC<props>= ({ lastPersonId, id }) => {
   return (
     <div className='Person'>
           <motion.div className='person_content'  variants={show} initial="hidden" animate="visible"  whileHover="hover">
-              <text style={{color:"white", width:"20px", margin:"0 20px"}}>{id+1}</text>
+              <text style={{color:"white", width:"20px", margin:"0 20px"}}>{id}</text>
               
               <div className='person__data'>
                 <text className='text__value'><text className='label'>email:</text>

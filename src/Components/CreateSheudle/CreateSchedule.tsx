@@ -15,7 +15,7 @@ export const CreateSchedule = () => {
   const persons = useSelector((state: State)=> state.person)
   const  person :any = persons;
   const dispatch = useDispatch();
-  
+
   const { addPerson, setPerson, deletePerson } = bindActionCreators(actionCreators, dispatch)
 
   return (
@@ -42,7 +42,7 @@ export const CreateSchedule = () => {
         <div className='Content flex'>
           <div className='Persons'>               
             {person.map((worker:any)=> {
-              return <Worker lastPersonId={person.at(-1).id} key={worker.id} id={worker.id}/>
+              return <Worker key={worker.id} id={worker.id}/>
             })}
           
               <motion.div className='Person' 
@@ -50,7 +50,7 @@ export const CreateSchedule = () => {
                 initial="outsideTop"
                 animate="goodPosition"
                 whileHover="hoverWorker">
-                <motion.div className="Person__add-button flex" onClick={()=> (addPerson({id: persons.length,email:"", nickname:""}))}>
+                <motion.div className="Person__add-button flex" onClick={()=> (addPerson({id: person.at(-1)?person.at(-1).id+1:1, email:"", nickname:""}))}>
                   <h5 style={{marginLeft:"20px"}}>Click to add new person </h5> 
                   <MdOutlinePersonAdd size={25} color='white' style={{margin:"0 20px"}}/>
                 </motion.div>
@@ -61,7 +61,7 @@ export const CreateSchedule = () => {
               <div className='Person__data-admin'>
                 <text>Admin<div style={{color:"#FF00FF", fontSize:"13px"}}>(YOU)</div></text>
 
-                {/* <Admin/> */}
+                 <Admin/>
               </div>
                 
               <BsPersonBoundingBox size={100} className='Person__data-icon'/>

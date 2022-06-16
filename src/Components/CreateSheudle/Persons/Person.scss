@@ -15,23 +15,38 @@
     font-size: 17px;
 
     .person_content {
+        z-index: 8;
         display: flex;
         align-items: center;
 
+        .admin {
+            flex-direction: column;
+
+            .text__value {
+                input {
+                    width: 280px!important; 
+                    height: 40px;
+                    font-size: 17px!important; 
+                    &::placeholder { 
+                        opacity: 1 !important;
+                    }
+                }
+            }
+        }
+
         .person__data {
             display: flex;
-            align-items: center;
+            align-items: center;      
 
+            height: 50px;
+            width: 100%;
 
-               @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 600px) {
                 flex-direction: column;
                 height: auto;
-               }
-               
-               height: 50px;
-               width: 100%;
+            }
        
-               text-align: left;
+            text-align: left;
        
                text {
                    margin: 0 10px;

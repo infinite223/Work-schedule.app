@@ -13,6 +13,7 @@ export const show = {
     hidden: {opacity: 0},
     visible: {
       border: "1px solid rgba(64, 63, 63,.6)",
+      borderRadius:"10px",
       opacity: 1,
       transition: {
         delay:.2,

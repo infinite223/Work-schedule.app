@@ -11,13 +11,12 @@ interface IShedule {
         endWork:string
     }]
 }
-//, date: new Date(`2022-05-${i}`)
+
 function generateSheduleData(){
 
     let initalState = []
 
     for (let i = 1; i <= 31; i++) {
-        //initalState.push({id:i, persons: [{name:"Dawid", startWork:"17:00", endWork:"22:00"}]})
         initalState.push({id:i, persons: [{name:"Nikola", startWork:"17:00", endWork:"22:00"}]})
     }
 

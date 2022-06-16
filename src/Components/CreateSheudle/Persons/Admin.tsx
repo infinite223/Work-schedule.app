@@ -7,12 +7,14 @@ export const Admin = () => {
   const [nickname, setNickname] = useState<string>();
   
   return (
-    <motion.div className='Person flex' style={{border:"1px solid rgba(255, 0, 255,.3)"}}>
+    <motion.div className='Person flex'>
         <div className='person_content'>
-            <text style={{color:"white"}}>Admin</text>
-            <text className='text__value'><text>email:</text> <input type="text" autoComplete='off'/></text>
-            <text className='text__value'><text>nickname:</text> <input type="text" autoComplete='off'/> </text>
-            <text className='text__value'><text>password:</text> <input type="password" autoComplete='off'/> </text>
+          <div className='person__data admin'>
+            <text className='text__value'><input type="text" placeholder='set your nickname..' autoComplete='off'/></text>
+            <text className='text__value'><input type="text" placeholder='type youremail..' autoComplete='off'/> </text>
+            <text className='text__value'> <input type="password" placeholder='set password..' autoComplete='off'/> </text>
+          </div>
+        
         </div>
     </motion.div>
   )
