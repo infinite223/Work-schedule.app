@@ -22,13 +22,21 @@
         .admin {
             flex-direction: column;
 
+            @media only screen and (max-width: 600px) {
+              margin-bottom: 30px;
+            }
+
             .text__value {
+                width: auto !important; 
                 input {
-                    width: 280px!important; 
+                    width: 300px!important; 
                     height: 40px;
                     font-size: 17px!important; 
+
+                    border: 1px solid rgba(165, 161, 161,.5) !important; 
+                    border-radius: 10px;
                     &::placeholder { 
-                        opacity: 1 !important;
+                        opacity: .6 !important;
                     }
                 }
             }

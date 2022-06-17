@@ -59,12 +59,12 @@ export const CreateSchedule = () => {
           </div> 
           <div className='Person__data flex'>
               <div className='Person__data-admin'>
-                <text>Admin<div style={{color:"#FF00FF", fontSize:"13px"}}>(YOU)</div></text>
-
-                 <Admin/>
-              </div>
-                
-              <BsPersonBoundingBox size={100} className='Person__data-icon'/>
+                <div className='Person__data-info'>
+                  <BsPersonBoundingBox size={35}/>
+                  <span>Admin<div style={{color:"#FF00FF", fontSize:"13px"}}>(YOU)</div></span>
+                </div>                  
+                <Admin/>
+              </div>         
           </div> 
         </div>
       </motion.div>
