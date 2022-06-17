@@ -14,6 +14,9 @@ export { Worker } from './Components/CreateSheudle/Persons/Worker';
 export { RiCalendarTodoLine } from 'react-icons/ri'
 export { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
 export { CgCloseR } from 'react-icons/cg'
+export { MdOutlinePersonRemove } from 'react-icons/md'
+export { MdOutlinePersonAdd } from 'react-icons/md'
+export { BsPersonBoundingBox } from 'react-icons/bs'
 
 export { bindActionCreators } from 'redux';
 export { useDispatch, useSelector } from 'react-redux';

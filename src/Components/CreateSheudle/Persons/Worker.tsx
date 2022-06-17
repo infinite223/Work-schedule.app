@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { motion, useDispatch, useSelector, bindActionCreators } from './../../../imports'
+import { motion, useDispatch, useSelector, bindActionCreators, MdOutlinePersonRemove } from './../../../imports'
 import { show } from './../../../Animations/variants';
 import { actionCreators, State } from '../../../state';
-import { MdOutlinePersonRemove } from 'react-icons/md'
 
 import './Person.scss'
 
@@ -10,7 +9,7 @@ interface props {
   id:number
 }
 
-export const Worker: React.FC<props>= ({id}) => { 
+export const Worker: React.FC<props>= ({ id }) => { 
   const person = useSelector((state: State)=> state.person)
   const dispatch = useDispatch();
   

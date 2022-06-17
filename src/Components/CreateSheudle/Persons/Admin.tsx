@@ -13,6 +13,7 @@ export const Admin = () => {
             <text className='text__value'><input type="text" placeholder='Set your nickname..' autoComplete='off'/></text>
             <text className='text__value'><input type="text" placeholder='Type youremail..' autoComplete='off'/> </text>
             <text className='text__value'> <input type="password" placeholder='Set password..' autoComplete='off'/> </text>
+            <div className='help-text'>click <span style={{color:"#FF00FF"}}>Create</span> button at the top to create your shedule</div>
           </div>
         
         </div>

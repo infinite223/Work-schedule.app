@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
 import { showDay } from '../../Animations/variants';
+import { useMediaQuery } from 'react-responsive'
 
 import './Day.scss'
 import { AnimatePresence } from 'framer-motion';
@@ -15,6 +16,8 @@ interface IPerson {
 }
 
 export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }> = ({ id, date, persons }) => {
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
   const loginPerson = useSelector((state: State)=> state.login)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
   const [ startWork, setStartWork ] = useState(persons[0]?.startWork? persons[0].startWork : "00:00");
@@ -68,9 +71,9 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
                 <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
               </div>  
         </motion.div>}
-
+    {!isTabletOrMobile?
       <div className={todayDate.getDate()-1<id?`enable-day day`:'day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
-          <nav >
+          <nav>
             <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
             <text>{days[date.getDay()]}</text>      
           </nav>
@@ -79,7 +82,10 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
               return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
             }):<>xd</>}
           </div>
-      </div>
+      </div>:
+      <div className='day__smallscreen' onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
+        <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
+      </div>}
     </AnimatePresence>
   )
 }

@@ -1,11 +1,9 @@
-import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker, useDispatch, bindActionCreators } from './../../imports'
+import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker, useDispatch, bindActionCreators, MdOutlinePersonAdd, BsPersonBoundingBox } from './../../imports'
 import { useSelector } from 'react-redux';
-import { BsPersonBoundingBox } from 'react-icons/bs'
 import { actionCreators,  State } from '../../state';
 
-import { position, showPage } from './../../Animations/variants';
+import { position } from './../../Animations/variants';
 import { showMobilePage } from '../../Animations/variantsOnSmallScreen';
-import { MdOutlinePersonAdd } from 'react-icons/md'
 
 import './CreateSchedule.scss'
 

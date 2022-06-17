@@ -5,6 +5,13 @@
     width: 90vw;
     height: 85vh;
 
+    @media only screen and (max-width: 600px) {
+        height: auto;  
+        flex-direction: column;
+
+        margin-top: 20%;  
+    }
+
     background-color: rgba(28, 27, 27, .9);
     border-radius: 10px;
 
@@ -95,8 +102,21 @@
         flex-wrap: wrap;
         justify-content: flex-start;
 
-        width: 100%;
+        width: 90%;
         height: 100;
+        
+        @media only screen and (max-width: 600px) {
+            margin:20px auto;
+            padding: 10px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            
+            &::after {
+                content: "";
+                flex: auto;
+            }
+        }
 
         margin: 20px;
         margin-left: 0px;
