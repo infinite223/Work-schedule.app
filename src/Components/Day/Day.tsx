@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { CgCloseR, motion} from '../../imports'
+import { CgCloseR, motion} from '../../Helpers/imports'
 import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
 import { showDay } from '../../Animations/variants';
 import { useMediaQuery } from 'react-responsive'
+import { Dispatch, SetStateAction } from "react";
 
 import './Day.scss'
 import { AnimatePresence } from 'framer-motion';
@@ -15,7 +16,7 @@ interface IPerson {
       endWork: string;
 }
 
-export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }> = ({ id, date, persons }) => {
+export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, setSelectDay:Dispatch<SetStateAction<number>>; }> = ({ id, date, persons, setSelectDay }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
 
   const loginPerson = useSelector((state: State)=> state.login)
@@ -72,7 +73,7 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
               </div>  
         </motion.div>}
     {!isTabletOrMobile?
-      <div className={todayDate.getDate()-1<id?`enable-day day`:'day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
+      <div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
           <nav>
             <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
             <text>{days[date.getDay()]}</text>      
@@ -83,7 +84,7 @@ export const Day: React.FC<{ id:number, date: Date,   persons: Array<IPerson> }>
             }):<>xd</>}
           </div>
       </div>:
-      <div className='day__smallscreen' onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
+      <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
         <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
       </div>}
     </AnimatePresence>

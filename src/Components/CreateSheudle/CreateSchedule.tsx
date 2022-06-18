@@ -1,15 +1,17 @@
-import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker, useDispatch, bindActionCreators, MdOutlinePersonAdd, BsPersonBoundingBox } from './../../imports'
+import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker, useDispatch, bindActionCreators, MdOutlinePersonAdd, BsPersonBoundingBox } from '../../Helpers/imports'
 import { useSelector } from 'react-redux';
 import { actionCreators,  State } from '../../state';
 
 import { position } from './../../Animations/variants';
 import { showMobilePage } from '../../Animations/variantsOnSmallScreen';
+import { showPage } from './../../Animations/variants';
+import { useMediaQuery } from 'react-responsive'
 
 import './CreateSchedule.scss'
 
 export const CreateSchedule = () => {
   const navigate = useNavigate(); 
-  
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
   const persons = useSelector((state: State)=> state.person)
   const  person :any = persons;
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ export const CreateSchedule = () => {
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
       <div className='right-header'>Create</div>
 
-      <motion.div className='CreateSchedule' variants={showMobilePage} initial="hidden" animate="visible">
+      <motion.div className='CreateSchedule' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
         <nav>
           <motion.div
             initial={{opacity:0}}

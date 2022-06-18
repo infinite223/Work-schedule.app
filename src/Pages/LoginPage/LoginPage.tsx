@@ -1,5 +1,5 @@
-import { useNavigate, HiOutlineChevronDoubleLeft, motion } from './../imports';
-import { showPage } from './../Animations/variants';
+import { useNavigate, HiOutlineChevronDoubleLeft, motion } from '../../Helpers/imports';
+import { showPage } from '../../Animations/variants';
 
 import './LoginPage.scss'
 

@@ -2,14 +2,14 @@ export { motion } from 'framer-motion';
 export { useNavigate } from 'react-router-dom';
 export { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-export { StartPage } from './StartPage/StartPage';
-export { LoginPage } from './LoginPage/LoginPage';
-export { SchedulePage } from './SchedulePage/SchedulePage';
+export { StartPage } from '../Pages/StartPage/StartPage';
+export { LoginPage } from '../Pages/LoginPage/LoginPage';
+export { SchedulePage } from '../Pages/SchedulePage/SchedulePage';
 
-export { CreateSchedule } from './Components/CreateSheudle/CreateSchedule';
-export { DayOnBackground } from './Components/DayOnBackground';
-export { Admin } from './Components/CreateSheudle/Persons/Admin'
-export { Worker } from './Components/CreateSheudle/Persons/Worker';
+export { CreateSchedule } from '../Components/CreateSheudle/CreateSchedule';
+export { DayOnBackground } from '../Components/DayOnBackground';
+export { Admin } from '../Components/CreateSheudle/Persons/Admin'
+export { Worker } from '../Components/CreateSheudle/Persons/Worker';
 
 export { RiCalendarTodoLine } from 'react-icons/ri'
 export { HiOutlineChevronDoubleLeft } from 'react-icons/hi'

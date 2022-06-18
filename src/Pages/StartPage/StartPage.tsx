@@ -1,5 +1,5 @@
-import { motion, useNavigate } from './../imports'
-import { letter, sentence, button } from '../Animations/variants'
+import { motion, useNavigate } from '../../Helpers/imports'
+import { letter, sentence, button } from '../../Animations/variants'
 
 import './StartPage.scss'
 

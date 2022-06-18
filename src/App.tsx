@@ -1,4 +1,4 @@
-import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, RiCalendarTodoLine, DayOnBackground, LoginPage, days } from './imports';
+import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, RiCalendarTodoLine, DayOnBackground, LoginPage, days } from './Helpers/imports';
 
 import './App.scss'
 

@@ -1,4 +1,4 @@
-import { motion } from './../../../imports'
+import { motion } from '../../../Helpers/imports'
 import { useState } from 'react'
 
 import './Person.scss'  
