@@ -11,6 +11,7 @@
         flex-direction: column;
 
         margin-top: 20%;  
+        margin-bottom: 20%;  
         border-radius: 30px;
     }
 
@@ -21,7 +22,13 @@
 
     .SchedulePage__navbar {
         flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
         height: 100%;
+
+        @media only screen and (max-width: 600px) {
+            flex-direction: row;
+        }
         
         .date {    
             margin: 10px;
@@ -46,59 +53,6 @@
         }
     }
 
-    .SchedulePage__data {
-        flex-direction: column;
-        
-        height: 100%;
-        width: 90%;
-
-        font-size: 18px;
-        color: rgb(160, 156, 156);
-
-        .group-name {
-            width: 90%;
-            
-            border: 2px solid rgb(34, 33, 33);
-
-            padding: .4rem;
-        }
-
-        .worker-list {
-            display: flex;
-            flex-direction: column;
-
-            height: 100%;
-            width: 90%;
-
-            border: 2px solid rgb(34, 33, 33);
-
-            margin: 10px;
-            margin-bottom: 20px;
-            padding: .4rem;
-
-            .worker {
-                width: 90%;
-
-                background-color: rgba(31, 30, 30,.5);
-                padding: 5px;
-                margin: 5px 0px;
-
-                text {
-                    width: 50%;
-                    margin: 0px 10px;
-                }
-
-                .worker-name {       
-                    text-align: left;
-                }
-
-                .worker-hours {
-                    text-align: right;
-                }
-            }
-        }
-    }   
-   
 
     .SchedulePage__content {
         flex-wrap: wrap;

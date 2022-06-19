@@ -9,8 +9,8 @@ import { useState } from 'react';
 import { Day } from '../../Components/Day/Day';
 import { DayContent } from '../../Components/DayContent';
 import { days, month, today } from '../../Helpers/constants';
-import { CountHours } from '../../Helpers/functions/functions';
 import { useMediaQuery } from 'react-responsive'
+import { WorkerList } from '../../Components/WorkerList';
 
 
 export const SchedulePage = () => {
@@ -20,7 +20,6 @@ export const SchedulePage = () => {
     const schedule = useSelector((state: State)=> state.schedule)
 
     const [selectDay, setSelectDay] = useState<number>(0)
-    console.log(schedule[0].persons[0])
 
   return (
     <>
@@ -33,25 +32,9 @@ export const SchedulePage = () => {
                         <div>{days[today.getDay()]}</div>
                         <div>{month[today.getMonth()]}</div>
                     </div>
+                    {!isTabletOrMobile&&<WorkerList/>}
+                </div>
                
-                </div>
-                <div className='SchedulePage__data flex'>
-                    <div className='group-name'>Prato Verde</div>
-                    <div className='worker-list'>                     
-                        <div className='worker flex'>
-                            <text className='worker-name'>Dawid</text>
-                            <text className='worker-hours'>{CountHours("Dawid")}h</text>
-                        </div>
-                        <div className='worker flex'>
-                            <text className='worker-name'>Nikola</text>
-                            <text className='worker-hours'>{CountHours("Nikola")}h</text>
-                        </div>
-                        <div className='worker flex'>
-                            <text className='worker-name'>Natalia</text>
-                            <text className='worker-hours'>0h</text>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div className='SchedulePage__content flex'>
@@ -61,7 +44,11 @@ export const SchedulePage = () => {
                    )
                })}
             </div>
-            {isTabletOrMobile&&<DayContent id={schedule[selectDay].id} date={new Date(`2022-06-${schedule[selectDay].id}`)} persons={schedule[0].persons}/>}
+            {isTabletOrMobile&&<>
+                <DayContent persons={schedule[0].persons}/>
+                <WorkerList/>
+            </>}
+            
             
         </motion.div>
     </>                                                                                          
