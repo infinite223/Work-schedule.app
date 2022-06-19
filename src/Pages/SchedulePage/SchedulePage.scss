@@ -28,10 +28,11 @@
 
         @media only screen and (max-width: 600px) {
             flex-direction: row;
+            text-align: left;
         }
         
         .date {    
-            margin: 10px;
+            margin: 0 10px;
             padding: 10px;
 
             max-width: 250px;
@@ -39,7 +40,11 @@
             font-size: 27px;
     
             div {
-                margin: 10px;
+                margin: 5px 10px;
+
+                @media only screen and (max-width: 600px) {
+                    margin-left: 0px;
+                }
             
                 &::first-letter {
                     color: #FF00FF;
@@ -69,8 +74,8 @@
             justify-content: space-between;
             
             &::after {
-                content: "";
-                flex: auto;
+                content:"";           
+                width: 56%;
             }
         }
 

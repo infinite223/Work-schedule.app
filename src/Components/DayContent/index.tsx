@@ -51,10 +51,16 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
       animate="visible"
     > 
       <motion.nav>
-          <motion.span>{foundDay?.id} </motion.span>
-          <text>{days[myDate.getDay()-1]}</text>     
+          <motion.span>{foundDay?.id&&foundDay.id+1} </motion.span>
+          <text>{days[myDate.getDay()]}</text>     
       </motion.nav>
-          <div className='day__chooseHours-choose flex'>
+         
+            <div className='day__workerlist'>  
+              {persons?persons.map(({ name, startWork, endWork })=>{
+                return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
+              }):<>xd</>}
+            </div>
+            {/* <div className='day__chooseHours-choose flex'>
               <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
                 <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
                   To  
@@ -62,7 +68,7 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
               </div>  
                 
                 <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
-            </div>  
+            </div>   */}
     </motion.div>
   )
 }

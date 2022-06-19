@@ -20,7 +20,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
 
   const loginPerson = useSelector((state: State)=> state.login)
-  const selectedDay = useSelector((state: State)=> state.select)
+ 
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
   const [ startWork, setStartWork ] = useState(persons[0]?.startWork? persons[0].startWork : "00:00");
   const [ endWork, setEndWork ] = useState("00:00");
@@ -85,7 +85,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
             }):<>xd</>}
           </div>
       </div>:
-      <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
+      <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id-1)}>
         <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
       </div>}
     </AnimatePresence>

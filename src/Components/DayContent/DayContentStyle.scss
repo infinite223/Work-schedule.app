@@ -1,6 +1,9 @@
 .DayContent {
     position: relative;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
     width: 100%;
     height: 300px;
 
@@ -21,4 +24,32 @@
             margin: 0 20px;
         }
     }
-}   
+
+    .day__workerlist {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        width: 90%;
+        height: auto;  
+        margin-top: 70px;     
+
+        font-size: 11px;
+        color: rgb(116, 109, 109);
+
+        background-color:  rgb(37, 35, 35);
+        border-radius: 5px;
+
+        .person {
+           
+            padding: 5px 0px;
+
+            border-bottom: 1px solid gray;
+        }
+
+        .login-person {
+            color: #f9f8f9;
+        }
+    }
+}
+
