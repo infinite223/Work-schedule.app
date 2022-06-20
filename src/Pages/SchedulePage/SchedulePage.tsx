@@ -24,6 +24,7 @@ export const SchedulePage = () => {
   return (
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
+        <div className='right-header'>Save schedule</div>
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <div className='SchedulePage__navbar flex'>
                 <div className='date'>

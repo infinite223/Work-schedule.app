@@ -5,11 +5,9 @@ import { actionCreators, State } from '../../../state';
 
 import './Person.scss'
 
-interface props {
-  id:number
-}
 
-export const Worker: React.FC<props>= ({ id }) => { 
+
+export const Worker: React.FC<{ id:number }>= ({ id }) => { 
   const person = useSelector((state: State)=> state.person)
   const dispatch = useDispatch();
   

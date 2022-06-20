@@ -1,16 +1,9 @@
+import { IShedule } from '../../Helpers/interfaces'
+
 interface Action  {
     type: string,
     payload: IShedule;
 } 
-
-interface IShedule {
-    id:number,
-    persons: [{
-        name:string,
-        startWork:string,
-        endWork:string
-    }]
-}
 
 function generateSheduleData(){
 

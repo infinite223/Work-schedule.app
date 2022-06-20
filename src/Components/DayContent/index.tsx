@@ -7,11 +7,8 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
 import { days } from '../../Helpers/constants'
 
-interface IPerson {
-    name: string;
-    startWork: string;
-    endWork: string;
-}
+import { IPerson } from './../../Helpers/interfaces';
+
 
 export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) => {
   const selectedDay = useSelector((state: State)=> state.select)

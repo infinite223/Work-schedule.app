@@ -10,11 +10,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import './Day.scss'
 import { AnimatePresence } from 'framer-motion';
-interface IPerson {
-      name: string;
-      startWork: string;
-      endWork: string;
-}
+import { IPerson } from './../../Helpers/interfaces';
 
 export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, setSelectDay:Dispatch<SetStateAction<number>>; }> = ({ id, date, persons, setSelectDay }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })

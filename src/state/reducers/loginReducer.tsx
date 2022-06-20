@@ -1,13 +1,9 @@
+import { IUser } from '../../Helpers/interfaces'
+
 interface Action  {
     type: string,
     payload: IUser;
-} 
-
-interface IUser {
-    id:number,
-    email:string,
-    nickname:string
-}
+}   
 
 const initalState: IUser[] = [
     { id: 0, email: "dawidszmigiel@gmail.com", nickname: "Dawid" },
