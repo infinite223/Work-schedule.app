@@ -28,7 +28,7 @@ export const SchedulePage = () => {
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <div className='SchedulePage__navbar flex'>
                 <div className='date'>
-                    <div className='year'>{today.getFullYear()}</div>
+                    <div className='year color-magenta'>{today.getFullYear()}</div>
                     <div className='flex'>
                         <div>{days[today.getDay()]}</div>
                         <div>{month[today.getMonth()]}</div>

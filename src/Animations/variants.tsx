@@ -45,6 +45,12 @@ export const show = {
     exit:{opacity:0, scale:[".9", ".8", ".4", ".1"]}
   }
 
+  export const showWorkers = {
+    start: {},
+    hover:{height:"25%"}
+  }
+
+
 
     
 

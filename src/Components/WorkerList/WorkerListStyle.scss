@@ -10,9 +10,10 @@
     .group-name {
         width: 100%;
         
-        border: 2px solid rgb(34, 33, 33);
+        border-top: 2px solid rgb(34, 33, 33);
 
         padding: .4rem;
+        text-align: left;
 
         
         @media only screen and (max-width: 600px) {

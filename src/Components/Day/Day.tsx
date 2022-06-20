@@ -4,7 +4,7 @@ import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
-import { showDay } from '../../Animations/variants';
+import { showDay, showWorkers } from '../../Animations/variants';
 import { useMediaQuery } from 'react-responsive'
 import { Dispatch, SetStateAction } from "react";
 
@@ -70,7 +70,11 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
               </div>  
         </motion.div>}
     {!isTabletOrMobile?
-      <div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}>
+      <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
+        variants={showWorkers}
+        initial="start"
+        whileHover="hover"
+      >
           <nav>
             <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
             <text>{days[date.getDay()]}</text>      
@@ -80,7 +84,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
               return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
             }):<>xd</>}
           </div>
-      </div>:
+      </motion.div>:
       <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id-1)}>
         <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
       </div>}

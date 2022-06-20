@@ -1,6 +1,6 @@
 import './DayContentStyle.scss'
 import { showDay } from '../../Animations/variantsOnSmallScreen';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,6 +14,7 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
   const selectedDay = useSelector((state: State)=> state.select)
   const loginPerson = useSelector((state: State)=> state.login)
   const schedule = useSelector((state: State)=> state.schedule)
+  const controls = useAnimation()
   const foundDay = schedule.find((day)=>day.id===selectedDay)
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
@@ -41,31 +42,41 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
     }
   },[ setPersonInDay ])
 
+  useEffect(()=>{
+    controls.start({
+      opacity:[0,1],
+      transition: { duration: 2 },
+    })
+  }, [selectedDay])
+
   return (
-    <motion.div className='DayContent flex'
-      variants={showDay}
-      initial="hidden"
-      animate="visible"
-    > 
-      <motion.nav>
-          <motion.span>{foundDay?.id&&foundDay.id+1} </motion.span>
-          <text>{days[myDate.getDay()]}</text>     
-      </motion.nav>
-         
-            <div className='day__workerlist'>  
-              {persons?persons.map(({ name, startWork, endWork })=>{
-                return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
-              }):<>xd</>}
-            </div>
-            {/* <div className='day__chooseHours-choose flex'>
-              <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
-                <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
-                  To  
-                <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
-              </div>  
-                
-                <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
-            </div>   */}
-    </motion.div>
+    <AnimatePresence>
+      <motion.div className='DayContent flex'
+        key="box"
+        variants={showDay}
+        initial="hidden"
+        animate={controls}
+      > 
+        <motion.nav>
+            <motion.span>{foundDay?.id&&foundDay.id+1} </motion.span>
+            <text>{days[myDate.getDay()]}</text>     
+        </motion.nav>
+          
+              <div className='day__workerlist'>  
+                {persons?persons.map(({ name, startWork, endWork })=>{
+                  return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
+                }):<>xd</>}
+              </div>
+              {/* <div className='day__chooseHours-choose flex'>
+                <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
+                  <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
+                    To  
+                  <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
+                </div>  
+                  
+                  <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
+              </div>   */}
+      </motion.div>
+    </AnimatePresence>
   )
 }
