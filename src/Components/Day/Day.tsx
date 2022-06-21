@@ -31,8 +31,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
     if(!operation){
       setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
     }
-    else {
-     
+    else {   
       setPersonInDay({id:id, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
          {name:loginPerson[0].nickname, startWork:startWork, endWork:endWork}]})
     }
@@ -73,10 +72,10 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
       <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
         variants={showWorkers}
         initial="start"
-        whileHover="hover"
+        whileHover={todayDate.getDate()-1<id?"hover":""}
       >
           <nav>
-            <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
+            <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
             <text>{days[date.getDay()]}</text>      
           </nav>
           <div className='day__workerlist'>  
@@ -86,7 +85,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
           </div>
       </motion.div>:
       <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id-1)}>
-        <span className={todayDate.getDate()==id?"magenta-text":""}>{id}</span>
+        <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
       </div>}
     </AnimatePresence>
   )

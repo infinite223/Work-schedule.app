@@ -46,7 +46,7 @@ export const SchedulePage = () => {
                })}
             </div>
             {isTabletOrMobile&&<>
-                <DayContent persons={schedule[0].persons}/>
+                <DayContent persons={schedule[selectDay].persons}/>
                 <WorkerList/>
             </>}
             

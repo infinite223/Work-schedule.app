@@ -46,7 +46,7 @@ export const show = {
   }
 
   export const showWorkers = {
-    start: {},
+    start: {height:"23%"},
     hover:{height:"25%"}
   }
 

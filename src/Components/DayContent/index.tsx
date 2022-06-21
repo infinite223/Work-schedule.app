@@ -26,11 +26,11 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
 
   const setPersons = (operation:boolean) : void => {
     if(!operation){
-      setPersonInDay({id:selectedDay, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
+      setPersonInDay({id:foundDay?.id?foundDay.id:2, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
+      console.log("usuwa")
     }
-    else {
-     
-      setPersonInDay({id:selectedDay, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
+    else {    
+      setPersonInDay({id:foundDay?.id?foundDay.id+2:2, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
          {name:loginPerson[0].nickname, startWork:startWork, endWork:endWork}]})
     }
   }
@@ -41,7 +41,7 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
       setSelectColor(foundPerson?true:false)
     }
   },[ setPersonInDay ])
-
+console.log(schedule)
   useEffect(()=>{
     controls.start({
       opacity:[0,1],
@@ -63,19 +63,19 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
         </motion.nav>
           
               <div className='day__workerlist'>  
-                {persons?persons.map(({ name, startWork, endWork })=>{
+                {schedule?schedule[selectedDay+1].persons.map(({ name, startWork, endWork })=>{
                   return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
-                }):<>xd</>}
+                }):<>no data</>}
               </div>
-              {/* <div className='day__chooseHours-choose flex'>
+               <div className='day__chooseHours-choose flex'>
                 <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
                   <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
                     To  
                   <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
                 </div>  
                   
-                  <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
-              </div>   */}
+                  {/* <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/> */}
+              </div>   
       </motion.div>
     </AnimatePresence>
   )
