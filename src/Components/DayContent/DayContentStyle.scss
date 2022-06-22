@@ -34,17 +34,21 @@
         height: auto;  
         margin-top: 70px;     
 
-        font-size: 11px;
-        color: rgb(116, 109, 109);
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: rgb(126, 121, 121);
 
-        background-color:  rgb(37, 35, 35);
         border-radius: 5px;
 
-        .person {
-           
+        .person { 
+            display: flex;        
             padding: 5px 0px;
 
-            border-bottom: 1px solid gray;
+            border-bottom: 1px solid rgb(68, 67, 67);
+
+            .interval {
+                margin-left: auto;
+            }
         }
 
         .login-person {

@@ -19,8 +19,6 @@ export const SchedulePage = () => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const schedule = useSelector((state: State)=> state.schedule)
 
-    const [selectDay, setSelectDay] = useState<number>(0)
-
   return (
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
@@ -40,12 +38,12 @@ export const SchedulePage = () => {
             <div className='SchedulePage__content flex'>
                {schedule.map((day)=>{
                    return (
-                    <Day key={day.id} id={day.id} date={new Date(`2022-06-${day.id}`)} persons={day.persons} setSelectDay={()=>setSelectDay}/>
+                    <Day key={day.id} id={day.id} date={new Date(`2022-06-${day.id}`)} persons={day.persons}/>
                    )
                })}
             </div>
             {isTabletOrMobile&&<>
-                <DayContent persons={schedule[selectDay].persons}/>
+                <DayContent/>
                 <WorkerList/>
             </>}
             

@@ -13,7 +13,7 @@ import { AnimatePresence } from 'framer-motion';
 import { BsDot } from 'react-icons/bs'
 import { IPerson } from './../../Helpers/interfaces';
 
-export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, setSelectDay:Dispatch<SetStateAction<number>>; }> = ({ id, date, persons, setSelectDay }) => {
+export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> = ({ id, date, persons }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
 
   const loginPerson = useSelector((state: State)=> state.login)
@@ -85,7 +85,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
             }):<>no data</>}
           </div>
       </motion.div>:
-      <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id-1)}>
+      <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
         <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
         <div className='dots'>
           {persons?persons.map(({ name })=>{

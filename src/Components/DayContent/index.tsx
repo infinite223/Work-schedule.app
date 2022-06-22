@@ -7,13 +7,15 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
 import { days } from '../../Helpers/constants'
 
+import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
 import { IPerson } from './../../Helpers/interfaces';
 
 
-export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) => {
+export const DayContent:React.FC = ( {} ) => {
   const selectedDay = useSelector((state: State)=> state.select)
   const loginPerson = useSelector((state: State)=> state.login)
   const schedule = useSelector((state: State)=> state.schedule)
+  const persons = schedule[selectedDay].persons;
   const controls = useAnimation()
   const foundDay = schedule.find((day)=>day.id===selectedDay)
   const dispatch = useDispatch();
@@ -26,11 +28,10 @@ export const DayContent:React.FC<{ persons: Array<IPerson> }> = ( {persons} ) =>
 
   const setPersons = (operation:boolean) : void => {
     if(!operation){
-      setPersonInDay({id:foundDay?.id?foundDay.id:2, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
-      console.log("usuwa")
+      setPersonInDay({id:selectedDay+1, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
     }
     else {    
-      setPersonInDay({id:foundDay?.id?foundDay.id+2:2, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
+      setPersonInDay({id:selectedDay+1, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
          {name:loginPerson[0].nickname, startWork:startWork, endWork:endWork}]})
     }
   }
@@ -58,23 +59,25 @@ console.log(schedule)
         animate={controls}
       > 
         <motion.nav>
-            <motion.span>{foundDay?.id&&foundDay.id+1} </motion.span>
+            <motion.span>{selectedDay} </motion.span>
             <text>{days[myDate.getDay()]}</text>     
         </motion.nav>
-          
+
               <div className='day__workerlist'>  
-                {schedule?schedule[selectedDay+1].persons.map(({ name, startWork, endWork })=>{
-                  return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
+                {schedule?schedule[selectedDay].persons.map(({ name, startWork, endWork })=>{
+                  return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} <div className='interval'>{startWork}-{endWork}</div></div>
                 }):<>no data</>}
               </div>
-               <div className='day__chooseHours-choose flex' style={{marginTop:"auto", marginBottom:"40px"}}>
-                <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
+               <div className='day__chooseHours-choose ' style={{marginTop:"auto", marginBottom:"40px"}}>
+                {!schedule[selectedDay].persons.find((person)=>person.name===loginPerson[0].nickname)?<FiPlusSquare size={40} color="grey"/>
+                :<FiMinusSquare size={40} color="grey" onClick={()=>setPersons(false)}/>}
+                 <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
                   <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
                     To  
                   <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
-                </div>  
+                </div>   
                   
-                  {/* <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/> */}
+                   {/* <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>  */}
               </div>   
       </motion.div>
     </AnimatePresence>
