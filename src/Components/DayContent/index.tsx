@@ -9,6 +9,7 @@ import { days } from '../../Helpers/constants'
 
 import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
 import { IPerson } from './../../Helpers/interfaces';
+import { ChoseHoursModal } from '../ChoseHoursModal';
 
 
 export const DayContent:React.FC = ( {} ) => {
@@ -25,6 +26,7 @@ export const DayContent:React.FC = ( {} ) => {
   const [ startWork, setStartWork ] = useState(persons[0]?.startWork? persons[0].startWork : "00:00");
   const [ endWork, setEndWork ] = useState("00:00");
   const [ selectColor, setSelectColor ] = useState<boolean>();
+  const [ chooseHours, setChooseHours ] = useState<boolean>(false)
 
   const setPersons = (operation:boolean) : void => {
     if(!operation){
@@ -68,17 +70,12 @@ console.log(schedule)
                   return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} <div className='interval'>{startWork}-{endWork}</div></div>
                 }):<>no data</>}
               </div>
-               <div className='day__chooseHours-choose ' style={{marginTop:"auto", marginBottom:"40px"}}>
-                {!schedule[selectedDay].persons.find((person)=>person.name===loginPerson[0].nickname)?<FiPlusSquare size={40} color="grey"/>
-                :<FiMinusSquare size={40} color="grey" onClick={()=>setPersons(false)}/>}
-                 <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
-                  <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
-                    To  
-                  <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
-                </div>   
-                  
-                   {/* <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>  */}
-              </div>   
+              <ChoseHoursModal id={selectedDay+1} date={myDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
+              <div style={{marginTop:"50px"}}>
+                {!schedule[selectedDay].persons.find((person)=>person.name===loginPerson[0].nickname)
+                ?<FiPlusSquare size={40} color="grey" onClick={()=>setChooseHours(true)}/>
+                :<FiMinusSquare size={40} color="grey" onClick={()=>setPersons(false)}/>}    
+              </div>                          
       </motion.div>
     </AnimatePresence>
   )
