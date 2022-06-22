@@ -67,7 +67,7 @@ console.log(schedule)
                   return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
                 }):<>no data</>}
               </div>
-               <div className='day__chooseHours-choose flex'>
+               <div className='day__chooseHours-choose flex' style={{marginTop:"auto", marginBottom:"40px"}}>
                 <div className={`chooseHours flex ${selectColor?"select":"no-select"}`} onClick={()=>setPersons(true)}>
                   <input className='hours' value={startWork} type="time" onChange={(x)=>(setStartWork(x.target.value),setPersons(true))}/>
                     To  

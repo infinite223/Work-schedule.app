@@ -10,6 +10,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import './Day.scss'
 import { AnimatePresence } from 'framer-motion';
+import { BsDot } from 'react-icons/bs'
 import { IPerson } from './../../Helpers/interfaces';
 
 export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, setSelectDay:Dispatch<SetStateAction<number>>; }> = ({ id, date, persons, setSelectDay }) => {
@@ -81,11 +82,16 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson>, set
           <div className='day__workerlist'>  
             {persons?persons.map(({ name, startWork, endWork })=>{
               return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
-            }):<>xd</>}
+            }):<>no data</>}
           </div>
       </motion.div>:
       <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id-1)}>
         <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
+        <div className='dots'>
+          {persons?persons.map(({ name })=>{
+                return  <BsDot size={20} className={loginPerson[0].nickname===name?"dot magenta-text":"dot"}/>
+          }):<></>}
+        </div>
       </div>}
     </AnimatePresence>
   )

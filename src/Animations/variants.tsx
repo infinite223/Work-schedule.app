@@ -46,12 +46,9 @@ export const show = {
   }
 
   export const showWorkers = {
-    start: {height:"23%"},
+    start: {height:"18%"},
     hover:{height:"25%"}
   }
-
-
-
     
 
 export const letter = {

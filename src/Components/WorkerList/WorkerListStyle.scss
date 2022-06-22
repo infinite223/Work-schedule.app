@@ -7,11 +7,9 @@
     font-size: 18px;
     color: rgb(160, 156, 156);
 
-    .group-name {
+    .group-name {   
         width: 100%;
         
-        border-top: 2px solid rgb(34, 33, 33);
-
         padding: .4rem;
         text-align: left;
 
@@ -34,10 +32,10 @@
 
         .worker {
             width: 100%;
+          
+            //background-color: rgba(48, 46, 46, 0.2);
 
-            background-color: rgba(48, 46, 46, 0.2);
-
-            padding: .1rem .4rem;
+            padding: .3rem;
 
 
             @media only screen and (max-width: 600px) {
@@ -50,12 +48,20 @@
                 margin: 0px auto;
             }
 
+            .person-icon {
+                margin-right:8px;
+            }
+
             .worker-name {       
                 text-align: left;
+                border-bottom: 2px solid rgb(34, 33, 33);
+                padding: .2rem; 
             }
 
             .worker-hours {
                 text-align: right;
+                border-bottom: 2px solid rgb(34, 33, 33);
+                padding: .2rem;
             }
         }
     }
