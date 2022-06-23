@@ -26,8 +26,7 @@ export const personReducer = (state = initalState, action: Action) =>{
         case "DeletePerson":   
             let nowPersonId = 0;
             state.forEach(person => {                          
-                state[nowPersonId].id = nowPersonId+1;           
-                console.log(state)             
+                state[nowPersonId].id = nowPersonId+1;                    
             })     
             
             return state.filter((person:any)=>person.id!==action.payload.id)

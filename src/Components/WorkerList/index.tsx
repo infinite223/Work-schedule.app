@@ -1,4 +1,3 @@
-import React from 'react'
 import { CountHours } from '../../Helpers/functions/functions';
 import { MdOutlinePerson } from 'react-icons/md'
 import './WorkerListStyle.scss'
@@ -9,18 +8,18 @@ export const WorkerList = () => {
         <div className='worker-list'>                     
             <div className='worker flex'>
                 <MdOutlinePerson size={25} className="person-icon"/>
-                <text className='worker-name'>Dawid</text>
-                <text className='worker-hours'>{CountHours("Dawid")} h</text>
+                <div className='worker-name'>Dawid</div>
+                <div className='worker-hours'>{CountHours("Dawid")} h</div>
             </div>
             <div className='worker flex'>
                 <MdOutlinePerson size={25} className="person-icon"/>
-                <text className='worker-name'>Nikola</text>
-                <text className='worker-hours'>{CountHours("Nikola")} h</text>
+                <div className='worker-name'>Nikola</div>
+                <div className='worker-hours'>{CountHours("Nikola")} h</div>
             </div>
             <div className='worker flex'>
                 <MdOutlinePerson size={25} className="person-icon"/>
-                <text className='worker-name'>Natalia</text>
-                <text className='worker-hours'>0 h</text>
+                <div className='worker-name'>Natalia</div>
+                <div className='worker-hours'>0 h</div>
             </div>
         </div>
     </div>

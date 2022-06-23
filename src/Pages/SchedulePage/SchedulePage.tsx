@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { State } from '../../state';
 
 import './SchedulePage.scss'
-import { useState } from 'react';
 import { Day } from '../../Components/Day/Day';
 import { DayContent } from '../../Components/DayContent';
 import { days, month, today } from '../../Helpers/constants';

@@ -30,13 +30,13 @@ export const CreateSchedule = () => {
             animate={{opacity:1}}
             transition={{duration:2.5}}
             > 
-              <h3>Persons in schedule <text style={{color:"#FF00FF"}}>{person.length}</text></h3>
+              <h3>Persons in schedule <span style={{color:"#FF00FF"}}>{person.length}</span></h3>
 
             </motion.div>   
             <div className='create__group'>
-                <text className='text__value'>
+                <span className='text__value'>
                   <input type="text" placeholder='Set name group...'/> 
-                </text> 
+                </span> 
               </div>  
         </nav>
         <div className='Content flex'>

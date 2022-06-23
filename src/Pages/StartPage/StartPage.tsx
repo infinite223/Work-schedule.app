@@ -25,7 +25,7 @@ export const StartPage = () => {
             )
           })}
         </motion.h1>
-        <div className='login-button' onClick={()=> navigate("/Login")}><text className='login-text'>Log</text> In</div>
+        <div className='login-button' onClick={()=> navigate("/Login")}><span className='login-text'>Log</span> In</div>
         <motion.div className='button create-button'
           variants={button}
           initial="hidden"
@@ -34,11 +34,11 @@ export const StartPage = () => {
           whileTap="tap"
           onClick={()=> navigate("/Create")}
         >
-          <text>Create</text>      
+          Create
         </motion.div>
 
         <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1.5, delay:2}}>if you belong to an existing work schedule, you can 
-         <text onClick={()=> navigate("/Login")}><text className='login-text'> log In</text></text>
+         <span onClick={()=> navigate("/Login")}><span className='login-text'> log In</span></span>
         </motion.p>
 
     </motion.div>

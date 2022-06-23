@@ -1,4 +1,4 @@
-import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, RiCalendarTodoLine, DayOnBackground, LoginPage, days } from './Helpers/imports';
+import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, DayOnBackground, LoginPage, days } from './Helpers/imports';
 
 import './App.scss'
 
@@ -8,9 +8,9 @@ function App() {
     <>
       <div className='App flex'>
         <div className='square-conteiner'>
-          {days.map((day)=>{
+          {days.map((day, i)=>{
             return (       
-                <DayOnBackground day={day} className={"flex square-1"}/>       
+                <DayOnBackground key={i} day={day} className={"flex square-1"}/>       
             )}       
           )}     
         </div>
@@ -24,8 +24,7 @@ function App() {
           </Routes>     
         </Router>
         
-        {/* <RiCalendarTodoLine className='calendar-icon' size={35}/> */}
-        <text className='version-text'>Work schedule v0.5</text>
+         <div className='version-text'>Work schedule v0.5</div> 
       </div>
     </>
   );

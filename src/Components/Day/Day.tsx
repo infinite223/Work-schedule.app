@@ -15,13 +15,10 @@ import { IPerson } from './../../Helpers/interfaces';
 
 export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> = ({ id, date, persons }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
-
   const loginPerson = useSelector((state: State)=> state.login)
   const todayDate = new Date();
-
   const dispatch = useDispatch();
   const { setSelectedDay } = bindActionCreators(actionCreators, dispatch)
-
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
 
 
@@ -36,7 +33,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
       >
           <nav>
             <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
-            <text>{days[date.getDay()]}</text>      
+            <div>{days[date.getDay()]}</div>      
           </nav>
           <div className='day__workerlist'>  
             {persons?persons.map(({ name, startWork, endWork }, person)=>{

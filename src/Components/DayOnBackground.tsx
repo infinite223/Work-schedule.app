@@ -1,7 +1,7 @@
 import React, { useEffect, useState }from 'react'
 import { motion } from '../Helpers/imports';
 
-export const DayOnBackground:React.FC<{ className:string, day:number }> = ({className, day}) => {
+export const DayOnBackground:React.FC<{ className:string, day:number }> = ({ className, day }) => {
   const [ animatedClass, setAnimatedClass ] = useState("")
   const d = new Date();
   
@@ -12,6 +12,6 @@ export const DayOnBackground:React.FC<{ className:string, day:number }> = ({clas
   },[])
 
   return (
-    <motion.div className={animatedClass+" "+className} ><text>{day}<span>May</span></text></motion.div>
+    <motion.div className={animatedClass+" "+className} ><div>{day}<span>May</span></div></motion.div>
   )
 }

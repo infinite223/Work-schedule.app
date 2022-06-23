@@ -19,15 +19,15 @@ export const Worker: React.FC<{ id:number }>= ({ id }) => {
   return (
     <div className='Person'>
           <motion.div className='person_content'  variants={show} initial="hidden" animate="visible"  whileHover="hover">
-              <text style={{color:"white", width:"20px", margin:"0 20px"}}>{id}</text>
+              <div style={{color:"white", width:"20px", margin:"0 20px"}}>{id}</div>
               
               <div className='person__data'>
-                <text className='text__value'><text className='label'>email:</text>
-                  <input type="text" autoComplete='off' placeholder='email' value={email} onChange={(x) => (setEmaill(x.target.value), setPerson({id:id,email:email,nickname:nickname}))}/>
-                </text>
-                <text className='text__value'><text className='label'>nickname:</text>
-                  <input type="text" placeholder='nickname' value={nickname} onChange={(x)=>(setNickname(x.target.value),setPerson({id:id, email:email, nickname:nickname}))}/>
-                </text>    
+                <div className='div__value'><div className='label'>email:</div>
+                  <input type="div" autoComplete='off' placeholder='email' value={email} onChange={(x) => (setEmaill(x.target.value), setPerson({id:id,email:email,nickname:nickname}))}/>
+                </div>
+                <div className='div__value'><div className='label'>nickname:</div>
+                  <input type="div" placeholder='nickname' value={nickname} onChange={(x)=>(setNickname(x.target.value),setPerson({id:id, email:email, nickname:nickname}))}/>
+                </div>    
               </div>            
               <MdOutlinePersonRemove className='delete-person' size={25} onClick={()=>deletePerson({id:id,email:"",nickname:""})}/>
           </motion.div>
