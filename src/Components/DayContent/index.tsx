@@ -30,7 +30,7 @@ export const DayContent:React.FC = ( {} ) => {
 
   const setPersons = (operation:boolean) : void => {
     if(!operation){
-      setPersonInDay({id:selectedDay+1, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
+      setPersonInDay({id:selectedDay, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
     }
     else {    
       setPersonInDay({id:selectedDay+1, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
@@ -66,13 +66,13 @@ console.log(schedule)
         </motion.nav>
 
               <div className='day__workerlist'>  
-                {schedule?schedule[selectedDay].persons.map(({ name, startWork, endWork })=>{
-                  return <div key={name} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} <div className='interval'>{startWork}-{endWork}</div></div>
+                {schedule?schedule[selectedDay-1].persons.map(({ name, startWork, endWork },x)=>{
+                  return <div key={x} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} <div className='interval'>{startWork}-{endWork}</div></div>
                 }):<>no data</>}
               </div>
-              <ChoseHoursModal id={selectedDay+1} date={myDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
+              <ChoseHoursModal id={selectedDay} date={myDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
               <div style={{marginTop:"50px"}}>
-                {!schedule[selectedDay].persons.find((person)=>person.name===loginPerson[0].nickname)
+                {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson[0].nickname)
                 ?<FiPlusSquare size={40} color="grey" onClick={()=>setChooseHours(true)}/>
                 :<FiMinusSquare size={40} color="grey" onClick={()=>setPersons(false)}/>}    
               </div>                          
