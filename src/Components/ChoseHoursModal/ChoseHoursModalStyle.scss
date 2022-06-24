@@ -1,6 +1,7 @@
 .day__chooseHours {
+    z-index: 20;
     position: absolute;
-    width: 30vw;
+    width: 22vw;
 
     left: 50%;
     top:50%;
@@ -15,6 +16,7 @@
         margin-top: -40vh;
     }
 
+  
     background-color: rgb(34, 32, 32);
     border-radius: 10px;
 
@@ -23,9 +25,8 @@
         width: 100%;
 
         margin: 10px;
-        color: rgb(181, 172, 172);
+        color: rgb(235, 229, 229);
      
-
         font-size: 20px;
 
         @media only screen and (max-width: 600px) {
@@ -63,65 +64,62 @@
         z-index: 20;
         flex-direction: column;
 
-        background-color:  rgb(37, 35, 35);
-        padding: 10px 0;
-        color: rgb(116, 109, 109);
-        letter-spacing: 5px;
-        
+        color: rgb(163, 155, 155);     
+        margin: auto;
 
         .chooseHours {
             width: 95%;
-            height: 40px;
+            height: auto;
 
             background-color: transparent;
 
-            font-size: 20px;
+            font-size: 17px;
             @media only screen and (max-width: 600px) {
                 font-size: 15px;
             }
 
             margin: 5px 0;
 
-            .hours {
-                width: 100px;
+            .label {
+                width:50%;
+                text-align: left;
+            }
 
+            .hours { 
+                width:50%;
+                text-align: right;
+                border: none;            
                 font-size: 20px;
+                color: rgb(199, 198, 198);
 
-                border: none; 
-                margin: auto;
-                color: rgb(163, 155, 155);      
                 @media only screen and (max-width: 600px) {
                     font-size: 15px;
-                }        
-            }
-
-            &:hover {
-                cursor: pointer;
-                border: 1px solid #FF00FF;
-            }
-        }
-
-        input[type=button] {
-            width: 95%;
-            height: 40px;
-
-            background-color: transparent;
-            color: rgb(116, 109, 109);
-            font-size: 20px;
-            letter-spacing: 4px;
-
-            @media only screen and (max-width: 600px) {
-                margin-bottom: 0px;
-                font-size: 15px;
-            }
-
-            margin: 5px 0;
-
-            &:hover {
-                cursor: pointer;
-                border: 1px solid #FF00FF;
+                }   
+                
+                &:hover{
+                    cursor: pointer;
+                }
+            
             }
         }
+
+        // input[type=button] {
+        //     background-color: transparent;
+        //     color: rgb(116, 109, 109);
+        //     font-size: 20px;
+
+        //     @media only screen and (max-width: 600px) {
+        //         margin-bottom: 0px;
+        //         font-size: 15px;
+        //     }
+
+        //     margin: 5px 0;
+
+        //     &:hover {
+        //         cursor: pointer;
+        //         border: 1px solid #FF00FF;
+        //     }
+        // }
 
         .select {
             border: 1px solid #FF00FF;
@@ -130,4 +128,47 @@
             border: 1px solid rgb(80, 78, 78);
         }
     }
+
+    .options {
+        font-size: 17px;
+        color: rgb(163, 157, 157);
+
+        margin: 10px 0;
+
+        .save-button {
+            width: auto;
+
+            border: 1px solid rgb(67, 68, 67);
+            border-radius: 5px;
+            padding: .2rem 1rem;
+
+            &:hover > .icon {
+                color: #FF00FF;
+            }
+
+            &:hover {
+                cursor: pointer;
+                border: 1px solid rgb(126, 126, 126);
+            }
+
+            .icon {
+                margin-left: 15px;
+            }
+        }
+    }
+
+}
+
+.blur-page {
+    position: fixed;
+
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+
+    background-color: rgba(44, 42, 42, 0.8);
+    backdrop-filter: blur(2px);
+    backdrop-filter: grayscale(80%);
+
+    z-index: 2;
 }
