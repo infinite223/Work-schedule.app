@@ -17,7 +17,7 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
     const loginPerson = useSelector((state: State)=> state.login)
  
     const [ startWork, setStartWork ] = useState(persons[0]?.startWork? persons[0].startWork : "00:00");
-    const [ endWork, setEndWork ] = useState("00:00");
+    const [ endWork, setEndWork ] = useState("22:00");
 
     const dispatch = useDispatch();
     const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
@@ -37,8 +37,9 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
         if(persons && loginPerson){
           const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
           setSelectColor(foundPerson?true:false)
+          console.log(id,selectColor)
         }
-      },[ setPersonInDay ])
+      },[ setPersons ])
 
   return (
     <AnimatePresence>
@@ -62,7 +63,7 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
                     <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
                 </div>  
                 
-                <input type="button" className={ selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
+                <input type="button" className={selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/>
             </div>  
         </motion.div>}
     </AnimatePresence>
