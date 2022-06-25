@@ -5,7 +5,7 @@
 
     left: 50%;
     top:50%;
-    margin-left: -15vw;
+    margin-left: -12vw;
     margin-top: -20vh;
 
     @media only screen and (max-width: 600px) {
@@ -110,24 +110,6 @@
             
             }
         }
-
-        // input[type=button] {
-        //     background-color: transparent;
-        //     color: rgb(116, 109, 109);
-        //     font-size: 20px;
-
-        //     @media only screen and (max-width: 600px) {
-        //         margin-bottom: 0px;
-        //         font-size: 15px;
-        //     }
-
-        //     margin: 5px 0;
-
-        //     &:hover {
-        //         cursor: pointer;
-        //         border: 1px solid #FF00FF;
-        //     }
-        // }
 
         .select {
             border: 1px solid #FF00FF;

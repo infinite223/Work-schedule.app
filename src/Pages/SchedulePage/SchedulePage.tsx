@@ -21,7 +21,10 @@ export const SchedulePage = () => {
   return (
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-        <div className='right-header'>Save schedule</div>
+        <motion.div initial={{right:"-145px"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
+            <HiOutlineChevronDoubleLeft size={30} className='icon-save'/>
+            <span>Save schedule</span>
+        </motion.div>
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <div className='SchedulePage__navbar flex'>
                 <div className='date'>

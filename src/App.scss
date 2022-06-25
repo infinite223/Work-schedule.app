@@ -76,12 +76,12 @@
 
     .icon-exit {
         position: fixed;
-        left: 20px;
-        top: 20px;
+        left: 0px;
+        top: 40%;
         z-index: 10;
         
         background-color:  rgba(53, 52, 52, .5);
-        border-radius: 50%;
+        border-radius: 0 15px 15px 0;
         
         padding: .5rem;
 
@@ -89,34 +89,46 @@
   
         &:hover {
           color: magenta;
-          transform: scale(1.2);
+          transform: scalex(1.2);
           transition: all .5s linear;
-        }
-
-        @media only screen and (max-width: 600px) {           
-            left: 10px;
-            top:10px
-        }        
+        }     
       }
 
       .right-header {
         position: fixed;
-        right: 0px;
-        top: 20px;
+        top: 40%;
+
+        @media only screen and (max-width: 600px) {           
+            top: 42%;
+        }   
         z-index: 10;
 
         font-size: 18px;
-        color: rgb(204, 200, 200);
-        font-weight: 600;
-        background-image: linear-gradient(214deg, rgba(52, 50, 54, 0.1) , rgba(41, 40, 42, 0.5)  30% ,#3e3b3e);
+        
+        background-color:  rgba(53, 52, 52, .5);
   
-        border-radius: 20px 0 0 20px;
+        border-radius: 15px 0 0 15px;
 
-        padding: .5rem 2rem;
+        padding: .5rem .5rem;
 
-        @media only screen and (max-width: 600px) {           
-            top:15px
+
+       .icon-save {
+        margin-right: 10px;
+        transform: rotate(180deg);
+
+        &:hover {
+           color: #FF00FF;
+           transition: all .5s linear;
         }
+       }
+
+       span {
+        color: rgb(154, 152, 152);
+       }
+
+       &:hover {
+        cursor: pointer;
+       }
       }
 
     .calendar-icon {
