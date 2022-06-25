@@ -17,7 +17,7 @@
     }
 
   
-    background-color: rgb(34, 32, 32);
+    background-color: rgb(28, 27, 27);
     border-radius: 10px;
 
     .nav {
@@ -60,18 +60,29 @@
         }
     }
 
+    
+    h4 {
+        width: 90%;
+
+        font-size: 12px;
+        color: rgba(171, 168, 168,.5);
+        text-align: left;
+        margin: 5px 10px;
+    }
+
     .day__chooseHours-choose {
         z-index: 20;
         flex-direction: column;
 
         color: rgb(163, 155, 155);     
-        margin: auto;
+
 
         .chooseHours {
             width: 95%;
             height: auto;
 
-            background-color: transparent;
+            background-color: rgb(32, 32, 32);
+            border-radius: 10px;   
 
             font-size: 17px;
             @media only screen and (max-width: 600px) {
@@ -83,6 +94,7 @@
             .label {
                 width:50%;
                 text-align: left;
+                margin: 0 10px;
             }
 
             .hours { 
@@ -91,6 +103,8 @@
                 border: none;            
                 font-size: 20px;
                 color: rgb(199, 198, 198);
+
+                margin: 0 10px;
 
                 @media only screen and (max-width: 600px) {
                     font-size: 15px;
@@ -130,29 +144,45 @@
     }
 
     .options {
+        width: 100%;
         font-size: 17px;
         color: rgb(163, 157, 157);
 
         margin: 10px 0;
+        margin-top: 50px;
+
+        .remove-button {
+            margin-left: 10px;
+
+            &:hover  {
+                color: #FF00FF;
+            }
+        }
 
         .save-button {
-            width: auto;
-
-            border: 1px solid rgb(67, 68, 67);
-            border-radius: 5px;
-            padding: .2rem 1rem;
+            margin-left: auto;
+            margin-right: 10px;
+           
 
             &:hover > .icon {
                 color: #FF00FF;
-            }
-
-            &:hover {
-                cursor: pointer;
-                border: 1px solid rgb(126, 126, 126);
+                transition: all 1s ease-in-out;
             }
 
             .icon {
                 margin-left: 15px;
+            }
+        }
+
+        .button {
+            border: 1px solid rgb(67, 68, 67);
+            border-radius: 5px;
+            padding: .2rem 1rem;
+
+            &:hover {
+                cursor: pointer;
+                border: 1px solid rgb(126, 126, 126);
+                transition: all .5s ease-in-out;
             }
         }
     }
@@ -166,7 +196,11 @@
     height: 100vh;
     left: 0;
 
-    background-color: rgba(44, 42, 42, 0.8);
+    @media only screen and (max-width: 600px) {
+       top:0;
+     }
+
+    background-color: rgba(35, 34, 34, 0.8);
     backdrop-filter: blur(2px);
     backdrop-filter: grayscale(80%);
 

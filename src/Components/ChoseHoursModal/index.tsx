@@ -44,7 +44,7 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
 
   return (
     <AnimatePresence>
-                 {chooseHours&& <div className='blur-page'/>}
+        {chooseHours&& <div className='blur-page'/>}
         {chooseHours&&<motion.div className='day__chooseHours' drag 
             key="box"
             variants={showDay}
@@ -57,6 +57,7 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
                 <text>{days[date.getDay()]}</text>     
                 {/* <CgCloseR className='exit-icon' size={25} onClick={()=> setChooseHours(false)}/> */}
             </div>
+            <h4>Set your working hours</h4>
             <div className='day__chooseHours-choose flex'>
                     <div className='chooseHours flex'>
                       <div className='label'>Start work</div>
@@ -69,8 +70,11 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
                 
                 {/* <input type="button" className={selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/> */}
             </div> 
-            <div className='options flex' onClick={()=>(setPersons(true), setChooseHours(false))}>
-              <div className='save-button flex'>
+            <div className='options flex'>
+              <div className='remove-button button flex' onClick={()=>(setPersons(false), setChooseHours(false))}>
+                Free
+              </div>
+              <div className='save-button button flex' onClick={()=>(setPersons(true), setChooseHours(false))}>
                 Set
                 <BsCheckLg size={15} className='icon'/>
               </div>
