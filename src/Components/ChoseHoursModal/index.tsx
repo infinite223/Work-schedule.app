@@ -67,9 +67,11 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
                       <div className='label'>End work</div>
                       <input className='hours' value={endWork} onChange={(x)=>(setEndWork(x.target.value),setPersons(true))} type="time"/>
                     </div>
-                
-                {/* <input type="button" className={selectColor?"no-select":"select" } value="Free" onClick={()=>setPersons(false)}/> */}
             </div> 
+            <ul>
+              <li>Your hours are counted up on the left side</li>
+              <li>If you want to have a day off, click the "free" button</li>
+            </ul>
             <div className='options flex'>
               <div className='remove-button button flex' onClick={()=>(setPersons(false), setChooseHours(false))}>
                 Free

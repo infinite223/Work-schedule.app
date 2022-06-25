@@ -29,7 +29,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
       <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
         variants={showWorkers}
         initial="start"
-        whileHover={todayDate.getDate()-1<id?"hover":""}
+        whileHover={todayDate.getDate()-1<id&&persons.length>=3?"hover":""}
       >
           <nav>
             <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
