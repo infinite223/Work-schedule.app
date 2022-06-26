@@ -21,7 +21,10 @@ export const CreateSchedule = () => {
   return (
     <>
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-      <div className='right-header'>Create</div>
+      <motion.div initial={!isTabletOrMobile?{right:"-72px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
+            <HiOutlineChevronDoubleLeft size={30} className='icon-save'/>
+            <span>Create</span>
+      </motion.div>
 
       <motion.div className='CreateSchedule' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
         <nav>

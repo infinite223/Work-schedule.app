@@ -36,7 +36,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
             <div>{days[date.getDay()]}</div>      
           </nav>
           <div className='day__workerlist'>  
-            {persons?persons.map(({ name, startWork, endWork }, person)=>{
+            {persons?persons?.map(({ name, startWork, endWork }, person)=>{
               return <div key={person} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
             }):<>no data</>}
           </div>
@@ -44,8 +44,8 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
       <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
         <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
         <div className='dots'>
-          {persons?persons.map(({ name }, person)=>{
-                return  <BsDot key={person} size={20} className={loginPerson[0].nickname===name?"dot magenta-text":"dot"}/>
+          {persons?persons?.map(({ name }, person)=>{
+                return <BsDot key={person} size={20} className={loginPerson[0].nickname===name?"dot magenta-text":"dot"}/>
           }):<></>}
         </div>
       </div>}

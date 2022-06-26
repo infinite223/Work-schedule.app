@@ -10,6 +10,7 @@ import { DayContent } from '../../Components/DayContent';
 import { days, month, today } from '../../Helpers/constants';
 import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
+import { MdOutlinePersonOutline } from 'react-icons/md'
 
 
 export const SchedulePage = () => {
@@ -17,14 +18,20 @@ export const SchedulePage = () => {
     const navigate = useNavigate(); 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const schedule = useSelector((state: State)=> state.schedule)
+    const loginPerson = useSelector((state: State)=> state.login)
 
   return (
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-        <motion.div initial={{right:"-145px"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
+        <motion.div initial={!isTabletOrMobile?{right:"-145px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
             <HiOutlineChevronDoubleLeft size={30} className='icon-save'/>
             <span>Save schedule</span>
         </motion.div>
+        {!isTabletOrMobile&&<div className='login__person-text flex'>
+            <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
+            <div>Log person </div>
+            <span>{loginPerson[0].nickname}</span>
+        </div>}
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <div className='SchedulePage__navbar flex'>
                 <div className='date'>

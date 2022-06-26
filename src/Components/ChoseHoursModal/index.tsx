@@ -54,7 +54,7 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
         >
             <div className='nav'>
                 <span>{id}</span>
-                <text>{days[date.getDay()]}</text>     
+                <div>{days[date.getDay()]}</div>     
                 {/* <CgCloseR className='exit-icon' size={25} onClick={()=> setChooseHours(false)}/> */}
             </div>
             <h4>Set your working hours</h4>

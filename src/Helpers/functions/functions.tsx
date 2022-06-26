@@ -20,7 +20,10 @@ export function generateSheduleData(days:number){
 }
 
 export function daysInMonth (month:number, year:number) {
-    return new Date(year, month, 0).getDate();
+    const nowDate:Date = new Date();
+    const nowYear = nowDate.getFullYear();
+    const nowMoth = nowDate.getMonth()+1;
+    return new Date(nowYear, nowMoth, 0).getDate();
 }
 
 export const CountHours = (person:string) => {

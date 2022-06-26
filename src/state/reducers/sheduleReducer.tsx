@@ -1,4 +1,5 @@
 import { IShedule } from '../../Helpers/interfaces'
+import { daysInMonth } from '../../Helpers/functions/functions'
 
 interface Action  {
     type: string,
@@ -9,7 +10,7 @@ function generateSheduleData(){
 
     let initalState = []
 
-    for (let i = 1; i <= 31; i++) {
+    for (let i = 1; i <= daysInMonth(6,2022); i++) {
         initalState.push({id:i, persons: [{name:"Nikola", startWork:"17:00", endWork:"22:00"}]})
     }
 

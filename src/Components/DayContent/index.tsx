@@ -15,12 +15,12 @@ export const DayContent:React.FC = ( {} ) => {
   const selectedDay = useSelector((state: State)=> state.select)
   const loginPerson = useSelector((state: State)=> state.login)
   const schedule = useSelector((state: State)=> state.schedule)
-  const persons = schedule[selectedDay].persons;
+  const persons = schedule[selectedDay-1].persons;
   const controls = useAnimation()
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
 
-  const myDate = new Date(`2022-06-${schedule[selectedDay].id}`)
+  const myDate = new Date(`2022-06-${schedule[selectedDay-1].id}`)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
 
   const removePerson = (operation:boolean) : void => {
