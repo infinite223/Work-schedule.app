@@ -8,11 +8,12 @@
     margin-left: -12vw;
     margin-top: -20vh;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 1024px) {
         width: 90vw;
 
         left: 20%;
         top:-20%;
+        margin-left: -15vw ;
         margin-top: -40vh;
     }
 
@@ -29,7 +30,7 @@
      
         font-size: 20px;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
             font-size: 23px;
         }
 
@@ -40,7 +41,7 @@
             font-size: 15px;
             margin-left: 10px;
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 1024px) {
                // font-size: 12px;
             }
         }
@@ -141,7 +142,7 @@
         width: 100%;
         font-size: 17px;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
             font-size: 20px;
         }
         color: rgb(209, 206, 206);
@@ -194,7 +195,7 @@
     height: 100vh;
     left: 0;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 1024px) {
        top:0;
      }
 

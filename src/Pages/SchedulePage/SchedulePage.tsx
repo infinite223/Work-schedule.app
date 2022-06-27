@@ -23,9 +23,10 @@ export const SchedulePage = () => {
   return (
     <>
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-        <motion.div initial={!isTabletOrMobile?{right:"-145px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
-            <HiOutlineChevronDoubleLeft size={30} className='icon-save'/>
-            <span>Save schedule</span>
+        <motion.div initial={!isTabletOrMobile?{right:"-65px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:.3}} className='right-header flex'>
+            {!isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
+            <span>Save</span>
+            {isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
         </motion.div>
         {!isTabletOrMobile&&<div className='login__person-text flex'>
             <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>

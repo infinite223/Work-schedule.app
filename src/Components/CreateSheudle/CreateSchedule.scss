@@ -25,7 +25,7 @@
       width: auto;
       height: 10%;
 
-      @media only screen and (max-width: 600px) {
+      @media only screen and (max-width: 1024px) {
        height: auto;
        flex-direction:column-reverse;
        margin: 10px;
@@ -39,7 +39,7 @@
         font-size: 22px;
         color: rgb(255, 255, 255);
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
           max-width: 350px;
           font-size: 20px;
           margin-bottom: 20px;
@@ -53,7 +53,7 @@
       height: 100%;
       width: 400px;
 
-      @media only screen and (max-width: 600px) {
+      @media only screen and (max-width: 1024px) {
        height: 70px;
        width: 100%;
        margin-top: 20px;
@@ -80,7 +80,7 @@
 
         padding: 0 10px;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
           padding: 5px;
           border: none;
         }
@@ -95,7 +95,7 @@
 
             border: none;
          
-          @media only screen and (max-width: 600px) {
+          @media only screen and (max-width: 1024px) {
             width: 170px;
             border-bottom:1px solid rgba(63, 62, 62, .3);
           }
@@ -110,7 +110,7 @@
             color: #FF00FF;
           }
         }
-        @media only screen and (min-width: 600px) {
+        @media only screen and (min-width: 1024px) {
           &:hover {
             border:1px solid rgba(79, 77, 77, 0.9);
             transition: all 1s ease-in-out;
@@ -149,7 +149,7 @@
            display: none;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
           margin-right: auto;
           width: 100%;
           height: auto;
@@ -171,7 +171,7 @@
 
         border: 1px solid rgb(49, 48, 48);
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
           margin:20px 0; 
           width: 100%;
           height: auto;

@@ -10,7 +10,7 @@
 
         font-family: Courier  ;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
            width: 350px;
 
            font-size: 40px;
@@ -38,7 +38,7 @@
         
         letter-spacing: 3px;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
            font-size: 17px;
 
            padding: .5rem 2rem;
@@ -56,7 +56,7 @@
             font-size: 15px;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 1024px) {
            transform: scale(.9);
            width: 200px;
         }
