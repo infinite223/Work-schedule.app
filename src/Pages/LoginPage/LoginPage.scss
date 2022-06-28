@@ -31,6 +31,13 @@
             color: rgba(172, 165, 165, .7);
         }
 
+        .error__message {
+            color: red;
+            font-size: 13px;
+
+            margin-top: 10px;
+        }
+
         input {
             width: 100%;
 

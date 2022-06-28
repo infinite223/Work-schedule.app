@@ -16,14 +16,15 @@ export const CreateSchedule = () => {
   const  person :any = persons;
   const dispatch = useDispatch();
 
-  const { addPerson, setPerson, deletePerson } = bindActionCreators(actionCreators, dispatch)
+  const { addPerson } = bindActionCreators(actionCreators, dispatch)
 
   return (
     <>
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-      <motion.div initial={!isTabletOrMobile?{right:"-72px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
-            <HiOutlineChevronDoubleLeft size={30} className='icon-save'/>
+      <motion.div initial={!isTabletOrMobile?{right:"-85px"}:{right:"0px"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
+            {!isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
             <span>Create</span>
+            {isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
       </motion.div>
 
       <motion.div className='CreateSchedule' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">

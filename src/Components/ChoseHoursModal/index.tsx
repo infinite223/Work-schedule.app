@@ -44,7 +44,7 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
 
   return (
     <AnimatePresence>
-        {chooseHours&& <div className='blur-page'/>}
+        {chooseHours&& <div className='blur-page' onClick={()=>setChooseHours(false)}/>}
         {chooseHours&&<motion.div className='day__chooseHours' drag 
             key="box"
             variants={showDay}

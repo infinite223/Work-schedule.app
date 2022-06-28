@@ -5,7 +5,8 @@ import './StartPage.scss'
 
 export const StartPage = () => {
 
-  const headerText = "Your work schedule can be here";
+  const headerText = "You can create your first work schedule here, it's really that simple";
+  const loginText = "If you belong to an existing work schedule, you should click log in";
   const navigate = useNavigate(); 
 
   return (
@@ -14,33 +15,58 @@ export const StartPage = () => {
       initial={{opacity:0}}
       animate={{opacity:1}}
     >
-        <motion.h1
-          variants={sentence}
-          initial="hidden"
-          animate="visible"
-        >
-          {headerText.split("").map((char, index) => {
-            return (
-              <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
-            )
-          })}
-        </motion.h1>
-        <div className='login-button' onClick={()=> navigate("/Login")}><span className='login-text'>Log</span> In</div>
-        <motion.div className='button create-button'
-          variants={button}
-          initial="hidden"
-          animate="goodPosition"
-          whileHover="hover"
-          whileTap="tap"
-          onClick={()=> navigate("/Create")}
-        >
-          Create
-        </motion.div>
+      
+      <div className='startPage__content flex'>
+        <div className="startPage__content-left">
+          <motion.h1
+            variants={sentence}
+            initial="hidden"
+            animate="visible"
+          >
+            {headerText.split("").map((char, index) => {
+              return (
+                <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
+              )
+            })}
+          </motion.h1>
+    
+          <motion.div className='button create-button'
+            variants={button}
+            initial="hidden"
+            animate="goodPosition"
+            whileHover="hover"
+            whileTap="tap"
+            onClick={()=> navigate("/Create")}
+          >
+            Create
+          </motion.div>
+        </div>
 
-        <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1.5, delay:2}}>if you belong to an existing work schedule, you can 
-         <span onClick={()=> navigate("/Login")}><span className='login-text'> log In</span></span>
-        </motion.p>
-
+        <div className="startPage__content-right">
+          <motion.h1
+              variants={sentence}
+              initial="hidden"
+              animate="visible"
+            >
+              {loginText.split("").map((char, index) => {
+              return (
+                <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
+              )
+            })}
+          </motion.h1>
+            {/* <span onClick={()=> navigate("/Login")}><span className='login-text'> log In</span></span> */}
+            <motion.div className='button create-button'
+              variants={button}
+              initial="hidden"
+              animate="goodPosition"
+              whileHover="hover"
+              whileTap="tap"
+              onClick={()=> navigate("/Login")}
+          >
+            log In
+          </motion.div>
+        </div>
+      </div>
     </motion.div>
   )
 }

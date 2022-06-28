@@ -63,7 +63,7 @@ export const letter = {
   }
 
 export const button = {
-    hidden: {opacity: 0, y: 100},
+    hidden: {opacity: 0, y: 50},
     goodPosition: {
       opacity: 1,
       y:0,
