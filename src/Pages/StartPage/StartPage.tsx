@@ -17,55 +17,67 @@ export const StartPage = () => {
     >
       
       <div className='startPage__content flex'>
-        <div className="startPage__content-left">
-          <motion.h1
-            variants={sentence}
-            initial="hidden"
-            animate="visible"
-          >
-            {headerText.split("").map((char, index) => {
-              return (
-                <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
-              )
-            })}
-          </motion.h1>
-    
-          <motion.div className='button create-button'
-            variants={button}
-            initial="hidden"
-            animate="goodPosition"
-            whileHover="hover"
-            whileTap="tap"
-            onClick={()=> navigate("/Create")}
-          >
-            Create
-          </motion.div>
-        </div>
 
-        <div className="startPage__content-right">
-          <motion.h1
+        <div className='startPage__content-left flex'>
+          <div className='startPage__content-box'>
+            <div className='logo'>
+              Work-schedule<span style={{color:"#FF00FF"}}>.app</span><br/>
+              <div>v2</div>
+            </div>
+          </div>
+        </div>
+        <div className='startPage__content-right flex'>
+          <div className="startPage__content-box">
+            <motion.h1
               variants={sentence}
               initial="hidden"
               animate="visible"
             >
-              {loginText.split("").map((char, index) => {
-              return (
-                <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
-              )
-            })}
-          </motion.h1>
-            {/* <span onClick={()=> navigate("/Login")}><span className='login-text'> log In</span></span> */}
+              {headerText.split("").map((char, index) => {
+                return (
+                  <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
+                )
+              })}
+            </motion.h1>
+      
             <motion.div className='button create-button'
               variants={button}
               initial="hidden"
               animate="goodPosition"
               whileHover="hover"
               whileTap="tap"
-              onClick={()=> navigate("/Login")}
-          >
-            log In
-          </motion.div>
+              onClick={()=> navigate("/Create")}
+            >
+              Create
+            </motion.div>
+          </div>
+
+          <div className="startPage__content-box">
+            <motion.h1
+                variants={sentence}
+                initial="hidden"
+                animate="visible"
+              >
+                {loginText.split("").map((char, index) => {
+                return (
+                  <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
+                )
+              })}
+            </motion.h1>
+              {/* <span onClick={()=> navigate("/Login")}><span className='login-text'> log In</span></span> */}
+              <motion.div className='button create-button'
+                variants={button}
+                initial="hidden"
+                animate="goodPosition"
+                whileHover="hover"
+                whileTap="tap"
+                onClick={()=> navigate("/Login")}
+            >
+              Log In
+            </motion.div>
+          </div>
         </div>
+        
       </div>
     </motion.div>
   )
