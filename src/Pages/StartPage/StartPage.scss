@@ -25,6 +25,7 @@
                 display: flex;
                 @media only screen and (max-width: 1024px) {
                  align-items: center;
+                 height: auto;
                 }
 
                 flex-direction: column;
@@ -55,7 +56,7 @@
                 }
 
                 .info {
-                  width: 450px;
+                  width: 550px;
 
                   @media only screen and (max-width: 1024px) {
                     width: 85vw;
@@ -92,13 +93,20 @@
         }
 
         .startPage__content-center {
-            position: absolute;
+            // border-left: 3px solid #ffffff;
+            // border-right: 3px solid #FF00FF;
+            // border-radius: 30%;
 
-            border-left: 3px solid #ffffff;
-            border-right: 3px solid #FF00FF;
-            border-radius: 30%;
+            .icon {
+                transform: rotate(180deg);
+                color: #FF00FF;   
+            }
 
-            padding: 7px 12px;
+            @media only screen and (max-width: 1024px) {
+                transform: rotate(90deg);
+            }  
+            
+            padding: 7px 22px;
             font-size: 25px;
 
             div {
@@ -126,7 +134,7 @@
                     width: 85vw;
                     top:-10px;
                     transform: scale(.85);
-                    padding: 20px 0px;
+                    padding:  0px;
                 }
     
                 padding: 20px 40px;
@@ -165,6 +173,7 @@
     max-width: 80px;
 
     border: 1px solid rgb(170, 164, 164);
+    border-radius: 15px;
 
     font-size: 15px;
     font-weight: 600;

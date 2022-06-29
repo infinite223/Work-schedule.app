@@ -1,6 +1,6 @@
 import { motion, useNavigate } from '../../Helpers/imports'
 import { letter, sentence, button } from '../../Animations/variants'
-import { days } from '../../Helpers/constants'
+import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
 
 import './StartPage.scss'
 
@@ -9,7 +9,6 @@ export const StartPage = () => {
   const headerText = "You can create your first work schedule here, it's really that simple";
   const loginText = "If you belong to an existing work schedule, you should click log in";
   const navigate = useNavigate(); 
-  const todayDate = new Date();
 
   return (
     <motion.div
@@ -38,8 +37,9 @@ export const StartPage = () => {
         </div>
 
         <div className='startPage__content-center flex'>
-          <div>{todayDate.getDate()}</div>
-          <span>{days[todayDate.getDay()]}</span>
+          <HiOutlineChevronDoubleLeft size={50} className='icon'/>
+          {/* <div>{todayDate.getDate()}</div>
+          <span>{days[todayDate.getDay()]}</span> */}
         </div>
 
         <div className='startPage__content-right flex'>

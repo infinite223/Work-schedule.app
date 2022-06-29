@@ -38,7 +38,6 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
         if(persons && loginPerson){
           const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
           setSelectColor(foundPerson?true:false)
-          console.log(id,selectColor)
         }
       },[ setPersons ])
 

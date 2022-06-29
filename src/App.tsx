@@ -24,7 +24,7 @@ function App() {
           </Routes>     
         </Router>
         
-         <div className='version-text'>Work schedule v0.5</div> 
+         <div className='version-text'>Work schedule v2.6</div> 
       </div>
     </>
   );
