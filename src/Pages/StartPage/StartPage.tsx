@@ -1,5 +1,6 @@
 import { motion, useNavigate } from '../../Helpers/imports'
 import { letter, sentence, button } from '../../Animations/variants'
+import { days } from '../../Helpers/constants'
 
 import './StartPage.scss'
 
@@ -8,6 +9,7 @@ export const StartPage = () => {
   const headerText = "You can create your first work schedule here, it's really that simple";
   const loginText = "If you belong to an existing work schedule, you should click log in";
   const navigate = useNavigate(); 
+  const todayDate = new Date();
 
   return (
     <motion.div
@@ -24,8 +26,22 @@ export const StartPage = () => {
               Work-schedule<span style={{color:"#FF00FF"}}>.app</span><br/>
               <div>v2</div>
             </div>
+            <div className='info'>
+              <ul>
+                <h3>What application offer?</h3>
+                <li>Convenient management of the work schedule</li>
+                <li>Quick counting of the number of hours worked per month</li>
+                <li>Accessibility from the level of mobile devices</li>
+              </ul>
+            </div>
           </div>
         </div>
+
+        <div className='startPage__content-center flex'>
+          <div>{todayDate.getDate()}</div>
+          <span>{days[todayDate.getDay()]}</span>
+        </div>
+
         <div className='startPage__content-right flex'>
           <div className="startPage__content-box">
             <motion.h1
