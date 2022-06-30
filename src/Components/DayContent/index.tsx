@@ -10,8 +10,7 @@ import { days } from '../../Helpers/constants'
 import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
 import { ChoseHoursModal } from '../ChoseHoursModal';
 
-
-export const DayContent:React.FC = ( {} ) => {
+export const DayContent:React.FC = ( ) => {
   const selectedDay = useSelector((state: State)=> state.select)
   const loginPerson = useSelector((state: State)=> state.login)
   const schedule = useSelector((state: State)=> state.schedule)
@@ -23,11 +22,13 @@ export const DayContent:React.FC = ( {} ) => {
   const myDate = new Date(`2022-06-${schedule[selectedDay-1]?.id}`)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
 
+
   const removePerson = (operation:boolean) : void => {
     if(!operation){
       setPersonInDay({id:selectedDay, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
     }
   }
+  
 
 
   useEffect(()=>{
@@ -36,6 +37,8 @@ export const DayContent:React.FC = ( {} ) => {
       transition: { duration: 2 },
     })
   }, [selectedDay])
+
+  
 
   return (
     <AnimatePresence>
@@ -49,9 +52,8 @@ export const DayContent:React.FC = ( {} ) => {
             <motion.span>{selectedDay} </motion.span>
             <span>{days[myDate.getDay()]}</span>     
         </motion.nav>
-
               <div className='day__workerlist'>  
-                {schedule?schedule[selectedDay-1].persons.map(({ name, startWork, endWork },x)=>{
+                {schedule?schedule[selectedDay-1].persons?.map(({ name, startWork, endWork },x)=>{
                   return <div key={x} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} <div className='interval'>{startWork}-{endWork}</div></div>
                 }):<>no data</>}
               </div>

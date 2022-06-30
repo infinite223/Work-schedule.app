@@ -3,6 +3,14 @@ import { showPage } from '../../Animations/variants';
 import { useRef, useState } from 'react';
 import { auth  } from "../../firebase"
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { db } from "../../firebase";
+import {
+  collection,
+  getDocs,
+} from "firebase/firestore";
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../state';
+import { useDispatch } from 'react-redux';
 
 import './LoginPage.scss'
 
@@ -12,6 +20,8 @@ export const LoginPage = () => {
   const passwordRef = useRef<HTMLInputElement | null>(null)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch();
+  const { setSchedule } = bindActionCreators(actionCreators, dispatch)
 
   async function handleSubmit(e:any) {
     e.preventDefault()
@@ -22,11 +32,16 @@ export const LoginPage = () => {
       await signInWithEmailAndPassword(auth,
          emailRef.current?.value?emailRef.current?.value.toString():"",
          passwordRef.current?.value?passwordRef.current?.value.toString():"")
-         navigate("/schedule")
+         const scheduleCollectionRef = collection(db, "schedule");    
+                 const getUsers = async () => {
+                     const days = await getDocs(scheduleCollectionRef)
+                      setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
+                 };
+               await getUsers();
+               await navigate("/schedule")
     } catch {
       setError("Failed to log in")
     }
-
     setLoading(false)
   }
 

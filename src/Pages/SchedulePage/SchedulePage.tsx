@@ -33,7 +33,6 @@ export const SchedulePage = () => {
 
     useEffect(()=>{
         const scheduleCollectionRef = collection(db, "schedule");    
-            //const initalState:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}> = []
             const getUsers = async () => {
                 const days = await getDocs(scheduleCollectionRef)
                  setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
