@@ -1,27 +1,21 @@
 import { IShedule } from '../../Helpers/interfaces'
-import { daysInMonth } from '../../Helpers/functions/functions'
 
 interface Action  {
     type: string,
     payload: IShedule;
 } 
 
-function generateSheduleData(){
-
-    let initalState = []
-
-    for (let i = 1; i <= daysInMonth(6,2022); i++) {
-        initalState.push({id:i, persons: [{name:"Nikola", startWork:"17:00", endWork:"22:00"}]})
-    }
-
-    return initalState;
-}
+const initalState:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}> = []
 
 
-export const ScheduleReducer = (state = generateSheduleData(), action: Action) =>{
+
+export const ScheduleReducer = (state = initalState, action: Action) =>{
     const { type } = action;
    
-    switch (type){    
+    switch (type){   
+        case "SetSchedule":
+            //state = Object.assign({}, state,action.payload);
+            return  state = Object.assign([], state, action.payload);
         case "SetPersonInDay":
             let id: number = action.payload.id;
 

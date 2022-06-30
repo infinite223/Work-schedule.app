@@ -14,8 +14,7 @@ export const Admin = () => {
             <div className='div__value margin'><input type="div" placeholder='Type youremail..' autoComplete='off'/> </div>
             <div className='div__value margin'> <input type="password" placeholder='Set password..' autoComplete='off'/> </div>
             <div className='help-div margin'>click <span style={{color:"#FF00FF"}}>Create</span> button at the top to create your shedule</div>
-          </div>
-        
+          </div>       
         </div>
     </motion.div>
   )

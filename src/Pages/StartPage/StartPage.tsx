@@ -37,7 +37,7 @@ export const StartPage = () => {
         </div>
 
         <div className='startPage__content-center flex'>
-          <HiOutlineChevronDoubleLeft size={50} className='icon'/>
+          <HiOutlineChevronDoubleLeft size={30} className='icon'/>
           {/* <div>{todayDate.getDate()}</div>
           <span>{days[todayDate.getDay()]}</span> */}
         </div>

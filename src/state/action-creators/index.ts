@@ -52,6 +52,14 @@ export const setPersonInDay = (shedule:IShedule) => {
         })
     }
 }
+export const setSchedule = (shedule:IShedule) => {
+    return (dispatch: Dispatch) => {
+        dispatch({
+            type: "SetSchedule",
+            payload:shedule
+        })
+    }
+}
 
 export const setSelectedDay = (day:number) => {
     return (dispatch: Dispatch) => {

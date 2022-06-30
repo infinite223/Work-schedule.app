@@ -36,10 +36,10 @@ export const LoginPage = () => {
          <motion.div variants={showPage} initial="hidden" animate="visible" className='LoginPage flex'>  
          <form className='flex'  onSubmit={handleSubmit}>   
            <div className='Login__content flex'>
-            <h1>Log In</h1>
-            <p>
-              if this is your first login, give your account a password
-            </p>
+              <h1>Log In</h1>
+              <p>
+                if this is your first login, give your account a password
+              </p>
              <input type="email" placeholder='E-mail' ref={emailRef} required/>
              <input type="password" placeholder='Password' ref={passwordRef} required/>
              <div className='error__message'>{error}</div>
