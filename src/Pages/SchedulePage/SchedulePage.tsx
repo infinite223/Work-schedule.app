@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../../state';
+import { auth } from '../../firebase';
 
 import './SchedulePage.scss'
 import { Day } from '../../Components/Day/Day';
@@ -31,14 +32,14 @@ export const SchedulePage = () => {
     const dispatch = useDispatch();
     const { setSchedule } = bindActionCreators(actionCreators, dispatch)
 
-    useEffect(()=>{
-        const scheduleCollectionRef = collection(db, "schedule");    
-            const getUsers = async () => {
-                const days = await getDocs(scheduleCollectionRef)
-                 setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
-            };
-            getUsers();
-    },[])
+    // useEffect(()=>{
+    //     const scheduleCollectionRef = collection(db, "schedule");    
+    //         const getUsers = async () => {
+    //             const days = await getDocs(scheduleCollectionRef)
+    //              setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
+    //         };
+    //         getUsers();
+    // },[])
 
     const updateSchedule = async () => {
         const scheduleRef = doc(db, "schedule", "1");
@@ -55,17 +56,19 @@ export const SchedulePage = () => {
             <span>Save</span>
             {isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
         </motion.div>
-        {!isTabletOrMobile&&<div className='login__person-text flex'>
-            <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
-            <div>Log person </div>
-            <span>{loginPerson[0].nickname}</span>
-        </div>}
+        {!isTabletOrMobile&&
+            <div className='login__person-text flex'>
+                <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
+                <div>Log person </div>
+                <span>{loginPerson}</span>
+                </div>  
+            }
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <div className='SchedulePage__navbar flex'>
                 <div className='date'>
                     <div>{days[today.getDay()]}</div>
                     <div className='year color-magenta'>{today.getFullYear()}</div>    
-                    <div className='margin-botton'>{month[today.getMonth()]}</div>
+                    <div>{month[today.getMonth()]}</div>
            
                     {!isTabletOrMobile&&<WorkerList/>}
                 </div>

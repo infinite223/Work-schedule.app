@@ -69,3 +69,12 @@ export const setSelectedDay = (day:number) => {
         })
     }
 }
+
+export const setLoginPerson = (nickname:string) => {
+    return (dispatch: Dispatch) => {
+        dispatch({
+            type: "SetLoginPerson",
+            payload:nickname
+        })
+    }
+}

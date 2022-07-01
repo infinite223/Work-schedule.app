@@ -15,5 +15,14 @@ const app = initializeApp(
 );
 
 export const auth = getAuth(app)
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // User logged in already or has just logged in.
+    console.log(user.uid);
+  } else {
+    // User not logged in or has just logged out.
+  }
+});
 export default app
 export const db = getFirestore(app);

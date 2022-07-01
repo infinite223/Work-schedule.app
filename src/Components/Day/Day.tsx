@@ -37,7 +37,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
           </nav>
           <div className='day__workerlist'>  
             {persons?persons?.map(({ name, startWork, endWork }, person)=>{
-              return <div key={person} className={loginPerson[0].nickname===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
+              return <div key={person} className={loginPerson===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
             }):<>no data</>}
           </div>
       </motion.div>:
@@ -45,7 +45,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
         <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
         <div className='dots'>
           {persons?persons?.map(({ name }, person)=>{
-                return <BsDot key={person} size={20} className={loginPerson[0].nickname===name?"dot magenta-text":"dot"}/>
+                return <BsDot key={person} size={20} className={loginPerson===name?"dot magenta-text":"dot"}/>
           }):<></>}
         </div>
       </div>}

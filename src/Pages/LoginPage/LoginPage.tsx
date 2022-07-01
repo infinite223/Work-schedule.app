@@ -21,7 +21,7 @@ export const LoginPage = () => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
-  const { setSchedule } = bindActionCreators(actionCreators, dispatch)
+  const { setSchedule, setLoginPerson } = bindActionCreators(actionCreators, dispatch)
 
   async function handleSubmit(e:any) {
     e.preventDefault()
@@ -33,11 +33,21 @@ export const LoginPage = () => {
          emailRef.current?.value?emailRef.current?.value.toString():"",
          passwordRef.current?.value?passwordRef.current?.value.toString():"")
          const scheduleCollectionRef = collection(db, "schedule");    
-                 const getUsers = async () => {
-                     const days = await getDocs(scheduleCollectionRef)
+                 const setScheduleData = async () => {
+                      const days = await getDocs(scheduleCollectionRef)
                       setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
                  };
-               await getUsers();
+               await setScheduleData();
+
+               await auth.onAuthStateChanged( async (user) => {
+                if (user) {
+                  const personsCollectionRef = collection(db, "persons");   
+                  const persons = await getDocs(personsCollectionRef)
+                  const loginPerson = persons.docs.find((doc) => (doc.id===user.uid))                 
+                  setLoginPerson(loginPerson?.data().nickname)
+                } else {
+                }
+              });
                await navigate("/schedule")
     } catch {
       setError("Failed to log in")

@@ -26,17 +26,17 @@ export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<I
 
     const setPersons = (operation:boolean) : void => {
         if(!operation){
-          setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson[0].nickname)]} )
+          setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==loginPerson)]} )
         }
         else {   
-          setPersonInDay({id:id, persons:[...persons.filter((person)=>person.name!==loginPerson[0].nickname),
-             {name:loginPerson[0].nickname, startWork:startWork, endWork:endWork}]})
+          setPersonInDay({id:id, persons:[...persons.filter((person)=>person.name!==loginPerson),
+             {name:loginPerson, startWork:startWork, endWork:endWork}]})
         }
       }
     
       useEffect(()=>{
         if(persons && loginPerson){
-          const foundPerson = persons.find((person)=> person.name===loginPerson[0].nickname)
+          const foundPerson = persons.find((person)=> person.name===loginPerson)
           setSelectColor(foundPerson?true:false)
         }
       },[ setPersons ])

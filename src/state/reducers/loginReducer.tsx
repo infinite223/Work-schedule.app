@@ -1,27 +1,26 @@
 import { IUser } from '../../Helpers/interfaces'
+import { auth } from './../../firebase/index';
 
 interface Action  {
     type: string,
-    payload: IUser;
+    payload: string;
 }   
 
-const initalState: IUser[] = [
-    { id: 0, email: "dawidszmigiel@gmail.com", nickname: "Dawid" },
-  ];
+const initalState = ""; 
 
 export const loginReducer = (state = initalState, action: Action) =>{
     const { type } = action;
    
     switch (type){    
         case "SetLoginPerson":
-            let id:number = action.payload.id
-            return (Object.assign([], state, {
-               [id]: Object.assign({}, state[id], 
-                  action.payload
-               )
-           }))                 
+            return action.payload                
         case "OutLoginPerson": 
-            return state;
+            return state
+            // return (Object.assign([], state, {
+            //     [id]: Object.assign({}, state[id], 
+            //        action.payload
+            //     )
+            // })) ;
         default:
             return state;
     }
