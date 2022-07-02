@@ -1,6 +1,3 @@
-import { useSelector } from 'react-redux';
-import { State } from './../../state';
-
 function timeStringToFloat(time:string) {
     var hoursMinutes = time.split(/[.:]/);
     var hours = parseInt(hoursMinutes[0], 10);
@@ -26,17 +23,17 @@ export function daysInMonth (month:number, year:number) {
     return new Date(nowYear, nowMoth, 0).getDate();
 }
 
-export const CountHours = (person:string) => {
-    const schedule = useSelector((state: State)=> state.schedule)
-
+export const CountHours = (person:string, schedule:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}>) => {
     let hours = 0;
     let minutes = 0 ;
-    schedule.forEach((day)=>{
-        const foundPerson = day.persons.find((inPerson)=>inPerson.name===person)
+
+    schedule.forEach((day:{id:number, persons:Array<{name:string, startWork:string, endWork:string}>})=>{
+        const foundPerson = day.persons.find((inPerson:{name:string, startWork:string, endWork:string})=>inPerson.name===person)
         if(foundPerson){  
            hours += timeStringToFloat(foundPerson.endWork).hours - timeStringToFloat(foundPerson.startWork).hours
            minutes+=timeStringToFloat(foundPerson.endWork).minutes - timeStringToFloat(foundPerson.startWork).minutes
         }
     })
-    return (hours + minutes/60).toFixed(2)
+
+    return  (hours + minutes/60).toFixed(2);
 }

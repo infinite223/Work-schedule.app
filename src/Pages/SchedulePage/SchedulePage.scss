@@ -94,23 +94,3 @@
 .color-magenta {
     color: #FF00FF;
 }
-
-.log__out-button {
-    position: absolute;
-    top:38px;
-    font-size: 15px;
-    letter-spacing: 2px;
-    padding: .3rem 1.5rem;
-
-    background-color: rgba(31, 30, 30, 0.5);
-    border-radius: 0px 0px 20px 20px;
-     border-bottom: 1px solid #555355;
-     border: 1px solid rgba(58, 57, 57, 0.5);
-     border-top: none;
-
-    &:hover {
-        cursor: pointer;
-        color: #FF00FF;
-        transition: all 1s ease;
-    }
-}

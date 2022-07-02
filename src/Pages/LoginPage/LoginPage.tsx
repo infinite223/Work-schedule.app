@@ -19,7 +19,6 @@ export const LoginPage = () => {
   const emailRef = useRef<HTMLInputElement | null>(null)
   const passwordRef = useRef<HTMLInputElement | null>(null)
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
   const { setSchedule, setLoginPerson } = bindActionCreators(actionCreators, dispatch)
 
@@ -28,7 +27,6 @@ export const LoginPage = () => {
 
     try {
       setError("")
-      setLoading(true)
       await signInWithEmailAndPassword(auth,
          emailRef.current?.value?emailRef.current?.value.toString():"",
          passwordRef.current?.value?passwordRef.current?.value.toString():"")
@@ -45,14 +43,12 @@ export const LoginPage = () => {
                   const persons = await getDocs(personsCollectionRef)
                   const loginPerson = persons.docs.find((doc) => (doc.id===user.uid))                 
                   setLoginPerson(loginPerson?.data().nickname)
-                } else {
                 }
               });
                await navigate("/schedule")
     } catch {
       setError("Failed to log in")
     }
-    setLoading(false)
   }
 
   return (
