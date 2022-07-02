@@ -38,8 +38,6 @@ export const StartPage = () => {
 
         <div className='startPage__content-center flex'>
           <HiOutlineChevronDoubleLeft size={30} className='icon'/>
-          {/* <div>{todayDate.getDate()}</div>
-          <span>{days[todayDate.getDay()]}</span> */}
         </div>
 
         <div className='startPage__content-right flex'>
@@ -80,7 +78,6 @@ export const StartPage = () => {
                 )
               })}
             </motion.h1>
-              {/* <span onClick={()=> navigate("/Login")}><span className='login-text'> log In</span></span> */}
               <motion.div className='button create-button'
                 variants={button}
                 initial="hidden"
@@ -93,7 +90,6 @@ export const StartPage = () => {
             </motion.div>
           </div>
         </div>
-        
       </div>
     </motion.div>
   )

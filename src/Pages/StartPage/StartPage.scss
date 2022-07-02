@@ -5,7 +5,7 @@
     color: rgb(226, 217, 217);
 
     .startPage__content {
-        background: linear-gradient(274deg, rgb(24, 23, 23 ) 50%, rgba(28, 27, 27, 0.6) 27%);
+        background: linear-gradient(278deg, rgb(24, 23, 23 ) 50%, rgba(3, 3, 3, 0.2) 27%);
         border-radius: 30px;
 
         @media only screen and (max-width: 1024px) {
@@ -64,6 +64,7 @@
                     
                   background-color: rgb(24, 23, 23);
                   border-radius: 20px;
+
                   margin: 20px;
                   padding: 10px;
 
@@ -132,7 +133,10 @@
                     transform: scale(.85);
                     padding:  0px;
                 }
-    
+                @media only screen and (max-width: 1024px) {
+                    width: 90vw;
+                }
+
                 padding: 20px 40px;
                 margin: 20px;
             
@@ -140,6 +144,7 @@
                     text-align: right;
                     font-size: 25px;
                     color: rgb(177, 176, 176);
+
                     @media only screen and (max-width: 1024px) {
                         font-size: 20px;
                     }
@@ -159,6 +164,10 @@
     
                font-size: 40px;
             }
+            @media only screen and (max-width: 424px) {
+                width: 270px;
+             }
+            
         }
        
     }
