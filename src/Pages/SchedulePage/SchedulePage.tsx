@@ -59,19 +59,20 @@ export const SchedulePage = () => {
 
   return (
     <>
-        <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-        <motion.div onClick={()=>updateSchedule()} initial={!isTabletOrMobile?{right:"-65px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:.3}} className='right-header flex'>
+        {/* <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/> */}
+        {/* <motion.div onClick={()=>updateSchedule()} initial={!isTabletOrMobile?{right:"-65px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:.3}} className='right-header flex'>
             {!isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
             <span>Save</span>
             {isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
-        </motion.div>
-        {!isTabletOrMobile&&
+        </motion.div> */}
+        {!isTabletOrMobile?
             <div className='login__person-text flex'>
                 <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
                 <div>Log person </div>
                 <span>{loginPerson}</span>
                 <GiHamburgerMenu size={18} style={{marginLeft:"15px"}} onClick={()=>(auth.signOut(), navigate("/"))}/>
-            </div>  
+            </div>:
+            <GiHamburgerMenu size={24} className="menu" onClick={()=>(auth.signOut(), navigate("/"))}/>
         }
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <div className='SchedulePage__main'>

@@ -130,6 +130,15 @@
         }
       }
 
+      .menu {
+        position: absolute;
+        z-index: 10;
+        
+        right: 20px;
+        top:20px;
+
+      }
+
       .right-header {
         position: fixed;
         top: 40%;
@@ -281,7 +290,6 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
- // border: 1px solid rgb(255, 255, 255);
   -webkit-text-fill-color: rgb(255, 255, 255);;
   -webkit-box-shadow: 0 0 0px 1000px rgb(30, 29, 29) inset;
   transition: background-color 5000s ease-in-out 0s;

@@ -30,7 +30,7 @@
             flex-direction: column;
 
             background-color: #FF00FF;
-            background: linear-gradient(0deg, rgba(180,15,180,1) 50%, rgba(255,0,255,1) 87%);
+            background: linear-gradient(0deg, rgb(119, 13, 119) 36%, rgba(207,12,207,1) 85%, rgba(255,0,228,.9) 96%);
     
             border-radius: 0 0 20px 20px;
         }
@@ -74,7 +74,7 @@
     
             .year {
                 font-size: 60px;
-                letter-spacing: 5px;
+                letter-spacing: 2px;
 
                 @media only screen and (max-width: 1024px) {
                     font-size: 40px;
@@ -112,11 +112,10 @@
             margin: 20px auto;
             margin-top: 60px;
             padding: 20px 10px;
+
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
-
-            //border-top: 2px solid rgb(34, 33, 33);
             
             &::after {
                 content:"";           
