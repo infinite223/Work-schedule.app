@@ -74,23 +74,24 @@ export const SchedulePage = () => {
             </div>  
         }
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
-            <div className='SchedulePage__navbar flex'>
-                <div className='date'>
-                    <div>{days[today.getDay()]}</div>
-                    <div className='year color-magenta'>{today.getFullYear()}</div>    
-                    <div>{month[today.getMonth()]}</div>
-           
-                    {!isTabletOrMobile&&<WorkerList/>}
+            <div className='SchedulePage__main'>
+                <div className='SchedulePage__navbar flex'>
+                    <div className='date'>
+                        <div className='year'>{today.getFullYear()}</div>    
+                        <div className='month'>{month[today.getMonth()]}</div>
+            
+                        {!isTabletOrMobile&&<WorkerList/>}
+                    </div>
+                
                 </div>
-               
-            </div>
 
-            <div className='SchedulePage__content flex'>
-               {schedule.map((day)=>{
-                   return (
-                    <Day key={day.id} id={day.id} date={new Date(`2022-06-${day.id}`)} persons={day.persons}/>
-                   )
-               })}
+                <div className='SchedulePage__content flex'>
+                {schedule.map((day)=>{
+                    return (
+                        <Day key={day.id} id={day.id} date={new Date(`2022-06-${day.id}`)} persons={day.persons}/>
+                    )
+                })}
+                </div>
             </div>
             {isTabletOrMobile&&<>
                 <DayContent/>

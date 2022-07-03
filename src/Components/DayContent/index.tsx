@@ -60,8 +60,8 @@ export const DayContent:React.FC = ( ) => {
               <ChoseHoursModal id={selectedDay} date={myDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
               <div style={{marginTop:"50px"}}>
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
-                ?<FiPlusSquare size={40} color="grey" onClick={()=>setChooseHours(true)}/>
-                :<FiMinusSquare size={40} color="grey" onClick={()=>removePerson(false)}/>}    
+                ?<FiPlusSquare size={40} color="#ff00ff" onClick={()=>setChooseHours(true)}/>
+                :<FiMinusSquare size={40} color="#ff00ff" onClick={()=>removePerson(false)}/>}    
               </div>                          
       </motion.div>
     </AnimatePresence>

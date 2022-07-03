@@ -10,15 +10,31 @@
         height: auto;  
         flex-direction: column;
 
-        margin-top: 20%;  
+       //margin-top: 20%;  
+        margin-top: 0%;  
+
+        //margin-bottom: 20%;  
         margin-bottom: 20%;  
-        border-radius: 30px;
+       // border-radius: 30px;
     }
 
     background-color: rgba(28, 27, 27, .9);
     border-radius: 10px;
 
-    color: antiquewhite;    
+    color: antiquewhite;   
+
+    .SchedulePage__main {
+        display: flex;
+
+        @media only screen and (max-width: 1024px) {
+            flex-direction: column;
+
+            background-color: #FF00FF;
+            background: linear-gradient(0deg, rgba(180,15,180,1) 50%, rgba(255,0,255,1) 87%);
+    
+            border-radius: 0 0 20px 20px;
+        }
+    } 
 
     .SchedulePage__navbar {
         flex-direction: column;
@@ -28,7 +44,8 @@
 
         @media only screen and (max-width: 1024px) {
             flex-direction: row;
-            text-align: left;
+            align-items:center;
+            justify-content: center;
         }
         
         .date {    
@@ -38,21 +55,47 @@
 
             max-width: 250px;
     
-            font-size: 27px;
-            text-align: left;
-            
-    
-            div {
-                margin: 5px 10px;
+            font-size: 24px;
 
-                @media only screen and (max-width: 1024px) {
-                    margin-left: 0px;
-                }                   
-            }
+            text-align: left;
+
+            @media only screen and (max-width: 1024px) {
+                display: flex;
+                width: 100%;
+                justify-content: flex-start;  
+                align-items: center;  
+                max-width: 1000px;
+
+                margin: 0 10px;
+                margin-top: 5px;
+
+              
+            }                   
     
             .year {
                 font-size: 60px;
                 letter-spacing: 5px;
+
+                @media only screen and (max-width: 1024px) {
+                    font-size: 40px;
+                }
+            }
+
+            .month {
+                margin-bottom: 30px;
+
+                font-weight: 700;
+                color: #FF00FF;
+
+                @media only screen and (max-width: 1024px) {
+                    position: absolute;
+                    left: 42%;
+                    top:10%;
+
+                
+                    letter-spacing: 2px;
+                    color: antiquewhite
+                } 
             }
         }
     }
@@ -66,17 +109,18 @@
         height: 100;
         
         @media only screen and (max-width: 1024px) {
-            margin:20px auto;
+            margin: 20px auto;
+            margin-top: 60px;
             padding: 20px 10px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
 
-            border-top: 2px solid rgb(34, 33, 33);
+            //border-top: 2px solid rgb(34, 33, 33);
             
             &::after {
                 content:"";           
-                width: 56%;
+                width: 71%;
             }
         }
 

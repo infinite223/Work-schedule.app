@@ -26,8 +26,8 @@ export const WorkerList = () => {
     }
   });
 }   
-checkLoginPerson()
 
+checkLoginPerson()
 
  useEffect(() => {
   const workersCollectionRef = collection(db, "workers");
