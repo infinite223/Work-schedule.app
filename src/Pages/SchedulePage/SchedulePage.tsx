@@ -89,7 +89,7 @@ export const SchedulePage = () => {
                 <div className='SchedulePage__content flex'>
                 {schedule.map((day)=>{
                     return (
-                        <Day key={day.id} id={day.id} date={new Date(`2022-06-${day.id}`)} persons={day.persons}/>
+                        <Day key={day.id} id={day.id}  persons={day.persons}/>
                     )
                 })}
                 </div>

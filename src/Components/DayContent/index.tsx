@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
-import { days } from '../../Helpers/constants'
+import { days, today } from '../../Helpers/constants'
 
 import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
 import { ChoseHoursModal } from '../ChoseHoursModal';
@@ -19,7 +19,6 @@ export const DayContent:React.FC = ( ) => {
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
 
-  const myDate = new Date(`2022-06-${schedule[selectedDay-1]?.id}`)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
 
 
@@ -50,14 +49,14 @@ export const DayContent:React.FC = ( ) => {
       > 
         <motion.nav>
             <motion.span>{selectedDay} </motion.span>
-            <span>{days[myDate.getDay()]}</span>     
+            <span>{days[today.getDay()]}</span>     
         </motion.nav>
               <div className='day__workerlist'>  
                 {schedule?schedule[selectedDay-1].persons?.map(({ name, startWork, endWork },x)=>{
                   return <div key={x} className={loginPerson===name?"person login-person":"person"}>{name} <div className='interval'>{startWork}-{endWork}</div></div>
                 }):<>no data</>}
               </div>
-              <ChoseHoursModal id={selectedDay} date={myDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
+              <ChoseHoursModal id={selectedDay} date={today} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
               <div style={{marginTop:"50px"}}>
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
                 ?<FiPlusSquare size={40} color="#ff00ff" onClick={()=>setChooseHours(true)}/>

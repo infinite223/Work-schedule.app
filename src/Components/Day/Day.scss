@@ -57,19 +57,24 @@
 }
 
 .day__smallscreen {
-    flex-direction: column;
-    width: 10%;
-    margin:1%;
+    flex-direction: column; 
+    width: 11%;
+    margin:3px;
     padding-top: .3rem;
 
-    background-color: rgb(34, 32, 32);
-    border: 1px solid  rgb(34, 32, 32);
+    //background-color: rgba(156, 87, 139, 0.5);
+    //border: 1px solid  rgb(34, 32, 32);
     border-radius: 5px;
 
     font-size: 16px;
 
     .magenta-text {
-        color: #FF00FF;
+       // color: #eb0b0b;
+    }
+
+    .red-text {
+        color: rgb(216, 12, 12);
+        font-weight: 700;
     }
 
     .dot {

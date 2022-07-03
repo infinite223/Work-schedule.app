@@ -30,7 +30,7 @@
             flex-direction: column;
 
             background-color: #FF00FF;
-            background: linear-gradient(0deg, rgb(166, 11, 166) 66%, rgb(208, 6, 208) 85%, rgba(239, 8, 216, 0.9) 96%);
+            background: linear-gradient(0deg, rgb(154, 9, 154) 66%, rgb(193, 7, 193) 85%, rgba(218, 8, 197, 0.9) 96%);
             
             -webkit-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
             -moz-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
@@ -82,7 +82,7 @@
                 letter-spacing: 2px;
 
                 @media only screen and (max-width: 1024px) {
-                    font-size: 40px;
+                    font-size: 25px;
                 }
             }
 
@@ -95,7 +95,7 @@
                 @media only screen and (max-width: 1024px) {
                     position: absolute;
                     left: 41%;
-                    top:10%;
+                    top:7%;
 
                     text-transform:uppercase;
                     letter-spacing: 2px;
@@ -115,7 +115,7 @@
         
         @media only screen and (max-width: 1024px) {
             margin: 20px auto;
-            margin-top: 60px;
+            margin-top: 40px;
             padding: 20px 10px;
 
             display: flex;

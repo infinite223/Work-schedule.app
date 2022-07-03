@@ -13,10 +13,11 @@ import './Day.scss'
 import { BsDot } from 'react-icons/bs'
 import { IPerson } from './../../Helpers/interfaces';
 
-export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> = ({ id, date, persons }) => {
+export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, persons }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
   const loginPerson = useSelector((state: State)=> state.login)
   const todayDate = new Date();
+
   const dispatch = useDispatch();
   const { setSelectedDay } = bindActionCreators(actionCreators, dispatch)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
@@ -24,7 +25,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
 
   return (
     <>
-        <ChoseHoursModal id={id} date={date} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>      
+        <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>      
     {!isTabletOrMobile?
       <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
         variants={showWorkers}
@@ -33,7 +34,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
       >
           <nav>
             <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
-            <div>{days[date.getDay()]}</div>      
+            <div>{days[todayDate.getDay()]}</div>      
           </nav>
           <div className='day__workerlist'>  
             {persons?persons?.map(({ name, startWork, endWork }, person)=>{
@@ -42,7 +43,7 @@ export const Day: React.FC<{ id:number, date: Date, persons: Array<IPerson> }> =
           </div>
       </motion.div>:
       <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
-        <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
+        <span className={todayDate.getDate()===id?"red-text":""}>{id}</span>
         <div className='dots'>
           {persons?persons?.map(({ name }, person)=>{
                 return <BsDot key={person} size={20} className={loginPerson===name?"dot magenta-text":"dot"}/>
