@@ -30,7 +30,12 @@
             flex-direction: column;
 
             background-color: #FF00FF;
-            background: linear-gradient(0deg, rgb(119, 13, 119) 36%, rgba(207,12,207,1) 85%, rgba(255,0,228,.9) 96%);
+            background: linear-gradient(0deg, rgb(166, 11, 166) 66%, rgb(208, 6, 208) 85%, rgba(239, 8, 216, 0.9) 96%);
+            
+            -webkit-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
+            -moz-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
+            box-shadow: inset 0px -5px 0px 0px rgb(124, 2, 124);
+            border-bottom: 1px solid rgba(224, 223, 223, 0.3);
     
             border-radius: 0 0 20px 20px;
         }
@@ -89,10 +94,10 @@
 
                 @media only screen and (max-width: 1024px) {
                     position: absolute;
-                    left: 42%;
+                    left: 41%;
                     top:10%;
 
-                
+                    text-transform:uppercase;
                     letter-spacing: 2px;
                     color: antiquewhite
                 } 
