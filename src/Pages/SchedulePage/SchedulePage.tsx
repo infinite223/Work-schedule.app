@@ -16,8 +16,10 @@ import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
 import { MdOutlinePersonOutline } from 'react-icons/md'
 import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
+import { BiPlus, BiMinus} from 'react-icons/bi'
 import { useEffect } from "react";
 import { db } from "../../firebase";
+import { MenuModal } from '../../Components/MenuModal';
 import {
   collection,
   getDocs,
@@ -29,6 +31,8 @@ import {
 export const SchedulePage = () => {  
     const navigate = useNavigate(); 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+    const [showMenu, setShowMenu] = useState(false);
+    const [ chooseHours, setChooseHours ] = useState<boolean>(false)
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
     const selectedDay = useSelector((state: State)=> state.select)
@@ -58,10 +62,6 @@ export const SchedulePage = () => {
 
         await updateDoc(scheduleRef, { schedule });
     };
-    
-  
-    const [ chooseHours, setChooseHours ] = useState<boolean>(false)
-  
   
     const removePerson = (operation:boolean) : void => {
       if(!operation){
@@ -84,8 +84,9 @@ export const SchedulePage = () => {
                 <span>{loginPerson}</span>
                 <GiHamburgerMenu size={18} style={{marginLeft:"15px"}} onClick={()=>(auth.signOut(), navigate("/"))}/>
             </div>:
-            <GiHamburgerMenu size={24} className="menu" onClick={()=>(auth.signOut(), navigate("/"))}/>
+            !showMenu&&<GiHamburgerMenu size={24} onClick={()=>setShowMenu(true)} className="menu"/>
         }
+        {showMenu&&<MenuModal showMenu={showMenu} setShowMenu={setShowMenu}/>}
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <motion.div className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
                 <div className='SchedulePage__navbar flex'>
@@ -113,9 +114,9 @@ export const SchedulePage = () => {
             
             {isTabletOrMobile&&<div className='save__add-button flex'>
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
-                ?<FiPlusSquare size={40} color="#ff00ff" onClick={()=>setChooseHours(true)}/>
-                :<FiMinusSquare size={40} color="#ff00ff" onClick={()=>removePerson(false)}/>}    
-                <div className='save' onClick={()=>updateSchedule()}>SAVE</div>
+                ?<BiPlus size={35} color="white" onClick={()=>setChooseHours(true)}/>
+                :<BiMinus size={35} color="white" onClick={()=>removePerson(false)}/>}    
+                {/* <div className='save' onClick={()=>updateSchedule()}>SAVE</div> */}
             </div> } 
             
         </motion.div>

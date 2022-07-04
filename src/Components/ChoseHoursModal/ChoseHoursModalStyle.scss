@@ -1,6 +1,6 @@
 .day__chooseHours {
     z-index: 20;
-    position: absolute;
+    position: fixed;
     width: 22vw;
 
     left: 50%;
@@ -12,9 +12,8 @@
         width: 90vw;
 
         left: 20%;
-        top:-20%;
+        top:-35%;
         margin-left: -15vw;
-        margin-top: -40vh;
     }
 
   
