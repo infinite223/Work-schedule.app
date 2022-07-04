@@ -7,10 +7,9 @@ import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
 import { days, today } from '../../Helpers/constants'
 
-import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
 import { ChoseHoursModal } from '../ChoseHoursModal';
 
-export const DayContent:React.FC = ( ) => {
+export const DayContent:React.FC<{chooseHours:boolean, setChooseHours: (value:boolean) => void }> = ({chooseHours, setChooseHours}) => {
   const selectedDay = useSelector((state: State)=> state.select)
   const loginPerson = useSelector((state: State)=> state.login)
   const schedule = useSelector((state: State)=> state.schedule)
@@ -18,8 +17,6 @@ export const DayContent:React.FC = ( ) => {
   const controls = useAnimation()
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
-
-  const [ chooseHours, setChooseHours ] = useState<boolean>(false)
 
 
   const removePerson = (operation:boolean) : void => {
@@ -57,11 +54,7 @@ export const DayContent:React.FC = ( ) => {
                 }):<>no data</>}
               </div>
               <ChoseHoursModal id={selectedDay} date={today} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
-              <div style={{marginTop:"50px"}}>
-                {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
-                ?<FiPlusSquare size={40} color="#ff00ff" onClick={()=>setChooseHours(true)}/>
-                :<FiMinusSquare size={40} color="#ff00ff" onClick={()=>removePerson(false)}/>}    
-              </div>                          
+                                     
       </motion.div>
     </AnimatePresence>
   )

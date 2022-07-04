@@ -43,7 +43,7 @@ export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, pers
           </div>
       </motion.div>:
       <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
-        <span className={todayDate.getDate()===id?"red-text":""}>{id}</span>
+        <span className={todayDate.getDate()===id?"today":""}>{id}</span>
         <div className='dots'>
           {persons?persons?.map(({ name }, person)=>{
                 return <BsDot key={person} size={20} className={loginPerson===name?"dot magenta-text":"dot"}/>

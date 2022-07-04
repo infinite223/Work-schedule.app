@@ -1,6 +1,6 @@
 import { useNavigate, HiOutlineChevronDoubleLeft, motion } from '../../Helpers/imports';
 import { showPage } from '../../Animations/variants';
-import { showMobilePage } from '../../Animations/variantsOnSmallScreen';
+import { showMobilePage, showSchedule } from '../../Animations/variantsOnSmallScreen';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,9 +11,11 @@ import './SchedulePage.scss'
 import { Day } from '../../Components/Day/Day';
 import { DayContent } from '../../Components/DayContent';
 import { days, month, today } from '../../Helpers/constants';
+import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
 import { MdOutlinePersonOutline } from 'react-icons/md'
+import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
 import { useEffect } from "react";
 import { db } from "../../firebase";
 import {
@@ -29,8 +31,9 @@ export const SchedulePage = () => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
+    const selectedDay = useSelector((state: State)=> state.select)
     const dispatch = useDispatch();
-    const { setSchedule, setLoginPerson } = bindActionCreators(actionCreators, dispatch)
+    const { setSchedule, setLoginPerson, setPersonInDay } = bindActionCreators(actionCreators, dispatch)
 
     useEffect(()=>{
         const scheduleCollectionRef = collection(db, "schedule");    
@@ -55,7 +58,16 @@ export const SchedulePage = () => {
 
         await updateDoc(scheduleRef, { schedule });
     };
+    
   
+    const [ chooseHours, setChooseHours ] = useState<boolean>(false)
+  
+  
+    const removePerson = (operation:boolean) : void => {
+      if(!operation){
+        setPersonInDay({id:selectedDay, persons:[...schedule[selectedDay-1]?.persons.filter(person=> person.name!==loginPerson)]} )
+      }
+    }
 
   return (
     <>
@@ -75,7 +87,7 @@ export const SchedulePage = () => {
             <GiHamburgerMenu size={24} className="menu" onClick={()=>(auth.signOut(), navigate("/"))}/>
         }
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
-            <div className='SchedulePage__main'>
+            <motion.div className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
                 <div className='SchedulePage__navbar flex'>
                     <div className='date'>
                         <div className='year'>{today.getFullYear()}</div>    
@@ -87,18 +99,24 @@ export const SchedulePage = () => {
                 </div>
 
                 <div className='SchedulePage__content flex'>
-                {schedule.map((day)=>{
-                    return (
-                        <Day key={day.id} id={day.id}  persons={day.persons}/>
-                    )
-                })}
+                    {schedule.map((day)=>{
+                        return (
+                            <Day key={day.id} id={day.id}  persons={day.persons}/>
+                        )
+                    })}
                 </div>
-            </div>
+            </motion.div>
             {isTabletOrMobile&&<>
-                <DayContent/>
+                <DayContent chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
                 <WorkerList/>
             </>}
             
+            {isTabletOrMobile&&<div className='save__add-button flex'>
+                {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
+                ?<FiPlusSquare size={40} color="#ff00ff" onClick={()=>setChooseHours(true)}/>
+                :<FiMinusSquare size={40} color="#ff00ff" onClick={()=>removePerson(false)}/>}    
+                <div className='save' onClick={()=>updateSchedule()}>SAVE</div>
+            </div> } 
             
         </motion.div>
     </>                                                                                          

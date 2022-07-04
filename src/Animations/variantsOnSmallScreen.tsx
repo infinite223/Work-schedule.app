@@ -9,6 +9,17 @@ export const showMobilePage = {
     }  
 }
 
+export const showSchedule = {
+  hidden: {opacity: 0},
+  visible: {
+    opacity: 1,
+    transition: {
+      delay:.6,
+      duration:2.5,
+    }
+  }  
+}
+
 export const showDay = {
   hidden: {opacity:0, x:"-100"},
   visible:{opacity:1, x:"0",
