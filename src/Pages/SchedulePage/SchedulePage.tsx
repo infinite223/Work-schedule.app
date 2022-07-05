@@ -86,7 +86,7 @@ export const SchedulePage = () => {
             </div>:
             !showMenu&&<GiHamburgerMenu size={24} onClick={()=>setShowMenu(true)} className="menu"/>
         }
-        {showMenu&&<MenuModal showMenu={showMenu} setShowMenu={setShowMenu}/>}
+        {showMenu&&<MenuModal showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <motion.div className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
                 <div className='SchedulePage__navbar flex'>

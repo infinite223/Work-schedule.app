@@ -36,5 +36,5 @@ export const showMenuModal = {
     duration:.3,
   }
 },
-  exit:{opacity:0, scale:[".9", ".8", ".4", ".1"]}
+ exit:{opacity:0, scale:[".9", ".8", ".4", ".1"]}
 }
