@@ -31,10 +31,6 @@ export const showDay = {
 }
 export const showMenuModal = {
   hidden: {opacity:0, scale:.1},
-  visible:{opacity:1, scale:1,
-  transition: {
-    duration:.3,
-  }
-},
+  visible:{opacity:1, scale:1},
  exit:{opacity:0, scale:[".9", ".8", ".4", ".1"]}
 }

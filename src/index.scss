@@ -32,6 +32,11 @@ code {
   }
 }
 
+.hover__pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 
 body::-webkit-scrollbar {

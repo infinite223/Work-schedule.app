@@ -294,3 +294,22 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px rgb(30, 29, 29) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+.blur-page {
+  position: fixed;
+  z-index: 12;
+
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+
+  @media only screen and (max-width: 1024px) {
+     top:0;
+   }
+
+  background-color: rgba(35, 34, 34, 0.8);
+  backdrop-filter: blur(2px);
+  backdrop-filter: grayscale(80%);
+
+  z-index: 2;
+}

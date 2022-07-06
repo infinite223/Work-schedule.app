@@ -16,7 +16,7 @@ export function generateSheduleData(days:number){
     return shedule;
 }
 
-export function daysInMonth (month:number, year:number) {
+export function daysInMonth () {
     const nowDate:Date = new Date();
     const nowYear = nowDate.getFullYear();
     const nowMoth = nowDate.getMonth()+1;

@@ -82,7 +82,7 @@ export const SchedulePage = () => {
                 <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
                 <div>Log person </div>
                 <span>{loginPerson}</span>
-                <GiHamburgerMenu size={18} style={{marginLeft:"15px"}} onClick={()=>(auth.signOut(), navigate("/"))}/>
+                <GiHamburgerMenu className='hover__pointer' size={18} style={{marginLeft:"15px"}} onClick={()=>setShowMenu(true)}/>
             </div>:
             !showMenu&&<GiHamburgerMenu size={24} onClick={()=>setShowMenu(true)} className="menu"/>
         }
