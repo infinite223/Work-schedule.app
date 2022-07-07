@@ -4,17 +4,20 @@ import { showMenuModal } from '../../Animations/variantsOnSmallScreen';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-import { SettingsModal } from '../SettingsModal';
 import { useState } from 'react';
 
-export const MenuModal :React.FC<{ showMenu:boolean,setShowMenu: (value:boolean) => void, updateSchedule: ()=>void  }> = ({showMenu, setShowMenu, updateSchedule}) => {
+interface MenuModalProps {
+  showMenu:boolean,
+  setShowMenu: (value:boolean) => void, updateSchedule: ()=>void,
+  showSettings:boolean,
+  setShowSettings: (value:boolean) => void,
+}
+
+export const MenuModal :React.FC<MenuModalProps> = ({showMenu, setShowMenu, updateSchedule, showSettings, setShowSettings}) => {
   const navigate = useNavigate(); 
-  const [showSettings, setShowSettings] = useState(false)
 
   return (
     <AnimatePresence>
-        {showMenu&& <div className='blur-page' onClick={()=>setShowMenu(false)}/>}
-        {showSettings&&<SettingsModal/>}
         <motion.div className='menu__container flex'
                key="box"
                variants={showMenuModal}

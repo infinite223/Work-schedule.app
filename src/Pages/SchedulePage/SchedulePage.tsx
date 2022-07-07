@@ -4,6 +4,7 @@ import { showMobilePage, showSchedule } from '../../Animations/variantsOnSmallSc
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { useSelector, useDispatch } from 'react-redux';
+import { SettingsModal } from './../../Components/SettingsModal';
 import { State } from '../../state';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { auth } from '../../firebase';
@@ -32,6 +33,7 @@ export const SchedulePage = () => {
     const navigate = useNavigate(); 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const [showMenu, setShowMenu] = useState(false);
+    const [showSettings, setShowSettings] = useState(false)
     const [ chooseHours, setChooseHours ] = useState<boolean>(false)
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
@@ -86,7 +88,9 @@ export const SchedulePage = () => {
             </div>:
             !showMenu&&<GiHamburgerMenu size={24} onClick={()=>setShowMenu(true)} className="menu"/>
         }
-        {showMenu&&<MenuModal showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
+        {showMenu&&<MenuModal  showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
+        {showSettings&&<SettingsModal/>}
+        {(showMenu || showSettings)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
         <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <motion.div className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
                 <div className='SchedulePage__navbar flex'>

@@ -58,12 +58,11 @@
 
 .day__smallscreen {
     flex-direction: column; 
+    justify-content: flex-start;
     width: 11%;
-    margin:3px;
-    padding-top: .3rem;
+    min-height: 50px;
 
-    //background-color: rgba(156, 87, 139, 0.5);
-    //border: 1px solid  rgb(34, 32, 32);
+    margin:3px;
     border-radius: 5px;
 
     font-size: 16px;

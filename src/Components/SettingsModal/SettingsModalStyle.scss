@@ -2,9 +2,15 @@
     flex-direction: column;
     z-index: 11;
     position: fixed;
+    top:20px;
 
     width: 65vw;
     height: 80vh;
+
+    @media only screen and (max-width: 1024px) {
+        width: 80vw;  
+        height: 90vh;  
+    }
 
     padding: 1rem 2rem;
     background-color: rgba(15, 15, 15, .9);
