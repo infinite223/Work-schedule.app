@@ -104,6 +104,9 @@ export const SchedulePage = () => {
                 </div>
 
                 <div className='SchedulePage__content flex'>
+                    {days.map((day)=>{return <div key={day} className='daysOfTheWeek'>
+                        {day.substring(0,2)}
+                    </div>})}
                     {schedule.map((day)=>{
                         return (
                             <Day key={day.id} id={day.id}  persons={day.persons}/>
@@ -120,7 +123,6 @@ export const SchedulePage = () => {
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
                 ?<BiPlus size={35} color="white" onClick={()=>setChooseHours(true)}/>
                 :<BiMinus size={35} color="white" onClick={()=>removePerson(false)}/>}    
-                {/* <div className='save' onClick={()=>updateSchedule()}>SAVE</div> */}
             </div> } 
             
         </motion.div>

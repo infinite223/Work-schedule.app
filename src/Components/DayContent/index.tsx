@@ -18,14 +18,15 @@ export const DayContent:React.FC<{chooseHours:boolean, setChooseHours: (value:bo
   const dispatch = useDispatch();
   const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
 
+  const todayDate = new Date();
+  const dayDate = new Date(todayDate.getFullYear(), todayDate.getMonth(),selectedDay);
+
 
   const removePerson = (operation:boolean) : void => {
     if(!operation){
       setPersonInDay({id:selectedDay, persons:[...persons.filter(person=> person.name!==loginPerson)]} )
     }
   }
-  
-
 
   useEffect(()=>{
     controls.start({
@@ -46,7 +47,7 @@ export const DayContent:React.FC<{chooseHours:boolean, setChooseHours: (value:bo
       > 
         <motion.nav>
             <motion.span>{selectedDay} </motion.span>
-            <span>{days[today.getDay()]}</span>     
+            <span>{days[dayDate.getDay()]}</span>     
         </motion.nav>
               <div className='day__workerlist'>  
                 {schedule?schedule[selectedDay-1].persons?.map(({ name, startWork, endWork },x)=>{

@@ -14,7 +14,17 @@ export const SettingsModal = () => {
          exit="exit">
 
             Settings
-        
+            <div className='option flex'>
+              <span>Set your theme schedule </span>
+              <input type="color" value="#FF00FF"/>
+            </div>
+            <div className='option flex'>
+              <span>Set language</span>
+              <select name="language" className='select'>
+                <option className='item' value="english">English</option>
+                <option className='item' value="polski">Polski</option>
+              </select>
+            </div>
         </motion.div>
     </AnimatePresence>
   )

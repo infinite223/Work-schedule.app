@@ -17,6 +17,7 @@ export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, pers
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
   const loginPerson = useSelector((state: State)=> state.login)
   const todayDate = new Date();
+  const dayDate = new Date(todayDate.getFullYear(), todayDate.getMonth(),id);
 
   const dispatch = useDispatch();
   const { setSelectedDay } = bindActionCreators(actionCreators, dispatch)
@@ -25,16 +26,16 @@ export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, pers
 
   return (
     <>
-        <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>      
-    {!isTabletOrMobile?
-      <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
+      <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>      
+      {!isTabletOrMobile?
+        <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
         variants={showWorkers}
         initial="start"
         whileHover={todayDate.getDate()-1<id&&persons.length>=3?"hover":""}
       >
           <nav>
             <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
-            <div>{days[todayDate.getDay()]}</div>      
+            <div>{days[dayDate.getDay()]}</div>      
           </nav>
           <div className='day__workerlist'>  
             {persons?persons?.map(({ name, startWork, endWork }, person)=>{
