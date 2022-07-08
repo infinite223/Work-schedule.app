@@ -11,7 +11,7 @@ import { auth } from '../../firebase';
 import './SchedulePage.scss'
 import { Day } from '../../Components/Day/Day';
 import { DayContent } from '../../Components/DayContent';
-import { days, month, today } from '../../Helpers/constants';
+import { daysShortcuts, month, today } from '../../Helpers/constants';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
@@ -70,15 +70,23 @@ export const SchedulePage = () => {
         setPersonInDay({id:selectedDay, persons:[...schedule[selectedDay-1]?.persons.filter(person=> person.name!==loginPerson)]} )
       }
     }
+    
+    const firstDayOfMonth = () => {
+        const nowMonth = today.getMonth()
+        const nowYear = today.getFullYear()
+        const arr:number[] = []
+
+        for (let i = 0; i < (new Date(nowYear, nowMonth, 1)).getDay()-1; i++) {
+            arr.push(i)              
+        }
+
+        return arr
+    }
+
+    console.log(firstDayOfMonth())
 
   return (
     <>
-        {/* <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/> */}
-        {/* <motion.div onClick={()=>updateSchedule()} initial={!isTabletOrMobile?{right:"-65px"}:{right:"0"}} whileHover={{right:"0px"}} transition={{duration:.3}} className='right-header flex'>
-            {!isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
-            <span>Save</span>
-            {isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
-        </motion.div> */}
         {!isTabletOrMobile?
             <div className='login__person-text flex'>
                 <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
@@ -104,9 +112,14 @@ export const SchedulePage = () => {
                 </div>
 
                 <div className='SchedulePage__content flex'>
-                    {days.map((day)=>{return <div key={day} className='daysOfTheWeek'>
+                    {daysShortcuts.map((day)=>{return <div key={day} className='daysOfTheWeek'>
                         {day.substring(0,2)}
                     </div>})}
+
+                   {firstDayOfMonth().map((i)=>{
+                    return  <div key={i} className='empty-day'></div>
+                   })}
+                   
                     {schedule.map((day)=>{
                         return (
                             <Day key={day.id} id={day.id}  persons={day.persons}/>
