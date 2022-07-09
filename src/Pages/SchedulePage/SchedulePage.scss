@@ -90,12 +90,30 @@
 
                 @media only screen and (max-width: 1024px) {
                     position: absolute;
-                    left: 41%;
-                    top:7%;
+                    left: 42%;
+                    top:9%;
 
                     text-transform:uppercase;
                     letter-spacing: 2px;
-                    color: antiquewhite
+                    color: antiquewhite;
+                    font-size: 20px;
+                } 
+            }
+
+            .arrow-left {
+                @media only screen and (max-width: 1024px) {
+                    position: absolute;
+                    left: 25px;
+                    top:9%;
+                } 
+            }
+            .arrow-right {
+                @media only screen and (max-width: 1024px) {
+                    position: absolute;
+                    right: 25px;
+                    top:9%;
+
+                    transform: rotate(180deg);
                 } 
             }
         }
@@ -113,7 +131,7 @@
             margin: 20px auto;
             margin-bottom: 5px;
             
-            margin-top: 40px;
+            margin-top: 60px;
             padding: 20px 10px;
             padding-bottom: 0px;
 

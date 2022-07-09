@@ -17,6 +17,7 @@ import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
 import { MdOutlinePersonOutline } from 'react-icons/md'
 import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
+import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 import { BiPlus, BiMinus} from 'react-icons/bi'
 import { useEffect } from "react";
 import { db } from "../../firebase";
@@ -105,6 +106,8 @@ export const SchedulePage = () => {
                     <div className='date'>
                         <div className='year'>{today.getFullYear()}</div>    
                         <div className='month'>{month[today.getMonth()]}</div>
+                        <div className='arrow-left'><MdOutlineArrowBackIosNew size={20}/></div>
+                        <div className='arrow-right'><MdOutlineArrowBackIosNew size={20}/></div>
             
                         {!isTabletOrMobile&&<WorkerList/>}
                     </div>
