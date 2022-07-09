@@ -1,3 +1,5 @@
+import { today } from '../../Helpers/constants';
+
 function timeStringToFloat(time:string) {
     var hoursMinutes = time.split(/[.:]/);
     var hours = parseInt(hoursMinutes[0], 10);
@@ -36,4 +38,16 @@ export const CountHours = (person:string, schedule:Array<{id:number, persons:Arr
     })
 
     return  (hours + minutes/60).toFixed(2);
+}
+
+export const firstDayOfMonth = () => {
+    const nowMonth = today.getMonth()
+    const nowYear = today.getFullYear()
+    const arr:number[] = []
+
+    for (let i = 0; i < (new Date(nowYear, nowMonth, 1)).getDay()-1; i++) {
+        arr.push(i)              
+    }
+
+    return arr
 }

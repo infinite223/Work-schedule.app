@@ -27,8 +27,8 @@
             flex-direction: column;
             margin-bottom: 10px;
 
-            background-color: #FF00FF;
-            background: linear-gradient(0deg, rgb(154, 9, 154) 66%, rgb(193, 7, 193) 85%, rgba(218, 8, 197, 0.9) 96%);
+           // background-color: #FF00FF;
+            // background: linear-gradient(0deg, rgb(154, 9, 154) 66%, rgb(193, 7, 193) 85%, rgba(218, 8, 197, 0.9) 96%);
             
             -webkit-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
             -moz-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
@@ -47,11 +47,9 @@
 
         @media only screen and (max-width: 1024px) {
             flex-direction: row;
-            align-items:center;
-            justify-content: center;
         }
         
-        .date {    
+        .date {               
             margin: 10px;
             margin-top: 15px;
             padding: 10px;
@@ -59,18 +57,13 @@
             max-width: 250px;
     
             font-size: 24px;
-
             text-align: left;
 
             @media only screen and (max-width: 1024px) {
-                display: flex;
+                margin-bottom: 0px;
+                padding-bottom: 0px;
+                max-width: none;
                 width: 100%;
-                justify-content: flex-start;  
-                align-items: center;  
-                max-width: 1000px;
-
-                margin: 0 10px;
-                margin-top: 5px;       
             }                   
     
             .year {
@@ -79,42 +72,43 @@
 
                 @media only screen and (max-width: 1024px) {
                     font-size: 25px;
+                    text-align: left;
                 }
             }
 
-            .month {
-                margin-bottom: 30px;
+            nav {
+                justify-content: space-between;
 
-                font-weight: 700;
-                color: #FF00FF;
-
+                margin: 30px 0;
                 @media only screen and (max-width: 1024px) {
-                    position: absolute;
-                    left: 42%;
-                    top:9%;
+                    width: 100%;
+                    margin-bottom: 0px;
+                }
 
-                    text-transform:uppercase;
-                    letter-spacing: 2px;
-                    color: antiquewhite;
-                    font-size: 20px;
-                } 
-            }
+                .month {    
+                    font-weight: 700;
+                    color: #FF00FF;
+    
+                    @media only screen and (max-width: 1024px) {
+    
+                        text-transform:uppercase;
+                        letter-spacing: 2px;
+                        color: antiquewhite;
+                        font-size: 20px;
+                    } 
+                }
+        
+                .arrow-left {
+                    @media only screen and (max-width: 1024px) {
 
-            .arrow-left {
-                @media only screen and (max-width: 1024px) {
-                    position: absolute;
-                    left: 25px;
-                    top:9%;
-                } 
-            }
-            .arrow-right {
-                @media only screen and (max-width: 1024px) {
-                    position: absolute;
-                    right: 25px;
-                    top:9%;
+                    } 
+                }
+                .arrow-right {
+                    @media only screen and (max-width: 1024px) {
 
+                    } 
                     transform: rotate(180deg);
-                } 
+                }
             }
         }
     }
@@ -131,7 +125,6 @@
             margin: 20px auto;
             margin-bottom: 5px;
             
-            margin-top: 60px;
             padding: 20px 10px;
             padding-bottom: 0px;
 

@@ -3,7 +3,13 @@ import './SettingsModalStyle.scss'
 import { AnimatePresence, motion } from 'framer-motion';
 import { showMenuModal } from '../../Animations/variantsOnSmallScreen';
 
-export const SettingsModal = () => {
+
+interface SettingsModalProps {
+  theme:string,
+  setTheme: (value:string) => void
+}
+export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme }) => {
+
   return (
     <AnimatePresence>
         <motion.div className='Settings__container flex'
@@ -16,7 +22,7 @@ export const SettingsModal = () => {
             Settings
             <div className='option flex'>
               <span>Set your theme schedule </span>
-              <input type="color" value="#FF00FF"/>
+              <input type="color" value={theme} onChange={(x)=>setTheme(x.target.value)}/>
             </div>
             <div className='option flex'>
               <span>Set language</span>

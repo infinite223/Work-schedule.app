@@ -1,4 +1,4 @@
-import { useNavigate, HiOutlineChevronDoubleLeft, motion } from '../../Helpers/imports';
+import { motion } from '../../Helpers/imports';
 import { showPage } from '../../Animations/variants';
 import { showMobilePage, showSchedule } from '../../Animations/variantsOnSmallScreen';
 import { bindActionCreators } from 'redux';
@@ -12,14 +12,12 @@ import './SchedulePage.scss'
 import { Day } from '../../Components/Day/Day';
 import { DayContent } from '../../Components/DayContent';
 import { daysShortcuts, month, today } from '../../Helpers/constants';
-import { useState } from 'react';
+import { firstDayOfMonth } from '../../Helpers/functions/functions';
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
-import { MdOutlinePersonOutline } from 'react-icons/md'
-import { FiPlusSquare, FiMinusSquare } from 'react-icons/fi'
-import { MdOutlineArrowBackIosNew } from 'react-icons/md'
+import { MdOutlinePersonOutline, MdOutlineArrowBackIosNew } from 'react-icons/md'
 import { BiPlus, BiMinus} from 'react-icons/bi'
-import { useEffect } from "react";
 import { db } from "../../firebase";
 import { MenuModal } from '../../Components/MenuModal';
 import {
@@ -29,12 +27,11 @@ import {
   doc,
 } from "firebase/firestore";
 
-
 export const SchedulePage = () => {  
-    const navigate = useNavigate(); 
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const [showMenu, setShowMenu] = useState(false);
     const [showSettings, setShowSettings] = useState(false)
+    const [theme, setTheme] = useState("#FF00FF")
     const [ chooseHours, setChooseHours ] = useState<boolean>(false)
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
@@ -72,20 +69,6 @@ export const SchedulePage = () => {
       }
     }
     
-    const firstDayOfMonth = () => {
-        const nowMonth = today.getMonth()
-        const nowYear = today.getFullYear()
-        const arr:number[] = []
-
-        for (let i = 0; i < (new Date(nowYear, nowMonth, 1)).getDay()-1; i++) {
-            arr.push(i)              
-        }
-
-        return arr
-    }
-
-    console.log(firstDayOfMonth())
-
   return (
     <>
         {!isTabletOrMobile?
@@ -98,17 +81,20 @@ export const SchedulePage = () => {
             !showMenu&&<GiHamburgerMenu size={24} onClick={()=>setShowMenu(true)} className="menu"/>
         }
         {showMenu&&<MenuModal  showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
-        {showSettings&&<SettingsModal/>}
+        {showSettings&&<SettingsModal theme={theme} setTheme={setTheme}/>}
         {(showMenu || showSettings)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
-        <motion.div className='SchedulePage' variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
-            <motion.div className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
+        <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
+            <motion.div
+             style={{  background: "linear-gradient(0deg, "+theme+" 66%, rgb(193, 7, 193) 85%, rgba(218, 8, 197, 0.9) 96%)"}}
+             className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
                 <div className='SchedulePage__navbar flex'>
                     <div className='date'>
-                        <div className='year'>{today.getFullYear()}</div>    
-                        <div className='month'>{month[today.getMonth()]}</div>
-                        <div className='arrow-left'><MdOutlineArrowBackIosNew size={20}/></div>
-                        <div className='arrow-right'><MdOutlineArrowBackIosNew size={20}/></div>
-            
+                        <div className='year'>{today.getFullYear()}</div> 
+                        <nav className='flex'>
+                            <div className='arrow-left'><MdOutlineArrowBackIosNew size={20}/></div>
+                            <div className='month'>{month[today.getMonth()]}</div>                     
+                            <div className='arrow-right'><MdOutlineArrowBackIosNew size={20}/></div>
+                        </nav>
                         {!isTabletOrMobile&&<WorkerList/>}
                     </div>
                 
