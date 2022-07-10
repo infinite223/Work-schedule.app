@@ -31,7 +31,7 @@ export const SchedulePage = () => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const [showMenu, setShowMenu] = useState(false);
     const [showSettings, setShowSettings] = useState(false)
-    const [theme, setTheme] = useState("#FF00FF")
+    const [theme, setTheme] = useState<Array<number>>([12, 32, 120])
     const [ chooseHours, setChooseHours ] = useState<boolean>(false)
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
@@ -85,7 +85,8 @@ export const SchedulePage = () => {
         {(showMenu || showSettings)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
         <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">
             <motion.div
-             style={{  background: "linear-gradient(0deg, "+theme+" 66%, rgb(193, 7, 193) 85%, rgba(218, 8, 197, 0.9) 96%)"}}
+             style={{  background: "linear-gradient(0deg, rgba("+theme+", .5) 66%, rgba("+theme+",.7) 85%, rgba("+theme+", 0.9) 96%)",
+             boxShadow: "inset 0px -5px 0px 0px rgb("+theme+")"}}
              className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
                 <div className='SchedulePage__navbar flex'>
                     <div className='date'>
@@ -121,7 +122,7 @@ export const SchedulePage = () => {
                 <WorkerList/>
             </>}
             
-            {isTabletOrMobile&&<div className='save__add-button flex'>
+            {isTabletOrMobile&&<div className='save__add-button flex' style={{backgroundColor:`rgb(${theme})`}}>
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
                 ?<BiPlus size={35} color="white" onClick={()=>setChooseHours(true)}/>
                 :<BiMinus size={35} color="white" onClick={()=>removePerson(false)}/>}    

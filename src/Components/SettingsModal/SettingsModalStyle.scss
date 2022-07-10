@@ -1,4 +1,6 @@
 .Settings__container {
+    display: flex;
+    align-items: flex-start;
     flex-direction: column;
     gap: 20px;
     z-index: 11;
@@ -28,20 +30,28 @@
             font-size: 18px;
             padding: 0 .5rem;
             text-align: left;
+
+            width: 40%;
         }
 
-        input[type="color"] {
-            appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            background: none;
-            border: 0;
-            cursor: pointer;
-            height: 40px;
-            padding: 0;
-            width: 40px;
-        }
+        .themes {
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
 
+            .theme-box {
+                width: 40px;
+                height: 40px;
+    
+                border: 1px solid rgba(76, 75, 75, .5);
+
+                &:hover {
+                    cursor: pointer;
+                    border: 1px solid rgba(152, 152, 152, 0.5);
+                }
+            }
+        }
+       
         select {
             background-color: transparent;
             border: 1px solid rgba(80, 79, 79, .5);
