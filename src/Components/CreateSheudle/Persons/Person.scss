@@ -29,9 +29,11 @@
             .div__value {
                 width: auto !important; 
                 input {
-                    width: 300px!important; 
+                    width: 250px!important; 
                     height: 40px;
                     font-size: 17px!important; 
+                    text-align: left!important; 
+                    padding: .2rem .7rem!important; 
 
                     border: 1px solid rgba(165, 161, 161,.5) !important; 
                     border-radius: 10px;
@@ -83,17 +85,17 @@
                    
                    width: 30%;
                    height: 80%;
-                   
-                   padding: 0 10px;
           
                    input {
                        width: 100%;  
                        margin: auto;
                                     
                        font-size: 14px;
-                       text-align: center;
+                       text-align: left;
+                       padding: .2rem .7rem;
        
                        border:1px solid rgba(63, 62, 62, .3);
+                       border-radius: 5px;
 
                        &::placeholder { 
                         opacity: 0;   

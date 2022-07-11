@@ -22,11 +22,11 @@ export const Worker: React.FC<{ id:number }>= ({ id }) => {
               <div style={{color:"white", width:"20px", margin:"0 20px"}}>{id}</div>
               
               <div className='person__data'>
-                <div className='div__value'><div className='label'>email:</div>
-                  <input type="div" autoComplete='off' placeholder='email' value={email} onChange={(x) => (setEmaill(x.target.value), setPerson({id:id,email:email,nickname:nickname}))}/>
+                <div className='div__value'><div className='label'>Email:</div>
+                  <input type="div" autoComplete='off' placeholder='Email' value={email} onChange={(x) => (setEmaill(x.target.value), setPerson({id:id,email:email,nickname:nickname}))}/>
                 </div>
-                <div className='div__value'><div className='label'>nickname:</div>
-                  <input type="div" placeholder='nickname' value={nickname} onChange={(x)=>(setNickname(x.target.value),setPerson({id:id, email:email, nickname:nickname}))}/>
+                <div className='div__value'><div className='label'>Nickname:</div>
+                  <input type="div" placeholder='Nickname' value={nickname} onChange={(x)=>(setNickname(x.target.value),setPerson({id:id, email:email, nickname:nickname}))}/>
                 </div>    
               </div>            
               <MdOutlinePersonRemove className='delete-person' size={25} onClick={()=>deletePerson({id:id,email:"",nickname:""})}/>

@@ -2,13 +2,15 @@ import React from 'react'
 import './SettingsModalStyle.scss'
 import { AnimatePresence, motion } from 'framer-motion';
 import { showMenuModal } from '../../Animations/variantsOnSmallScreen';
+import { TiTimes } from 'react-icons/ti' 
 
 
 interface SettingsModalProps {
   theme:Array<number>,
-  setTheme: (value:Array<number>) => void
+  setTheme: (value:Array<number>) => void,
+  setShowSettings: (value:boolean) => void
 }
-export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme }) => {
+export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, setShowSettings }) => {
 
   return (
     <AnimatePresence>
@@ -18,8 +20,10 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme }) 
          initial="hidden"
          animate="visible"
          exit="exit">
-
-            Settings
+          <nav>
+            <div>Settings</div>
+            <TiTimes className='exit-icon' size={35} onClick={()=>setShowSettings(false)}/>
+          </nav>
             <div className='option flex'>
               <span>Set your theme schedule </span>
               {/* <input type="color" value={theme} onChange={(x)=>setTheme(x.target.value)}/> */}

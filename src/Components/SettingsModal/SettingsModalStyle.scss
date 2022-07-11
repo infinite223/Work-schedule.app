@@ -16,19 +16,34 @@
     }
 
     padding: 1rem 2rem;
-    background-color: rgba(15, 15, 15, .9);
+    background-color: rgb(15, 15, 15);
     border-radius: 15px;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+
+        .exit-icon {
+            &:hover {
+                cursor: pointer;
+                color: magenta;
+                transition: all .5s ease-in-out;
+            }
+        }
+    }
 
     .option {
         background-color: rgba(28, 28, 28, 0.9);
         justify-content: space-between;
         border-radius: 15px;
-        padding: .5rem 1rem;
-        width: 90%;
+        width: 100%;
 
         span {
             font-size: 18px;
-            padding: 0 .5rem;
+            padding: 1rem;
             text-align: left;
 
             width: 40%;
@@ -38,10 +53,11 @@
             flex-wrap: wrap;
             justify-content: flex-end;
             gap: 10px;
+            padding: 0 1rem;
 
             .theme-box {
-                width: 40px;
-                height: 40px;
+                width: 30px;
+                height: 30px;
     
                 border: 1px solid rgba(76, 75, 75, .5);
 
@@ -60,9 +76,10 @@
             padding: .3rem 1rem;
             color: white;
             font-size: 17px;
+
+            margin-right: 1rem;
         }
        
-          /* Style the arrow inside the select element: */
         select: after {
             content: "";
             top: 14px;
