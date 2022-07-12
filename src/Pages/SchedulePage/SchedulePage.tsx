@@ -20,6 +20,7 @@ import { MdOutlinePersonOutline, MdOutlineArrowBackIosNew } from 'react-icons/md
 import { BiPlus, BiMinus} from 'react-icons/bi'
 import { db } from "../../firebase";
 import { MenuModal } from '../../Components/MenuModal';
+import { setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
 import {
   collection,
   getDocs,
@@ -27,6 +28,7 @@ import {
   doc,
   getDoc
 } from "firebase/firestore";
+import { IGroupType } from '../../Helpers/interfaces';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
@@ -37,36 +39,16 @@ export const SchedulePage = () => {
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
     const selectedDay = useSelector((state: State)=> state.select)
+    const group:IGroupType = useSelector((state: State)=> state.group)
     const dispatch = useDispatch();
     const { setSchedule, setLoginPerson, setPersonInDay } = bindActionCreators(actionCreators, dispatch)
-
-    useEffect(()=>{
-        const scheduleCollectionRef = collection(db, "schedule");    
+    let groupName = group.nameGroup;
+    useEffect(()=>{  
         const setScheduleData = async () => {
             await auth.onAuthStateChanged( async (user) => {
                 if (user) {
-                //   const personsCollectionRef = collection(db, "persons");   
-                //   const persons = await getDocs(personsCollectionRef)
-                //   const loginPerson = persons.docs.find((doc) => (doc.id===user.uid))                 
-                //   setLoginPerson(loginPerson?.data().nickname)
-
-                //   const days = await getDocs(scheduleCollectionRef)
-                //   setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
-
-                const groupsRef = collection(db, "groups");  
-       
-                const workersData = await getDocs(groupsRef)
-                let foundWorker, foundGroup:string = "";  
-
-                workersData.docs.forEach((doc)=>{
-                    foundWorker = doc.data().workers.find((worker:{email:string, id:number, nickname:string})=> worker.nickname === loginPerson)
-                    foundWorker&&(foundGroup = doc.data().nameGroup)
-                })
-
-                const scheduleRef = doc(db, "schedule", foundGroup);
-                const scheduleSnap = await getDoc(scheduleRef);
-                const nowMonth =  [month[today.getMonth()]+today.getFullYear()].toString();
-                await setSchedule(scheduleSnap.data()?.[nowMonth])
+                    groupName&&setScheduleFromFirebase(dispatch, groupName)
+                    setLoginPersonAndGroupFromFirebase(dispatch, user.uid)
                 } 
             })
         };
@@ -74,9 +56,12 @@ export const SchedulePage = () => {
     },[])
 
     const updateSchedule = async () => {
-        const scheduleRef = doc(db, "schedule", "1");
-
-        await updateDoc(scheduleRef, { schedule });
+        if(group.nameGroup){
+            const scheduleRef = doc(db, "schedule", group.nameGroup);
+            await updateDoc(scheduleRef,  {
+                [month[today.getMonth()]+today.getFullYear()]:schedule
+            } );
+        }
     };
   
     const removePerson = (operation:boolean) : void => {

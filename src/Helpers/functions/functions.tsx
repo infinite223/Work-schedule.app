@@ -1,4 +1,10 @@
 import { today } from '../../Helpers/constants';
+import { bindActionCreators } from 'redux';
+import { db } from "../../firebase";
+import { getDoc, getDocs, doc, collection } from 'firebase/firestore';
+import { actionCreators } from '../../state';
+import { month } from '../../Helpers/constants';
+import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
 
 function timeStringToFloat(time:string) {
     var hoursMinutes = time.split(/[.:]/);
@@ -8,7 +14,6 @@ function timeStringToFloat(time:string) {
 }
 
 export function generateSheduleData(days:number){
-
     let shedule = []
 
     for (let i = 1; i <= days; i++) {
@@ -50,4 +55,28 @@ export const firstDayOfMonth = () => {
     }
 
     return arr
+}
+
+export const setScheduleFromFirebase = async (dispatch:any, groupName:string) =>{
+    const { setSchedule } = bindActionCreators(actionCreators, dispatch)
+    const scheduleRef = doc(db, "schedule", groupName);
+    const scheduleSnap = await getDoc(scheduleRef);
+    const nowMonth =  [month[today.getMonth()]+today.getFullYear()].toString();
+    await setSchedule(scheduleSnap.data()?.[nowMonth])
+    console.log(scheduleSnap.data()?.[nowMonth])
+}
+
+export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, UID:string) => {
+    const { setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch) 
+    const groupsRef = collection(db, "groups");  
+       
+    const workersData = await getDocs(groupsRef)
+    let foundWorker, foundGroup:string = "";  
+
+    await workersData.docs.forEach((doc)=>{
+      foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === UID)
+      foundWorker&&(foundGroup = doc.data().nameGroup)
+      foundWorker&&setGroup(doc.data())
+      foundWorker&&setLoginPerson(foundWorker.nickname)
+    })
 }
