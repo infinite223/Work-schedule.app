@@ -1,4 +1,5 @@
 import { Dispatch } from "redux"
+import { IGroupType } from './../../Helpers/interfaces'
 interface IUser {
     id:number,
     email:string,
@@ -75,6 +76,15 @@ export const setLoginPerson = (nickname:string) => {
         dispatch({
             type: "SetLoginPerson",
             payload:nickname
+        })
+    }
+}
+
+export const setGroup = (group:IGroupType) => {
+    return (dispatch: Dispatch) => {
+        dispatch({
+            type: "SetGroup",
+            payload:group
         })
     }
 }

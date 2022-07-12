@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './WorkerListStyle.scss'
 import { db } from './../../firebase/index';
 import { auth } from './../../firebase/index';
+import { IGroupType } from '../../Helpers/interfaces';
 
 import { useSelector } from 'react-redux';
 import { State } from '../../state';
@@ -17,6 +18,8 @@ export const WorkerList = () => {
  const [workers, setWorkers] = useState<Array<string>>([]);
  const loginPerson = useSelector((state: State)=> state.login)
  const schedule = useSelector((state: State)=> state.schedule)
+ const group:IGroupType = useSelector((state: State)=> state.group)
+ console.log(group)
  const navigate = useNavigate(); 
 
  const checkLoginPerson = async () => {
@@ -30,21 +33,19 @@ export const WorkerList = () => {
 checkLoginPerson()
 
  useEffect(() => {
-  const workersCollectionRef = collection(db, "workers");
-
    const getWorkers = async () => {
-   const nicknames = await getDocs(workersCollectionRef)
-    nicknames.docs.forEach((Doc) => {
-      const nickname = Doc.data()
-      setWorkers(nickname.nicknames)
+    let thisWorkers:Array<string> = [];
+    group.workers?.forEach((worker)=>{
+      thisWorkers.push(worker.nickname)
     })
+    setWorkers(thisWorkers)
   }
   getWorkers()
  }, []);
 
   return (
     <div className='SchedulePage__data flex'>
-        <div className='group-name'>Prato Verde</div>
+        <div className='group-name'>{group.nameGroup}</div>
         <div className='worker-list'>    
 
              {workers?.map((nick,i)=>{

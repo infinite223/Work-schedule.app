@@ -25,6 +25,7 @@ import {
   getDocs,
   updateDoc,
   doc,
+  getDoc
 } from "firebase/firestore";
 
 export const SchedulePage = () => {  
@@ -44,13 +45,28 @@ export const SchedulePage = () => {
         const setScheduleData = async () => {
             await auth.onAuthStateChanged( async (user) => {
                 if (user) {
-                  const personsCollectionRef = collection(db, "persons");   
-                  const persons = await getDocs(personsCollectionRef)
-                  const loginPerson = persons.docs.find((doc) => (doc.id===user.uid))                 
-                  setLoginPerson(loginPerson?.data().nickname)
+                //   const personsCollectionRef = collection(db, "persons");   
+                //   const persons = await getDocs(personsCollectionRef)
+                //   const loginPerson = persons.docs.find((doc) => (doc.id===user.uid))                 
+                //   setLoginPerson(loginPerson?.data().nickname)
 
-                  const days = await getDocs(scheduleCollectionRef)
-                  setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
+                //   const days = await getDocs(scheduleCollectionRef)
+                //   setSchedule((days.docs.map((doc) => (doc.data().schedule)))[0])
+
+                const groupsRef = collection(db, "groups");  
+       
+                const workersData = await getDocs(groupsRef)
+                let foundWorker, foundGroup:string = "";  
+
+                workersData.docs.forEach((doc)=>{
+                    foundWorker = doc.data().workers.find((worker:{email:string, id:number, nickname:string})=> worker.nickname === loginPerson)
+                    foundWorker&&(foundGroup = doc.data().nameGroup)
+                })
+
+                const scheduleRef = doc(db, "schedule", foundGroup);
+                const scheduleSnap = await getDoc(scheduleRef);
+                const nowMonth =  [month[today.getMonth()]+today.getFullYear()].toString();
+                await setSchedule(scheduleSnap.data()?.[nowMonth])
                 } 
             })
         };

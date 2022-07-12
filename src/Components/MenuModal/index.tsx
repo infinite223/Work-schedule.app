@@ -4,7 +4,9 @@ import { showMenuModal } from '../../Animations/variantsOnSmallScreen';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-import { useState } from 'react';
+
+import { useSelector } from 'react-redux';
+import { State } from '../../state';
 
 interface MenuModalProps {
   showMenu:boolean,
@@ -15,6 +17,7 @@ interface MenuModalProps {
 
 export const MenuModal :React.FC<MenuModalProps> = ({showMenu, setShowMenu, updateSchedule, showSettings, setShowSettings}) => {
   const navigate = useNavigate(); 
+  const loginPerson = useSelector((state: State)=> state.login)
 
   return (
     <AnimatePresence>
@@ -27,7 +30,7 @@ export const MenuModal :React.FC<MenuModalProps> = ({showMenu, setShowMenu, upda
 
             <span>
               <div className='icon'><MdOutlinePersonOutline size={20}/></div>
-              <div className='meganta-text'>Dawid</div>
+              <div className='meganta-text'>{loginPerson}</div>
             </span>
             <span className='hover-color' onClick={()=>(auth.signOut(), navigate("/"))}>Log out</span>
             <span className='hover-color' onClick={()=>(updateSchedule(),setShowMenu(false))}>Save</span>

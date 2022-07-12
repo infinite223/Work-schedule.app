@@ -18,3 +18,9 @@ export interface IShedule {
         endWork:string
     }]
 }
+
+export interface IGroupType {
+    admin?: {email:string, nickname:string},
+    nameGroup?:string,
+    workers?:Array<{email:string, nickname:string, id:number, UID?:string}>
+}

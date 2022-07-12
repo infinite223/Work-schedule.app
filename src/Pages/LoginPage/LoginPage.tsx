@@ -10,11 +10,14 @@ import { db } from "../../firebase";
 import {
   collection,
   getDocs,
+  setDoc,
+  updateDoc
 } from "firebase/firestore";
 import { State } from '../../state';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { useDispatch, useSelector } from 'react-redux';
+import { IGroupType } from '../../Helpers/interfaces';
 
 import './LoginPage.scss'
 
@@ -24,7 +27,7 @@ export const LoginPage = () => {
   const passwordRef = useRef<HTMLInputElement | null>(null)
   const [error, setError] = useState("")
   const dispatch = useDispatch();
-  const { setSchedule, setLoginPerson } = bindActionCreators(actionCreators, dispatch)
+  const { setSchedule, setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
   const schedule = useSelector((state: State)=> state.schedule)
 
   async function handleSubmit(e:any) {
@@ -35,7 +38,6 @@ export const LoginPage = () => {
     try {
       setError("")
       await signInWithEmailAndPassword(auth, userEmail, userPassword).then( async ()=>{
-        console.log("xd")
         const groupsRef = collection(db, "groups");  
        
         const workersData = await getDocs(groupsRef)
@@ -44,6 +46,7 @@ export const LoginPage = () => {
         workersData.docs.forEach((doc)=>{
           foundWorker = doc.data().workers.find((worker:{email:string, id:number, nickname:string})=> worker.email === userEmail)
           foundWorker&&(foundGroup = doc.data().nameGroup)
+          foundWorker&&setGroup(doc.data())
         })
 
         const scheduleRef = doc(db, "schedule", foundGroup);
@@ -53,13 +56,17 @@ export const LoginPage = () => {
 
               await auth.onAuthStateChanged( async (user) => {
                if (user) {
-                 const personsCollectionRef = collection(db, "persons");   
-                 const persons = await getDocs(personsCollectionRef)
-                 const loginPerson = persons.docs.find((doc) => (doc.id===user.uid))                 
-                 setLoginPerson(loginPerson?.data().nickname)
+                 //const personsCollectionRef = collection(db, "groups");   
+                // const persons = await getDocs(personsCollectionRef)
+                const groupRef = doc(db, "groups", foundGroup);
+                const groupSnap = await getDoc(groupRef);
+                 const loginPerson = groupSnap.data()?.workers.find((worker:{email:string, id:number, nickname:string, UID:string}) => (worker.UID===user.uid))                 
+                 setLoginPerson(loginPerson.nickname)
+                 console.log("on loginpage", loginPerson)
+                 await navigate("/schedule")
                }
              });
-              await navigate("/schedule")
+           
       })
     
 
@@ -69,33 +76,46 @@ export const LoginPage = () => {
         const getGroups = async () => {
              const workersData = await getDocs(groupsRef)
              let foundWorker, foundGroup:string;
+             let workers:Array<{email:string, id:number, nickname:string}>;
               workersData.docs.forEach((doc)=>{
                 foundWorker = doc.data().workers.find((worker:{email:string, id:number, nickname:string})=> worker.email === userEmail)
                 foundWorker&&(foundGroup = doc.data().nameGroup)
+                foundWorker&&(workers = doc.data().workers)
               })
 
               if(foundWorker){
                 createUserWithEmailAndPassword(auth, userEmail, userPassword).then(async ()=>{
-                  ///
+    
                   await signInWithEmailAndPassword(auth, userEmail, userPassword)
                   const scheduleRef = doc(db, "schedule", foundGroup);
                   const scheduleSnap = await getDoc(scheduleRef);
                   const nowMonth =  [month[today.getMonth()]+today.getFullYear()].toString();
-                  setSchedule(scheduleSnap.data()?.[nowMonth])
-                  console.log(schedule)
+                  await setSchedule(scheduleSnap.data()?.[nowMonth])
 
-                 // await setScheduleData();
+                  await auth.onAuthStateChanged( async (user) => {
+                    if (user) {
+                      const newWorkers:Array<{email:string, id:number, nickname:string, UID?:string}> = [];
+                      workers.forEach((worker)=>{                   
+                          if(worker.email === userEmail){
+                            const emailWorker = worker.email
+                            const nicknameWorker = worker.nickname
+                            const idWorker = worker.id
+                            newWorkers.push({email:emailWorker, id:idWorker, nickname:nicknameWorker, UID:user.uid})
+                            setLoginPerson(nicknameWorker)
+                          }
+                          else {
+                            newWorkers.push(worker)
+                          }
+                      })                   
+                      console.log(workers)
+                      console.log(newWorkers)
+                      const groupsRef = doc(db, "groups", foundGroup);
+                           await updateDoc(groupsRef, {
+                             "workers": newWorkers
+                    })}
 
-                  // await auth.onAuthStateChanged( async (user) => {
-                  //   if (user) {
-                  //     const personsCollectionRef = collection(db, "persons");   
-                  //     const persons = await getDocs(personsCollectionRef)
-                  //     const loginPerson = persons.docs.find((doc) => (doc.id===user.uid))                 
-                  //     setLoginPerson(loginPerson?.data().nickname)
-                  //   }
-                  // });
-                 // await navigate("/schedule")
-                  ////
+                    await navigate("/schedule")                  
+                  })
                 })
               }
               else {
