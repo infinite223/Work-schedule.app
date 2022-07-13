@@ -1,6 +1,6 @@
 import { useNavigate, HiOutlineChevronDoubleLeft, motion } from '../../Helpers/imports';
 import { showPage } from '../../Animations/variants';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { auth  } from "../../firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
@@ -13,12 +13,12 @@ import {
   setDoc,
   updateDoc
 } from "firebase/firestore";
-import { State } from '../../state';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { useDispatch, useSelector } from 'react-redux';
 import { setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
 import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
+import LoadingStatus from '../../Components/LoadingStatus';
 
 import './LoginPage.scss'
 
@@ -29,12 +29,17 @@ export const LoginPage = () => {
   const [error, setError] = useState("")
   const dispatch = useDispatch();
   const {  setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(()=>{
+    console.log(loading)
+  },[loading])
 
   async function handleSubmit(e:any) {
     e.preventDefault()
     const userEmail =  emailRef.current?.value?emailRef.current?.value.toString():"";
     const userPassword =  passwordRef.current?.value?passwordRef.current?.value.toString():"";
-
+    setLoading(true)
     try {
       setError("")
       await signInWithEmailAndPassword(auth, userEmail, userPassword).then( async ()=>{
@@ -53,6 +58,7 @@ export const LoginPage = () => {
             if (user) {
               await setLoginPersonAndGroupFromFirebase(dispatch, user.uid)
               await navigate("/schedule")
+            
              }
            });         
       })
@@ -94,7 +100,7 @@ export const LoginPage = () => {
                       const groupsRef = doc(db, "groups", foundGroup);
                            await updateDoc(groupsRef, {
                              "workers": newWorkers
-                    })}
+                    }).then(()=>setLoading(false))}
 
                     await navigate("/schedule")                  
                   })
@@ -114,6 +120,7 @@ export const LoginPage = () => {
 
   return (
     <div>
+        {loading&&<LoadingStatus/> }
          <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
          <motion.div variants={showPage} initial="hidden" animate="visible" className='LoginPage flex'>  
          <form className='flex'  onSubmit={handleSubmit}>   

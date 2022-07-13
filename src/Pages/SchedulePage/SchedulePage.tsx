@@ -21,14 +21,17 @@ import { BiPlus, BiMinus} from 'react-icons/bi'
 import { db } from "../../firebase";
 import { MenuModal } from '../../Components/MenuModal';
 import { setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
+import { workerAfterSign } from '../../Helpers/types';
+import LoadingStatus from '../../Components/LoadingStatus';
 import {
   collection,
   getDocs,
   updateDoc,
-  doc,
-  getDoc
+  doc
 } from "firebase/firestore";
 import { IGroupType } from '../../Helpers/interfaces';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { MessageModal } from '../../Components/MessageModal';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
@@ -41,14 +44,30 @@ export const SchedulePage = () => {
     const selectedDay = useSelector((state: State)=> state.select)
     const group:IGroupType = useSelector((state: State)=> state.group)
     const dispatch = useDispatch();
-    const { setSchedule, setLoginPerson, setPersonInDay } = bindActionCreators(actionCreators, dispatch)
-    let groupName = group.nameGroup;
+    const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
+    const [loading, setLoading] = useState(false)
+    const [showMessage, setShowMessage] = useState(false)
+    const navigate = useNavigate()
+
     useEffect(()=>{  
         const setScheduleData = async () => {
+            setLoading(true)
             await auth.onAuthStateChanged( async (user) => {
                 if (user) {
-                    groupName&&setScheduleFromFirebase(dispatch, groupName)
-                    setLoginPersonAndGroupFromFirebase(dispatch, user.uid)
+                    const groupsRef = collection(db, "groups");  
+       
+                    const workersData = await getDocs(groupsRef)
+                    let foundWorker, foundGroup:string = "";  
+                
+                    await workersData.docs.forEach((doc)=>{
+                      foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === user.uid)
+                      foundWorker&&(foundGroup = doc.data().nameGroup)
+                    })
+                     setScheduleFromFirebase(dispatch, foundGroup)
+                     setLoginPersonAndGroupFromFirebase(dispatch, user.uid).then(()=>setLoading(false))
+                }
+                else{
+                    navigate("/")
                 } 
             })
         };
@@ -56,11 +75,12 @@ export const SchedulePage = () => {
     },[])
 
     const updateSchedule = async () => {
+        setLoading(true)
         if(group.nameGroup){
             const scheduleRef = doc(db, "schedule", group.nameGroup);
             await updateDoc(scheduleRef,  {
                 [month[today.getMonth()]+today.getFullYear()]:schedule
-            } );
+            } ).then(()=>setLoading(false)).then(()=>setShowMessage(true));
         }
     };
   
@@ -71,7 +91,9 @@ export const SchedulePage = () => {
     }
     
   return (
-    <>
+    <> 
+        {loading&&<LoadingStatus/> }
+        {showMessage&&<MessageModal description='schedule was saved!' setShowMessage={setShowMessage}/>}
         {!isTabletOrMobile?
             <div className='login__person-text flex'>
                 <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
@@ -81,7 +103,7 @@ export const SchedulePage = () => {
             </div>:
             !showMenu&&<GiHamburgerMenu size={24} onClick={()=>setShowMenu(true)} className="menu"/>
         }
-        {showMenu&&<MenuModal  showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
+        {showMenu&&<MenuModal showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
         {showSettings&&<SettingsModal theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
         {(showMenu || showSettings)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
         <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">

@@ -45,6 +45,12 @@ export const show = {
     exit:{opacity:0, scale:[".9", ".8", ".4", ".1"]}
   }
 
+  export const message = {
+    hidden: {opacity:0, top:"10px"},
+    visible:{opacity:1, top:"75%"},
+    exit:{opacity:0, top:"90%"}
+  }
+
   export const showWorkers = {
     start: {height:"18%"},
     hover:{height:"25%"}

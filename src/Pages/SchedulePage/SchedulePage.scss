@@ -26,9 +26,6 @@
         @media only screen and (max-width: 1024px) {
             flex-direction: column;
             margin-bottom: 10px;
-
-           // background-color: #FF00FF;
-            // background: linear-gradient(0deg, rgb(154, 9, 154) 66%, rgb(193, 7, 193) 85%, rgba(218, 8, 197, 0.9) 96%);
             
             -webkit-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
             -moz-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
@@ -69,6 +66,7 @@
             .year {
                 font-size: 60px;
                 letter-spacing: 2px;
+                text-align: center;
 
                 @media only screen and (max-width: 1024px) {
                     font-size: 25px;

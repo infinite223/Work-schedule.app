@@ -62,8 +62,7 @@ export const setScheduleFromFirebase = async (dispatch:any, groupName:string) =>
     const scheduleRef = doc(db, "schedule", groupName);
     const scheduleSnap = await getDoc(scheduleRef);
     const nowMonth =  [month[today.getMonth()]+today.getFullYear()].toString();
-    await setSchedule(scheduleSnap.data()?.[nowMonth])
-    console.log(scheduleSnap.data()?.[nowMonth])
+    setSchedule(scheduleSnap.data()?.[nowMonth])
 }
 
 export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, UID:string) => {
@@ -71,12 +70,11 @@ export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, UID:strin
     const groupsRef = collection(db, "groups");  
        
     const workersData = await getDocs(groupsRef)
-    let foundWorker, foundGroup:string = "";  
+    let foundWorker;
 
     await workersData.docs.forEach((doc)=>{
       foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === UID)
-      foundWorker&&(foundGroup = doc.data().nameGroup)
-      foundWorker&&setGroup(doc.data())
-      foundWorker&&setLoginPerson(foundWorker.nickname)
+      foundWorker&&setGroup(doc.data());
+      foundWorker&&setLoginPerson(foundWorker.nickname);
     })
 }

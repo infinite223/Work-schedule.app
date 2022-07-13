@@ -6,6 +6,7 @@ import './WorkerListStyle.scss'
 import { db } from './../../firebase/index';
 import { auth } from './../../firebase/index';
 import { IGroupType } from '../../Helpers/interfaces';
+import { setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
 
 import { useSelector } from 'react-redux';
 import { State } from '../../state';
@@ -15,11 +16,9 @@ import {
 } from "firebase/firestore";
 
 export const WorkerList = () => {
- const [workers, setWorkers] = useState<Array<string>>([]);
  const loginPerson = useSelector((state: State)=> state.login)
  const schedule = useSelector((state: State)=> state.schedule)
  const group:IGroupType = useSelector((state: State)=> state.group)
- console.log(group)
  const navigate = useNavigate(); 
 
  const checkLoginPerson = async () => {
@@ -30,30 +29,17 @@ export const WorkerList = () => {
   });
 }   
 
-checkLoginPerson()
-
- useEffect(() => {
-   const getWorkers = async () => {
-    let thisWorkers:Array<string> = [];
-    group.workers?.forEach((worker)=>{
-      thisWorkers.push(worker.nickname)
-    })
-    setWorkers(thisWorkers)
-  }
-  getWorkers()
- }, []);
-
   return (
     <div className='SchedulePage__data flex'>
         <div className='group-name'>{group.nameGroup}</div>
         <div className='worker-list'>    
 
-             {workers?.map((nick,i)=>{
+             {group?.workers?.map(({ nickname },i)=>{
                 return (
-                    <div key={nick} style={nick===loginPerson?{color:"white"}:{}} className='worker flex'>
+                    <div key={nickname} style={nickname===loginPerson?{color:"white"}:{}} className='worker flex'>
                         <MdOutlinePerson size={25} className="person-icon"/>
-                        <div className='worker-name'>{nick}</div>
-                        <div className='worker-hours'>{CountHours(nick, schedule)}h</div>
+                        <div className='worker-name'>{nickname}</div>
+                        <div className='worker-hours'>{CountHours(nickname, schedule)}h</div>
                     </div>
                 )
             })} 
