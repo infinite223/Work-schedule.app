@@ -32,10 +32,13 @@ import {
 import { IGroupType } from '../../Helpers/interfaces';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { MessageModal } from '../../Components/MessageModal';
+import { generateSheduleData } from './../../Helpers/functions/functions';
+import { IShedule } from './../../Helpers/interfaces';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const [showMenu, setShowMenu] = useState(false);
+    const [selectMonth, setSelectMonth] = useState<number>(1);
     const [showSettings, setShowSettings] = useState(false)
     const [theme, setTheme] = useState<Array<number>>([12, 32, 120])
     const [ chooseHours, setChooseHours ] = useState<boolean>(false)
@@ -44,7 +47,7 @@ export const SchedulePage = () => {
     const selectedDay = useSelector((state: State)=> state.select)
     const group:IGroupType = useSelector((state: State)=> state.group)
     const dispatch = useDispatch();
-    const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
+    const { setPersonInDay, setSchedule } = bindActionCreators(actionCreators, dispatch)
     const [loading, setLoading] = useState(false)
     const [showMessage, setShowMessage] = useState(false)
     const navigate = useNavigate()
@@ -71,7 +74,7 @@ export const SchedulePage = () => {
                 } 
             })
         };
-       setScheduleData();
+        selectMonth===1&&setScheduleData();
     },[])
 
     const updateSchedule = async () => {
@@ -83,6 +86,22 @@ export const SchedulePage = () => {
             } ).then(()=>setLoading(false)).then(()=>setShowMessage(true));
         }
     };
+    useEffect(()=>{
+        const nextMonth = () => {
+            if(selectMonth!==1){
+                const nowDate:Date = new Date();
+                const nowYear = nowDate.getFullYear();
+                const nowMoth = (nowDate.getMonth())+selectMonth;
+                const nextSchedule:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}> =  generateSheduleData(new Date(nowYear, nowMoth, 0).getDate())
+                 setSchedule(nextSchedule)
+                console.log(nextSchedule)
+                 console.log(schedule)
+            }          
+        }
+        nextMonth()
+    },[selectMonth])
+
+
   
     const removePerson = (operation:boolean) : void => {
       if(!operation){
@@ -115,9 +134,9 @@ export const SchedulePage = () => {
                     <div className='date'>
                         <div className='year'>{today.getFullYear()}</div> 
                         <nav className='flex'>
-                            <div className='arrow-left'><MdOutlineArrowBackIosNew size={20}/></div>
-                            <div className='month'>{month[today.getMonth()]}</div>                     
-                            <div className='arrow-right'><MdOutlineArrowBackIosNew size={20}/></div>
+                            <div className='arrow-left' onClick={()=>setSelectMonth(selectMonth-1)}><MdOutlineArrowBackIosNew size={20}/></div>
+                            <div className='month'>{month[today.getMonth()+selectMonth-1]}</div>                     
+                            <div className='arrow-right' onClick={()=>setSelectMonth(selectMonth+1)}><MdOutlineArrowBackIosNew size={20}/></div>
                         </nav>
                         {!isTabletOrMobile&&<WorkerList/>}
                     </div>
@@ -129,7 +148,7 @@ export const SchedulePage = () => {
                         {day.substring(0,2)}
                     </div>})}
 
-                   {firstDayOfMonth().map((i)=>{
+                   {firstDayOfMonth(selectMonth-1).map((i)=>{
                     return  <div key={i} className='empty-day'></div>
                    })}
                    

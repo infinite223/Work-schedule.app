@@ -53,7 +53,7 @@ export const setPersonInDay = (shedule:IShedule) => {
         })
     }
 }
-export const setSchedule = (shedule:IShedule) => {
+export const setSchedule = (shedule:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}>) => {
     return (dispatch: Dispatch) => {
         dispatch({
             type: "SetSchedule",

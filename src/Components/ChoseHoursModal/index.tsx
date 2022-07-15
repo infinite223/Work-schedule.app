@@ -12,8 +12,15 @@ import { AnimatePresence } from 'framer-motion';
 import { IPerson } from './../../Helpers/interfaces';
 import { BsCheckLg } from 'react-icons/bs'
 
+interface ChoseHoursModalProps {
+  id:number,
+  date: Date,
+  persons: Array<IPerson>,
+  chooseHours:boolean,
+  setChooseHours: (value:boolean) => void  
+}
 
-export const ChoseHoursModal: React.FC<{ id:number, date: Date, persons: Array<IPerson>, chooseHours:boolean,setChooseHours: (value:boolean) => void  }> = ({ id, date, persons, chooseHours, setChooseHours}) => {
+export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, persons, chooseHours, setChooseHours}) => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const loginPerson = useSelector((state: State)=> state.login)
  

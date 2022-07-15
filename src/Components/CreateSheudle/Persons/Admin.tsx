@@ -9,7 +9,7 @@ interface adminProps {
 }
 
 export const Admin:React.FC<adminProps> = ({ setNicknameAdmin, setEmailAdmin }) => {
-  const [nickname, setNickname] = useState<string>();
+  const [nickname, setNickname] = useState<string>(); 
   
   return (
     <motion.div className='Person'>

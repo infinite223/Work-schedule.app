@@ -57,8 +57,7 @@ export const LoginPage = () => {
           await auth.onAuthStateChanged( async (user) => {
             if (user) {
               await setLoginPersonAndGroupFromFirebase(dispatch, user.uid)
-              await navigate("/schedule")
-            
+              await navigate("/schedule")        
              }
            });         
       })

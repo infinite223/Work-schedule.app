@@ -35,8 +35,6 @@ export const DayContent:React.FC<{chooseHours:boolean, setChooseHours: (value:bo
     })
   }, [selectedDay])
 
-  
-
   return (
     <AnimatePresence>
       <motion.div className='DayContent flex'

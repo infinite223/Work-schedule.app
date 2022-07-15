@@ -36,7 +36,7 @@ export const CreateSchedule = () => {
         nickname:nicknameAdmin,
         email:emailAdmin
       }
-    }).then(async ()=> {
+    }).then( async ()=> {
       await setDoc(doc(db, "schedule", nameGroup), {
         [month[today.getMonth()]+today.getFullYear()]: generateSheduleData(daysInMonth())
       })

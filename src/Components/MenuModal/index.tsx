@@ -10,7 +10,7 @@ import { State } from '../../state';
 
 interface MenuModalProps {
   showMenu:boolean,
-  setShowMenu: (value:boolean) => void, updateSchedule: ()=>void,
+  setShowMenu: (value:boolean) => void, updateSchedule: () =>void,
   showSettings:boolean,
   setShowSettings: (value:boolean) => void,
 }

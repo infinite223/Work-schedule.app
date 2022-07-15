@@ -1,10 +1,11 @@
 import { today } from '../../Helpers/constants';
 import { bindActionCreators } from 'redux';
 import { db } from "../../firebase";
-import { getDoc, getDocs, doc, collection } from 'firebase/firestore';
+import { getDoc, updateDoc, getDocs, doc, collection } from 'firebase/firestore';
 import { actionCreators } from '../../state';
 import { month } from '../../Helpers/constants';
 import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
+import { IGroupType, IShedule } from './../interfaces'
 
 function timeStringToFloat(time:string) {
     var hoursMinutes = time.split(/[.:]/);
@@ -45,8 +46,8 @@ export const CountHours = (person:string, schedule:Array<{id:number, persons:Arr
     return  (hours + minutes/60).toFixed(2);
 }
 
-export const firstDayOfMonth = () => {
-    const nowMonth = today.getMonth()
+export const firstDayOfMonth = (selectMonth:number) => {
+    const nowMonth = today.getMonth()+selectMonth
     const nowYear = today.getFullYear()
     const arr:number[] = []
 
