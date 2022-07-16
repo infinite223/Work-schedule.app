@@ -7,12 +7,8 @@
 
     @media only screen and (max-width: 1024px) {
         width: 100vw;
-        height: auto;  
+        height: 100vh;  
         flex-direction: column;
-
-        margin-top: 0%; 
-
-        margin-bottom: 20%;  
     }
 
     background-color: rgba(28, 27, 27, .9);
@@ -26,6 +22,7 @@
         @media only screen and (max-width: 1024px) {
             flex-direction: column;
             margin-bottom: 10px;
+            padding-bottom: 10px;
             
             -webkit-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);
             -moz-box-shadow: inset 0px -7px 0px 0px rgb(124, 2, 124);

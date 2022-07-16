@@ -171,7 +171,7 @@ export const SchedulePage = () => {
                 </div>
             </motion.div>
             {isTabletOrMobile&&<>
-                <div style={{overflowY:"scroll", height:"30vh", marginBottom:"200px"}}>
+                <div style={{overflowY:"scroll"}}>
                     <DayContent chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
                     <WorkerList/>
                 </div>
