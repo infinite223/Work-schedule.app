@@ -71,13 +71,16 @@ export const LoginPage = () => {
              let foundWorker, foundGroup:string;
              let workers:Array<{email:string, id:number, nickname:string}>;
               workersData.docs.forEach((doc)=>{
-                foundWorker = doc.data().workers.find((worker:workerBeforSign)=> worker.email === userEmail)
-                foundWorker&&(foundGroup = doc.data().nameGroup)
-                foundWorker&&(workers = doc.data().workers)
+                if(doc.data().workers.find((worker:workerBeforSign)=> worker.email === userEmail)){
+                  foundWorker = doc.data().workers.find((worker:workerBeforSign)=> worker.email)
+                  foundWorker&&(foundGroup = doc.data().nameGroup)
+                  foundWorker&&(workers = doc.data().workers)
+                }
               })
-
+              //console.log(foundWorker)
               if(foundWorker){
-                createUserWithEmailAndPassword(auth, userEmail, userPassword).then(async ()=>{
+                console.log("xsd")
+                 createUserWithEmailAndPassword(auth, userEmail, userPassword).then(async () =>{
                   await signInWithEmailAndPassword(auth, userEmail, userPassword)             
                   setScheduleFromFirebase(dispatch, foundGroup)
 

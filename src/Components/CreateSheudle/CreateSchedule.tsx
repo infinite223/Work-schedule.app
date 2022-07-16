@@ -8,8 +8,9 @@ import { showMobilePage } from '../../Animations/variantsOnSmallScreen';
 import { showPage } from './../../Animations/variants';
 import { useMediaQuery } from 'react-responsive'
 import { db } from '../../firebase';
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, getDoc, doc } from 'firebase/firestore';
 import { generateSheduleData, daysInMonth } from '../../Helpers/functions/functions';
+import { MessageModal } from '../MessageModal';
 import { today, month } from '../../Helpers/constants';
 
 import './CreateSchedule.scss'
@@ -26,28 +27,46 @@ export const CreateSchedule = () => {
   const [emailAdmin, setEmailAdmin] = useState("")
 
   const { addPerson } = bindActionCreators(actionCreators, dispatch)
+  const [showMessage, setShowMessage] = useState(false)
+  const [message, setMessage] = useState("")
 
   const createSchedule = async () => {
-
-    await setDoc(doc(db, "groups", nameGroup), {
-      nameGroup:nameGroup,
-      workers: person,
-      admin: {
-        nickname:nicknameAdmin,
-        email:emailAdmin
+    if(persons.length<1){
+      setMessage("Without employees, you cannot create a schedule"); setShowMessage(true)
+    }
+    else if(nameGroup.length<4){
+      setMessage("The group name must be at least 4 letters long"); setShowMessage(true)
+    }
+     else if(message.length>3){
+       setShowMessage(true)
       }
-    }).then( async ()=> {
-      await setDoc(doc(db, "schedule", nameGroup), {
-        [month[today.getMonth()]+today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
-      })
-    })
-    
+    else {
+      const foundGroup = await getDoc(doc(db, "groups", nameGroup))  
+      if(!foundGroup.data()){
+        await setDoc(doc(db, "groups", nameGroup), {
+          nameGroup:nameGroup,
+          workers: person,
+          admin: {
+            nickname:nicknameAdmin,
+            email:emailAdmin
+          }
+        }).then( async ()=> {
+          await setDoc(doc(db, "schedule", nameGroup), {
+            [month[today.getMonth()]+today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
+          }).then(() => (setMessage("The group has been created correctly"), setShowMessage(true)))
+        })
+      }
+      else {
+        setMessage("Group name taken, use another"); setShowMessage(true)
+      }
+    }
   }
 
   return (
     <>
+    {showMessage&&<MessageModal description={message} setShowMessage={setShowMessage}/>}
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-      <motion.div initial={!isTabletOrMobile?{right:"-85px"}:{right:"0px"}} whileHover={{right:"0px"}} transition={{duration:1}} className='right-header flex'>
+      <motion.div initial={!isTabletOrMobile?{right:"-85px"}:{right:"0px"}} whileHover={{right:"0px"}} transition={{duration:.5}} className='right-header flex'>
             {!isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
             <span onClick={()=>createSchedule()}>Create</span>
             {isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}
@@ -72,7 +91,7 @@ export const CreateSchedule = () => {
         <div className='Content flex'>
           <div className='Persons'>               
             {person.map((worker:any)=> {
-              return <Worker key={worker.id} id={worker.id}/>
+              return <Worker key={worker.id} id={worker.id} setMessage={setMessage}/>
             })}
           
               <motion.div className='Person' 

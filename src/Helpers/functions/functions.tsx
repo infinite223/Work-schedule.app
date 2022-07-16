@@ -1,11 +1,10 @@
 import { today } from '../../Helpers/constants';
 import { bindActionCreators } from 'redux';
 import { db } from "../../firebase";
-import { getDoc, updateDoc, getDocs, doc, collection } from 'firebase/firestore';
+import { getDoc, getDocs, doc, collection } from 'firebase/firestore';
 import { actionCreators } from '../../state';
 import { month } from '../../Helpers/constants';
-import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
-import { IGroupType, IShedule } from './../interfaces'
+import { workerAfterSign } from '../../Helpers/types';
 
 function timeStringToFloat(time:string) {
     var hoursMinutes = time.split(/[.:]/);
@@ -74,8 +73,10 @@ export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, UID:strin
     let foundWorker;
 
     await workersData.docs.forEach((doc)=>{
-      foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === UID)
-      foundWorker&&setGroup(doc.data());
-      foundWorker&&setLoginPerson(foundWorker.nickname);
+      if(doc.data().workers.find((worker:workerAfterSign)=> worker.UID === UID)){
+        foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === UID)
+        foundWorker&&setGroup(doc.data());
+        foundWorker&&setLoginPerson(foundWorker.nickname);
+      }
     })
 }

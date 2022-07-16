@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, useDispatch, useSelector, bindActionCreators, MdOutlinePersonRemove } from '../../../Helpers/imports'
 import { show } from './../../../Animations/variants';
 import { actionCreators, State } from '../../../state';
@@ -7,7 +7,7 @@ import './Person.scss'
 
 
 
-export const Worker: React.FC<{ id:number }>= ({ id }) => { 
+export const Worker: React.FC<{ id:number, setMessage:(value:string) => void }>= ({ id, setMessage }) => { 
   const person = useSelector((state: State)=> state.person)
   const dispatch = useDispatch();
   
@@ -15,6 +15,15 @@ export const Worker: React.FC<{ id:number }>= ({ id }) => {
 
   const [email, setEmaill] = useState(person[id]?person[id].email:"")
   const [nickname, setNickname] = useState<string>(person[id]?person[id].nickname:"")
+
+  useEffect(()=>{
+    if(email.length<3 || nickname.length<3){
+      setMessage("Email or nickname is too short")
+    }
+    else {
+      setMessage("")
+    }
+  },[email, nickname])
 
   return (
     <div className='Person'>
