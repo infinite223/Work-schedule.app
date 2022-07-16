@@ -12,7 +12,7 @@ import './SchedulePage.scss'
 import { Day } from '../../Components/Day/Day';
 import { DayContent } from '../../Components/DayContent';
 import { daysShortcuts, month, today } from '../../Helpers/constants';
-import { firstDayOfMonth } from '../../Helpers/functions/functions';
+import { daysInMonth, firstDayOfMonth } from '../../Helpers/functions/functions';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
@@ -38,7 +38,13 @@ import { IShedule } from './../../Helpers/interfaces';
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const [showMenu, setShowMenu] = useState(false);
+
     const [selectMonth, setSelectMonth] = useState<number>(1);
+    const [selectYear, setSelectYear] = useState<number>(1);
+    const [selectDate, setSelectDate] = useState(new Date())
+
+    console.log(selectDate)
+
     const [showSettings, setShowSettings] = useState(false)
     const [theme, setTheme] = useState<Array<number>>([12, 32, 120])
     const [ chooseHours, setChooseHours ] = useState<boolean>(false)
@@ -46,6 +52,7 @@ export const SchedulePage = () => {
     const loginPerson = useSelector((state: State)=> state.login)
     const selectedDay = useSelector((state: State)=> state.select)
     const group:IGroupType = useSelector((state: State)=> state.group)
+    const [nameGroup, setNameGroup] = useState("")
     const dispatch = useDispatch();
     const { setPersonInDay, setSchedule } = bindActionCreators(actionCreators, dispatch)
     const [loading, setLoading] = useState(false)
@@ -53,6 +60,7 @@ export const SchedulePage = () => {
     const navigate = useNavigate()
 
     useEffect(()=>{  
+        document.body.style.overflow = "hidden";
         const setScheduleData = async () => {
             setLoading(true)
             await auth.onAuthStateChanged( async (user) => {
@@ -60,13 +68,12 @@ export const SchedulePage = () => {
                     const groupsRef = collection(db, "groups");  
        
                     const workersData = await getDocs(groupsRef)
-                    let foundWorker, foundGroup:string = "";  
+                    let foundWorker;  
                 
                     await workersData.docs.forEach((doc)=>{
                       foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === user.uid)
-                      foundWorker&&(foundGroup = doc.data().nameGroup)
+                      foundWorker&&(setNameGroup(doc.data().nameGroup))
                     })
-                     setScheduleFromFirebase(dispatch, foundGroup)
                      setLoginPersonAndGroupFromFirebase(dispatch, user.uid).then(()=>setLoading(false))
                 }
                 else{
@@ -74,7 +81,7 @@ export const SchedulePage = () => {
                 } 
             })
         };
-        selectMonth===1&&setScheduleData();
+       setScheduleData();
     },[])
 
     const updateSchedule = async () => {
@@ -88,18 +95,22 @@ export const SchedulePage = () => {
     };
     useEffect(()=>{
         const nextMonth = () => {
-            if(selectMonth!==1){
-                const nowDate:Date = new Date();
-                const nowYear = nowDate.getFullYear();
-                const nowMoth = (nowDate.getMonth())+selectMonth;
-                const nextSchedule:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}> =  generateSheduleData(new Date(nowYear, nowMoth, 0).getDate())
-                 setSchedule(nextSchedule)
-                console.log(nextSchedule)
-                 console.log(schedule)
-            }          
+            if(selectDate!==new Date()){
+                //:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}>
+                    const nextSchedule = generateSheduleData(daysInMonth(selectDate))         
+                    setSchedule([{id:1,persons:[{name: "string",
+                        startWork: "string",
+                        endWork: "string"}]}])
+
+                   console.log(nextSchedule)
+                    console.log(schedule)           
+            }    
+            else {
+                setScheduleFromFirebase(dispatch, nameGroup)
+            }      
         }
         nextMonth()
-    },[selectMonth])
+    },[selectDate])
 
 
   
@@ -132,11 +143,11 @@ export const SchedulePage = () => {
              className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
                 <div className='SchedulePage__navbar flex'>
                     <div className='date'>
-                        <div className='year'>{today.getFullYear()}</div> 
+                        <div className='year'>{selectDate.getFullYear()}</div> 
                         <nav className='flex'>
-                            <div className='arrow-left' onClick={()=>setSelectMonth(selectMonth-1)}><MdOutlineArrowBackIosNew size={20}/></div>
-                            <div className='month'>{month[today.getMonth()+selectMonth-1]}</div>                     
-                            <div className='arrow-right' onClick={()=>setSelectMonth(selectMonth+1)}><MdOutlineArrowBackIosNew size={20}/></div>
+                            <div className='arrow-left' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()-1,1))}><MdOutlineArrowBackIosNew size={20}/></div>
+                            <div className='month'>{month[selectDate.getMonth()]}</div>                     
+                            <div className='arrow-right' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1))}><MdOutlineArrowBackIosNew size={20}/></div>
                         </nav>
                         {!isTabletOrMobile&&<WorkerList/>}
                     </div>
@@ -148,7 +159,7 @@ export const SchedulePage = () => {
                         {day.substring(0,2)}
                     </div>})}
 
-                   {firstDayOfMonth(selectMonth-1).map((i)=>{
+                   {firstDayOfMonth(selectDate).map((i)=>{
                     return  <div key={i} className='empty-day'></div>
                    })}
                    
@@ -160,8 +171,10 @@ export const SchedulePage = () => {
                 </div>
             </motion.div>
             {isTabletOrMobile&&<>
-                <DayContent chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
-                <WorkerList/>
+                <div style={{overflowY:"scroll", height:"200px"}}>
+                    <DayContent chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
+                    <WorkerList/>
+                </div>
             </>}
             
             {isTabletOrMobile&&<div className='save__add-button flex' style={{backgroundColor:`rgb(${theme})`}}>

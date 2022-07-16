@@ -38,7 +38,7 @@ export const CreateSchedule = () => {
       }
     }).then( async ()=> {
       await setDoc(doc(db, "schedule", nameGroup), {
-        [month[today.getMonth()]+today.getFullYear()]: generateSheduleData(daysInMonth())
+        [month[today.getMonth()]+today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
       })
     })
     

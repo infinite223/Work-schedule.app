@@ -5,6 +5,7 @@ import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
 import './StartPage.scss'
 
 export const StartPage = () => {
+  document.body.style.overflow = "scroll";
 
   const headerText = "You can create your first work schedule here, it's really that simple";
   const loginText = "If you belong to an existing work schedule, you should click log in";

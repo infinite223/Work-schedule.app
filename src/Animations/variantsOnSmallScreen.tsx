@@ -34,3 +34,10 @@ export const showMenuModal = {
   visible:{opacity:1, scale:1},
  exit:{opacity:0, scale:[".9", ".8", ".4", ".1"]}
 }
+export const tap = {
+  visible:{backgroundColor:"black"},
+  tap:{
+    scale:[1,.2, .6, 1],
+    opacity:0,
+  }
+}

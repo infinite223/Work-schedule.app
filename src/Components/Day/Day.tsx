@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion} from '../../Helpers/imports'
 import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
 import { showWorkers } from '../../Animations/variants';
+import { tap } from '../../Animations/variantsOnSmallScreen';
 import { useMediaQuery } from 'react-responsive'
+import { useMotionValue, animate } from 'framer-motion';
 
 import { ChoseHoursModal } from '../ChoseHoursModal';
 
@@ -22,6 +24,7 @@ export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, pers
   const dispatch = useDispatch();
   const { setSelectedDay } = bindActionCreators(actionCreators, dispatch)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
+  const opacity = useMotionValue(0)
 
 
   return (
@@ -43,14 +46,14 @@ export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, pers
             }):<>no data</>}
           </div>
       </motion.div>:
-      <div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
-        <span className={todayDate.getDate()===id?"today":""}>{id}</span>
+      <motion.div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
+        <motion.span whileTap="tap" variants={tap} className={todayDate.getDate()===id?"today":""}>{id}</motion.span>
         <div className='dots'>
           {persons?persons?.map(({ name }, person)=>{
                 return <BsDot key={person} size={20} className={loginPerson===name?"dot magenta-text":"dot"}/>
           }):<></>}
         </div>
-      </div>}
+      </motion.div>}
     </>
   )
 }
