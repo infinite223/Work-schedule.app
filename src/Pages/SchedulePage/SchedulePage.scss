@@ -18,7 +18,32 @@
 
     .SchedulePage__main {
         display: flex;
+        height: auto;
         position: relative;
+
+        nav {
+            z-index: 15;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+          
+            .year {
+                font-size: 60px;
+                letter-spacing: 2px;
+                margin: 13px;       
+
+                @media only screen and (max-width: 1024px) {
+                    font-size: 25px;
+                    text-align: left;
+                }
+            }
+            .arrow-icon-top {
+                position: absolute;
+                left: 48%;
+                top:15px;
+            }
+        }
 
         @media only screen and (max-width: 1024px) {
             flex-direction: column;
@@ -40,89 +65,85 @@
             left:46%;
             transform: rotate(180deg);
         }
-        .arrow-icon-top {
-            position: absolute;
-           
-            top:25%;
-            left:47%;
-        }
-    } 
 
-    .SchedulePage__navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        height: 100%;
+        
+    .schedule__content-all {
+        display: flex;
 
         @media only screen and (max-width: 1024px) {
-            flex-direction: row;
+            flex-direction: column;
         }
-        
-        .date {               
-            margin: 5px;
-            //margin-top: 0px;
-     
-            padding: 10px;
 
-            max-width: 250px;
+        .SchedulePage__navbar {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: 100%;
+            width: 100%;
     
-            font-size: 24px;
-            text-align: left;
-
             @media only screen and (max-width: 1024px) {
-                margin-bottom: 0px;
-                padding-bottom: 0px;
-                max-width: none;
-                width: 100%;
-            }                   
-    
-            .year {
-                font-size: 60px;
-                letter-spacing: 2px;
-                text-align: center;
-
-                @media only screen and (max-width: 1024px) {
-                    font-size: 25px;
-                    text-align: left;
-                }
+                flex-direction: row;
             }
-
-            nav {
-                justify-content: space-between;
-
-                margin: 30px 0;
-                @media only screen and (max-width: 1024px) {
-                    width: 100%;
-                    margin-bottom: 0px;
-                }
-
-                .month {    
-                    font-weight: 500;
-                    color: #FF00FF;
+            
+            .date {               
+                margin: 5px;
+                //margin-top: 0px;
+         
+                padding: 10px;
     
-                    @media only screen and (max-width: 1024px) {
-    
-                        text-transform:uppercase;
-                        letter-spacing: 2px;
-                        color: antiquewhite;
-                        font-size: 16px;
-                    } 
-                }
+                max-width: 250px;
         
-                .arrow-left {
+                font-size: 24px;
+                text-align: left;
+    
+                @media only screen and (max-width: 1024px) {
+                    margin-bottom: 0px;
+                    padding-bottom: 0px;
+                    max-width: none;
+                    width: 100%;
+                }                   
+    
+    
+                nav {
+                    justify-content: space-between;
+    
+                    margin: 30px 0;
                     @media only screen and (max-width: 1024px) {
-
-                    } 
-                }
-                .arrow-right {
-                    @media only screen and (max-width: 1024px) {
-
-                    } 
-                    transform: rotate(180deg);
+                        width: 100%;
+                        margin-bottom: 0px;
+                    }
+    
+                    .month {    
+                        font-weight: 500;
+                        color: #FF00FF;
+        
+                        @media only screen and (max-width: 1024px) {
+        
+                            text-transform:uppercase;
+                            letter-spacing: 2px;
+                            color: antiquewhite;
+                            font-size: 16px;
+                        } 
+                    }
+            
+                    .arrow-left {
+                        @media only screen and (max-width: 1024px) {
+    
+                        } 
+                    }
+                    .arrow-right {
+                        @media only screen and (max-width: 1024px) {
+    
+                        } 
+                        transform: rotate(180deg);
+                    }
                 }
             }
         }
     }
+
+    } 
+    
 
 
     .SchedulePage__content {
