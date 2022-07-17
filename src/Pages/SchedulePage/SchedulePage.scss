@@ -7,7 +7,8 @@
 
     @media only screen and (max-width: 1024px) {
         width: 100vw;
-        height: 100vh;  
+        height: auto;  
+        margin-bottom: 20px;
         flex-direction: column;
     }
 
@@ -18,22 +19,20 @@
 
     .SchedulePage__main {
         display: flex;
-        height: auto;
         position: relative;
 
-        nav {
-            z-index: 15;
+        .main-nav {
             display: flex;
+            width: 100vw;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            position: fixed;
+
+            background-color: rgba(39, 38, 38, .15);
           
             .year {
-                font-size: 60px;
-                letter-spacing: 2px;
-                margin: 13px;       
-
                 @media only screen and (max-width: 1024px) {
+                    margin: 13px;
                     font-size: 25px;
                     text-align: left;
                 }
@@ -69,6 +68,8 @@
         
     .schedule__content-all {
         display: flex;
+        margin-top: 50px;
+        
 
         @media only screen and (max-width: 1024px) {
             flex-direction: column;
@@ -79,15 +80,15 @@
             align-items: flex-start;
             justify-content: flex-start;
             height: 100%;
-            width: 100%;
+      
     
             @media only screen and (max-width: 1024px) {
                 flex-direction: row;
+                width: 100%;
             }
             
             .date {               
                 margin: 5px;
-                //margin-top: 0px;
          
                 padding: 10px;
     
@@ -95,6 +96,12 @@
         
                 font-size: 24px;
                 text-align: left;
+
+                .year {
+                    font-size: 60px;
+                    letter-spacing: 2px;
+                    margin: 13px;       
+                }
     
                 @media only screen and (max-width: 1024px) {
                     margin-bottom: 0px;
@@ -110,7 +117,7 @@
                     margin: 30px 0;
                     @media only screen and (max-width: 1024px) {
                         width: 100%;
-                        margin-bottom: 0px;
+                        margin: 0px;
                     }
     
                     .month {    
@@ -144,13 +151,17 @@
 
     } 
     
-
+.schedule {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 
     .SchedulePage__content {
         flex-wrap: wrap;
         justify-content: flex-start;
 
-        width: 90%;
+        width: 100%;
         height: 100;
         
         @media only screen and (max-width: 1024px) {
@@ -158,6 +169,7 @@
             margin-bottom: 5px;
             
             padding: 20px 10px;
+            padding-top: 5px;
             padding-bottom: 0px;
 
             display: flex;
@@ -191,8 +203,8 @@
                 margin: 3px;
             }
         }
-    
     }
+}
 
     .daysOfTheWeek {
        display: none;

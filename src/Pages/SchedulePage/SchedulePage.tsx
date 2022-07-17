@@ -83,7 +83,7 @@ export const SchedulePage = () => {
       }, [schowSchedule])
 
     useEffect(()=>{  
-        document.body.style.overflow = "hidden";
+        // document.body.style.overflow = "hidden";
         const setScheduleData = async () => {
             setLoading(true)
             await auth.onAuthStateChanged( async (user) => {
@@ -143,41 +143,41 @@ export const SchedulePage = () => {
     <> 
         {loading&&<LoadingStatus/> }
         {showMessage&&<MessageModal description='schedule was saved!' setShowMessage={setShowMessage}/>}
-        {!isTabletOrMobile?
+        {!isTabletOrMobile&&
             <div className='login__person-text flex'>
                 <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
                 <div>Log person </div>
                 <span>{loginPerson}</span>
                 <GiHamburgerMenu className='hover__pointer' size={18} style={{marginLeft:"15px"}} onClick={()=>setShowMenu(true)}/>
-            </div>:
-           <></>
+            </div>    
         }
         {showMenu&&<MenuModal showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
         {showSettings&&<SettingsModal theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
         {(showMenu || showSettings)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
-        <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage}>         
+        <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">         
             <motion.div
              style={isTabletOrMobile?{  background: "linear-gradient(0deg, rgba("+theme+", .5) 66%, rgba("+theme+",.7) 85%, rgba("+theme+", 0.9) 96%)",
              boxShadow: "inset 0px -5px 0px 0px rgb("+theme+")"}:{}}
-             className='SchedulePage__main'  >
-                <nav>
+             className='SchedulePage__main'  initial="hidden">
+                {isTabletOrMobile&&<nav className='main-nav'>
                     <div className='year'>{selectDate.getFullYear()}</div>                  
-                     {isTabletOrMobile&&<motion.div animate={controlArrow}>{!schowSchedule&&<MdKeyboardArrowDown size={30} className="arrow-icon-top" onClick={()=>setShowSchedule(true)}/>}</motion.div>}
-                    {!showMenu&&<GiHamburgerMenu size={24} onClick={()=>setShowMenu(true)} className="menu"/>}
-                 </nav>
+                     {/* {isTabletOrMobile&&<motion.div animate={controlArrow}>{!schowSchedule&&<MdKeyboardArrowDown size={30} className="arrow-icon-top" onClick={()=>setShowSchedule(true)}/>}</motion.div>} */}
+                    {!showMenu&&<GiHamburgerMenu style={{left:"88vw"}} size={24} onClick={()=>setShowMenu(true)} className="menu"/>}
+                 </nav>}
                 <motion.div className='flex schedule__content-all' animate={controlSchedule}>
-                    <div className='SchedulePage__navbar flex'>
-                        <div className='date'>                           
+                    <div className='SchedulePage__navbar flex'>                        
+                        <div className='date'>   
+                            {!isTabletOrMobile&&<div className='year'>{selectDate.getFullYear()}</div> }                           
                             <nav className='flex'>
-                                <div className='arrow-left' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()-1,1))}><MdOutlineArrowBackIosNew size={20}/></div>
+                                <div className='arrow-left' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()-1,1))}><MdOutlineArrowBackIosNew size={18}/></div>
                                 <div className='month'>{month[selectDate.getMonth()]}</div>                     
-                                <div className='arrow-right' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1))}><MdOutlineArrowBackIosNew size={20}/></div>
+                                <div className='arrow-right' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1))}><MdOutlineArrowBackIosNew size={18}/></div>
                             </nav>
                             {!isTabletOrMobile&&<WorkerList/>}
                         </div>
                     
                     </div>
-                    <motion.div animate={controlDay} >
+                    <motion.div animate={controlDay} className="schedule">
                         <motion.div key="box" animate={controlSchedule}  className='SchedulePage__content flex'>
                             {daysShortcuts.map((day)=>{return <div key={day} className='daysOfTheWeek'>
                                 {day.substring(0,2)}
@@ -194,14 +194,12 @@ export const SchedulePage = () => {
                             })}
                         </motion.div>
                     </motion.div>
-                    {isTabletOrMobile&&<motion.div animate={controlArrow}><MdKeyboardArrowDown size={30} className="arrow-icon" onClick={()=>setShowSchedule(false)}/></motion.div>}
+                    {/* {isTabletOrMobile&&<motion.div animate={controlArrow}><MdKeyboardArrowDown size={30} className="arrow-icon" onClick={()=>setShowSchedule(false)}/></motion.div>} */}
                 </motion.div>
             </motion.div>
             {isTabletOrMobile&&<>
-                <div style={{overflowY:"scroll"}}>
                     <DayContent chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
                     <WorkerList/>
-                </div>
             </>}
             
             {isTabletOrMobile&&<motion.div whileTap="tap" variants={tap}  className='save__add-button flex' style={{background: "radial-gradient(circle, rgba("+theme+",.7) 36%, rgba("+theme+",.5) 73%)"}}>
