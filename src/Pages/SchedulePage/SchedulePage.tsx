@@ -155,11 +155,11 @@ export const SchedulePage = () => {
         {showMenu&&<MenuModal showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
         {showSettings&&<SettingsModal theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
         {(showMenu || showSettings)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
-        <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">         
+        <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage}>         
             <motion.div
              style={isTabletOrMobile?{  background: "linear-gradient(0deg, rgba("+theme+", .5) 66%, rgba("+theme+",.7) 85%, rgba("+theme+", 0.9) 96%)",
              boxShadow: "inset 0px -5px 0px 0px rgb("+theme+")"}:{}}
-             className='SchedulePage__main'  initial="hidden">
+             className='SchedulePage__main'  >
                 <nav>
                     <div className='year'>{selectDate.getFullYear()}</div>                  
                      {isTabletOrMobile&&<motion.div animate={controlArrow}>{!schowSchedule&&<MdKeyboardArrowDown size={30} className="arrow-icon-top" onClick={()=>setShowSchedule(true)}/>}</motion.div>}
@@ -194,7 +194,7 @@ export const SchedulePage = () => {
                             })}
                         </motion.div>
                     </motion.div>
-                    {isTabletOrMobile&&<motion.div animate={controlArrow}>{showSchedule&&<MdKeyboardArrowDown size={30} className="arrow-icon" onClick={()=>setShowSchedule(false)}/>}</motion.div>}
+                    {isTabletOrMobile&&<motion.div animate={controlArrow}><MdKeyboardArrowDown size={30} className="arrow-icon" onClick={()=>setShowSchedule(false)}/></motion.div>}
                 </motion.div>
             </motion.div>
             {isTabletOrMobile&&<>
