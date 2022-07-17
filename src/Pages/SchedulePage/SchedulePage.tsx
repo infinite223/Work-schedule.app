@@ -1,26 +1,24 @@
-import { motion } from '../../Helpers/imports';
+import { useAnimation, motion } from 'framer-motion';
 import { showPage } from '../../Animations/variants';
-import { showMobilePage, showSchedule } from '../../Animations/variantsOnSmallScreen';
+import { showMobilePage, showSchedule, tap } from '../../Animations/variantsOnSmallScreen';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { useSelector, useDispatch } from 'react-redux';
 import { SettingsModal } from './../../Components/SettingsModal';
 import { State } from '../../state';
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import './SchedulePage.scss'
 import { Day } from '../../Components/Day/Day';
 import { DayContent } from '../../Components/DayContent';
 import { daysShortcuts, month, today } from '../../Helpers/constants';
-import { daysInMonth, firstDayOfMonth } from '../../Helpers/functions/functions';
+import { daysInMonth, firstDayOfMonth, setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase, generateSheduleData } from '../../Helpers/functions/functions';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
-import { MdOutlinePersonOutline, MdOutlineArrowBackIosNew } from 'react-icons/md'
+import { MdOutlinePersonOutline, MdOutlineArrowBackIosNew, MdKeyboardArrowDown } from 'react-icons/md'
 import { BiPlus, BiMinus} from 'react-icons/bi'
-import { db } from "../../firebase";
 import { MenuModal } from '../../Components/MenuModal';
-import { setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
 import { workerAfterSign } from '../../Helpers/types';
 import LoadingStatus from '../../Components/LoadingStatus';
 import {
@@ -30,34 +28,52 @@ import {
   doc
 } from "firebase/firestore";
 import { IGroupType } from '../../Helpers/interfaces';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MessageModal } from '../../Components/MessageModal';
-import { generateSheduleData } from './../../Helpers/functions/functions';
-import { IShedule } from './../../Helpers/interfaces';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
     const [showMenu, setShowMenu] = useState(false);
-
-    const [selectMonth, setSelectMonth] = useState<number>(1);
-    const [selectYear, setSelectYear] = useState<number>(1);
     const [selectDate, setSelectDate] = useState(new Date())
-
-    console.log(selectDate)
-
     const [showSettings, setShowSettings] = useState(false)
     const [theme, setTheme] = useState<Array<number>>([12, 32, 120])
-    const [ chooseHours, setChooseHours ] = useState<boolean>(false)
+    const [schowSchedule, setShowSchedule] = useState(true)
+    const [chooseHours, setChooseHours] = useState<boolean>(false)
+    const [nameGroup, setNameGroup] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [showMessage, setShowMessage] = useState(false)
+
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
     const selectedDay = useSelector((state: State)=> state.select)
     const group:IGroupType = useSelector((state: State)=> state.group)
-    const [nameGroup, setNameGroup] = useState("")
+
     const dispatch = useDispatch();
-    const { setPersonInDay, setSchedule } = bindActionCreators(actionCreators, dispatch)
-    const [loading, setLoading] = useState(false)
-    const [showMessage, setShowMessage] = useState(false)
+    
     const navigate = useNavigate()
+    const controlDay = useAnimation()
+    const controlSchedule = useAnimation()
+
+    const {setPersonInDay, setSchedule} = bindActionCreators(actionCreators, dispatch)
+
+    useEffect(()=>{
+        controlDay.start({
+          opacity:[0,1],
+          transition: { duration: 2 },
+        })
+      }, [selectDate])
+
+      useEffect(()=>{
+        isTabletOrMobile&&(
+        controlSchedule.start({
+          height:!schowSchedule?"50px":"auto",
+          overflow:!schowSchedule?"hidden":"",
+          transition: { duration: 1, overflow: schowSchedule?{
+            delay:1
+          }:{delay:0} },          
+        }))
+      }, [schowSchedule])
 
     useEffect(()=>{  
         document.body.style.overflow = "hidden";
@@ -95,15 +111,11 @@ export const SchedulePage = () => {
     };
     useEffect(()=>{
         const nextMonth = () => {
-            if(selectDate!==new Date()){
-                //:Array<{id:number, persons:Array<{name:string, startWork:string, endWork:string}>}>
+            if(selectDate!==new Date()){            
                     const nextSchedule = generateSheduleData(daysInMonth(selectDate))         
                     setSchedule([{id:1,persons:[{name: "string",
                         startWork: "string",
-                        endWork: "string"}]}])
-
-                   console.log(nextSchedule)
-                    console.log(schedule)           
+                        endWork: "string"}]}])      
             }    
             else {
                 setScheduleFromFirebase(dispatch, nameGroup)
@@ -140,7 +152,7 @@ export const SchedulePage = () => {
             <motion.div
              style={isTabletOrMobile?{  background: "linear-gradient(0deg, rgba("+theme+", .5) 66%, rgba("+theme+",.7) 85%, rgba("+theme+", 0.9) 96%)",
              boxShadow: "inset 0px -5px 0px 0px rgb("+theme+")"}:{}}
-             className='SchedulePage__main' variants={showSchedule} initial="hidden" animate="visible">
+             className='SchedulePage__main'  initial="hidden" animate={controlSchedule}>
                 <div className='SchedulePage__navbar flex'>
                     <div className='date'>
                         <div className='year'>{selectDate.getFullYear()}</div> 
@@ -153,22 +165,24 @@ export const SchedulePage = () => {
                     </div>
                 
                 </div>
+                <motion.div animate={controlDay} >
+                    <motion.div key="box" animate={controlSchedule}  className='SchedulePage__content flex'>
+                        {daysShortcuts.map((day)=>{return <div key={day} className='daysOfTheWeek'>
+                            {day.substring(0,2)}
+                        </div>})}
 
-                <div className='SchedulePage__content flex'>
-                    {daysShortcuts.map((day)=>{return <div key={day} className='daysOfTheWeek'>
-                        {day.substring(0,2)}
-                    </div>})}
-
-                   {firstDayOfMonth(selectDate).map((i)=>{
-                    return  <div key={i} className='empty-day'></div>
-                   })}
-                   
-                    {schedule.map((day)=>{
-                        return (
-                            <Day key={day.id} id={day.id}  persons={day.persons}/>
-                        )
+                    {firstDayOfMonth(selectDate).map((i)=>{
+                        return  <div key={i} className='empty-day'></div>
                     })}
-                </div>
+                    
+                        {schedule.map((day)=>{
+                            return (
+                                <Day key={day.id} id={day.id}  persons={day.persons}/>
+                            )
+                        })}
+                    </motion.div>
+                </motion.div>
+                {isTabletOrMobile&&<MdKeyboardArrowDown size={30} className={schowSchedule?"arrow-icon":"arrow-icon-top"} onClick={()=>setShowSchedule(!schowSchedule)}/>}
             </motion.div>
             {isTabletOrMobile&&<>
                 <div style={{overflowY:"scroll"}}>
@@ -177,11 +191,11 @@ export const SchedulePage = () => {
                 </div>
             </>}
             
-            {isTabletOrMobile&&<div className='save__add-button flex' style={{backgroundColor:`rgb(${theme})`}}>
+            {isTabletOrMobile&&<motion.div whileTap="tap" variants={tap}  className='save__add-button flex' style={{background: "radial-gradient(circle, rgba("+theme+",.7) 36%, rgba("+theme+",.5) 73%)"}}>
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
                 ?<BiPlus size={35} color="white" onClick={()=>setChooseHours(true)}/>
                 :<BiMinus size={35} color="white" onClick={()=>removePerson(false)}/>}    
-            </div> } 
+            </motion.div> } 
             
         </motion.div>
     </>                                                                                          

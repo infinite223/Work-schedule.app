@@ -11,8 +11,10 @@
     height: 80vh;
 
     @media only screen and (max-width: 1024px) {
-        width: 80vw;  
+        width: 90vw;  
         height: 90vh;  
+
+        padding: 1rem .7rem;
     }
 
     padding: 1rem 2rem;
@@ -36,9 +38,9 @@
     }
 
     .option {
-        background-color: rgba(28, 28, 28, 0.9);
+        background-color: rgba(28, 28, 28, 0.8);
         justify-content: space-between;
-        border-radius: 15px;
+        border-radius: 7px;
         width: 100%;
 
         span {
@@ -46,7 +48,7 @@
             padding: 1rem;
             text-align: left;
 
-            width: 40%;
+            width: 50%;
         }
 
         .themes {

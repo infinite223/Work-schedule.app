@@ -31,7 +31,7 @@ export const WorkerList = () => {
 
   return (
     <div className='SchedulePage__data flex'>
-        <div className='group-name'>{group.nameGroup}</div>
+        <div className='group-name'>{group.nameGroup} <small>(workers list)</small> </div>
         <div className='worker-list'>    
 
              {group?.workers?.map(({ nickname },i)=>{

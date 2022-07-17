@@ -35,6 +35,8 @@
             width: 100%;
         
             padding: .3rem;
+            background-color: rgb(25, 25, 25);
+            border-radius: 7px;
 
 
             @media only screen and (max-width: 1024px) {
@@ -54,14 +56,12 @@
             .worker-name {       
                 text-align: left;
                 font-size: 16px;
-
-                border-bottom: 2px solid rgb(34, 33, 33);
+               
                 padding: .2rem; 
             }
 
             .worker-hours {
-                text-align: right;
-                border-bottom: 2px solid rgb(34, 33, 33);
+                text-align: right;          
                 padding: .2rem;
             }
         }

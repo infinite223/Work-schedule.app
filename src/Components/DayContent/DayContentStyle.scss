@@ -41,10 +41,13 @@
         border-radius: 5px;
 
         .person { 
-            display: flex;        
-            padding: 5px 0px;
+            display: flex;    
+               
+            padding:10px;
+            margin-bottom: 5px;
 
-            //border-bottom: 1px solid rgb(68, 67, 67);
+            background-color: rgb(25, 25, 25);
+            border-radius: 7px;
 
             .interval {
                 margin-left: auto;

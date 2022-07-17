@@ -1,12 +1,12 @@
 .messageModal {
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 14;
-    top: 75vh;
+    max-width: 80vw;
 
-    padding:.5rem 1.2rem;
+    padding:.9rem 1.2rem;
     font-size: 20px;
     color: rgb(162, 160, 160);
     background-color:rgb(23, 22, 22);
@@ -14,5 +14,6 @@
 
     div {
         margin-right: 10px;
+        max-width: 90%;
     }
 }

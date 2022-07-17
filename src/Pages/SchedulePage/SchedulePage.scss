@@ -18,6 +18,7 @@
 
     .SchedulePage__main {
         display: flex;
+        position: relative;
 
         @media only screen and (max-width: 1024px) {
             flex-direction: column;
@@ -30,6 +31,20 @@
             border-bottom: 1px solid rgba(224, 223, 223, 0.3);
     
             border-radius: 0 0 20px 20px;
+        }
+
+        .arrow-icon {
+            position: absolute;
+           
+            top:93%;
+            left:46%;
+            transform: rotate(180deg);
+        }
+        .arrow-icon-top {
+            position: absolute;
+           
+            top:25%;
+            left:47%;
         }
     } 
 
@@ -44,8 +59,9 @@
         }
         
         .date {               
-            margin: 10px;
-            margin-top: 15px;
+            margin: 5px;
+            //margin-top: 0px;
+     
             padding: 10px;
 
             max-width: 250px;
@@ -81,7 +97,7 @@
                 }
 
                 .month {    
-                    font-weight: 700;
+                    font-weight: 500;
                     color: #FF00FF;
     
                     @media only screen and (max-width: 1024px) {
@@ -89,7 +105,7 @@
                         text-transform:uppercase;
                         letter-spacing: 2px;
                         color: antiquewhite;
-                        font-size: 20px;
+                        font-size: 16px;
                     } 
                 }
         

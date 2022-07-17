@@ -47,8 +47,8 @@ export const show = {
 
   export const message = {
     hidden: {opacity:0, top:"10px"},
-    visible:{opacity:1, top:"75%"},
-    exit:{opacity:0, top:"90%"}
+    visible:{opacity:1, top:"75vh"},
+    exit:{opacity:0, top:"90vh"}
   }
 
   export const showWorkers = {
