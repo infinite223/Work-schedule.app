@@ -142,7 +142,7 @@ export const SchedulePage = () => {
   return (
     <> 
         {loading&&<LoadingStatus/> }
-        {showMessage&&<MessageModal description='schedule was saved!' setShowMessage={setShowMessage}/>}
+        {showMessage&&<MessageModal description='schedule was saved!' status={true} setShowMessage={setShowMessage}/>}
         {!isTabletOrMobile&&
             <div className='login__person-text flex'>
                 <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
@@ -162,7 +162,7 @@ export const SchedulePage = () => {
                 {isTabletOrMobile&&<nav className='main-nav'>
                     <div className='year'>{selectDate.getFullYear()}</div>                  
                      {/* {isTabletOrMobile&&<motion.div animate={controlArrow}>{!schowSchedule&&<MdKeyboardArrowDown size={30} className="arrow-icon-top" onClick={()=>setShowSchedule(true)}/>}</motion.div>} */}
-                    {!showMenu&&<GiHamburgerMenu style={{left:"88vw"}} size={24} onClick={()=>setShowMenu(true)} className="menu"/>}
+                    {!showMenu&&<GiHamburgerMenu style={{right:"15px"}} size={24} onClick={()=>setShowMenu(true)} className="menu"/>}
                  </nav>}
                 <motion.div className='flex schedule__content-all' animate={controlSchedule}>
                     <div className='SchedulePage__navbar flex'>                        

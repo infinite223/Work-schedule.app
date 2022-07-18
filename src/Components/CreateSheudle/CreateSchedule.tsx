@@ -28,43 +28,75 @@ export const CreateSchedule = () => {
 
   const { addPerson } = bindActionCreators(actionCreators, dispatch)
   const [showMessage, setShowMessage] = useState(false)
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState({descripstion:"", status:false})
 
   const createSchedule = async () => {
+    // if(persons.length<=1){
+    //   if(nameGroup.length>=4){
+    //     if(emailAdmin.length > 3 || nicknameAdmin.length > 3){
+    //       const foundGroup = await getDoc(doc(db, "groups", nameGroup))  
+    //       if(!foundGroup.data()){
+    //         await setDoc(doc(db, "groups", nameGroup), {
+    //           nameGroup:nameGroup,
+    //           workers: person,
+    //           admin: {
+    //             nickname:nicknameAdmin,
+    //             email:emailAdmin
+    //           }
+    //         }).then( async ()=> {
+    //           await setDoc(doc(db, "schedule", nameGroup), {
+    //             [month[today.getMonth()] + today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
+    //           }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true)))
+    //         })
+    //       }
+    //       else {
+    //         setMessage({descripstion:"Group name taken, use another", status:false}); setShowMessage(true)
+    //       }
+    //     }
+    //     else {
+    //       setMessage({descripstion:"Email or nickname is too short", status:false}); setShowMessage(true)
+    //     }
+    //   }
+    //   else {
+    //     setMessage({descripstion:"The group name must be at least 4 letters long", status:false}); setShowMessage(true)
+    //   }
+    // }
+    // else {
+    //   setMessage({descripstion:"Without employees, you cannot create a schedule", status:false}); setShowMessage(true);
+    // }
+
+    const foundGroup = await getDoc(doc(db, "groups", nameGroup))  
     if(persons.length<1){
-      setMessage("Without employees, you cannot create a schedule"); setShowMessage(true)
+      setMessage({descripstion:"Without employees, you cannot create a schedule", status:false}); setShowMessage(true);
     }
     else if(nameGroup.length<4){
-      setMessage("The group name must be at least 4 letters long"); setShowMessage(true)
+      setMessage({descripstion:"The group name must be at least 4 letters long", status:false}); setShowMessage(true)
     }
-     else if(message.length>3){
-       setShowMessage(true)
-      }
+    else if(emailAdmin.length < 3 || nicknameAdmin.length < 3){
+      setMessage({descripstion:"Email or nickname is too short", status:false}); setShowMessage(true)
+    }
+    else if(foundGroup.data()){
+      setMessage({descripstion:"Group name taken, use another", status:false}); setShowMessage(true)
+    }
     else {
-      const foundGroup = await getDoc(doc(db, "groups", nameGroup))  
-      if(!foundGroup.data()){
-        await setDoc(doc(db, "groups", nameGroup), {
-          nameGroup:nameGroup,
-          workers: person,
-          admin: {
-            nickname:nicknameAdmin,
-            email:emailAdmin
-          }
-        }).then( async ()=> {
-          await setDoc(doc(db, "schedule", nameGroup), {
-            [month[today.getMonth()]+today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
-          }).then(() => (setMessage("The group has been created correctly"), setShowMessage(true)))
-        })
-      }
-      else {
-        setMessage("Group name taken, use another"); setShowMessage(true)
-      }
+      await setDoc(doc(db, "groups", nameGroup), {
+        nameGroup:nameGroup,
+        workers: person,
+        admin: {
+          nickname:nicknameAdmin,
+          email:emailAdmin
+        }
+      }).then( async ()=> {
+        await setDoc(doc(db, "schedule", nameGroup), {
+          [month[today.getMonth()] + today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
+        }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true)))
+      })
     }
   }
 
   return (
     <>
-    {showMessage&&<MessageModal description={message} setShowMessage={setShowMessage}/>}
+    {showMessage&&<MessageModal setMessage={setMessage} description={message.descripstion} status={message.status} setShowMessage={setShowMessage}/>}
       <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
       <motion.div initial={!isTabletOrMobile?{right:"-85px"}:{right:"0px"}} whileHover={{right:"0px"}} transition={{duration:.5}} className='right-header flex'>
             {!isTabletOrMobile&&<HiOutlineChevronDoubleLeft size={30} className='icon-save'/>}

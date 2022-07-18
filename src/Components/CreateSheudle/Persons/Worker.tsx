@@ -7,7 +7,7 @@ import './Person.scss'
 
 
 
-export const Worker: React.FC<{ id:number, setMessage:(value:string) => void }>= ({ id, setMessage }) => { 
+export const Worker: React.FC<{ id:number, setMessage:(value:{descripstion:string, status:boolean}) => void }>= ({ id, setMessage }) => { 
   const person = useSelector((state: State)=> state.person)
   const dispatch = useDispatch();
   
@@ -18,10 +18,10 @@ export const Worker: React.FC<{ id:number, setMessage:(value:string) => void }>=
 
   useEffect(()=>{
     if(email.length<3 || nickname.length<3){
-      setMessage("Email or nickname is too short")
+      //setMessage({descripstion:"Email or nickname is too short", status:false})
     }
     else {
-      setMessage("")
+      setMessage({descripstion:"", status:true})
     }
   },[email, nickname])
 

@@ -25,15 +25,12 @@
             display: flex;
             width: 100vw;
             justify-content: space-between;
-            align-items: center;
-            position: fixed;
-
-            background-color: rgba(39, 38, 38, .15);
+            align-items: center;   
           
             .year {
                 @media only screen and (max-width: 1024px) {
                     margin: 13px;
-                    font-size: 25px;
+                    font-size: 30px;
                     text-align: left;
                 }
             }
@@ -68,7 +65,7 @@
         
     .schedule__content-all {
         display: flex;
-        margin-top: 50px;
+        margin-top: 10px;
         
 
         @media only screen and (max-width: 1024px) {
