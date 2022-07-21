@@ -1,4 +1,4 @@
-import { motion, HiOutlineChevronDoubleLeft, useNavigate, Admin, Worker, useDispatch, bindActionCreators, MdOutlinePersonAdd, BsPersonBoundingBox } from '../../Helpers/imports'
+import {  Router, Routes, Route, useNavigate, Admin, Worker, useDispatch, bindActionCreators, MdOutlinePersonAdd, BsPersonBoundingBox } from '../../Helpers/imports'
 import { useSelector } from 'react-redux';
 import { actionCreators,  State } from '../../state';
 import { useState } from 'react'
@@ -16,51 +16,20 @@ import { useRef } from 'react';
 import './CreateSchedule.scss'
 import { workerBeforSign } from '../../Helpers/types';
 import LoadingStatus from './../LoadingStatus/index';
+import { CreateAdmin } from './SubPages/CreateAdmin';
+import { CreateGroups } from './SubPages/CreateGroups'
 
 export const CreateSchedule = () => {
-  const navigate = useNavigate(); 
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
-  const [ nameGroup, setNameGroup ] = useState("")
-  const persons = useSelector((state: State)=> state.person)
-  const [workers, setWorkers] = useState<Array<{id:number, email:string, nickname:string}>>([{id:1, email:"", nickname:""}])
-  const  person :any = persons;
-  const dispatch = useDispatch();
-
-  const [nicknameAdmin, setNicknameAdmin] = useState("")
-  const [emailAdmin, setEmailAdmin] = useState("")
-
-  const { addPerson } = bindActionCreators(actionCreators, dispatch)
-  const [showMessage, setShowMessage] = useState(false)
-  const [message, setMessage] = useState({descripstion:"", status:false})
-  const [validateWorkers, setValidateWorkers] = useState(false)
-  const emailRef = useRef<HTMLInputElement | null>(null)
-  const passwordRef = useRef<HTMLInputElement | null>(null)
-  const [error, setError] = useState("")
-
-  const [loading, setLoading] = useState(false)
-
-  async function createSchedule () {
-    
-  }
 
   return (
     <>
-        {loading&&<LoadingStatus/> }
-         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
-         <motion.div variants={showPage} initial="hidden" animate="visible" className='LoginPage flex'>  
-         <form className='flex'  onSubmit={createSchedule}>   
-           <div className='Login__content flex'>
-              <h1>Create schedule</h1>
-              <p>
-                First, create your administrator account
-              </p>
-             <input type="email" placeholder='E-mail' ref={emailRef} required/>
-             <input type="password" placeholder='Password' ref={passwordRef} required/>
-             <div className='error__message'>{error}</div>
-           </div>  
-           <button type="submit" className='login button'>next</button>
-          </form>  
-         </motion.div>
+      {/* <CreateAdmin/>     */}
+  
+          {/* <Routes>      
+            <Route path="/Create/Admin" element={<CreateGroups/>} />   
+            <Route path="/Create/Groups" element={<CreateGroups/>} />        
+          </Routes>     
+        */}
     </>
   )
 }

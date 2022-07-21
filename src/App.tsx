@@ -1,6 +1,8 @@
 import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, DayOnBackground, LoginPage, days } from './Helpers/imports';
 
 import './App.scss'
+import { CreateAdmin } from './Components/CreateSheudle/SubPages/CreateAdmin';
+import { CreateGroups } from './Components/CreateSheudle/SubPages/CreateGroups';
 
 function App() {
 
@@ -18,7 +20,8 @@ function App() {
         <Router>  
           <Routes>      
             <Route path="/" element={<StartPage/>} />   
-            <Route path="/Create" element={<CreateSchedule/>} />
+            <Route path="/CreateAdmin" element={<CreateAdmin/>} />
+            <Route path="/CreateGroups" element={<CreateGroups/>} />
             <Route path='/Login' element={<LoginPage/>}/> 
             <Route path='/Schedule' element={<SchedulePage/>}/>              
           </Routes>     

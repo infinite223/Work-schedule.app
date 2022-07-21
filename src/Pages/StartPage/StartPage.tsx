@@ -61,7 +61,7 @@ export const StartPage = () => {
               animate="goodPosition"
               whileHover="hover"
               whileTap="tap"
-              onClick={()=> navigate("/Create")}
+              onClick={()=> navigate("/CreateAdmin")}
             >
               Create
             </motion.div>
