@@ -6,6 +6,7 @@ import { HiOutlineChevronDoubleLeft, useNavigate, motion } from '../../../Helper
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useLocation } from 'react-router-dom';
 import { auth } from './../../../firebase/index';
+import LoadingStatus from './../../LoadingStatus/index';
 
 export const CreateAdmin = () => {
     const emailRef = useRef<HTMLInputElement | null>(null)
@@ -20,6 +21,7 @@ export const CreateAdmin = () => {
     const { state } = useLocation();
 
     function createSchedule (event:any) {
+        setLoading(true)
         event.preventDefault();
         const userPassword =  passwordRef.current?.value?passwordRef.current?.value.toString():"";
         const userEmail =  emailRef.current?.value?emailRef.current?.value.toString():"";
@@ -29,14 +31,15 @@ export const CreateAdmin = () => {
             createUserWithEmailAndPassword(auth, userEmail, userPassword).then(()=>(
               setMessage({descripstion:"Admin was created", status:true}), setShowMessage(true),
               navigate('/CreateGroups', {state: userEmail})
-            )).catch(()=> (setMessage({descripstion:"Email is already taken", status:true}), setShowMessage(true)))         
+            )).catch(()=> (setMessage({descripstion:"Email is already taken", status:true}), setShowMessage(true), setLoading(false)))         
         }
         else {
-          setMessage({descripstion:"passwords are not the same", status:false}); setShowMessage(true)
+          setMessage({descripstion:"passwords are not the same", status:false}); setShowMessage(true); setLoading(false)
         }
     }
 
   return (<>
+    {loading&&<LoadingStatus/> }
     {showMessage&&<MessageModal setShowMessage={setShowMessage}  description={message.descripstion} status={message.status} setMessage={setMessage}/>}
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
         <motion.div variants={showPage} initial="hidden" animate="visible" className='CreatePage flex'>  

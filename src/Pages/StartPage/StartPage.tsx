@@ -33,15 +33,46 @@ export const StartPage = () => {
                 <li>Quick counting of the number of hours worked per month</li>
                 <li>Accessibility from the level of mobile devices</li>
               </ul>
+
+              <motion.div className='button create-button'
+              variants={button}
+              whileHover="hover"
+              whileTap="tap"
+              onClick={()=> navigate("/CreateAdmin")}
+            >
+              <HiOutlineChevronDoubleLeft size={20} className='icon'/>
+              <div>Create</div>
+            </motion.div>
             </div>
+           
           </div>
         </div>
 
-        <div className='startPage__content-center flex'>
-          <HiOutlineChevronDoubleLeft size={30} className='icon'/>
-        </div>
-
         <div className='startPage__content-right flex'>
+          <div className="startPage__content-box">
+            <motion.h1
+                variants={sentence}
+                initial="hidden"
+                animate="visible"
+              >
+                {loginText.split("").map((char, index) => {
+                return (
+                  <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
+                )
+              })}
+            </motion.h1>
+              <motion.div className='button login__register-button'
+                variants={button}
+                initial="hidden"
+                animate="goodPosition"
+                whileHover="hover"
+                whileTap="tap"
+                onClick={()=> navigate("/Login")}
+            >
+              Login
+            </motion.div>
+          </div>
+
           <div className="startPage__content-box">
             <motion.h1
               variants={sentence}
@@ -55,39 +86,15 @@ export const StartPage = () => {
               })}
             </motion.h1>
       
-            <motion.div className='button create-button'
+            <motion.div className='button login__register-button'
               variants={button}
               initial="hidden"
               animate="goodPosition"
               whileHover="hover"
-              whileTap="tap"
-              onClick={()=> navigate("/CreateAdmin")}
+              whileTap="tap"  
+              onClick={()=> navigate("/Register")}
             >
-              Create
-            </motion.div>
-          </div>
-
-          <div className="startPage__content-box">
-            <motion.h1
-                variants={sentence}
-                initial="hidden"
-                animate="visible"
-              >
-                {loginText.split("").map((char, index) => {
-                return (
-                  <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
-                )
-              })}
-            </motion.h1>
-              <motion.div className='button create-button'
-                variants={button}
-                initial="hidden"
-                animate="goodPosition"
-                whileHover="hover"
-                whileTap="tap"
-                onClick={()=> navigate("/Login")}
-            >
-              Log In
+              Register
             </motion.div>
           </div>
         </div>

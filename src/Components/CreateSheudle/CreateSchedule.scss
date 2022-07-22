@@ -40,6 +40,26 @@
           font-size: large;
           margin: .7rem 0;
       }
+
+      .group {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: rgba(37, 36, 36, 0.9);
+        border-radius: 10px;
+        padding: 0px 10px;
+        margin: 10px 0;
+
+        .group-icon {
+            margin: 10px;
+        }
+        
+        input {
+            width: 70%;
+            border: none;
+        }
+      }
   }
 
   button {
@@ -71,3 +91,4 @@
       width: 95vw;  
   }
 }
+
