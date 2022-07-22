@@ -3,6 +3,7 @@ import React, {useState, useRef} from 'react'
 import { showPage } from '../../../Animations/variants';
 import { MessageModal } from '../../MessageModal';
 import { HiOutlineChevronDoubleLeft, useNavigate, motion } from '../../../Helpers/imports';
+import { useLocation } from 'react-router-dom';
 
 export const CreateGroups = () => {
     const emailRef = useRef<HTMLInputElement | null>(null)
@@ -14,6 +15,8 @@ export const CreateGroups = () => {
   
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate(); 
+    const location = useLocation();
+    console.log(location.state)
 
     function createSchedule (event:any) {
         event.preventDefault();

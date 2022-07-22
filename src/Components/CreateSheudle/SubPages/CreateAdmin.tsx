@@ -4,6 +4,7 @@ import { showPage } from '../../../Animations/variants';
 import { MessageModal } from '../../MessageModal';
 import { HiOutlineChevronDoubleLeft, useNavigate, motion } from '../../../Helpers/imports';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useLocation } from 'react-router-dom';
 import { auth } from './../../../firebase/index';
 
 export const CreateAdmin = () => {
@@ -16,6 +17,7 @@ export const CreateAdmin = () => {
   
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate(); 
+    const { state } = useLocation();
 
     function createSchedule (event:any) {
         event.preventDefault();
@@ -24,14 +26,10 @@ export const CreateAdmin = () => {
         const userRepeatPassword =  repeatPasswordRef.current?.value?repeatPasswordRef.current?.value.toString():"";
     
         if(userPassword===userRepeatPassword){
-          try {
             createUserWithEmailAndPassword(auth, userEmail, userPassword).then(()=>(
               setMessage({descripstion:"Admin was created", status:true}), setShowMessage(true),
-              navigate('/CreateGroups')
-            ))
-          } catch (error) {
-            setMessage({descripstion:"Coś się zjebało", status:true}); setShowMessage(true)
-          }      
+              navigate('/CreateGroups', {state: userEmail})
+            )).catch(()=> (setMessage({descripstion:"Email is already taken", status:true}), setShowMessage(true)))         
         }
         else {
           setMessage({descripstion:"passwords are not the same", status:false}); setShowMessage(true)
