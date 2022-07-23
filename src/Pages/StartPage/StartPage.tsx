@@ -1,6 +1,7 @@
 import { motion, useNavigate } from '../../Helpers/imports'
 import { letter, sentence, button } from '../../Animations/variants'
 import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
+import { TiArrowUpOutline, TiLocationArrowOutline } from 'react-icons/ti'
 
 import './StartPage.scss'
 
@@ -34,6 +35,8 @@ export const StartPage = () => {
                 <li>Accessibility from the level of mobile devices</li>
               </ul>
 
+              <div className='helper-text'>You can create your first work schedule here, it's really that simple...</div>
+
               <motion.div className='button create-button'
               variants={button}
               whileHover="hover"
@@ -50,17 +53,20 @@ export const StartPage = () => {
 
         <div className='startPage__content-right flex'>
           <div className="startPage__content-box">
+            
             <motion.h1
                 variants={sentence}
                 initial="hidden"
                 animate="visible"
               >
+                <TiLocationArrowOutline size={30} className='arrow-icon'/>
                 {loginText.split("").map((char, index) => {
                 return (
                   <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
                 )
               })}
             </motion.h1>
+             
               <motion.div className='button login__register-button'
                 variants={button}
                 initial="hidden"
@@ -79,6 +85,7 @@ export const StartPage = () => {
               initial="hidden"
               animate="visible"
             >
+              <TiLocationArrowOutline size={30} className='arrow-icon'/>
               {headerText.split("").map((char, index) => {
                 return (
                   <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>

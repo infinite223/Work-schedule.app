@@ -3,6 +3,7 @@ import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, DayOnBa
 import './App.scss'
 import { CreateAdmin } from './Components/CreateSheudle/SubPages/CreateAdmin';
 import { CreateGroups } from './Components/CreateSheudle/SubPages/CreateGroups';
+import { RegisterPage } from './Pages/RegisterPage/index';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/CreateAdmin" element={<CreateAdmin/>} />
             <Route path="/CreateGroups" element={<CreateGroups/>} />
             <Route path='/Login' element={<LoginPage/>}/> 
+            <Route path='/Register' element={<RegisterPage/>}/> 
             <Route path='/Schedule' element={<SchedulePage/>}/>              
           </Routes>     
         </Router>

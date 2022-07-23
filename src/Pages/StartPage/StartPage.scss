@@ -92,6 +92,13 @@
                         margin-left: -2em;
                       }
                 }
+
+                .helper-text {
+                    font-size: 15px;
+                    text-align: left;
+
+                    margin: 0 35px;
+                }
                 }
             }
         }
@@ -102,6 +109,7 @@
 
             align-items: flex-end;
             .startPage__content-box{   
+                position: relative;
                 display: flex;
                 align-items: flex-end;
                 flex-direction: column;
@@ -128,6 +136,21 @@
 
                     @media only screen and (max-width: 1024px) {
                         font-size: 20px;
+                    }
+                }
+
+                .arrow-icon {
+                    margin-right: 10px;
+                    transform: rotate(45deg);
+                     position: absolute;
+                     left:50px;
+                     bottom: 50px;
+
+                    color: #FF00FF;
+                    
+                    @media only screen and (max-width: 1024px) {
+                       bottom: 10px;
+                       left:10px;
                     }
                 }
             }
@@ -159,7 +182,7 @@
     margin: 15px 0px;
     width: min-content;
 
-    border: 1px solid #FF00FF;
+    border: 1px solid #e1dae1;
     border-radius: 10px;
 
     font-size: 13px;
