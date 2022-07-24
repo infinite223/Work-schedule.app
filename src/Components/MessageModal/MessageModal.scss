@@ -1,10 +1,14 @@
 .messageModal {
     position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 14;
     max-width: 80vw;
+     
 
     padding:.9rem 1.2rem;
     font-size: 20px;

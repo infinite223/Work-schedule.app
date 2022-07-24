@@ -5,8 +5,12 @@ import { MessageModal } from '../../MessageModal';
 import { HiOutlineChevronDoubleLeft, useNavigate, motion } from '../../../Helpers/imports';
 import { useLocation } from 'react-router-dom';
 import { MdOutlineGroups, MdGroupAdd } from 'react-icons/md';
-import { createGroups } from '../../../Helpers/functions/functions'
+import { createGroups, daysInMonth } from '../../../Helpers/functions/functions'
 import { FaMinus } from 'react-icons/fa'
+import { generateSheduleData } from './../../../Helpers/functions/functions';
+import { setDoc,  doc } from 'firebase/firestore';
+import { db } from '../../../firebase';
+import { today, month } from '../../../Helpers/constants';
 
 export const CreateGroups = () => {
     const emailRef = useRef<HTMLInputElement | null>(null)
@@ -38,8 +42,17 @@ export const CreateGroups = () => {
           const workplace = workPlaceRef.current?.value.toString();
           console.log(email)
           if(email && workplace){
-            createGroups(email, workplace, groups).then(()=>
-              (setMessage({descripstion:"Groups was created", status:true}), setShowMessage(true), setLoading(false))
+            createGroups(email, workplace, groups).then(async ()=>
+              {
+                try {
+                  await setDoc(doc(db, "schedule", workplace), {
+                    [month[today.getMonth()] + today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
+                  }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true)))
+                }
+                catch {
+                  setMessage({descripstion:"Error", status:false}); setShowMessage(true); setLoading(false);
+                }
+              }
             )
           }
         }

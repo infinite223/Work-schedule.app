@@ -19,113 +19,123 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
 import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
 import LoadingStatus from '../../Components/LoadingStatus';
+import { MessageModal } from '../../Components/MessageModal';
 
 import './LoginPage.scss'
+
+interface queue {
+  email:string,
+  name:string
+}
 
 export const LoginPage = () => {
   const navigate = useNavigate(); 
   const emailRef = useRef<HTMLInputElement | null>(null)
   const passwordRef = useRef<HTMLInputElement | null>(null)
-  const [error, setError] = useState("")
+  const [showMessage, setShowMessage] = useState(false)
+  const [message, setMessage] = useState({descripstion:"", status:false})
   const dispatch = useDispatch();
-  const {  setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
+  const { setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
   const [loading, setLoading] = useState(false)
 
-  useEffect(()=>{
-    console.log(loading)
-  },[loading])
-
-  async function handleSubmit(e:any) {
+  async function login(e:any) {
     e.preventDefault()
     const userEmail =  emailRef.current?.value?emailRef.current?.value.toString():"";
     const userPassword =  passwordRef.current?.value?passwordRef.current?.value.toString():"";
     setLoading(true)
     try {
-      setError("")
       await signInWithEmailAndPassword(auth, userEmail, userPassword).then( async ()=>{
          const groupsRef = collection(db, "groups");       
          const workersData = await getDocs(groupsRef)
          let foundWorker, foundGroup:string = "";  
 
          workersData.docs.forEach((doc)=>{
-           foundWorker = doc.data().workers.find((worker:workerBeforSign)=> worker.email === userEmail)
-           foundWorker&&(foundGroup = doc.data().nameGroup)
+          if(doc.data().queue.find((worker:queue)=> worker.email === userEmail)){
+            foundWorker = doc.data().workers.find((worker:queue)=> worker.email === userEmail);
+            setMessage({descripstion:"The administrator has not assigned you to the group", status:false}); setShowMessage(true); setLoading(false)
+          }
+          if(doc.data().admin.email===userEmail){
+            setMessage({descripstion:"Adminp", status:false}); setShowMessage(true); setLoading(false)
+          }
          })
+         if(!foundWorker) {
+          //...szukamy naszej grupy i wbijamy do grafiku...po to czy na pewno do jakiejś należyny
+         }
 
-          await setScheduleFromFirebase(dispatch, foundGroup)
+          // await setScheduleFromFirebase(dispatch, foundGroup)
 
-          await auth.onAuthStateChanged( async (user) => {
-            if (user) {
-              await setLoginPersonAndGroupFromFirebase(dispatch, user.uid)
-              await navigate("/schedule")        
-             }
-           });         
+          // await auth.onAuthStateChanged( async (user) => {
+          //   if (user) {
+          //     await setLoginPersonAndGroupFromFirebase(dispatch, user.uid)
+          //     await navigate("/schedule")        
+          //    }
+          //  });         
       })
-    
-
     } catch {
-      try {
-        const groupsRef = collection(db, "groups");    
-        const getGroups = async () => {
-             const workersData = await getDocs(groupsRef)
-             let foundWorker, foundGroup:string;
-             let workers:Array<{email:string, id:number, nickname:string}>;
-              workersData.docs.forEach((doc)=>{
-                if(doc.data().workers.find((worker:workerBeforSign)=> worker.email === userEmail)){
-                  foundWorker = doc.data().workers.find((worker:workerBeforSign)=> worker.email)
-                  foundWorker&&(foundGroup = doc.data().nameGroup)
-                  foundWorker&&(workers = doc.data().workers)
-                }
-              })
-              //console.log(foundWorker)
-              if(foundWorker){
-                console.log("xsd")
-                 createUserWithEmailAndPassword(auth, userEmail, userPassword).then(async () =>{
-                  await signInWithEmailAndPassword(auth, userEmail, userPassword)             
-                  setScheduleFromFirebase(dispatch, foundGroup)
+     // try {
+      //   const groupsRef = collection(db, "groups");    
+      //   const getGroups = async () => {
+      //        const workersData = await getDocs(groupsRef)
+      //        let foundWorker, foundGroup:string;
+      //        let workers:Array<{email:string, id:number, nickname:string}>;
+      //         workersData.docs.forEach((doc)=>{
+      //           if(doc.data().workers.find((worker:workerBeforSign)=> worker.email === userEmail)){
+      //             foundWorker = doc.data().workers.find((worker:workerBeforSign)=> worker.email)
+      //             foundWorker&&(foundGroup = doc.data().nameGroup)
+      //             foundWorker&&(workers = doc.data().workers)
+      //           }
+      //         })
+      //         //console.log(foundWorker)
+      //         if(foundWorker){
+      //           console.log("xsd")
+      //            createUserWithEmailAndPassword(auth, userEmail, userPassword).then(async () =>{
+      //             await signInWithEmailAndPassword(auth, userEmail, userPassword)             
+      //             setScheduleFromFirebase(dispatch, foundGroup)
 
-                  await auth.onAuthStateChanged( async (user) => {
-                    if (user) {
-                      const newWorkers:Array<workerAfterSign> = [];
-                      workers.forEach((worker)=>{                   
-                          if(worker.email === userEmail){
-                            const emailWorker = worker.email
-                            const nicknameWorker = worker.nickname
-                            const idWorker = worker.id
-                            newWorkers.push({email:emailWorker, id:idWorker, nickname:nicknameWorker, UID:user.uid})
-                            setLoginPerson(nicknameWorker)
-                          }
-                          else {
-                            newWorkers.push(worker)
-                          }
-                      })                           
-                      const groupsRef = doc(db, "groups", foundGroup);
-                           await updateDoc(groupsRef, {
-                             "workers": newWorkers
-                    }).then(()=>setLoading(false))}
+      //             await auth.onAuthStateChanged( async (user) => {
+      //               if (user) {
+      //                 const newWorkers:Array<workerAfterSign> = [];
+      //                 workers.forEach((worker)=>{                   
+      //                     if(worker.email === userEmail){
+      //                       const emailWorker = worker.email
+      //                       const nicknameWorker = worker.nickname
+      //                       const idWorker = worker.id
+      //                       newWorkers.push({email:emailWorker, id:idWorker, nickname:nicknameWorker, UID:user.uid})
+      //                       setLoginPerson(nicknameWorker)
+      //                     }
+      //                     else {
+      //                       newWorkers.push(worker)
+      //                     }
+      //                 })                           
+      //                 const groupsRef = doc(db, "groups", foundGroup);
+      //                      await updateDoc(groupsRef, {
+      //                        "workers": newWorkers
+      //               }).then(()=>setLoading(false))}
 
-                    await navigate("/schedule")                  
-                  })
-                })
-              }
-              else {
-                setError("Failed to log in")
-              }
-        };
-        getGroups()
-      }
-      catch{
-        setError("Failed to log in")
-      }
+      //               await navigate("/schedule")                  
+      //             })
+      //           })
+      //         }
+      //         else {
+      //           setError("Failed to log in")
+      //         }
+      //   };
+      //   getGroups()
+      // }
+      //catch{
+        setMessage({descripstion:"Failed to log in", status:false}); setShowMessage(true); setLoading(false)
+     // }
     }
+    setLoading(false)
   }
 
   return (
     <div>
+       {showMessage&&<MessageModal setShowMessage={setShowMessage}  description={message.descripstion} status={message.status} setMessage={setMessage}/>}
         {loading&&<LoadingStatus/> }
          <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
          <motion.div variants={showPage} initial="hidden" animate="visible" className='LoginPage flex'>  
-         <form className='flex'  onSubmit={handleSubmit}>   
+         <form className='flex'  onSubmit={login}>   
            <div className='Login__content flex'>
               <h1>Log In</h1>
               <p>
@@ -133,7 +143,6 @@ export const LoginPage = () => {
               </p>
              <input type="email" placeholder='E-mail' ref={emailRef} required/>
              <input type="password" placeholder='Password' ref={passwordRef} required/>
-             <div className='error__message'>{error}</div>
            </div>  
            <button type="submit" className='login button'>Log In</button>
           </form>  
