@@ -18,9 +18,8 @@ export const CreateAdmin = () => {
   
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate(); 
-    const { state } = useLocation();
 
-    function createSchedule (event:any) {
+    function createAdmin (event:any) {
         setLoading(true)
         event.preventDefault();
         const userPassword =  passwordRef.current?.value?passwordRef.current?.value.toString():"";
@@ -30,7 +29,7 @@ export const CreateAdmin = () => {
         if(userPassword===userRepeatPassword){
             createUserWithEmailAndPassword(auth, userEmail, userPassword).then(()=>(
               setMessage({descripstion:"Admin was created", status:true}), setShowMessage(true),
-              navigate('/CreateGroups', {state: userEmail})
+              navigate('/CreateGroups', {state: {email:userEmail}})
             )).catch(()=> (setMessage({descripstion:"Email is already taken", status:true}), setShowMessage(true), setLoading(false)))         
         }
         else {
@@ -43,7 +42,7 @@ export const CreateAdmin = () => {
     {showMessage&&<MessageModal setShowMessage={setShowMessage}  description={message.descripstion} status={message.status} setMessage={setMessage}/>}
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
         <motion.div variants={showPage} initial="hidden" animate="visible" className='CreatePage flex'>  
-        <form className='flex' style={{marginBottom:"20px"}} onSubmit={(e)=>createSchedule(e)}>   
+        <form className='flex' style={{marginBottom:"20px"}} onSubmit={(e)=>createAdmin(e)}>   
         <div className='Login__content flex'>
             <h1>Create schedule</h1>
             <p>

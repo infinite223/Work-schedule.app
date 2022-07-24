@@ -1,7 +1,7 @@
 import { today } from '../../Helpers/constants';
 import { bindActionCreators } from 'redux';
 import { db } from "../../firebase";
-import { getDoc, getDocs, doc, collection } from 'firebase/firestore';
+import { getDoc, setDoc, getDocs, doc, collection } from 'firebase/firestore';
 import { actionCreators } from '../../state';
 import { month } from '../../Helpers/constants';
 import { workerAfterSign } from '../../Helpers/types';
@@ -80,3 +80,16 @@ export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, UID:strin
       }
     })
 }
+
+export const createGroups = async (emailAdmin:string, workplace:string, groups:Array<string>) => {
+    await setDoc(doc(db, "groups", workplace), {
+      workplace:workplace,
+      groups: groups,
+      admin: emailAdmin 
+    })
+    // .then( async ()=> {
+    //   await setDoc(doc(db, "schedule", nameGroup), {
+    //     [month[today.getMonth()] + today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
+    //   }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true)))
+    // })
+  }
