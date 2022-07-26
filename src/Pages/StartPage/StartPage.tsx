@@ -4,6 +4,7 @@ import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
 import { TiArrowUpOutline, TiLocationArrowOutline } from 'react-icons/ti'
 
 import './StartPage.scss'
+import { useLocation } from 'react-router-dom';
 
 export const StartPage = () => {
   // document.body.style.overflow = "scroll";

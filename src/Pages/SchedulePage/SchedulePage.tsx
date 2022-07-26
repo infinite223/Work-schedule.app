@@ -19,8 +19,9 @@ import { WorkerList } from '../../Components/WorkerList';
 import { MdOutlinePersonOutline, MdOutlineArrowBackIosNew, MdKeyboardArrowDown } from 'react-icons/md'
 import { BiPlus, BiMinus} from 'react-icons/bi'
 import { MenuModal } from '../../Components/MenuModal';
-import { workerAfterSign } from '../../Helpers/types';
+import { MessagePrompt } from '../../Components/MessagePrompt';
 import LoadingStatus from '../../Components/LoadingStatus';
+import { useLocation } from 'react-router-dom';
 import {
   collection,
   getDocs,
@@ -30,6 +31,7 @@ import {
 import { IGroupType } from '../../Helpers/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { MessageModal } from '../../Components/MessageModal';
+import { setLoginPerson } from './../../state/action-creators/index';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
@@ -43,6 +45,7 @@ export const SchedulePage = () => {
     const [nameGroup, setNameGroup] = useState("")
     const [loading, setLoading] = useState(false)
     const [showMessage, setShowMessage] = useState(false)
+    const [showMessagePrompt, setShowMessagePrompt] = useState(false)
 
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
@@ -57,6 +60,8 @@ export const SchedulePage = () => {
     const controlArrow = useAnimation()
 
     const {setPersonInDay, setSchedule} = bindActionCreators(actionCreators, dispatch)
+    const location = useLocation();
+    const email = location.state as string
 
     useEffect(()=>{
         controlDay.start({
@@ -83,7 +88,6 @@ export const SchedulePage = () => {
       }, [schowSchedule])
 
     useEffect(()=>{  
-        // document.body.style.overflow = "hidden";
         const setScheduleData = async () => {
             setLoading(true)
             await auth.onAuthStateChanged( async (user) => {
@@ -93,11 +97,18 @@ export const SchedulePage = () => {
                     const workersData = await getDocs(groupsRef)
                     let foundWorker;  
                 
-                    await workersData.docs.forEach((doc)=>{
-                      foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === user.uid)
-                      foundWorker&&(setNameGroup(doc.data().nameGroup))
+                    await workersData.docs.forEach((doc)=>{                    
+                      //if(doc.data().workers.find((worker:workerAfterSign)=> worker.email === email)){
+                        //foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.email === email)
+                        //foundWorker&&(setNameGroup(doc.data().workplace))
+                       // setLoginPersonAndGroupFromFirebase(dispatch, email).then(()=>setLoading(false))
+                    //  }
+                      if(doc.data().admin.email===email){
+                        setLoginPerson("Admin")
+                        setNameGroup(doc.data().workplace)
+                        setShowMessagePrompt(true)
+                      }
                     })
-                     setLoginPersonAndGroupFromFirebase(dispatch, user.uid).then(()=>setLoading(false))
                 }
                 else{
                     navigate("/")
@@ -105,6 +116,7 @@ export const SchedulePage = () => {
             })
         };
        setScheduleData();
+       setLoading(false)
     },[])
 
     const updateSchedule = async () => {
@@ -141,6 +153,7 @@ export const SchedulePage = () => {
     
   return (
     <> 
+        {showMessagePrompt&&<MessagePrompt setShowMessagePrompt={setShowMessagePrompt} email={email} workPlace={nameGroup}/>}
         {loading&&<LoadingStatus/> }
         {showMessage&&<MessageModal description='schedule was saved!' status={true} setShowMessage={setShowMessage}/>}
         {!isTabletOrMobile&&
@@ -153,7 +166,7 @@ export const SchedulePage = () => {
         }
         {showMenu&&<MenuModal showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
         {showSettings&&<SettingsModal theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
-        {(showMenu || showSettings)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
+        {(showMenu || showSettings || showMessagePrompt)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
         <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">         
             <motion.div
              style={isTabletOrMobile?{  background: "linear-gradient(0deg, rgba("+theme+", .5) 66%, rgba("+theme+",.7) 85%, rgba("+theme+", 0.9) 96%)",

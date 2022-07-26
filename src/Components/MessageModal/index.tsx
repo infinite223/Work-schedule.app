@@ -5,7 +5,13 @@ import { FiX } from 'react-icons/fi'
 import { AnimatePresence, motion } from 'framer-motion'
 import { message } from '../../Animations/variants'
 
-export const MessageModal: React.FC<{ description:string, setShowMessage: (value:boolean) => void, setMessage?:(value:{descripstion:string, status:boolean}) => void,  status:boolean}> = ({ description, setShowMessage, status, setMessage }) => {
+interface MessageModalProps {
+  description:string,
+  setShowMessage: (value:boolean) => void,
+  setMessage?:(value:{descripstion:string, status:boolean}) => void,
+  status:boolean
+}
+export const MessageModal: React.FC<MessageModalProps> = ({ description, setShowMessage, status, setMessage }) => {
   useEffect(()=>{
     const timer = setTimeout(() => {
        setShowMessage(false)
