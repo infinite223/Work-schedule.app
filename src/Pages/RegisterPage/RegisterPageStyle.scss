@@ -42,7 +42,7 @@
             width: 240px;
 
             font-size: large;
-            margin: .7rem 0;
+            margin: .5rem 0;
 
             background-color: rgba(37, 36, 36, 0.9);
             border-radius: 10px;
@@ -71,9 +71,7 @@
         }
     }
     @media only screen and (max-width: 1024px) {
-        padding: 55px 0px;
-        width: 80vw;    
-        height: 450px;    
+        width: 80vw;     
     }
     
     @media only screen and (max-width: 324px) {

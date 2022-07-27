@@ -1,7 +1,7 @@
 import './ChoseHoursModalStyle.scss'
 
 import React, { useState, useEffect } from 'react'
-import { CgCloseR, motion} from '../../Helpers/imports'
+import { motion} from '../../Helpers/imports'
 import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';

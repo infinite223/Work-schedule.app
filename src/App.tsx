@@ -1,4 +1,4 @@
-import { StartPage, SchedulePage, Router, Routes, Route, CreateSchedule, DayOnBackground, LoginPage, days } from './Helpers/imports';
+import { StartPage, SchedulePage, Router, Routes, Route, DayOnBackground, LoginPage, days } from './Helpers/imports';
 
 import './App.scss'
 import { CreateAdmin } from './Components/CreateSheudle/SubPages/CreateAdmin';

@@ -11,11 +11,16 @@ import { useMotionValue, animate } from 'framer-motion';
 
 import { ChoseHoursModal } from '../ChoseHoursModal';
 
-import './Day.scss'
+import './DayStyle.scss'
 import { BsDot } from 'react-icons/bs'
-import { IPerson } from './../../Helpers/interfaces';
+import { IPerson } from '../../Helpers/interfaces';
 
-export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, persons }) => {
+interface DayProps {
+  id:number,
+  persons: Array<IPerson> 
+}
+
+export const Day: React.FC<DayProps> = ({ id, persons }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
   const loginPerson = useSelector((state: State)=> state.login)
   const todayDate = new Date();
@@ -24,7 +29,6 @@ export const Day: React.FC<{ id:number, persons: Array<IPerson> }> = ({ id, pers
   const dispatch = useDispatch();
   const { setSelectedDay } = bindActionCreators(actionCreators, dispatch)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
-  const opacity = useMotionValue(0)
 
 
   return (

@@ -1,10 +1,9 @@
-import React, {useState, useRef} from 'react'
-
+import  {useState, useRef} from 'react'
+import './../CreateScheduleStyle.scss'
 import { showPage } from '../../../Animations/variants';
 import { MessageModal } from '../../MessageModal';
 import { HiOutlineChevronDoubleLeft, useNavigate, motion } from '../../../Helpers/imports';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useLocation } from 'react-router-dom';
 import { auth } from './../../../firebase/index';
 import LoadingStatus from './../../LoadingStatus/index';
 

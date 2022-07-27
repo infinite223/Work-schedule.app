@@ -1,5 +1,5 @@
-import React, {useState, useRef} from 'react'
-
+import {useState, useRef} from 'react'
+import './../CreateScheduleStyle.scss'
 import { showPage } from '../../../Animations/variants';
 import { MessageModal } from '../../MessageModal';
 import { HiOutlineChevronDoubleLeft, useNavigate, motion } from '../../../Helpers/imports';
@@ -13,9 +13,6 @@ import { db } from '../../../firebase';
 import { today, month } from '../../../Helpers/constants';
 
 export const CreateGroups = () => {
-    const emailRef = useRef<HTMLInputElement | null>(null)
-    const passwordRef = useRef<HTMLInputElement | null>(null)
-    const repeatPasswordRef = useRef<HTMLInputElement | null>(null)
     const workPlaceRef = useRef<HTMLInputElement | null>(null)
 
     const [showMessage, setShowMessage] = useState(false)

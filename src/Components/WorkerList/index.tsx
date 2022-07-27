@@ -31,15 +31,15 @@ export const WorkerList = () => {
 
   return (
     <div className='SchedulePage__data flex'>
-        <div className='group-name'>{group.nameGroup} <small>(workers list)</small> </div>
+        <div className='group-name'>{group.workplace} <small>(workers list)</small></div>
         <div className='worker-list'>    
 
-             {group?.workers?.map(({ nickname },i)=>{
+             {group?.workers?.map(({ name },i)=>{
                 return (
-                    <div key={nickname} style={nickname===loginPerson?{color:"white"}:{}} className='worker flex'>
+                    <div key={name} style={name===loginPerson?{color:"white"}:{}} className='worker flex'>
                         <MdOutlinePerson size={25} className="person-icon"/>
-                        <div className='worker-name'>{nickname}</div>
-                        <div className='worker-hours'>{CountHours(nickname, schedule)}h</div>
+                        <div className='worker-name'>{name}</div>
+                        <div className='worker-hours'>{CountHours(name, schedule)}h</div>
                     </div>
                 )
             })} 

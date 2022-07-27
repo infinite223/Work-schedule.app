@@ -5,21 +5,11 @@ import { auth  } from "../../firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
 import { MessageModal } from '../../Components/MessageModal';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { today, month } from '../../Helpers/constants';
 import { db } from "../../firebase";
 import {
-  collection,
-  getDocs,
-  setDoc,
   updateDoc,
   arrayUnion
 } from "firebase/firestore";
-import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../state';
-import { useDispatch, useSelector } from 'react-redux';
-import { setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
-import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
 import LoadingStatus from '../../Components/LoadingStatus';
 
 import './RegisterPageStyle.scss'
@@ -31,9 +21,6 @@ export const RegisterPage = () => {
   const repeatPasswordRef = useRef<HTMLInputElement | null>(null)
   const workPlaceRef = useRef<HTMLInputElement | null>(null)
   const nameRef = useRef<HTMLInputElement | null>(null)
-  const [error, setError] = useState("")
-  const dispatch = useDispatch();
-  const {  setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
   const [loading, setLoading] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState({descripstion:"", status:false})
@@ -96,7 +83,6 @@ export const RegisterPage = () => {
              <input type="password" placeholder='Password' ref={passwordRef} required/>
              <input type="password" placeholder='Repeat password' ref={repeatPasswordRef} required/>
              <input type="text" placeholder='Workplace name' ref={workPlaceRef} required/>
-             <div className='error__message'>{error}</div>
            </div>  
            <button type="submit" className='login button'>Register</button>
           </form>  

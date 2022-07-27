@@ -1,14 +1,10 @@
 import { motion, useNavigate } from '../../Helpers/imports'
 import { letter, sentence, button } from '../../Animations/variants'
 import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
-import { TiArrowUpOutline, TiLocationArrowOutline } from 'react-icons/ti'
+import { TiLocationArrowOutline } from 'react-icons/ti'
 
-import './StartPage.scss'
-import { useLocation } from 'react-router-dom';
-
+import './StartPageStyle.scss'
 export const StartPage = () => {
-  // document.body.style.overflow = "scroll";
-
   const headerText = "You can create your first work schedule here, it's really that simple";
   const loginText = "If you belong to an existing work schedule, you should click log in";
   const navigate = useNavigate(); 

@@ -12,7 +12,7 @@ export interface IUser {
 
 export interface IShedule {
     id:number,
-    persons: [{
+    persons: [{ 
         name:string,
         startWork:string,
         endWork:string
@@ -20,7 +20,9 @@ export interface IShedule {
 }
 
 export interface IGroupType {
-    admin?: {email:string, nickname:string},
-    nameGroup?:string,
-    workers?:Array<{email:string, nickname:string, id:number, UID?:string}>
+    admin?: {email:string, name:string},
+    workplace?:string,
+    groups?:Array<string>,
+    workers?:Array<{email:string, name:string, group:string}>,
+    queue?:Array<{email:string, name:string, id:number}>,
 }

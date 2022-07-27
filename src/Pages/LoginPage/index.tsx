@@ -21,12 +21,14 @@ import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
 import LoadingStatus from '../../Components/LoadingStatus';
 import { MessageModal } from '../../Components/MessageModal';
 
-import './LoginPage.scss'
+import './LoginPageStyle.scss'
 
 interface queue {
   email:string,
   name:string
 }
+
+interface Worker {name:string, email:string, workplace:string}
 
 export const LoginPage = () => {
   const navigate = useNavigate(); 
@@ -37,6 +39,7 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
   const { setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
   const [loading, setLoading] = useState(false)
+  
 
   async function login(e:any) {
     e.preventDefault()
@@ -61,78 +64,25 @@ export const LoginPage = () => {
                 if (user) {
                   await setScheduleFromFirebase(dispatch, doc.data().workplace)
                   await setLoginPerson("Admin")
-                  await navigate("/schedule", {state:userEmail})        
+                  await setGroup(doc.data())
+                  await navigate("/schedule", {state:{email:userEmail, workplace:doc.data().workplace}})        
                 }
               }); 
           }
-         })
-         if(!foundWorker) {
-          //...szukamy naszej grupy i wbijamy do grafiku...po to czy na pewno do jakiejś należyny
+          if(doc.data().workers.find((worker:Worker)=> worker.email === userEmail)){
+            const setData = async  () => {
+               const foudWorker = doc.data().workers.find((worker:Worker)=> worker.email === userEmail)
+               await setScheduleFromFirebase(dispatch, doc.data().workplace)
+               setLoginPerson(foudWorker.name)    
+               await setGroup(doc.data()) 
+               await navigate("/schedule", {state:{email:userEmail, workplace:doc.data().workplace}})                            
+            } 
+           setData()     
          }
-
-          // await setScheduleFromFirebase(dispatch, foundGroup)
-
-          // await auth.onAuthStateChanged( async (user) => {
-          //   if (user) {
-          //     await setLoginPersonAndGroupFromFirebase(dispatch, user.uid)
-          //     await navigate("/schedule")        
-          //    }
-          //  });         
+         }) 
       })
     } catch {
-     // try {
-      //   const groupsRef = collection(db, "groups");    
-      //   const getGroups = async () => {
-      //        const workersData = await getDocs(groupsRef)
-      //        let foundWorker, foundGroup:string;
-      //        let workers:Array<{email:string, id:number, nickname:string}>;
-      //         workersData.docs.forEach((doc)=>{
-      //           if(doc.data().workers.find((worker:workerBeforSign)=> worker.email === userEmail)){
-      //             foundWorker = doc.data().workers.find((worker:workerBeforSign)=> worker.email)
-      //             foundWorker&&(foundGroup = doc.data().nameGroup)
-      //             foundWorker&&(workers = doc.data().workers)
-      //           }
-      //         })
-      //         //console.log(foundWorker)
-      //         if(foundWorker){
-      //           console.log("xsd")
-      //            createUserWithEmailAndPassword(auth, userEmail, userPassword).then(async () =>{
-      //             await signInWithEmailAndPassword(auth, userEmail, userPassword)             
-      //             setScheduleFromFirebase(dispatch, foundGroup)
-
-      //             await auth.onAuthStateChanged( async (user) => {
-      //               if (user) {
-      //                 const newWorkers:Array<workerAfterSign> = [];
-      //                 workers.forEach((worker)=>{                   
-      //                     if(worker.email === userEmail){
-      //                       const emailWorker = worker.email
-      //                       const nicknameWorker = worker.nickname
-      //                       const idWorker = worker.id
-      //                       newWorkers.push({email:emailWorker, id:idWorker, nickname:nicknameWorker, UID:user.uid})
-      //                       setLoginPerson(nicknameWorker)
-      //                     }
-      //                     else {
-      //                       newWorkers.push(worker)
-      //                     }
-      //                 })                           
-      //                 const groupsRef = doc(db, "groups", foundGroup);
-      //                      await updateDoc(groupsRef, {
-      //                        "workers": newWorkers
-      //               }).then(()=>setLoading(false))}
-
-      //               await navigate("/schedule")                  
-      //             })
-      //           })
-      //         }
-      //         else {
-      //           setError("Failed to log in")
-      //         }
-      //   };
-      //   getGroups()
-      // }
-      //catch{
         setMessage({descripstion:"Failed to log in", status:false}); setShowMessage(true); setLoading(false)
-     // }
     }
     setLoading(false)
   }
@@ -147,7 +97,7 @@ export const LoginPage = () => {
            <div className='Login__content flex'>
               <h1>Log In</h1>
               <p>
-                if this is your first login, give your account a password
+                if you don't have an account yet, create one and join the group
               </p>
              <input type="email" placeholder='E-mail' ref={emailRef} required/>
              <input type="password" placeholder='Password' ref={passwordRef} required/>

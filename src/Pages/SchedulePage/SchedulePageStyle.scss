@@ -8,6 +8,7 @@
     @media only screen and (max-width: 1024px) {
         width: 100vw;
         height: auto;  
+        min-height: 100vh;
         margin-bottom: 20px;
         flex-direction: column;
     }
@@ -164,23 +165,12 @@
         
         @media only screen and (max-width: 1024px) {
             overflow-y:hidden; 
-            //justify-content:space-around;
             margin: 10px;
-            //margin-left: 10px;
-            
-            //padding: 20px 10px;   
+
             padding-top: 5px;
             padding-bottom: 0px;
 
-            // display: flex;
-            // flex-flow: row wrap;
-            // justify-content: space-between;
-            
-            // &::after {
-            //     content:"";           
-            //     width: 56%;
-            // }
-            display: flex;
+            display: flex;  
             flex-flow: row wrap;
             justify-content: space-between;
             &::after {

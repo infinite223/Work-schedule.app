@@ -8,11 +8,18 @@ import { actionCreators, State } from '../../state';
 import { days, today } from '../../Helpers/constants'
 
 import { ChoseHoursModal } from '../ChoseHoursModal';
+import { IGroupType } from '../../Helpers/interfaces';
 
-export const DayContent:React.FC<{chooseHours:boolean, setChooseHours: (value:boolean) => void }> = ({chooseHours, setChooseHours}) => {
+interface DayContentProps {
+  chooseHours:boolean,
+  setChooseHours: (value:boolean) => void
+}
+
+export const DayContent:React.FC<DayContentProps> = ({chooseHours, setChooseHours}) => {
   const selectedDay = useSelector((state: State)=> state.select)
   const loginPerson = useSelector((state: State)=> state.login)
   const schedule = useSelector((state: State)=> state.schedule)
+  const group:IGroupType = useSelector((state: State)=> state.group)
   const persons = schedule[selectedDay-1]?.persons;
   const controls = useAnimation()
   const dispatch = useDispatch();
@@ -48,12 +55,19 @@ export const DayContent:React.FC<{chooseHours:boolean, setChooseHours: (value:bo
             <span>{days[dayDate.getDay()]}</span>     
         </motion.nav>
               <div className='day__workerlist'>  
+                {schedule&&schedule[selectedDay-1].persons.length<1&&<div className='person'>No one works on this day yet</div>}
                 {schedule?schedule[selectedDay-1].persons?.map(({ name, startWork, endWork },x)=>{
-                  return <div key={x} className={loginPerson===name?"person login-person":"person"}>{name} <div className='interval'>{startWork}-{endWork}</div></div>
+                    const foundWorker = group.workers?.find((worker)=> worker.name === name)
+                  return <div key={x} className={loginPerson===name?"person login-person":"person"}>
+                        <div className='person__data'>
+                          <span>{name} </span>
+                          <span>{foundWorker?.group}</span>
+                        </div>
+                       <div className='interval'>{startWork}-{endWork}</div>
+                    </div>
                 }):<>no data</>}
               </div>
-              <ChoseHoursModal id={selectedDay} date={today} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>
-                                     
+              <ChoseHoursModal id={selectedDay} date={today} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>                                     
       </motion.div>
     </AnimatePresence>
   )

@@ -1,15 +1,15 @@
 import { useAnimation, motion } from 'framer-motion';
 import { showPage } from '../../Animations/variants';
-import { showMobilePage, showSchedule, tap } from '../../Animations/variantsOnSmallScreen';
+import { showMobilePage, tap } from '../../Animations/variantsOnSmallScreen';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { useSelector, useDispatch } from 'react-redux';
-import { SettingsModal } from './../../Components/SettingsModal';
+import { SettingsModal } from '../../Components/SettingsModal';
 import { State } from '../../state';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { auth, db } from '../../firebase';
-import './SchedulePage.scss'
-import { Day } from '../../Components/Day/Day';
+import './SchedulePageStyle.scss'
+import { Day } from '../../Components/Day';
 import { DayContent } from '../../Components/DayContent';
 import { daysShortcuts, month, today } from '../../Helpers/constants';
 import { daysInMonth, firstDayOfMonth, setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase, generateSheduleData } from '../../Helpers/functions/functions';
@@ -31,7 +31,8 @@ import {
 import { IGroupType } from '../../Helpers/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { MessageModal } from '../../Components/MessageModal';
-import { setLoginPerson } from './../../state/action-creators/index';
+import { setLoginPerson } from '../../state/action-creators/index';
+import { setGroup } from './../../state/action-creators/index';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
@@ -46,6 +47,8 @@ export const SchedulePage = () => {
     const [loading, setLoading] = useState(false)
     const [showMessage, setShowMessage] = useState(false)
     const [showMessagePrompt, setShowMessagePrompt] = useState(false)
+    const [groupData, setGroupData] = useState()
+    const [login, setLogim] = useState("")
 
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
@@ -59,9 +62,11 @@ export const SchedulePage = () => {
     const controlSchedule = useAnimation()
     const controlArrow = useAnimation()
 
-    const {setPersonInDay, setSchedule} = bindActionCreators(actionCreators, dispatch)
+    const {setPersonInDay, setSchedule, setGroup} = bindActionCreators(actionCreators, dispatch)
     const location = useLocation();
-    const email = location.state as string
+    const { workplace, email } = location.state as {workplace:string, email:string}
+
+    interface Worker {name:string, email:string, group:string}
 
     useEffect(()=>{
         controlDay.start({
@@ -88,31 +93,48 @@ export const SchedulePage = () => {
       }, [schowSchedule])
 
     useEffect(()=>{  
+        if(loginPerson==="Admin"){
+            setNameGroup(workplace)
+            setShowMessagePrompt(true)
+        }
         const setScheduleData = async () => {
             setLoading(true)
             await auth.onAuthStateChanged( async (user) => {
-                if (user) {
-                    const groupsRef = collection(db, "groups");  
-       
-                    const workersData = await getDocs(groupsRef)
-                    let foundWorker;  
-                
-                    await workersData.docs.forEach((doc)=>{                    
-                      //if(doc.data().workers.find((worker:workerAfterSign)=> worker.email === email)){
-                        //foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.email === email)
-                        //foundWorker&&(setNameGroup(doc.data().workplace))
-                       // setLoginPersonAndGroupFromFirebase(dispatch, email).then(()=>setLoading(false))
-                    //  }
-                      if(doc.data().admin.email===email){
-                        setLoginPerson("Admin")
-                        setNameGroup(doc.data().workplace)
-                        setShowMessagePrompt(true)
-                      }
-                    })
+                if(!loginPerson || !group){
+                    if (user) {
+                        const groupsRef = collection(db, "groups");            
+                        const workersData = await getDocs(groupsRef)
+                    
+                        await workersData.docs.forEach((doc)=>{                           
+                          if(doc.data().workers.find((worker:Worker)=> worker.email === email)){
+                            const setData = async  () => {
+                               const foudWorker = doc.data().workers.find((worker:Worker)=> worker.email === email)
+                               await setScheduleFromFirebase(dispatch, doc.data().workplace)
+                               setLoginPerson(foudWorker.name)    
+                               await setNameGroup(doc.data().workplace)
+                               await console.log(loginPerson)
+                               await setGroup(doc.data())
+                               await setShowMessagePrompt(true)                             
+                            } 
+                           setData()     
+                         }
+                          if(doc.data().admin.email===user.email){
+                            const setData = async  () => {
+                                await setScheduleFromFirebase(dispatch, doc.data().workplace)
+                                setLoginPerson("Admin")    
+                               await setNameGroup(doc.data().workplace)
+                               await console.log(loginPerson)
+                               await setGroup(doc.data())
+                               await setShowMessagePrompt(true)                             
+                            } 
+                           setData()                       
+                         }
+                      })
+                   }
+                   else{
+                        navigate("/")
+                   }
                 }
-                else{
-                    navigate("/")
-                } 
             })
         };
        setScheduleData();
@@ -121,8 +143,8 @@ export const SchedulePage = () => {
 
     const updateSchedule = async () => {
         setLoading(true)
-        if(group.nameGroup){
-            const scheduleRef = doc(db, "schedule", group.nameGroup);
+        if(group.workplace){
+            const scheduleRef = doc(db, "schedule", group.workplace);
             await updateDoc(scheduleRef,  {
                 [month[today.getMonth()]+today.getFullYear()]:schedule
             } ).then(()=>setLoading(false)).then(()=>setShowMessage(true));
@@ -153,7 +175,7 @@ export const SchedulePage = () => {
     
   return (
     <> 
-        {showMessagePrompt&&<MessagePrompt setShowMessagePrompt={setShowMessagePrompt} email={email} workPlace={nameGroup}/>}
+        {showMessagePrompt&&<MessagePrompt setShowMessagePrompt={setShowMessagePrompt}/>}
         {loading&&<LoadingStatus/> }
         {showMessage&&<MessageModal description='schedule was saved!' status={true} setShowMessage={setShowMessage}/>}
         {!isTabletOrMobile&&
@@ -166,7 +188,7 @@ export const SchedulePage = () => {
         }
         {showMenu&&<MenuModal showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
         {showSettings&&<SettingsModal theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
-        {(showMenu || showSettings || showMessagePrompt)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false))}/>}
+        {(showMenu || showSettings || showMessagePrompt)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false), setShowMessagePrompt(false))}/>}
         <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">         
             <motion.div
              style={isTabletOrMobile?{  background: "linear-gradient(0deg, rgba("+theme+", .5) 66%, rgba("+theme+",.7) 85%, rgba("+theme+", 0.9) 96%)",
