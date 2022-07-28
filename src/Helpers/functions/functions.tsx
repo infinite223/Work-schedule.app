@@ -17,7 +17,7 @@ export function generateSheduleData(days:number){
     let shedule = []
 
     for (let i = 1; i <= days; i++) {
-        shedule.push({id:i, persons:[]})
+        shedule.push({id:i, persons:[{ name:"", startWork:"", endWork:"" }]})
     }
 
     return shedule;
@@ -61,11 +61,11 @@ export const setScheduleFromFirebase = async (dispatch:any, groupName:string) =>
     const { setSchedule } = bindActionCreators(actionCreators, dispatch)
     const scheduleRef = doc(db, "schedule", groupName);
     const scheduleSnap = await getDoc(scheduleRef);
-    const nowMonth =  [month[today.getMonth()]+today.getFullYear()].toString();
+    const nowMonth =  (new Date(today.getFullYear(), today.getMonth(), 1)).toDateString();
     setSchedule(scheduleSnap.data()?.[nowMonth])
 }
 
-export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, UID:string) => {
+export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, email:string) => {
     const { setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch) 
     const groupsRef = collection(db, "groups");  
        
@@ -73,8 +73,8 @@ export const setLoginPersonAndGroupFromFirebase = async (dispatch:any, UID:strin
     let foundWorker;
 
     await workersData.docs.forEach((doc)=>{
-      if(doc.data().workers.find((worker:workerAfterSign)=> worker.UID === UID)){
-        foundWorker = doc.data().workers.find((worker:workerAfterSign)=> worker.UID === UID)
+      if(doc.data().workers.find((worker:workerAfterSign)=> worker.UID === email)){
+        foundWorker = doc.data().groups.find((worker:workerAfterSign)=> worker.email === email)
         foundWorker&&setGroup(doc.data());
         foundWorker&&setLoginPerson(foundWorker.nickname);
       }

@@ -8,6 +8,10 @@
     align-items: center;
     z-index: 14;
     max-width: 80vw;
+
+    @media only screen and (max-width: 1024px) {
+      min-width: 70vw;  
+    }
      
 
     padding:.9rem 1.2rem;

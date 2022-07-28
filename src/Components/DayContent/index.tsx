@@ -12,10 +12,11 @@ import { IGroupType } from '../../Helpers/interfaces';
 
 interface DayContentProps {
   chooseHours:boolean,
-  setChooseHours: (value:boolean) => void
+  setChooseHours: (value:boolean) => void,
+  theme:Array<number>
 }
 
-export const DayContent:React.FC<DayContentProps> = ({chooseHours, setChooseHours}) => {
+export const DayContent:React.FC<DayContentProps> = ({chooseHours, setChooseHours, theme}) => {
   const selectedDay = useSelector((state: State)=> state.select)
   const loginPerson = useSelector((state: State)=> state.login)
   const schedule = useSelector((state: State)=> state.schedule)
@@ -60,14 +61,14 @@ export const DayContent:React.FC<DayContentProps> = ({chooseHours, setChooseHour
                     const foundWorker = group.workers?.find((worker)=> worker.name === name)
                   return <div key={x} className={loginPerson===name?"person login-person":"person"}>
                         <div className='person__data'>
-                          <span>{name} </span>
+                          <span style={{color:"rgb("+theme+")"}}>{name} </span>
                           <span>{foundWorker?.group}</span>
                         </div>
                        <div className='interval'>{startWork}-{endWork}</div>
                     </div>
                 }):<>no data</>}
               </div>
-              <ChoseHoursModal id={selectedDay} date={today} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>                                     
+              <ChoseHoursModal theme={theme} id={selectedDay} date={today} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>                                     
       </motion.div>
     </AnimatePresence>
   )

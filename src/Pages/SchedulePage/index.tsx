@@ -25,6 +25,7 @@ import { useLocation } from 'react-router-dom';
 import {
   collection,
   getDocs,
+  getDoc,
   updateDoc,
   doc
 } from "firebase/firestore";
@@ -33,6 +34,7 @@ import { useNavigate } from 'react-router-dom';
 import { MessageModal } from '../../Components/MessageModal';
 import { setLoginPerson } from '../../state/action-creators/index';
 import { setGroup } from './../../state/action-creators/index';
+import { async } from '@firebase/util';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
@@ -47,8 +49,6 @@ export const SchedulePage = () => {
     const [loading, setLoading] = useState(false)
     const [showMessage, setShowMessage] = useState(false)
     const [showMessagePrompt, setShowMessagePrompt] = useState(false)
-    const [groupData, setGroupData] = useState()
-    const [login, setLogim] = useState("")
 
     const schedule = useSelector((state: State)=> state.schedule)
     const loginPerson = useSelector((state: State)=> state.login)
@@ -62,11 +62,17 @@ export const SchedulePage = () => {
     const controlSchedule = useAnimation()
     const controlArrow = useAnimation()
 
-    const {setPersonInDay, setSchedule, setGroup} = bindActionCreators(actionCreators, dispatch)
+    const {setPersonInDay, setSchedule, setGroup, setLoginPerson} = bindActionCreators(actionCreators, dispatch)
     const location = useLocation();
     const { workplace, email } = location.state as {workplace:string, email:string}
+    const [message, setMessage] = useState({descripstion:"", status:false})
 
     interface Worker {name:string, email:string, group:string}
+    const [todayCondition, setTodayCondition] = useState<boolean>()
+  
+    useEffect(()=>{
+        setTodayCondition(new Date()<=new Date(selectDate.getFullYear(), selectDate.getMonth(), selectedDay))
+    },[selectDate])
 
     useEffect(()=>{
         controlDay.start({
@@ -146,25 +152,42 @@ export const SchedulePage = () => {
         if(group.workplace){
             const scheduleRef = doc(db, "schedule", group.workplace);
             await updateDoc(scheduleRef,  {
-                [month[today.getMonth()]+today.getFullYear()]:schedule
-            } ).then(()=>setLoading(false)).then(()=>setShowMessage(true));
+                [(new Date(selectDate.getFullYear(), selectDate.getMonth(), 1)).toDateString()]:schedule
+            } ).then(()=>setLoading(false)).then(()=>( setMessage({descripstion:"schedule was saved!", status:true}),setShowMessage(true)));
         }
     };
-    useEffect(()=>{
-        const nextMonth = () => {
-            if(selectDate!==new Date()){            
-                    const nextSchedule = generateSheduleData(daysInMonth(selectDate))         
-                    setSchedule([{id:1,persons:[{name: "string",
-                        startWork: "string",
-                        endWork: "string"}]}])      
-            }    
-            else {
-                setScheduleFromFirebase(dispatch, nameGroup)
-            }      
-        }
-        nextMonth()
-    },[selectDate])
 
+    const nextMonth = async () => {
+        if(group.workplace){
+            const scheduleRef = doc(db, "schedule", group.workplace);
+            const dataSchedule = await getDoc(scheduleRef)
+            
+            if(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1)).toDateString()]){
+                console.log("jest")
+                setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1))
+                setSchedule(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1)).toDateString()])
+            }
+            else {
+                setMessage({descripstion:"there is no schedule created for the next month", status:false}); setShowMessage(true); setLoading(false)
+            }
+        }    
+    }
+
+    const earlierMonth = async () => {
+        if(group.workplace){
+            const scheduleRef = doc(db, "schedule", group.workplace);
+            const dataSchedule = await getDoc(scheduleRef)
+            
+            if(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1)).toDateString()]){
+                console.log("jest")
+                setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1))
+                setSchedule(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1)).toDateString()])
+            }
+            else {
+                setMessage({descripstion:"there is no schedule created for the next month", status:false}); setShowMessage(true); setLoading(false)
+            }
+        }    
+    } 
 
   
     const removePerson = (operation:boolean) : void => {
@@ -177,7 +200,7 @@ export const SchedulePage = () => {
     <> 
         {showMessagePrompt&&<MessagePrompt setShowMessagePrompt={setShowMessagePrompt}/>}
         {loading&&<LoadingStatus/> }
-        {showMessage&&<MessageModal description='schedule was saved!' status={true} setShowMessage={setShowMessage}/>}
+        {showMessage&&<MessageModal description={message.descripstion} status={message.status} setShowMessage={setShowMessage}/>}
         {!isTabletOrMobile&&
             <div className='login__person-text flex'>
                 <MdOutlinePersonOutline size={20} style={{marginRight:"10px"}}/>
@@ -187,7 +210,7 @@ export const SchedulePage = () => {
             </div>    
         }
         {showMenu&&<MenuModal showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
-        {showSettings&&<SettingsModal theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
+        {showSettings&&<SettingsModal selectedDate={selectDate} theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
         {(showMenu || showSettings || showMessagePrompt)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false), setShowMessagePrompt(false))}/>}
         <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">         
             <motion.div
@@ -195,8 +218,7 @@ export const SchedulePage = () => {
              boxShadow: "inset 0px -5px 0px 0px rgb("+theme+")"}:{}}
              className='SchedulePage__main'  initial="hidden">
                 {isTabletOrMobile&&<nav className='main-nav'>
-                    <div className='year'>{selectDate.getFullYear()}</div>                  
-                     {/* {isTabletOrMobile&&<motion.div animate={controlArrow}>{!schowSchedule&&<MdKeyboardArrowDown size={30} className="arrow-icon-top" onClick={()=>setShowSchedule(true)}/>}</motion.div>} */}
+                    <div className='year'>{selectDate.getFullYear()}</div>               
                     {!showMenu&&<GiHamburgerMenu style={{right:"15px"}} size={24} onClick={()=>setShowMenu(true)} className="menu"/>}
                  </nav>}
                 <motion.div className='flex schedule__content-all' animate={controlSchedule}>
@@ -204,9 +226,9 @@ export const SchedulePage = () => {
                         <div className='date'>   
                             {!isTabletOrMobile&&<div className='year'>{selectDate.getFullYear()}</div> }                           
                             <nav className='flex'>
-                                <div className='arrow-left' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()-1,1))}><MdOutlineArrowBackIosNew size={18}/></div>
+                                <div className='arrow-left' onClick={()=>earlierMonth()}><MdOutlineArrowBackIosNew size={18}/></div>
                                 <div className='month'>{month[selectDate.getMonth()]}</div>                     
-                                <div className='arrow-right' onClick={()=>setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1))}><MdOutlineArrowBackIosNew size={18}/></div>
+                                <div className='arrow-right' onClick={()=>nextMonth()}><MdOutlineArrowBackIosNew size={18}/></div>
                             </nav>
                             {!isTabletOrMobile&&<WorkerList/>}
                         </div>
@@ -224,20 +246,19 @@ export const SchedulePage = () => {
                         
                             {schedule.map((day)=>{
                                 return (
-                                    <Day key={day.id} id={day.id}  persons={day.persons}/>
+                                    <Day  selectedDate={selectDate} key={day.id} id={day.id}  persons={day.persons}/>
                                 )
                             })}
                         </motion.div>
                     </motion.div>
-                    {/* {isTabletOrMobile&&<motion.div animate={controlArrow}><MdKeyboardArrowDown size={30} className="arrow-icon" onClick={()=>setShowSchedule(false)}/></motion.div>} */}
                 </motion.div>
             </motion.div>
             {isTabletOrMobile&&<>
-                    <DayContent chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
+                    <DayContent theme={theme} chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
                     <WorkerList/>
             </>}
-            
-            {isTabletOrMobile&&<motion.div whileTap="tap" variants={tap}  className='save__add-button flex' style={{background: "radial-gradient(circle, rgba("+theme+",.7) 36%, rgba("+theme+",.5) 73%)"}}>
+            {todayCondition&&
+            isTabletOrMobile&&<motion.div whileTap="tap" variants={tap}  className='save__add-button flex' style={{background: "radial-gradient(circle, rgba("+theme+",.7) 36%, rgba("+theme+",.5) 73%)"}}>
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
                 ?<BiPlus size={35} color="white" onClick={()=>setChooseHours(true)}/>
                 :<BiMinus size={35} color="white" onClick={()=>removePerson(false)}/>}    

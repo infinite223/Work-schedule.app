@@ -17,10 +17,11 @@ import { IPerson } from '../../Helpers/interfaces';
 
 interface DayProps {
   id:number,
-  persons: Array<IPerson> 
+  persons: Array<IPerson>, 
+  selectedDate:Date
 }
 
-export const Day: React.FC<DayProps> = ({ id, persons }) => {
+export const Day: React.FC<DayProps> = ({ id, persons, selectedDate }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
   const loginPerson = useSelector((state: State)=> state.login)
   const todayDate = new Date();
@@ -30,10 +31,9 @@ export const Day: React.FC<DayProps> = ({ id, persons }) => {
   const { setSelectedDay } = bindActionCreators(actionCreators, dispatch)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
 
-
   return (
     <>
-      <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>      
+      <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>   
       {!isTabletOrMobile?
         <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
         variants={showWorkers}
@@ -41,7 +41,7 @@ export const Day: React.FC<DayProps> = ({ id, persons }) => {
         whileHover={todayDate.getDate()-1<id&&persons.length>=3?"hover":""}
       >
           <nav>
-            <span className={todayDate.getDate()===id?"magenta-text":""}>{id}</span>
+            <span className={(todayDate.getDate()===id  && todayDate.getMonth() === selectedDate.getMonth())?"magenta-text":""}>{id}</span>
             <div>{days[dayDate.getDay()]}</div>      
           </nav>
           <div className='day__workerlist'>  
@@ -51,7 +51,7 @@ export const Day: React.FC<DayProps> = ({ id, persons }) => {
           </div>
       </motion.div>:
       <motion.div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
-        <motion.span whileTap="tap" variants={tap} className={todayDate.getDate()===id?"today":""}>{id}</motion.span>
+        <motion.span whileTap="tap" variants={tap} className={(todayDate.getDate()===id && todayDate.getMonth() === selectedDate.getMonth())?"today":""}>{id}</motion.span>
         <div className='dots'>
           {persons?persons?.map(({ name }, person)=>{
                 return <BsDot key={person} size={20} className={loginPerson===name?"dot magenta-text":"dot"}/>

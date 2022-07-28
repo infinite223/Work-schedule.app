@@ -34,7 +34,7 @@ export const WorkerList = () => {
         <div className='group-name'>{group.workplace} <small>(workers list)</small></div>
         <div className='worker-list'>    
 
-             {group?.workers?.map(({ name },i)=>{
+             {group?.workers?.map(({ name }, i)=>{
                 return (
                     <div key={name} style={name===loginPerson?{color:"white"}:{}} className='worker flex'>
                         <MdOutlinePerson size={25} className="person-icon"/>

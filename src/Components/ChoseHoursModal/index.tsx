@@ -17,10 +17,11 @@ interface ChoseHoursModalProps {
   date: Date,
   persons: Array<IPerson>,
   chooseHours:boolean,
-  setChooseHours: (value:boolean) => void  
+  setChooseHours: (value:boolean) => void,
+  theme?:Array<number>  
 }
 
-export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, persons, chooseHours, setChooseHours}) => {
+export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, persons, chooseHours, setChooseHours, theme}) => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const loginPerson = useSelector((state: State)=> state.login)
  
@@ -59,7 +60,7 @@ export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, pers
             exit="exit"
         >
             <div className='nav'>
-                <span>{id}</span>
+                <span style={{color:"rgb("+theme+")"}}>{id}</span>
                 <div>{days[date.getDay()]}</div>     
                 {/* <CgCloseR className='exit-icon' size={25} onClick={()=> setChooseHours(false)}/> */}
             </div>
@@ -75,16 +76,16 @@ export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, pers
                     </div>
             </div> 
             <ul>
-              <li>Your hours are counted up on the left side</li>
-              <li>If you want to have a day off, click the "free" button</li>
+              <li data-content={"rgb("+theme+")"}>Your hours are counted up on the left side</li>
+              <li data-content={"rgb("+theme+")"}>If you want to have a day off, click the "free" button</li>
             </ul>
             <div className='options flex'>
-              <div className='remove-button button flex' onClick={()=>(setPersons(false), setChooseHours(false))}>
+              {/* <div className='remove-button button flex' onClick={()=>(setPersons(false), setChooseHours(false))}>
                 Free
-              </div>
+              </div> */}
               <div className='save-button button flex' onClick={()=>(setPersons(true), setChooseHours(false))}>
                 Set
-                <BsCheckLg size={15} className='icon'/>
+                <BsCheckLg size={15} color={"rgb("+theme+")"} className='icon'/>
               </div>
             </div> 
         </motion.div>}
