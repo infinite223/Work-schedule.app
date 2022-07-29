@@ -9,6 +9,7 @@ import { days, today } from '../../Helpers/constants'
 
 import { ChoseHoursModal } from '../ChoseHoursModal';
 import { IGroupType } from '../../Helpers/interfaces';
+import { BiMinus } from 'react-icons/bi';
 
 interface DayContentProps {
   chooseHours:boolean,
@@ -30,10 +31,8 @@ export const DayContent:React.FC<DayContentProps> = ({chooseHours, setChooseHour
   const dayDate = new Date(todayDate.getFullYear(), todayDate.getMonth(),selectedDay);
 
 
-  const removePerson = (operation:boolean) : void => {
-    if(!operation){
-      setPersonInDay({id:selectedDay, persons:[...persons.filter(person=> person.name!==loginPerson)]} )
-    }
+  const removePerson = (name:string) : void => {
+      setPersonInDay({id:selectedDay, persons:[...persons.filter(person=> person.name!==name)]} )
   }
 
   useEffect(()=>{
@@ -65,6 +64,7 @@ export const DayContent:React.FC<DayContentProps> = ({chooseHours, setChooseHour
                           <span>{foundWorker?.group}</span>
                         </div>
                        <div className='interval'>{startWork}-{endWork}</div>
+                       {loginPerson==="Admin"&&<BiMinus size={20} style={{margin:"0px 10px"}}  onClick={()=>removePerson(name)}/>}
                     </div>
                 }):<>no data</>}
               </div>

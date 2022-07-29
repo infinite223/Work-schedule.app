@@ -140,13 +140,9 @@
                 }
 
                 .arrow-icon {
-                    margin-right: 10px;
                     transform: rotate(45deg);
-                     position: absolute;
-                     left:50px;
-                     bottom: 50px;
-
                     color: #FF00FF;
+                    margin-right: 10px;
                     
                     @media only screen and (max-width: 1024px) {
                        bottom: 10px;
@@ -178,7 +174,7 @@
 } 
 .login__register-button {
     display: flex;
-    padding: .7rem 1.5rem;
+    padding: .5rem 1rem;
     margin: 15px 0px;
     width: min-content;
 

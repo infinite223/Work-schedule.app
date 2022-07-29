@@ -5,7 +5,7 @@ import { TiLocationArrowOutline } from 'react-icons/ti'
 
 import './StartPageStyle.scss'
 export const StartPage = () => {
-  const headerText = "You can create your first work schedule here, it's really that simple";
+  const headerText = "Click register if you want to be part of a group of employees";
   const loginText = "If you belong to an existing work schedule, you should click log in";
   const navigate = useNavigate(); 
 
@@ -56,7 +56,6 @@ export const StartPage = () => {
                 initial="hidden"
                 animate="visible"
               >
-                <TiLocationArrowOutline size={30} className='arrow-icon'/>
                 {loginText.split("").map((char, index) => {
                 return (
                   <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
@@ -64,7 +63,7 @@ export const StartPage = () => {
               })}
             </motion.h1>
              
-              <motion.div className='button login__register-button'
+              <motion.div className='button login__register-button flex'
                 variants={button}
                 initial="hidden"
                 animate="goodPosition"
@@ -72,7 +71,8 @@ export const StartPage = () => {
                 whileTap="tap"
                 onClick={()=> navigate("/Login")}
             >
-              Login
+              <TiLocationArrowOutline size={30} className='arrow-icon'/>
+              <div>Login</div>
             </motion.div>
           </div>
 
@@ -82,7 +82,7 @@ export const StartPage = () => {
               initial="hidden"
               animate="visible"
             >
-              <TiLocationArrowOutline size={30} className='arrow-icon'/>
+             
               {headerText.split("").map((char, index) => {
                 return (
                   <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
@@ -90,7 +90,7 @@ export const StartPage = () => {
               })}
             </motion.h1>
       
-            <motion.div className='button login__register-button'
+            <motion.div className='button login__register-button flex'
               variants={button}
               initial="hidden"
               animate="goodPosition"
@@ -98,7 +98,8 @@ export const StartPage = () => {
               whileTap="tap"  
               onClick={()=> navigate("/Register")}
             >
-              Register
+               <TiLocationArrowOutline size={30} className='arrow-icon'/>
+              <div>Register</div>
             </motion.div>
           </div>
         </div>

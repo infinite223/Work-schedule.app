@@ -71,8 +71,8 @@ export const SchedulePage = () => {
     const [todayCondition, setTodayCondition] = useState<boolean>()
   
     useEffect(()=>{
-        setTodayCondition(new Date()<=new Date(selectDate.getFullYear(), selectDate.getMonth(), selectedDay))
-    },[selectDate])
+        setTodayCondition(new Date()<=new Date(selectDate.getFullYear(), selectDate.getMonth(), selectedDay+1))
+    },[selectDate, selectedDay])
 
     useEffect(()=>{
         controlDay.start({
@@ -257,7 +257,7 @@ export const SchedulePage = () => {
                     <DayContent theme={theme} chooseHours={chooseHours}  setChooseHours={setChooseHours}/>
                     <WorkerList/>
             </>}
-            {todayCondition&&
+            {todayCondition&& loginPerson!=="Admin" &&
             isTabletOrMobile&&<motion.div whileTap="tap" variants={tap}  className='save__add-button flex' style={{background: "radial-gradient(circle, rgba("+theme+",.7) 36%, rgba("+theme+",.5) 73%)"}}>
                 {!schedule[selectedDay-1].persons.find((person)=>person.name===loginPerson)
                 ?<BiPlus size={35} color="white" onClick={()=>setChooseHours(true)}/>

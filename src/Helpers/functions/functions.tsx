@@ -17,7 +17,7 @@ export function generateSheduleData(days:number){
     let shedule = []
 
     for (let i = 1; i <= days; i++) {
-        shedule.push({id:i, persons:[{ name:"", startWork:"", endWork:"" }]})
+        shedule.push({id:i, persons:[]})
     }
 
     return shedule;
