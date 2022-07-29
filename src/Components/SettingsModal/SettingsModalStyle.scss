@@ -6,6 +6,11 @@
     z-index: 11;
     position: fixed;
 
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     width: 65vw;
     height: 80vh;
@@ -13,6 +18,7 @@
     @media only screen and (max-width: 1024px) {
         width: 90vw;  
         height: 90vh;  
+        top:20px;
 
         padding: 1rem .7rem;
     }
@@ -63,8 +69,10 @@
 
             padding:15px;
 
+
             div {
                 font-size: 18px;
+                margin: 0 15px;
 
                 &:first-child {
                     color: magenta;

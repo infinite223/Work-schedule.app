@@ -49,7 +49,8 @@ export const RegisterPage = () => {
                 const workPlaceRefFirebase = doc(db, "groups", workplace);
                 createUserWithEmailAndPassword(auth, email, password).then(()=>                 
                     updateDoc(workPlaceRefFirebase, {queue: arrayUnion({name:name, email:email})}).then(()=>{
-                      setMessage({descripstion:"The account has been successfully created", status:true}); setShowMessage(true); setLoading(false)
+                      setMessage({descripstion:"The account has been successfully created", status:true}); setShowMessage(true); setLoading(false);
+                      navigate("/Login")
                     })                   
                   ).catch(()=> {
                     setMessage({descripstion:"Something went wrong, please try again later", status:true}); setShowMessage(true); setLoading(false)

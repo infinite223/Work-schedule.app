@@ -44,7 +44,7 @@ export const CreateGroups = () => {
                 try {
                   await setDoc(doc(db, "schedule", workplace), {
                     [(new Date(today.getFullYear(), today.getMonth(), 1)).toDateString()]: generateSheduleData(daysInMonth(new Date()))
-                  }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true)))
+                  }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true), navigate("/Logim")))
                 }
                 catch {
                   setMessage({descripstion:"Error", status:false}); setShowMessage(true); setLoading(false);
@@ -77,7 +77,7 @@ export const CreateGroups = () => {
               </p>
 
               <div className='group'>
-                <input style={{width:"280px"}} type="text" placeholder='Name of the workplace' ref={workPlaceRef} required/>
+                <input style={{width:"250px"}} type="text" placeholder='Name of the workplace' ref={workPlaceRef} required/>
               </div>
             {groups.map((group, index)=>{
               return (
