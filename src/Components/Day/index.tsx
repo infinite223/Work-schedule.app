@@ -8,6 +8,7 @@ import { showWorkers } from '../../Animations/variants';
 import { tap } from '../../Animations/variantsOnSmallScreen';
 import { useMediaQuery } from 'react-responsive'
 import { useMotionValue, animate } from 'framer-motion';
+import { BiMinus } from 'react-icons/bi';
 
 import { ChoseHoursModal } from '../ChoseHoursModal';
 
@@ -28,14 +29,18 @@ export const Day: React.FC<DayProps> = ({ id, persons, selectedDate }) => {
   const dayDate = new Date(todayDate.getFullYear(), todayDate.getMonth(),id);
 
   const dispatch = useDispatch();
-  const { setSelectedDay } = bindActionCreators(actionCreators, dispatch)
+  const { setSelectedDay, setPersonInDay } = bindActionCreators(actionCreators, dispatch)
   const [ chooseHours, setChooseHours ] = useState<boolean>(false)
+
+  const removePerson = (name:string) : void => {
+    setPersonInDay({id:id, persons:[...persons.filter(person=> person.name!==name)]} )
+}
 
   return (
     <>
       <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>   
       {!isTabletOrMobile?
-        <motion.div className={todayDate.getDate()-1<id?`enable-day day`:'day disable-day'} onClick={()=> setChooseHours(todayDate.getDate()-1<id&&true)}
+        <motion.div className="enable-day day" onClick={()=> setChooseHours((new Date)<=(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), id+1))&& (loginPerson!=="Admin")&&true)}
         variants={showWorkers}
         initial="start"
         whileHover={todayDate.getDate()-1<id&&persons.length>=3?"hover":""}
@@ -46,11 +51,14 @@ export const Day: React.FC<DayProps> = ({ id, persons, selectedDate }) => {
           </nav>
           <div className='day__workerlist'>  
             {persons?persons?.map(({ name, startWork, endWork }, person)=>{
-              return <div key={person} className={loginPerson===name?"person login-person":"person"}>{name} {startWork}-{endWork}</div>
+              return <div key={person} className={loginPerson===name?"person login-person":"person"}>
+                <div>{name} {startWork}-{endWork}</div>
+               {loginPerson==="Admin"&&<BiMinus size={20} style={{margin:"0px 0px"}}  onClick={()=>removePerson(name)}/>}
+              </div>
             }):<>no data</>}
           </div>
       </motion.div>:
-      <motion.div className={todayDate.getDate()-1>=id?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
+      <motion.div className={(new Date)>=(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), id+1))?`disable-day day__smallscreen flex`:`day__smallscreen flex`} onClick={()=> setSelectedDay(id)}>
         <motion.span whileTap="tap" variants={tap} className={(todayDate.getDate()===id && todayDate.getMonth() === selectedDate.getMonth())?"today":""}>{id}</motion.span>
         <div className='dots'>
           {persons?persons?.map(({ name }, person)=>{

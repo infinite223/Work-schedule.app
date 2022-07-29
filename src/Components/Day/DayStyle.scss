@@ -48,6 +48,10 @@
 
         .person {    
             padding: 5px 0px;
+            align-items: center;
+            justify-content: space-around;
+            display: flex;
+            gap: 5px;
         }
 
         .login-person {
@@ -66,10 +70,6 @@
     border-radius: 5px;
 
     font-size: 16px;
-
-    .magenta-text {
-       // color: #eb0b0b;
-    }
 
     span {
         border-radius: 50%;

@@ -13,9 +13,10 @@ interface MenuModalProps {
   setShowMenu: (value:boolean) => void, updateSchedule: () =>void,
   showSettings:boolean,
   setShowSettings: (value:boolean) => void,
+  theme:Array<number>
 }
 
-export const MenuModal :React.FC<MenuModalProps> = ({showMenu, setShowMenu, updateSchedule, showSettings, setShowSettings}) => {
+export const MenuModal :React.FC<MenuModalProps> = ({showMenu, setShowMenu, updateSchedule, showSettings, setShowSettings, theme}) => {
   const navigate = useNavigate(); 
   const loginPerson = useSelector((state: State)=> state.login)
 
@@ -30,7 +31,7 @@ export const MenuModal :React.FC<MenuModalProps> = ({showMenu, setShowMenu, upda
 
             <span>
               <div className='icon'><MdOutlinePersonOutline size={20}/></div>
-              <div className='meganta-text'>{loginPerson}</div>
+              <div style={{color:"rgb("+theme+")"}}>{loginPerson}</div>
             </span>
             <span className='hover-color' onClick={()=>(auth.signOut(), navigate("/"))}>Log out</span>
             <span className='hover-color' onClick={()=>(updateSchedule(),setShowMenu(false))}>Save</span>

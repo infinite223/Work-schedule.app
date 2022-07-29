@@ -76,7 +76,7 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
             {loginPerson=="Admin"&&<><div className='option flex'>
                 {group.workers?.map(({name, email, group})=>(
                   <div className='worker' key={email}>
-                    <div>{name}</div>
+                    <div style={{color:"rgb("+theme+")"}}>{name}</div>
                     <div>{email}</div>
                     <div style={{color:"grey", fontSize:"15px"}}>{group}</div>
                   </div>

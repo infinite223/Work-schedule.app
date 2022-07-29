@@ -209,7 +209,7 @@ export const SchedulePage = () => {
                 <GiHamburgerMenu className='hover__pointer' size={18} style={{marginLeft:"15px"}} onClick={()=>setShowMenu(true)}/>
             </div>    
         }
-        {showMenu&&<MenuModal showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
+        {showMenu&&<MenuModal theme={theme} showSettings={showSettings} setShowSettings={setShowSettings} showMenu={showMenu} setShowMenu={setShowMenu} updateSchedule={()=>updateSchedule()}/>}
         {showSettings&&<SettingsModal selectedDate={selectDate} theme={theme} setTheme={setTheme} setShowSettings={setShowSettings}/>}
         {(showMenu || showSettings || showMessagePrompt)&& <div className='blur-page' onClick={()=>(setShowMenu(false),setShowSettings(false), setShowMessagePrompt(false))}/>}
         <motion.div className='SchedulePage'  variants={isTabletOrMobile?showMobilePage:showPage} initial="hidden" animate="visible">         

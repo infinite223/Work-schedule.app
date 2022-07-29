@@ -24,4 +24,12 @@
         margin-right: 10px;
         max-width: 90%;
     }
+
+    .status-icon {
+      border-radius: 7px;
+      padding: .15rem .2rem;
+      background-color: rgba(55, 55, 55, 0.2);
+
+      min-width: 30px;
+    }
 }

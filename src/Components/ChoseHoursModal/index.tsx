@@ -80,9 +80,9 @@ export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, pers
               <li data-content={"rgb("+theme+")"}>If you want to have a day off, click the "free" button</li>
             </ul>
             <div className='options flex'>
-              {/* <div className='remove-button button flex' onClick={()=>(setPersons(false), setChooseHours(false))}>
+              <div className='remove-button button flex' onClick={()=>(setPersons(false), setChooseHours(false))}>
                 Free
-              </div> */}
+              </div>
               <div className='save-button button flex' onClick={()=>(setPersons(true), setChooseHours(false))}>
                 Set
                 <BsCheckLg size={15} color={"rgb("+theme+")"} className='icon'/>
