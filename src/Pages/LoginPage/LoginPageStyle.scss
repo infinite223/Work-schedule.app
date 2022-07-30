@@ -3,11 +3,10 @@
     position: relative;
 
     width: 300px;
-    height: auto;
 
     background-color: rgba(28, 27, 27, .9);
     border-radius: 20px;
-    padding: 20px 0px;
+    padding: 20px 0;
 
     font-size: 20px;
     h1::first-letter {
@@ -22,11 +21,10 @@
         margin-bottom: 70px;
         margin-top: 20px;
 
-        p {
-            max-width: 250px;
-            @media only screen and (max-width: 1024px) {
-                max-width: 70vw;    
-            }
+        padding: 0 15px;
+        
+
+        p {          
             text-align: left;
 
             margin: 20px 0;
@@ -57,8 +55,7 @@
 
     button {
         position: absolute;
-        right: 35px;
-        bottom: 35px;
+        right: 20px !important;
 
         padding: .4rem 1.4rem;
 
@@ -66,6 +63,7 @@
         font-size: 14px;
 
         border: 1px solid white;
+        background-color: transparent;
         border-radius: 10px;
 
         &:hover {
@@ -73,10 +71,14 @@
             color: #FF00FF;
             border: 1px solid #FF00FF;;
         }
+
+        @media only screen and (max-width: 1024px) {
+            right: 25px !important;      
+        }
     }
     @media only screen and (max-width: 1024px) {
-        width: 70vw;    
-        height: 450px;    
+        width: 70vw !important;    
+        height: 450px;       
     }
     
     @media only screen and (max-width: 324px) {

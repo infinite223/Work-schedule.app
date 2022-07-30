@@ -39,7 +39,6 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
   const { setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
   const [loading, setLoading] = useState(false)
-  
 
   async function login(e:any) {
     e.preventDefault()
@@ -102,7 +101,7 @@ export const LoginPage = () => {
              <input type="email" placeholder='E-mail' ref={emailRef} required/>
              <input type="password" placeholder='Password' ref={passwordRef} required/>
            </div>  
-           <button type="submit" className='login button'>Log In</button>
+           <button type="submit" className=''>Log In</button>
           </form>  
          </motion.div>
     </div>
