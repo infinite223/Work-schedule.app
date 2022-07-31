@@ -45,20 +45,16 @@ export const LoginPage = () => {
     const userEmail =  emailRef.current?.value?emailRef.current?.value.toString():"";
     const userPassword =  passwordRef.current?.value?passwordRef.current?.value.toString():"";
     setLoading(true)
+    
     try {
       await signInWithEmailAndPassword(auth, userEmail, userPassword).then( async ()=>{
          const groupsRef = collection(db, "groups");       
          const workersData = await getDocs(groupsRef)
-         let foundWorker, foundGroup:string = "";  
+         let foundWorker;
 
          workersData.docs.forEach((doc)=>{
-          if(doc.data().queue.find((worker:queue)=> worker.email === userEmail)){
-            foundWorker = doc.data().workers.find((worker:queue)=> worker.email === userEmail);
-            setMessage({descripstion:"The administrator has not assigned you to the group", status:false}); setShowMessage(true); setLoading(false)
-          }
           if(doc.data().admin.email===userEmail){
             setMessage({descripstion:"Admin", status:true}); setShowMessage(true); setLoading(false)
-           
                auth.onAuthStateChanged( async (user) => {
                 if (user) {
                   await setScheduleFromFirebase(dispatch, doc.data().workplace)
@@ -68,7 +64,21 @@ export const LoginPage = () => {
                 }
               }); 
           }
-          if(doc.data().workers.find((worker:Worker)=> worker.email === userEmail)){
+          else if(doc.data().queue.find((worker:queue)=> worker.email === userEmail)){
+            setMessage({descripstion:"The administrator has not assigned you to the group", status:false}); setShowMessage(true); setLoading(false)
+          }
+          // else if(doc.data().admin.email===userEmail){
+          //   setMessage({descripstion:"Admin", status:true}); setShowMessage(true); setLoading(false)
+          //      auth.onAuthStateChanged( async (user) => {
+          //       if (user) {
+          //         await setScheduleFromFirebase(dispatch, doc.data().workplace)
+          //         await setLoginPerson("Admin")
+          //         await setGroup(doc.data())
+          //         await navigate("/schedule", {state:{email:userEmail, workplace:doc.data().workplace}})        
+          //       }
+          //     }); 
+          // }
+          else if(doc.data().workers.find((worker:Worker)=> worker.email === userEmail)){
             const setData = async  () => {
                const foudWorker = doc.data().workers.find((worker:Worker)=> worker.email === userEmail)
                await setScheduleFromFirebase(dispatch, doc.data().workplace)

@@ -8,7 +8,7 @@ import { MdOutlineGroups, MdGroupAdd } from 'react-icons/md';
 import { createGroups, daysInMonth } from '../../../Helpers/functions/functions'
 import { FaMinus } from 'react-icons/fa'
 import { generateSheduleData } from './../../../Helpers/functions/functions';
-import { setDoc,  doc } from 'firebase/firestore';
+import { setDoc,  doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../firebase';
 import { today, month } from '../../../Helpers/constants';
 
@@ -27,7 +27,7 @@ export const CreateGroups = () => {
  
 
 
-    function validateGroups (event:any) {
+   async function validateGroups (event:any) {
       setLoading(true)
       event.preventDefault();
       const tooShortGroupName = groups.find((group)=> group.length<3)
@@ -37,20 +37,25 @@ export const CreateGroups = () => {
       else{
         if(groups.length>=1){
           const workplace = workPlaceRef.current?.value.toString();
-          console.log(email)
           if(email && workplace){
-            createGroups(email, workplace, groups).then(async ()=>
-              {
-                try {
-                  await setDoc(doc(db, "schedule", workplace), {
-                    [(new Date(today.getFullYear(), today.getMonth(), 1)).toDateString()]: generateSheduleData(daysInMonth(new Date()))
-                  }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true), navigate("/Login")))
+            const foundWorkPlace = await getDoc(doc(db, "groups", workplace))  
+            if(!foundWorkPlace.data()){
+                createGroups(email, workplace, groups).then(async ()=>
+                {
+                  try {
+                    await setDoc(doc(db, "schedule", workplace), {
+                      [(new Date(today.getFullYear(), today.getMonth(), 1)).toDateString()]: generateSheduleData(daysInMonth(new Date()))
+                    }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true), navigate("/Login")))
+                  }
+                  catch {
+                    setMessage({descripstion:"Error", status:false}); setShowMessage(true); setLoading(false);
+                  }
                 }
-                catch {
-                  setMessage({descripstion:"Error", status:false}); setShowMessage(true); setLoading(false);
-                }
-              }
-            )
+              )
+            }
+            else {
+              setMessage({descripstion:"The group name is taken", status:false}); setShowMessage(true); setLoading(false);
+            }     
           }
         }
         else {

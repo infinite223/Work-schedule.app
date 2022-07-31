@@ -47,14 +47,22 @@ export const RegisterPage = () => {
             if(password===repeatPassword){
               if(email && password){
                 const workPlaceRefFirebase = doc(db, "groups", workplace);
-                createUserWithEmailAndPassword(auth, email, password).then(()=>                 
-                    updateDoc(workPlaceRefFirebase, {queue: arrayUnion({name:name, email:email})}).then(()=>{
-                      setMessage({descripstion:"The account has been successfully created", status:true}); setShowMessage(true); setLoading(false);
-                      navigate("/Login")
-                    })                   
-                  ).catch(()=> {
-                    setMessage({descripstion:"Something went wrong, please try again later", status:true}); setShowMessage(true); setLoading(false)
-                  })              
+                const foundWorkerInWorkers = foundWorkPlace.data()?.workers.find((worker:{email:string, name:string, group:string})=> worker.name === name)
+                const foundWorkerInQueue = foundWorkPlace.data()?.queue.find((worker:{email:string, name:string})=> worker.name === name)
+                if(!foundWorkerInWorkers && !foundWorkerInQueue){
+                  createUserWithEmailAndPassword(auth, email, password).then(()=>                 
+                  updateDoc(workPlaceRefFirebase, {queue: arrayUnion({name:name, email:email})}).then(()=>{
+                    setMessage({descripstion:"The account has been successfully created", status:true}); setShowMessage(true); setLoading(false);
+                    navigate("/Login")
+                  })                   
+                ).catch(()=> {
+                  setMessage({descripstion:"Something went wrong, please try again later", status:true}); setShowMessage(true); setLoading(false)
+                }) 
+                }
+                else {
+                  setMessage({descripstion:"User with the given name already exists", status:false}); setShowMessage(true); setLoading(false)
+                }
+                  
               }
             }
             else {

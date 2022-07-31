@@ -85,11 +85,8 @@ export const createGroups = async (emailAdmin:string, workplace:string, groups:A
     await setDoc(doc(db, "groups", workplace), {
       workplace:workplace,
       groups: groups,
-      admin: emailAdmin 
+      admin: emailAdmin,
+      workers: [],
+      queue:[]
     })
-    // .then( async ()=> {
-    //   await setDoc(doc(db, "schedule", nameGroup), {
-    //     [month[today.getMonth()] + today.getFullYear()]: generateSheduleData(daysInMonth(new Date()))
-    //   }).then(() => (setMessage({descripstion:"The group has been created correctly", status:true}), setShowMessage(true)))
-    // })
   }
