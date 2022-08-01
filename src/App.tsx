@@ -6,7 +6,6 @@ import { CreateGroups } from './Components/CreateSheudle/SubPages/CreateGroups';
 import { RegisterPage } from './Pages/RegisterPage/index';
 
 function App() {
-
   return (
     <>
       <div className='App flex'>
@@ -29,7 +28,7 @@ function App() {
           </Routes>     
         </Router>
         
-         <div className='version-text'>Work schedule v2.6</div> 
+         <div className='version-text'>Work schedule v2.7</div> 
       </div>
     </>
   );

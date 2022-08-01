@@ -68,12 +68,13 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
             </div>
             <div className='option flex'>
               <span>Set language</span>
-              <select name="language" className='select'>
+              <select name="language" className='select' onClick={()=>(setMessage({descripstion:"The option is, however, not available", status:true}),setShowMessage(true))}>
                 <option className='item' value="english">English</option>
                 <option className='item' value="polski">Polski</option>
               </select>
             </div>
-            {loginPerson=="Admin"&&<><div className='option flex' style={{flexDirection:"column"}}>
+            {loginPerson=="Admin"&&<>
+              {(group.workers?.length!==0)&&<div className='option flex' style={{flexDirection:"column"}}>
                 {group.workers?.map(({name, email, group})=>(
                   <div className='worker' key={email}>
                     <div style={{color:"rgb("+theme+")"}}>{name}</div>
@@ -81,7 +82,7 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
                     <div style={{color:"grey", fontSize:"15px"}}>{group}</div>
                   </div>
                 ))}
-            </div>
+            </div>}
             <div className='option flex'>
               <span>Waiting persons in queue</span>
               <div className='button-show' onClick={()=>setShowMessagePrompt(true)}>Show</div>

@@ -1,5 +1,3 @@
-import { IUser } from '../../Helpers/interfaces'
-import { auth } from './../../firebase/index';
 import { IGroupType } from './../../Helpers/interfaces'
 
 interface Action  {
@@ -15,8 +13,6 @@ export const groupReducer = (state = initalState, action: Action) =>{
     switch (type){    
         case "SetGroup":
             return action.payload                
-        case "OutLoginPerson": 
-            return state
         default:
             return state;
     }

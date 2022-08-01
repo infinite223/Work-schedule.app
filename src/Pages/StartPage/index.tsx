@@ -7,6 +7,7 @@ import './StartPageStyle.scss'
 export const StartPage = () => {
   const headerText = "Click register if you want to be part of a group of employees";
   const loginText = "If you belong to an existing work schedule, you should click log in";
+  const helperText = "You can create your first work schedule here, it's really that simple..."
   const navigate = useNavigate(); 
 
   return (
@@ -21,7 +22,10 @@ export const StartPage = () => {
         <div className='startPage__content-left flex'>
           <div className='startPage__content-box'>
             <div className='logo'>
-              Work-schedule<span style={{color:"#FF00FF"}}>.app</span><br/>
+         
+              Work-schedule
+              
+              <span style={{color:"#FF00FF"}}>.app</span><br/>
               <div>v2</div>
             </div>
             <div className='info'>
@@ -32,7 +36,20 @@ export const StartPage = () => {
                 <li>Accessibility from the level of mobile devices</li>
               </ul>
 
-              <div className='helper-text'>You can create your first work schedule here, it's really that simple...</div>
+            
+                <motion.div
+                  variants={sentence}
+                  initial="hidden"
+                  animate="visible"
+                  className='helper-text'
+                >
+                  {helperText.split("").map((char, index) => {
+                  return (
+                    <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
+                  )
+                })}
+              </motion.div>
+       
 
               <motion.div className='button create-button'
               variants={button}
@@ -71,7 +88,7 @@ export const StartPage = () => {
                 whileTap="tap"
                 onClick={()=> navigate("/Login")}
             >
-              <TiLocationArrowOutline size={30} className='arrow-icon'/>
+              <TiLocationArrowOutline size={25} className='arrow-icon'/>
               <div>Login</div>
             </motion.div>
           </div>
@@ -98,7 +115,7 @@ export const StartPage = () => {
               whileTap="tap"  
               onClick={()=> navigate("/Register")}
             >
-               <TiLocationArrowOutline size={30} className='arrow-icon'/>
+               <TiLocationArrowOutline size={25} className='arrow-icon'/>
               <div>Register</div>
             </motion.div>
           </div>

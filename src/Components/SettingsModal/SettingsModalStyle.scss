@@ -23,7 +23,7 @@
         padding: 1rem .7rem;
     }
 
-    padding: 1rem 2rem;
+    padding: 2rem;
     background-color: rgb(15, 15, 15);
     border-radius: 15px;
 
@@ -36,11 +36,9 @@
 
         div {
             font-size: 25px;
-            font-weight: 600;
-            margin-left: 10px;
+            font-weight: 300;
         }
-        .exit-icon {
-            margin-right: 10px;
+        .exit-icon {       
             &:hover {
                 cursor: pointer;
                 color: magenta;

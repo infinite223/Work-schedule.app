@@ -1,6 +1,5 @@
 .messagePrompt {
     position: fixed;
-    //left: 50%;
 
     transform: translate(-50%, -50%);
     display: flex;
@@ -10,7 +9,6 @@
     max-width: 80vw;
     flex-direction: column;
      
-
     padding:.9rem 1.2rem;
     font-size: 20px;
     color: rgb(162, 160, 160);
@@ -24,7 +22,6 @@
 
         font-size: 25;
         color: #FF00FF;
-        text-transform:uppercase;
 
         .exit {
             color:white;
@@ -104,7 +101,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     z-index: 15;
     max-width: 80vw;
     flex-direction: column;
@@ -123,8 +120,12 @@
         padding: 5px 10px;
         border-radius: 10px;
         margin: 5px 0;
+        width: max-content;
+        width: 90%;
 
         background-color:rgb(33, 32, 32); 
+
+        text-align: left;
 
         &:hover {
             color: #FF00FF;

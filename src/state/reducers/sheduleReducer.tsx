@@ -13,7 +13,6 @@ export const ScheduleReducer = (state = initalState, action: Action) =>{
    
     switch (type){   
         case "SetSchedule":
-            //state = Object.assign([], state, action.payload);
             return state = [], Object.assign([], state, action.payload);
         case "SetPersonInDay":
             let id: number = action.payload.id;
