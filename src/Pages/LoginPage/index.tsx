@@ -1,11 +1,8 @@
 import { useNavigate, HiOutlineChevronDoubleLeft, motion } from '../../Helpers/imports';
 import { showPage } from '../../Animations/variants';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { auth  } from "../../firebase"
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getDoc, doc } from 'firebase/firestore';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { today, month } from '../../Helpers/constants';
 import { db } from "../../firebase";
 import {
   collection,
@@ -15,9 +12,8 @@ import {
 } from "firebase/firestore";
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
-import { useDispatch, useSelector } from 'react-redux';
-import { setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase } from '../../Helpers/functions/functions';
-import { workerAfterSign, workerBeforSign } from '../../Helpers/types';
+import { useDispatch } from 'react-redux';
+import { setScheduleFromFirebase } from '../../Helpers/functions/functions';
 import LoadingStatus from '../../Components/LoadingStatus';
 import { MessageModal } from '../../Components/MessageModal';
 
@@ -40,7 +36,7 @@ export const LoginPage = () => {
   const { setLoginPerson, setGroup } = bindActionCreators(actionCreators, dispatch)
   const [loading, setLoading] = useState(false)
 
-  async function login(e:any) {
+  async function login(e:React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const userEmail =  emailRef.current?.value?emailRef.current?.value.toString():"";
     const userPassword =  passwordRef.current?.value?passwordRef.current?.value.toString():"";
@@ -50,7 +46,6 @@ export const LoginPage = () => {
       await signInWithEmailAndPassword(auth, userEmail, userPassword).then( async ()=>{
          const groupsRef = collection(db, "groups");       
          const workersData = await getDocs(groupsRef)
-         let foundWorker;
 
          workersData.docs.forEach((doc)=>{
           if(doc.data().admin.email===userEmail){
@@ -60,7 +55,7 @@ export const LoginPage = () => {
                   await setScheduleFromFirebase(dispatch, doc.data().workplace)
                   await setLoginPerson("Admin")
                   await setGroup(doc.data())
-                  await navigate("/schedule", {state:{email:userEmail, workplace:doc.data().workplace}})        
+                  await navigate("/schedule", {state:{userTheme:[212, 245, 47], email:userEmail, workplace:doc.data().workplace}})        
                 }
               }); 
           }
@@ -73,7 +68,7 @@ export const LoginPage = () => {
                await setScheduleFromFirebase(dispatch, doc.data().workplace)
                setLoginPerson(foudWorker.name)    
                await setGroup(doc.data()) 
-               await navigate("/schedule", {state:{email:userEmail, workplace:doc.data().workplace}})                            
+               await navigate("/schedule", {state:{userTheme:foudWorker.theme, email:userEmail, workplace:doc.data().workplace}})                            
             } 
            setData()     
          }

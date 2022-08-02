@@ -23,6 +23,6 @@ export interface IGroupType {
     admin?: {email:string, name:string},
     workplace?:string,
     groups?:Array<string>,
-    workers?:Array<{email:string, name:string, group:string}>,
+    workers?:Array<{email:string, name:string, group:string, theme:Array<number>}>,
     queue?:Array<{email:string, name:string, id:number}>,
 }

@@ -1,7 +1,7 @@
 import './DayContentStyle.scss'
 import { showDay } from '../../Animations/variantsOnSmallScreen';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';

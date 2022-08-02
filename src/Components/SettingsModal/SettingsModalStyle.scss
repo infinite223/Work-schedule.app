@@ -85,6 +85,23 @@
             text-align: left;
 
             width: 50%;
+
+            .save {
+                max-width: 150px;
+                color: rgb(155, 153, 153);
+                padding: .2rem .1rem;
+                margin-top: 10px;
+                border-radius: 5px;
+                background-color: rgb(39, 37, 37);
+
+                &:hover {
+                    &:hover {
+                        transition: all 1s ease;                       
+                        color: magenta;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
 
         .button-show {

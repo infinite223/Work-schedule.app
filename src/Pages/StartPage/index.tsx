@@ -4,9 +4,11 @@ import { HiOutlineChevronDoubleLeft } from 'react-icons/hi'
 import { TiLocationArrowOutline } from 'react-icons/ti'
 
 import './StartPageStyle.scss'
+import blue_theme from "./../../images/blue_theme.jpg"
+import red_theme from "./../../images/red_theme.jpg"
+import green_theme from "./../../images/green_theme.jpg"
+
 export const StartPage = () => {
-  const headerText = "Click register if you want to be part of a group of employees";
-  const loginText = "If you belong to an existing work schedule, you should click log in";
   const helperText = "You can create your first work schedule here, it's really that simple..."
   const navigate = useNavigate(); 
 
@@ -28,6 +30,32 @@ export const StartPage = () => {
               <span style={{color:"#FF00FF"}}>.app</span><br/>
               <div>v2</div>
             </div>
+            <div className='options'>
+            <motion.div className='button login__register-button flex'
+              variants={button}
+              initial="hidden"
+              animate="goodPosition"
+              whileHover="hover"
+              whileTap="tap"
+              onClick={()=> navigate("/Login")}
+            >
+              <TiLocationArrowOutline size={20} className='arrow-icon'/>
+              <div>Login</div>
+             
+            </motion.div> 
+      
+            <motion.div className='button login__register-button flex'
+              variants={button}
+              initial="hidden"
+              animate="goodPosition"
+              whileHover="hover"
+              whileTap="tap"  
+              onClick={()=> navigate("/Register")}
+            >
+              <div>Register</div>
+              <TiLocationArrowOutline size={25} style={{transform:"rotate(225deg)",marginRight:"0px", marginLeft:"10px"}} className='arrow-icon'/>
+            </motion.div>
+          </div>
             <div className='info'>
               <ul>
                 <h3>What application offer?</h3>
@@ -67,34 +95,11 @@ export const StartPage = () => {
 
         <div className='startPage__content-right flex'>
           <div className='image-container'>
-
+                <img className='blue_theme' src={blue_theme} alt="blue theme"/>
+                <img className='red_theme' src={red_theme} alt="red theme"/>
+                <img className='green_theme' src={green_theme} alt="green theme"/>
           </div>
-          <div className='options'>
-            <motion.div className='button login__register-button flex'
-              variants={button}
-              initial="hidden"
-              animate="goodPosition"
-              whileHover="hover"
-              whileTap="tap"
-              onClick={()=> navigate("/Login")}
-            >
-              <TiLocationArrowOutline size={25} className='arrow-icon'/>
-              <div>Login</div>
-             
-            </motion.div> 
-      
-            <motion.div className='button login__register-button flex'
-              variants={button}
-              initial="hidden"
-              animate="goodPosition"
-              whileHover="hover"
-              whileTap="tap"  
-              onClick={()=> navigate("/Register")}
-            >
-              <div>Register</div>
-              {/* <TiLocationArrowOutline size={25} style={{transform:"rotate(225deg)",marginRight:"0px", marginLeft:"10px"}} className='arrow-icon'/> */}
-            </motion.div>
-          </div>
+ 
         </div>
       </div>
     </motion.div>

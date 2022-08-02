@@ -197,11 +197,18 @@
         position: fixed;
         right: 20px;
         bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        color: rgb(141, 140, 140);
+        color: rgb(184, 184, 184);
         font-family:Verdana, Geneva, Tahoma, sans-serif;
         font-size: 13px;
         font-weight: 800;
+
+        border-radius: 7px;
+        background-color: rgb(21, 21, 21);
+        padding: .5rem .9rem;
 
         @media only screen and (max-width: 1024px) {           
             transform: scale(.8);  

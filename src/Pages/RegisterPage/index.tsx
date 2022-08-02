@@ -1,6 +1,6 @@
 import { useNavigate, HiOutlineChevronDoubleLeft, motion } from '../../Helpers/imports';
 import { showPage } from '../../Animations/variants';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { auth  } from "../../firebase"
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
@@ -25,7 +25,7 @@ export const RegisterPage = () => {
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState({descripstion:"", status:false})
 
-  async function register(e:any) {
+  async function register(e:React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
     const workplace = workPlaceRef.current?.value.toString();

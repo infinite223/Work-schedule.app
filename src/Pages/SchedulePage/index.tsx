@@ -11,12 +11,12 @@ import { auth, db } from '../../firebase';
 import './SchedulePageStyle.scss'
 import { Day } from '../../Components/Day';
 import { DayContent } from '../../Components/DayContent';
-import { daysShortcuts, month, today } from '../../Helpers/constants';
-import { daysInMonth, firstDayOfMonth, setScheduleFromFirebase, setLoginPersonAndGroupFromFirebase, generateSheduleData } from '../../Helpers/functions/functions';
+import { daysShortcuts, month } from '../../Helpers/constants';
+import { firstDayOfMonth, setScheduleFromFirebase } from '../../Helpers/functions/functions';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { WorkerList } from '../../Components/WorkerList';
-import { MdOutlinePersonOutline, MdOutlineArrowBackIosNew, MdKeyboardArrowDown } from 'react-icons/md'
+import { MdOutlinePersonOutline, MdOutlineArrowBackIosNew } from 'react-icons/md'
 import { BiPlus, BiMinus} from 'react-icons/bi'
 import { MenuModal } from '../../Components/MenuModal';
 import { MessagePrompt } from '../../Components/MessagePrompt';
@@ -32,9 +32,6 @@ import {
 import { IGroupType } from '../../Helpers/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { MessageModal } from '../../Components/MessageModal';
-import { setLoginPerson } from '../../state/action-creators/index';
-import { setGroup } from './../../state/action-creators/index';
-import { async } from '@firebase/util';
 
 export const SchedulePage = () => {  
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
@@ -42,10 +39,7 @@ export const SchedulePage = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [selectDate, setSelectDate] = useState(new Date())
     const [showSettings, setShowSettings] = useState(false)
-    const [theme, setTheme] = useState<Array<number>>([12, 32, 120])
-    const [schowSchedule, setShowSchedule] = useState(true)
     const [chooseHours, setChooseHours] = useState<boolean>(false)
-    const [nameGroup, setNameGroup] = useState("")
     const [loading, setLoading] = useState(false)
     const [showMessage, setShowMessage] = useState(false)
     const [showMessagePrompt, setShowMessagePrompt] = useState(false)
@@ -60,16 +54,15 @@ export const SchedulePage = () => {
     const navigate = useNavigate()
     const controlDay = useAnimation()
     const controlSchedule = useAnimation()
-    const controlArrow = useAnimation()
 
     const {setPersonInDay, setSchedule, setGroup, setLoginPerson} = bindActionCreators(actionCreators, dispatch)
     const location = useLocation();
-    const { workplace, email } = location.state as {workplace:string, email:string}
+    const {userTheme, email } = location.state as {userTheme:Array<number>, workplace:string, email:string}
+    const [theme, setTheme] = useState<Array<number>>(userTheme)
     const [message, setMessage] = useState({descripstion:"", status:false})
 
     interface Worker {name:string, email:string, group:string}
     const [todayCondition, setTodayCondition] = useState<boolean>()
-  
     useEffect(()=>{
         setTodayCondition(new Date()<=new Date(selectDate.getFullYear(), selectDate.getMonth(), selectedDay+1))
     },[selectDate, selectedDay])
@@ -81,26 +74,8 @@ export const SchedulePage = () => {
         })
       }, [selectDate])
 
-      useEffect(()=>{
-        isTabletOrMobile&&(
-            controlSchedule.start({
-            height:!schowSchedule?"0px":"auto",
-            y:!schowSchedule?-500:0,
-            overflow:!schowSchedule?"hidden":"",
-            transition: { duration: 1, overflow: schowSchedule?{
-                delay:1
-            }:{delay:0} },          
-            })
-        )
-        controlArrow.start({
-            opacity:[0,1],
-            transition: {duration:2}         
-        })    
-      }, [schowSchedule])
-
     useEffect(()=>{  
         if(loginPerson==="Admin"){
-            setNameGroup(workplace)
             setShowMessagePrompt(true)
         }
         const setScheduleData = async () => {
@@ -116,18 +91,15 @@ export const SchedulePage = () => {
                             const setData = async  () => {
                                const foudWorker = doc.data().workers.find((worker:Worker)=> worker.email === email)
                                await setScheduleFromFirebase(dispatch, doc.data().workplace)
-                               setLoginPerson(foudWorker.name)    
-                               await setNameGroup(doc.data().workplace)
-                               await setGroup(doc.data())
-                               await setShowMessagePrompt(true)                             
+                               setLoginPerson(foudWorker.name)                             
+                               await setGroup(doc.data())                                                  
                             } 
                            setData()     
                          }
                           if(doc.data().admin.email===user.email){
                             const setData = async  () => {
                                 await setScheduleFromFirebase(dispatch, doc.data().workplace)
-                                setLoginPerson("Admin")    
-                               await setNameGroup(doc.data().workplace)
+                                setLoginPerson("Admin")                  
                                await setGroup(doc.data())
                                await setShowMessagePrompt(true)                             
                             } 
@@ -142,7 +114,7 @@ export const SchedulePage = () => {
             })
         };
        setScheduleData();
-       setLoading(false)
+       setLoading(false) 
     },[])
 
     const updateSchedule = async () => {
@@ -184,7 +156,6 @@ export const SchedulePage = () => {
             }
         }    
     } 
-
   
     const removePerson = (operation:boolean) : void => {
       if(!operation){

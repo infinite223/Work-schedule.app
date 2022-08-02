@@ -55,7 +55,7 @@ export const MessagePrompt:React.FC<MessagePromptProps> = ({ setShowMessagePromp
   }
 
   const acceptWorker = async (name:string, email:string, groupname:string) => {
-    await  updateDoc(workPlaceRefFirebase, {workers:arrayUnion({name:name, email:email, group:groupname})})          
+    await  updateDoc(workPlaceRefFirebase, {workers:arrayUnion({name:name, email:email, group:groupname,theme:[70, 250, 7]})})          
     rejectWorker(name, email)
     const groupsRef = collection(db, "groups");       
     const workersData = await getDocs(groupsRef)

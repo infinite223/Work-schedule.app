@@ -10,10 +10,13 @@ import { State } from '../../state';
 import { IGroupType } from '../../Helpers/interfaces';
 import { MessagePrompt } from '../../Components/MessagePrompt';
 import { month, today } from '../../Helpers/constants';
+import { query, where } from "firebase/firestore";  
 import { db } from '../../firebase';
 import {
   updateDoc,
-  doc
+  doc,
+  arrayRemove,
+  arrayUnion
 } from "firebase/firestore";
 
 interface SettingsModalProps {
@@ -31,6 +34,7 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
   const [loading, setLoading] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState({descripstion:"", status:false})
+  const [workers, setWorkers] = useState<Array<{ email: string; name: string; group: string; theme:Array<number>}>>([])
 
   const generate = async () => {
       setLoading(true)
@@ -40,6 +44,39 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
               [(new Date(selectedDate.getFullYear(), selectedDate.getMonth()+1, 1)).toDateString()]:generateSheduleData(daysInMonth(new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 1)))
           } ).then(()=>(setLoading(false), (setMessage({descripstion:"schedule for next month was created!", status:true}),setShowMessage(true))));
       }
+  }
+
+  const saveTheme = async () => {
+    setLoading(true)
+    console.log("s")
+    if(group?.workers){
+      setWorkers(group.workers)
+    }
+
+    if(loginPerson==="Admin"){
+
+    }
+    else {
+      const foundPerson = group.workers?.find((worker)=>worker.name===loginPerson)
+      if(foundPerson ){
+        const newPerson = {
+          email: foundPerson?.email,
+          group: foundPerson?.group,
+          name: foundPerson?.name,
+          theme: theme,
+        }
+      
+        if(group.workplace){
+          const groupsRef = doc(db, "groups", group.workplace);
+          await updateDoc(groupsRef, {
+            workers:arrayRemove(foundPerson)
+          })
+          await updateDoc(groupsRef, {
+            workers:arrayUnion(newPerson)
+          }).then(()=>(setLoading(false), (setMessage({descripstion:"Theme was saved!", status:true}),setShowMessage(true))));
+        }
+      }
+    }
   }
 
   return (
@@ -57,7 +94,9 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
             <FiX className='exit-icon' size={25} onClick={()=>setShowSettings(false)}/>
           </nav>
             <div className='option flex'>
-              <span>Set your theme schedule </span>
+              <span>  Set your theme schedule 
+                <div className='save flex' onClick={()=>saveTheme()}>Save theme</div>
+              </span>
               <div className='themes flex'>
                 <div className='theme-box' style={{backgroundColor:"rgb(19,19,19)"}} onClick={()=>setTheme([19,19,19])}></div>
                 <div className='theme-box' style={{backgroundColor:"rgb(255,0,255)"}} onClick={()=>setTheme([255,0,255])}></div>
