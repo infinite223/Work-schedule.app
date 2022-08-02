@@ -41,9 +41,9 @@ export const Day: React.FC<DayProps> = ({ id, persons, selectedDate }) => {
       <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>   
       {!isTabletOrMobile?
         <motion.div className="enable-day day" onClick={()=> setChooseHours((new Date)<=(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), id+1))&& (loginPerson!=="Admin")&&true)}
-        variants={showWorkers}
-        initial="start"
-        whileHover={todayDate.getDate()-1<id&&persons.length>=3?"hover":""}
+        // variants={showWorkers}
+        // initial="start"
+        // whileHover={todayDate.getDate()-1<id&&persons.length>=3?"hover":""}
       >
           <nav>
             <span className={(todayDate.getDate()===id  && todayDate.getMonth() === selectedDate.getMonth())?"magenta-text":""}>{id}</span>
@@ -53,7 +53,7 @@ export const Day: React.FC<DayProps> = ({ id, persons, selectedDate }) => {
             {persons?persons?.map(({ name, startWork, endWork }, person)=>{
               return <div key={person} className={loginPerson===name?"person login-person":"person"}>
                 <div>{name} {startWork}-{endWork}</div>
-               {loginPerson==="Admin"&&<BiMinus size={20} style={{margin:"0px 0px"}}  onClick={()=>removePerson(name)}/>}
+               {loginPerson==="Admin"&&<BiMinus size={20} className="minus-icon" style={{margin:"0px 0px"}}  onClick={()=>removePerson(name)}/>}
               </div>
             }):<>no data</>}
           </div>

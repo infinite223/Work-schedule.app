@@ -118,7 +118,6 @@ export const SchedulePage = () => {
                                await setScheduleFromFirebase(dispatch, doc.data().workplace)
                                setLoginPerson(foudWorker.name)    
                                await setNameGroup(doc.data().workplace)
-                               await console.log(loginPerson)
                                await setGroup(doc.data())
                                await setShowMessagePrompt(true)                             
                             } 
@@ -129,7 +128,6 @@ export const SchedulePage = () => {
                                 await setScheduleFromFirebase(dispatch, doc.data().workplace)
                                 setLoginPerson("Admin")    
                                await setNameGroup(doc.data().workplace)
-                               await console.log(loginPerson)
                                await setGroup(doc.data())
                                await setShowMessagePrompt(true)                             
                             } 
@@ -163,7 +161,6 @@ export const SchedulePage = () => {
             const dataSchedule = await getDoc(scheduleRef)
             
             if(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1)).toDateString()]){
-                console.log("jest")
                 setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1))
                 setSchedule(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1)).toDateString()])
             }
@@ -179,7 +176,6 @@ export const SchedulePage = () => {
             const dataSchedule = await getDoc(scheduleRef)
             
             if(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1)).toDateString()]){
-                console.log("jest")
                 setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1))
                 setSchedule(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1)).toDateString()])
             }

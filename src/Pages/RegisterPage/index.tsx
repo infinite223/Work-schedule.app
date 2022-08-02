@@ -25,10 +25,6 @@ export const RegisterPage = () => {
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState({descripstion:"", status:false})
 
-  useEffect(()=>{
-    console.log(loading)
-  },[loading])
-
   async function register(e:any) {
     e.preventDefault()
     setLoading(true)

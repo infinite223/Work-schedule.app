@@ -66,46 +66,22 @@ export const StartPage = () => {
         </div>
 
         <div className='startPage__content-right flex'>
-          <div className="startPage__content-box">
-            
-            <motion.h1
-                variants={sentence}
-                initial="hidden"
-                animate="visible"
-              >
-                {loginText.split("").map((char, index) => {
-                return (
-                  <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
-                )
-              })}
-            </motion.h1>
-             
-              <motion.div className='button login__register-button flex'
-                variants={button}
-                initial="hidden"
-                animate="goodPosition"
-                whileHover="hover"
-                whileTap="tap"
-                onClick={()=> navigate("/Login")}
+          <div className='image-container'>
+
+          </div>
+          <div className='options'>
+            <motion.div className='button login__register-button flex'
+              variants={button}
+              initial="hidden"
+              animate="goodPosition"
+              whileHover="hover"
+              whileTap="tap"
+              onClick={()=> navigate("/Login")}
             >
               <TiLocationArrowOutline size={25} className='arrow-icon'/>
               <div>Login</div>
-            </motion.div>
-          </div>
-
-          <div className="startPage__content-box">
-            <motion.h1
-              variants={sentence}
-              initial="hidden"
-              animate="visible"
-            >
              
-              {headerText.split("").map((char, index) => {
-                return (
-                  <motion.span key={char + "-" + index} variants={letter}>{char}</motion.span>
-                )
-              })}
-            </motion.h1>
+            </motion.div> 
       
             <motion.div className='button login__register-button flex'
               variants={button}
@@ -115,8 +91,8 @@ export const StartPage = () => {
               whileTap="tap"  
               onClick={()=> navigate("/Register")}
             >
-               <TiLocationArrowOutline size={25} className='arrow-icon'/>
               <div>Register</div>
+              {/* <TiLocationArrowOutline size={25} style={{transform:"rotate(225deg)",marginRight:"0px", marginLeft:"10px"}} className='arrow-icon'/> */}
             </motion.div>
           </div>
         </div>

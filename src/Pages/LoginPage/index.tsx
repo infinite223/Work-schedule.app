@@ -67,17 +67,6 @@ export const LoginPage = () => {
           else if(doc.data().queue.find((worker:queue)=> worker.email === userEmail)){
             setMessage({descripstion:"The administrator has not assigned you to the group", status:false}); setShowMessage(true); setLoading(false)
           }
-          // else if(doc.data().admin.email===userEmail){
-          //   setMessage({descripstion:"Admin", status:true}); setShowMessage(true); setLoading(false)
-          //      auth.onAuthStateChanged( async (user) => {
-          //       if (user) {
-          //         await setScheduleFromFirebase(dispatch, doc.data().workplace)
-          //         await setLoginPerson("Admin")
-          //         await setGroup(doc.data())
-          //         await navigate("/schedule", {state:{email:userEmail, workplace:doc.data().workplace}})        
-          //       }
-          //     }); 
-          // }
           else if(doc.data().workers.find((worker:Worker)=> worker.email === userEmail)){
             const setData = async  () => {
                const foudWorker = doc.data().workers.find((worker:Worker)=> worker.email === userEmail)

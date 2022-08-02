@@ -11,6 +11,7 @@ import { generateSheduleData } from './../../../Helpers/functions/functions';
 import { setDoc,  doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../firebase';
 import { today, month } from '../../../Helpers/constants';
+import LoadingStatus from './../../LoadingStatus/index';
 
 export const CreateGroups = () => {
     const workPlaceRef = useRef<HTMLInputElement | null>(null)
@@ -62,6 +63,7 @@ export const CreateGroups = () => {
           setMessage({descripstion:"Error", status:false}); setShowMessage(true); setLoading(false)
         }
       }
+      setLoading(false)
     }
 
     const editGroup = (index:number, editGroup:string) => {
@@ -71,6 +73,7 @@ export const CreateGroups = () => {
     }
 
   return (<>
+    {loading&&<LoadingStatus/>}
     {showMessage&&<MessageModal setShowMessage={setShowMessage}  description={message.descripstion} status={message.status} setMessage={setMessage}/>}
         <HiOutlineChevronDoubleLeft className='icon-exit'  onClick={()=>navigate("/")}/>
         <motion.div variants={showPage} initial="hidden" animate="visible" className='CreatePage flex'>  
