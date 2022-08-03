@@ -30,22 +30,19 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
   const [showMessagePrompt, setShowMessagePrompt] = useState(false)
   const loginPerson = useSelector((state: State)=> state.login)
   const group:IGroupType = useSelector((state: State)=> state.group)
-  const [loading, setLoading] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState({descripstion:"", status:false})
 
   const generate = async () => {
-      setLoading(true)
       if(group.workplace){
           const scheduleRef = doc(db, "schedule", group.workplace);
           await updateDoc(scheduleRef,  {
               [(new Date(selectedDate.getFullYear(), selectedDate.getMonth()+1, 1)).toDateString()]:generateSheduleData(daysInMonth(new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 1)))
-          } ).then(()=>(setLoading(false), (setMessage({descripstion:"schedule for next month was created!", status:true}),setShowMessage(true))));
+          } ).then(()=>((setMessage({descripstion:"schedule for next month was created!", status:true}),setShowMessage(true))));
       }
   }
 
   const saveTheme = async () => {
-    setLoading(true)
     if(loginPerson==="Admin"){
 
     }
@@ -67,7 +64,7 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
             }).then(async ()=>{
               await updateDoc(groupRef, {
                 workers:arrayUnion(newPerson)
-              }).then(()=>(setLoading(false), (setMessage({descripstion:"Theme was saved!", status:true}),setShowMessage(true))));
+              }).then(()=>((setMessage({descripstion:"Theme was saved!", status:true}),setShowMessage(true))));
             })
           }
         }

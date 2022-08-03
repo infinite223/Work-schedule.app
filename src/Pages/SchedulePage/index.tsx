@@ -55,7 +55,7 @@ export const SchedulePage = () => {
     const controlDay = useAnimation()
     const controlSchedule = useAnimation()
 
-    const {setPersonInDay, setSchedule, setGroup, setLoginPerson} = bindActionCreators(actionCreators, dispatch)
+    const {setPersonInDay, setSchedule, setGroup, setLoginPerson, setSelectedDay} = bindActionCreators(actionCreators, dispatch)
     const location = useLocation();
     const {userTheme, email } = location.state as {userTheme:Array<number>, workplace:string, email:string}
     const [theme, setTheme] = useState<Array<number>>(userTheme)
@@ -133,6 +133,7 @@ export const SchedulePage = () => {
             const dataSchedule = await getDoc(scheduleRef)
             
             if(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1)).toDateString()]){
+                setSelectedDay(1)
                 setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1))
                 setSchedule(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()+1, 1)).toDateString()])
             }
@@ -148,6 +149,7 @@ export const SchedulePage = () => {
             const dataSchedule = await getDoc(scheduleRef)
             
             if(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1)).toDateString()]){
+                setSelectedDay(1)
                 setSelectDate(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1))
                 setSchedule(dataSchedule?.data()?.[(new Date(selectDate.getFullYear(), selectDate.getMonth()-1, 1)).toDateString()])
             }
