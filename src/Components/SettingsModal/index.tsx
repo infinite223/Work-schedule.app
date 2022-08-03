@@ -9,12 +9,12 @@ import { MessageModal } from '../MessageModal';
 import { State } from '../../state';
 import { IGroupType } from '../../Helpers/interfaces';
 import { MessagePrompt } from '../../Components/MessagePrompt';
-import { month, today } from '../../Helpers/constants';
-import { query, where } from "firebase/firestore";  
+import { month } from '../../Helpers/constants';
 import { db } from '../../firebase';
 import {
   updateDoc,
   doc,
+  getDoc,
   arrayRemove,
   arrayUnion
 } from "firebase/firestore";
@@ -29,12 +29,10 @@ interface SettingsModalProps {
 export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, setShowSettings, selectedDate }) => {
   const [showMessagePrompt, setShowMessagePrompt] = useState(false)
   const loginPerson = useSelector((state: State)=> state.login)
-  const selectedDay = useSelector((state: State)=> state.select)
   const group:IGroupType = useSelector((state: State)=> state.group)
   const [loading, setLoading] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState({descripstion:"", status:false})
-  const [workers, setWorkers] = useState<Array<{ email: string; name: string; group: string; theme:Array<number>}>>([])
 
   const generate = async () => {
       setLoading(true)
@@ -48,34 +46,31 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
 
   const saveTheme = async () => {
     setLoading(true)
-    console.log("s")
-    if(group?.workers){
-      setWorkers(group.workers)
-    }
-
     if(loginPerson==="Admin"){
 
     }
-    else {
-      const foundPerson = group.workers?.find((worker)=>worker.name===loginPerson)
-      if(foundPerson ){
-        const newPerson = {
-          email: foundPerson?.email,
-          group: foundPerson?.group,
-          name: foundPerson?.name,
-          theme: theme,
-        }
-      
+    else {      
         if(group.workplace){
-          const groupsRef = doc(db, "groups", group.workplace);
-          await updateDoc(groupsRef, {
-            workers:arrayRemove(foundPerson)
-          })
-          await updateDoc(groupsRef, {
-            workers:arrayUnion(newPerson)
-          }).then(()=>(setLoading(false), (setMessage({descripstion:"Theme was saved!", status:true}),setShowMessage(true))));
+          const groupRef = doc(db, "groups", group.workplace);
+          const dataGroup = await getDoc(groupRef)
+          const foundPerson = dataGroup.data()?.workers.find((worker:{name:string, email:string, group:string, theme:Array<number>})=>worker.name===loginPerson)
+          if(foundPerson){
+            const newPerson = {
+              email: foundPerson?.email,
+              group: foundPerson?.group,
+              name: foundPerson?.name,
+              theme: theme,
+            }
+
+            await updateDoc(groupRef, {
+              workers:arrayRemove(foundPerson)
+            }).then(async ()=>{
+              await updateDoc(groupRef, {
+                workers:arrayUnion(newPerson)
+              }).then(()=>(setLoading(false), (setMessage({descripstion:"Theme was saved!", status:true}),setShowMessage(true))));
+            })
+          }
         }
-      }
     }
   }
 

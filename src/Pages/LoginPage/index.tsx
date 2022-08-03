@@ -55,7 +55,7 @@ export const LoginPage = () => {
                   await setScheduleFromFirebase(dispatch, doc.data().workplace)
                   await setLoginPerson("Admin")
                   await setGroup(doc.data())
-                  await navigate("/schedule", {state:{userTheme:[212, 245, 47], email:userEmail, workplace:doc.data().workplace}})        
+                  await navigate("/schedule", {state:{userTheme:[22, 42, 145], email:userEmail, workplace:doc.data().workplace}})        
                 }
               }); 
           }

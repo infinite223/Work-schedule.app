@@ -74,7 +74,7 @@ export const button = {
       opacity: 1,
       y:0,
       transition: {
-        delay: 1.5,
+        delay: .2,
         duration: 1.5,
       }
     },

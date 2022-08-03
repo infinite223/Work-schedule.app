@@ -25,6 +25,7 @@ interface MessagePromptProps {
 
 export const MessagePrompt:React.FC<MessagePromptProps> = ({ setShowMessagePrompt }) => {
   const group:IGroupType = useSelector((state: State)=> state.group)
+  const loginPerson = useSelector((state: State)=> state.login)
   const [queue, setQueue] = useState<Array<{name:string, email:string}>>([])
   const [showGroups, setShowGroups] = useState<{name:string, email:string, status:boolean}>()
   const dispatch = useDispatch();
@@ -45,7 +46,12 @@ export const MessagePrompt:React.FC<MessagePromptProps> = ({ setShowMessagePromp
          }
         })
       }
-      getDataGrroup()
+      if(loginPerson==="Admin"){
+        getDataGrroup()
+      }
+      else {
+        setShowMessagePrompt(false)
+      }
   }, [queue])
   
 

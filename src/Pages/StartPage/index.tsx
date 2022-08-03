@@ -31,31 +31,31 @@ export const StartPage = () => {
               <div>v2</div>
             </div>
             <div className='options'>
-            <motion.div className='button login__register-button flex'
-              variants={button}
-              initial="hidden"
-              animate="goodPosition"
-              whileHover="hover"
-              whileTap="tap"
-              onClick={()=> navigate("/Login")}
-            >
-              <TiLocationArrowOutline size={20} className='arrow-icon'/>
-              <div>Login</div>
-             
-            </motion.div> 
-      
-            <motion.div className='button login__register-button flex'
-              variants={button}
-              initial="hidden"
-              animate="goodPosition"
-              whileHover="hover"
-              whileTap="tap"  
-              onClick={()=> navigate("/Register")}
-            >
-              <div>Register</div>
-              <TiLocationArrowOutline size={25} style={{transform:"rotate(225deg)",marginRight:"0px", marginLeft:"10px"}} className='arrow-icon'/>
-            </motion.div>
-          </div>
+              <motion.div className='button login__register-button flex'
+                variants={button}
+                initial="hidden"
+                animate="goodPosition"
+                whileHover="hover"
+                whileTap="tap"
+                onClick={()=> navigate("/Login")}
+              >
+                <TiLocationArrowOutline size={20} className='arrow-icon'/>
+                <div>Login</div>
+              
+              </motion.div> 
+        
+              <motion.div className='button login__register-button flex'
+                variants={button}
+                initial="hidden"
+                animate="goodPosition"
+                whileHover="hover"
+                whileTap="tap"  
+                onClick={()=> navigate("/Register")}
+              >
+                <div>Register</div>
+                <TiLocationArrowOutline size={25} style={{transform:"rotate(225deg)",marginRight:"0px", marginLeft:"10px"}} className='arrow-icon'/>
+              </motion.div>
+            </div>
             <div className='info'>
               <ul>
                 <h3>What application offer?</h3>

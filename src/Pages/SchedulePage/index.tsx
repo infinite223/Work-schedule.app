@@ -92,7 +92,7 @@ export const SchedulePage = () => {
                                const foudWorker = doc.data().workers.find((worker:Worker)=> worker.email === email)
                                await setScheduleFromFirebase(dispatch, doc.data().workplace)
                                setLoginPerson(foudWorker.name)                             
-                               await setGroup(doc.data())                                                  
+                               await setGroup(doc.data())                                                 
                             } 
                            setData()     
                          }
