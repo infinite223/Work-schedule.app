@@ -16,7 +16,7 @@ interface MenuModalProps {
   theme:Array<number>
 }
 
-export const MenuModal :React.FC<MenuModalProps> = ({showMenu, setShowMenu, updateSchedule, showSettings, setShowSettings, theme}) => {
+export const MenuModal :React.FC<MenuModalProps> = ({ setShowMenu, updateSchedule, setShowSettings, theme}) => {
   const navigate = useNavigate(); 
   const loginPerson = useSelector((state: State)=> state.login)
 

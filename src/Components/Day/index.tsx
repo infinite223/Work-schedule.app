@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { motion} from '../../Helpers/imports'
 import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
-import { showWorkers } from '../../Animations/variants';
 import { tap } from '../../Animations/variantsOnSmallScreen';
 import { useMediaQuery } from 'react-responsive'
-import { useMotionValue, animate } from 'framer-motion';
 import { BiMinus } from 'react-icons/bi';
 
 import { ChoseHoursModal } from '../ChoseHoursModal';
@@ -41,9 +39,6 @@ export const Day: React.FC<DayProps> = ({ id, persons, selectedDate }) => {
       <ChoseHoursModal id={id} date={todayDate} persons={persons} chooseHours={chooseHours} setChooseHours={(x)=>setChooseHours(x)}/>   
       {!isTabletOrMobile?
         <motion.div className="enable-day day" onClick={()=> setChooseHours((new Date)<=(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), id+1))&& (loginPerson!=="Admin")&&true)}
-        // variants={showWorkers}
-        // initial="start"
-        // whileHover={todayDate.getDate()-1<id&&persons.length>=3?"hover":""}
       >
           <nav>
             <span className={(todayDate.getDate()===id  && todayDate.getMonth() === selectedDate.getMonth())?"magenta-text":""}>{id}</span>

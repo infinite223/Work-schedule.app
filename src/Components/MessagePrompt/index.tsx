@@ -7,7 +7,6 @@ import { State } from '../../state';
 import {
   collection,
   getDocs,
-  getDoc,
   updateDoc,
   arrayUnion,
   arrayRemove,
@@ -35,17 +34,18 @@ export const MessagePrompt:React.FC<MessagePromptProps> = ({ setShowMessagePromp
     const groupWorkPlace = group?.workplace?group.workplace:""
     const workPlaceRefFirebase = doc(db, "groups", groupWorkPlace);  
 
-      useEffect(()=>{
-      const getDataGrroup = async () => {
-        const groupsRef = collection(db, "groups");       
-        const workersData = await getDocs(groupsRef)
-        workersData.docs.forEach((doc)=>{
+  useEffect(()=>{
+    const getDataGrroup = async () => {
+      const groupsRef = collection(db, "groups");       
+      const workersData = await getDocs(groupsRef)
+      workersData.docs.forEach((doc)=>{
          if(doc.data().workplace===group.workplace){
           setGroup(doc.data())
           setQueue(doc.data().queue)
          }
-        })
-      }
+      })
+    }
+    
       if(loginPerson==="Admin"){
         getDataGrroup()
       }

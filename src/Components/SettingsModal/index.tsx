@@ -44,7 +44,8 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
 
   const saveTheme = async () => {
     if(loginPerson==="Admin"){
-
+      setMessage({descripstion:"Administrator write is not supported", status:true}); 
+      setShowMessage(true)
     }
     else {      
         if(group.workplace){
@@ -73,7 +74,7 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
 
   return (
     <AnimatePresence>
-       {showMessage&&<MessageModal description={message.descripstion} status={message.status} setShowMessage={setShowMessage}/>}
+      {showMessage&&<MessageModal description={message.descripstion} status={message.status} setShowMessage={setShowMessage}/>}
       {showMessagePrompt&&<MessagePrompt setShowMessagePrompt={setShowMessagePrompt}/>}
         <motion.div className='Settings__container'
          key="box"
@@ -99,12 +100,12 @@ export const SettingsModal:React.FC<SettingsModalProps> = ({ theme, setTheme, se
             </div>
             <div className='option flex'>
               <span>Set language</span>
-              <select name="language" className='select' onClick={()=>(setMessage({descripstion:"The option is, however, not available", status:true}),setShowMessage(true))}>
+              <select name="language" className='select' onClick={()=>{setMessage({descripstion:"The option is, however, not available", status:true}); setShowMessage(true)}}>
                 <option className='item' value="english">English</option>
                 <option className='item' value="polski">Polski</option>
               </select>
             </div>
-            {loginPerson=="Admin"&&<>
+            {loginPerson==="Admin"&&<>
               {(group.workers?.length!==0)&&<div className='option flex' style={{flexDirection:"column"}}>
                 {group.workers?.map(({name, email, group})=>(
                   <div className='worker' key={email}>
