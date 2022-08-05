@@ -4,6 +4,7 @@ import './App.scss'
 import { CreateAdmin } from './Components/CreateSheudle/SubPages/CreateAdmin';
 import { CreateGroups } from './Components/CreateSheudle/SubPages/CreateGroups';
 import { RegisterPage } from './Pages/RegisterPage/index';
+import { AiFillGithub } from 'react-icons/ai'
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
           </Routes>     
         </Router>
         
-         <div className='version-text'>Work schedule v2.7</div> 
+         <div className='version-text'>Work schedule v2.7
+              <a href='https://github.com/infinite223/Work-schedule.app'><AiFillGithub className='gitHub-icon' size={20}/></a>
+         </div> 
       </div>
     </>
   );

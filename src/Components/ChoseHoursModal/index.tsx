@@ -1,13 +1,12 @@
 import './ChoseHoursModalStyle.scss'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { motion} from '../../Helpers/imports'
 import { days } from '../../Helpers/constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators, State } from '../../state';
 import { showDay } from '../../Animations/variants';
-import { useMediaQuery } from 'react-responsive'
 import { AnimatePresence } from 'framer-motion';
 import { IPerson } from './../../Helpers/interfaces';
 import { BsCheckLg } from 'react-icons/bs'
@@ -22,7 +21,6 @@ interface ChoseHoursModalProps {
 }
 
 export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, persons, chooseHours, setChooseHours, theme}) => {
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
     const loginPerson = useSelector((state: State)=> state.login)
  
     const [ startWork, setStartWork ] = useState(persons[0]?.startWork? persons[0].startWork : "00:00");
@@ -30,7 +28,6 @@ export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, pers
 
     const dispatch = useDispatch();
     const { setPersonInDay } = bindActionCreators(actionCreators, dispatch)
-    const [ selectColor, setSelectColor ] = useState<boolean>();
 
     const setPersons = (operation:boolean) : void => {
         if(!operation){
@@ -40,14 +37,8 @@ export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, pers
           setPersonInDay({id:id, persons:[...persons.filter((person)=>person.name!==loginPerson),
              {name:loginPerson, startWork:startWork, endWork:endWork}]})
         }
-      }
+    }
     
-      useEffect(()=>{
-        if(persons && loginPerson){
-          const foundPerson = persons.find((person)=> person.name===loginPerson)
-          setSelectColor(foundPerson?true:false)
-        }
-      },[ setPersons ])
 
   return (
     <AnimatePresence>
@@ -62,7 +53,6 @@ export const ChoseHoursModal: React.FC<ChoseHoursModalProps> = ({ id, date, pers
             <div className='nav'>
                 <span style={{color:"rgb("+theme+")"}}>{id}</span>
                 <div>{days[date.getDay()]}</div>     
-                {/* <CgCloseR className='exit-icon' size={25} onClick={()=> setChooseHours(false)}/> */}
             </div>
             <h4>Set your working hours</h4>
             <div className='day__chooseHours-choose flex'>
