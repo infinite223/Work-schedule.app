@@ -1,3 +1,4 @@
+React project bootstrapped with <code>create-react-app</code> <br/>
 # Documentation Work-schedule
 
 Work-schedule is a web application that allows the employer to manage the work schedule for their employees, place them in appropriate groups and count the number of hours worked per month
